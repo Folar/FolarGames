@@ -8,6 +8,7 @@ import {
 } from 'react-vr';
 
 import Login from './components/scenes/Login.js';
+import TakeSix from './components/scenes/TakeSix.js';
 
 export default class FolarGames extends React.Component {
   render() {
@@ -15,8 +16,8 @@ export default class FolarGames extends React.Component {
       <View>
 
         <Pano source={asset('museum.jpg')}/>
+          <TakeSix showButton={false} text={"Play"}/>
 
-        <Login showButton={false} text={"Play"}/>
       </View>
     );
   }
