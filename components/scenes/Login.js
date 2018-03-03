@@ -14,7 +14,7 @@ class Login extends React.Component {
     return (
       <View>
        
-        <LoginLayout text={this.props.text} />
+        <LoginLayout updateScene={this.props.updateScene} text={this.props.text} />
       </View>
     )
   }

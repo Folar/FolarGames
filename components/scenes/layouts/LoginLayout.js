@@ -148,7 +148,7 @@ class LoginLayout extends React.Component {
                 </View>
                 <View style={{  margin: 0.01, width:2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
 
-                        <Button  showButton={this.state.showButton} text={this.state.text}
+                        <Button   updateScene={this.props.updateScene} showButton={this.state.showButton} text={this.state.text}
                                 style={{
                                     fontSize: 0.2,
                                     textAlign: 'center',

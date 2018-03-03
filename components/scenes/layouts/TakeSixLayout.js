@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     View,
-    Animated
+    Animated,
+    Text
 } from 'react-vr';
 
 import { Easing } from 'react-native';
@@ -19,6 +20,7 @@ const SECOND_ROW= FIRST_ROW - CARD_HEIGHT - INNER_GAP_4ROWS;
 const THIRD_ROW= SECOND_ROW - CARD_HEIGHT - INNER_GAP_4ROWS;
 const FORTH_ROW= THIRD_ROW - CARD_HEIGHT - INNER_GAP_4ROWS;
 const ROUND_ROW= FORTH_ROW - CARD_HEIGHT - GAP_4ROWS;
+const NAMES_ROW= ROUND_ROW - CARD_HEIGHT - INNER_GAP_4ROWS ;
 const START_X = .965;
 //Layout
 class TakeSixLayout extends React.Component {
@@ -83,6 +85,7 @@ class TakeSixLayout extends React.Component {
     }
 
     render() {
+
         var yourCards = [
             {rank:5,value:2},
             {rank:55,value:1},
@@ -98,11 +101,11 @@ class TakeSixLayout extends React.Component {
             return <CardButton key={index} t={this} card={item} updateStage={this.updateStage}/>
         });
         var row1Cards = [
-            {rank:52,value:2},
+            {rank:42,value:2},
             {rank:75,value:1},
-            {rank:56,value:1},
-            {rank:99,value:7},
-            {rank:35,value:3}].map((item,index) => {
+            {rank:46,value:1},
+            {rank:49,value:7},
+            {rank:95,value:3}].map((item,index) => {
 
             return <CardButton key={index} t={this} card={item} updateStage={this.updateStage}/>
         });
@@ -130,11 +133,7 @@ class TakeSixLayout extends React.Component {
             return <CardButton key={index} t={this} card={item} updateStage={this.updateStage}/>
         });
         var roundCards = [
-            {rank:5,value:2},
-            {rank:55,value:1},
-            {rank:5,value:1},
-            {rank:9,value:7},
-            {rank:85,value:1},
+
             {rank:15,value:2},
             {rank:11,value:1},
             {rank:42,value:1},
@@ -142,6 +141,24 @@ class TakeSixLayout extends React.Component {
             {rank:35,value:3}].map((item,index) => {
 
             return <CardButton key={index} t={this} card={item} updateStage={this.updateStage}/>
+        });
+        var names = [
+
+            "susan",
+            "stu",
+            "bob",
+            "larry",
+            "wai"].map((item,index) => {
+
+            return <Text key={index}
+                style={{
+                    width:0.4,
+                    fontSize: 0.11,
+                    textAlign: 'center',
+                    color: 'black',
+                }}>
+                {item}
+            </Text>
         });
         return (
             <View>
@@ -257,16 +274,13 @@ class TakeSixLayout extends React.Component {
                     </View>
                 </Animated.View>
 
-
-
-
                 <Animated.View
                     style={{
-                        width: 5,
+                        width: 2.5,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
-                        layoutOrigin: [0, ROUND_ROW],
+                        layoutOrigin: [START_X, ROUND_ROW],
                         opacity: this.state.fadeIn,
                         transform: [
                             {translateX: this.state.slideLeft},
@@ -275,13 +289,41 @@ class TakeSixLayout extends React.Component {
                         marginTop: -0.3
                     }}
                 >
-                    <View style={{marginTop: -0.09, width: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-                        <View style={{ margin: 0.01,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{marginTop: -0.09, width: 2.5, flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                        <View style={{ margin: 0.01,  flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                             {roundCards}
                         </View>
 
                     </View>
                 </Animated.View>
+
+                <Animated.View
+                    style={{
+                        width: 2.5,
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        justifyContent: 'flex-start',
+                        layoutOrigin: [START_X, NAMES_ROW],
+                        opacity: this.state.fadeIn,
+                        transform: [
+                            {translateX: this.state.slideLeft},
+                            {translateZ: -3}
+                        ],
+                        marginTop: -0.3
+                    }}
+                >
+                    <View style={{marginTop: .18, width: 2.5, flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                        <View style={{ margin: 0.01,  flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                            {names}
+                        </View>
+
+                    </View>
+                </Animated.View>
+
+
+
+
+
             </View>
         )
     }
