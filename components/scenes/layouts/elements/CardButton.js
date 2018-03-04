@@ -75,8 +75,8 @@ class CardButton extends React.Component {
          <View
             style={{
               margin: .01,
-              height: 0.5,
-                width: 0.4,
+              height: this.props.dim.height,
+                width: this.props.dim.width,
 
               backgroundColor: this.state.backgroundColor,
               borderWidth: 0,
@@ -99,7 +99,7 @@ class CardButton extends React.Component {
                     <View style={{ margin: 0,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                         <Text
                             style={{
-                                fontSize: 0.3,
+                                fontSize: 0.2,
                                 textAlign: 'center',
                                 color: this.state.color,
                             }}>

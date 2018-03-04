@@ -13,7 +13,7 @@ import TakeSix from './components/scenes/TakeSix.js';
 export default class FolarGames extends React.Component {
     constructor(){
         super();
-        this.state={mainMenu: true};
+        this.state={mainMenu: false};
     }
     updateScene() {
 

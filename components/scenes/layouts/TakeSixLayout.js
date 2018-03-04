@@ -5,10 +5,10 @@ import {
     Text
 } from 'react-vr';
 
-import { Easing } from 'react-native';
+import {Easing} from 'react-native';
 
 
-import LoginLayout from './ScoreLayout.js';
+import TextScoreLayout from './TextScoreLayout.js';
 import CardsLayout from './CardsLayout.js';
 
 //Layout
@@ -17,7 +17,7 @@ class TakeSixLayout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name:""
+            name: ""
         };
     }
 
@@ -26,17 +26,20 @@ class TakeSixLayout extends React.Component {
     }
 
 
-
-
-
     render() {
 
 
         return (
-            <View style={{  marginLeft:.1, width: 5, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-
+            <View style={{
+                marginLeft: .1,
+                width: 5,
+                height: 5,
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start'
+            }}>
                 <CardsLayout text={this.props.text}/>
-            <LoginLayout text={this.props.text}/>
+                <TextScoreLayout text={this.props.text}/>
 
             </View>
         )
