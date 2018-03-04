@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   View,
-  Animated
+  Text
 } from 'react-vr';
 
 import { Easing } from 'react-native';
@@ -17,8 +17,7 @@ class LoginLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      slideLeft: new Animated.Value(-1),
-      fadeIn: new Animated.Value(0),
+        name2:"Click on the keys to spell your name and then press Play",
       name:"",
       showButton: false,
       color1: "#A482DF",
@@ -29,26 +28,8 @@ class LoginLayout extends React.Component {
   }
 
   componentDidMount() {
-    Animated.sequence([
-      Animated.parallel([
-        Animated.timing(
-          this.state.slideLeft,
-          {
-           toValue: 0,
-           duration: 2000,
-           easing: Easing.ease
-          }
-        ),
-        Animated.timing(
-          this.state.fadeIn,
-          {
-           toValue: 1,
-           duration: 2000,
-           easing: Easing.ease
-          }
-        )
-      ])
-    ]).start();
+
+
   }
 
   //previously updateShowButton
@@ -66,30 +47,10 @@ class LoginLayout extends React.Component {
       }
 
 
-    /*switch (input) {
-      case 1:
-        this.setState({borderWidths: [0.05, 0, 0, 0, 0, 0]});
-        break;
-      case 2:
-        this.setState({borderWidths: [0, 0.05, 0, 0, 0, 0]});
-        break;
-      case 3:
-        this.setState({borderWidths: [0, 0, 0.05, 0, 0, 0]});
-        break;
-      case 4:
-        this.setState({borderWidths: [0, 0, 0, 0.05, 0, 0]});
-        break;
-      case 5:
-        this.setState({borderWidths: [0, 0, 0, 0, 0.05, 0]});
-        break;
-      case 6:
-        this.setState({borderWidths: [0, 0, 0, 0, 0, 0.05]});
-        break;
-    }*/
   }
 
   updateScene() {
-    this.setState({color1: "#DBDAF1", color2: "#A482DF", text: "Watch Video"});
+      ;
   }
 
   render() {
@@ -108,22 +69,22 @@ class LoginLayout extends React.Component {
       });
     return (
       <View>
-        <Animated.View
+        <View
           style={{
-            width: 5,
-            flexDirection: 'row',
+            width: 3,
+            flexDirection: 'column',
             alignItems: 'flex-start',
             justifyContent: 'flex-start',
-            layoutOrigin: [0, 0.5],
+            layoutOrigin: [-.2, 0.3],
             opacity: this.state.fadeIn,
             transform: [
-              {translateX: this.state.slideLeft},
+              {translateX: -3},
               {translateZ: -3}
             ],
             marginTop: -0.3
           }}
         >
-            <View style={{marginTop: -0.09, width: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{marginTop: -0.09, width: 5, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start'}}>
                 <View style={{ margin: 0.01,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                     {items}
                 </View>
@@ -134,33 +95,52 @@ class LoginLayout extends React.Component {
                     {items3}
                 </View>
                 <View style={{ margin: 0.01,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                    <Animated.Text
-                        style={{
-                            fontSize: 0.2,
-                            textAlign: 'center',
-                            color: "#000000",
-                            transform: [
-                                {translateX: -.3}
-                            ]
-                        }}>
-                        {this.state.name}
-                    </Animated.Text>
-                </View>
-                <View style={{  margin: 0.01, width:2, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-
-                        <Button   updateScene={this.props.updateScene} showButton={this.state.showButton} text={this.state.text}
-                                style={{
-                                    fontSize: 0.2,
-                                    textAlign: 'center',
-                                    color: "#000000",
-                                    transform: [
-                                        {translateX: 0}
-                                    ]
-                                }} />
 
                 </View>
+
             </View>
-        </Animated.View>
+            <View
+                style={{  margin: 0.01,
+                    width:5, flexDirection: 'row',
+                    alignItems: 'center',justifyContent: 'flex-start',
+                    layoutOrigin: [0, -.7],
+                    justifyContent: 'center'}}
+            >
+
+                <Text
+                    style={{
+                        fontSize: 0.2,
+                        height:.3,
+                        textAlign: 'center',
+                        color: "#000000",
+                        transform: [
+                            {translateX: -.3}
+                        ]
+                    }}>
+                    {this.state.name}
+                </Text>
+
+            </View>
+            <View
+                style={{  margin: 0.01,
+                    width:5, flexDirection: 'row',
+                    alignItems: 'center',
+                    layoutOrigin: [0, -1.2],
+                    justifyContent: 'center'}}
+            >
+
+                <Button   updateScene={this.props.updateScene} showButton={this.state.showButton} text={this.state.text}
+                          style={{
+                              fontSize: 0.2,
+                              textAlign: 'center',
+                              color: "#000000",
+                              transform: [
+                                  {translateX: 0}
+                              ]
+                          }} />
+
+            </View>
+        </View>
 
 
       </View>

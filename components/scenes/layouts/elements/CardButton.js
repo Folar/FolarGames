@@ -33,7 +33,7 @@ class CardButton extends React.Component {
                 break;
             case 3:
                 this.setState({backgroundColor:"#59eb2c"});
-                this.setState({color:"#ebde26"});
+                this.setState({color:"black"});
 
                 break;
             case 5:
@@ -85,7 +85,7 @@ class CardButton extends React.Component {
             }}
           >
             <VrButton >
-                <View style={{marginTop: .05, width: .5, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{marginTop: .05, width: .4, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                     <View style={{ margin: 0,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                         <Text
                             style={{
