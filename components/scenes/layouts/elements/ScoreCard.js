@@ -33,7 +33,14 @@ class ScoreCard extends React.Component {
                   rank: 34
               }
           },
-         
+          {
+          name: "bob",
+          score: 62,
+          card: {
+              value: 5,
+              rank: 104
+          }
+      },
           {
               name: "larry",
               score: 0,

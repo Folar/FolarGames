@@ -51,7 +51,7 @@ class TextScoreLayout extends React.Component {
 
                     transform: [
                         {translateX: -2.9},
-                        {translateY: .8},
+                        {translateY: .67},
                         {translateZ: -3}
                     ],
                     marginTop: -0.3

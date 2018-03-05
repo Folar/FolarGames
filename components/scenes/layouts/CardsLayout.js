@@ -10,10 +10,10 @@ import { Easing } from 'react-native';
 
 import CardButton from './elements/CardButton.js';
 
-const Y_YOUR_CARDS = 2.85;
+const Y_YOUR_CARDS = 2.75;
 const CARD_HEIGHT = .5;
 
-const GAP_4ROWS = .4;
+const GAP_4ROWS = .6;
 const INNER_GAP_4ROWS = .3;
 const FIRST_ROW= Y_YOUR_CARDS - CARD_HEIGHT - GAP_4ROWS;
 const SECOND_ROW= FIRST_ROW - CARD_HEIGHT - INNER_GAP_4ROWS;
@@ -258,28 +258,7 @@ class CardsLayout extends React.Component {
                     </View>
                 </Animated.View>
 
-                <Animated.View
-                    style={{
-                        width: 2.5,
-                        flexDirection: 'row',
-                        alignItems: 'flex-start',
-                        justifyContent: 'flex-start',
-                        layoutOrigin: [START_X, ROUND_ROW],
-                        opacity: this.state.fadeIn,
-                        transform: [
-                            {translateX: this.state.slideLeft},
-                            {translateZ: -3}
-                        ],
-                        marginTop: -0.3
-                    }}
-                >
-                    <View style={{marginTop: -0.09, width: 2.5, flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-                        <View style={{ margin: 0.01,  flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-                            {roundCards}
-                        </View>
 
-                    </View>
-                </Animated.View>
 
 
 
