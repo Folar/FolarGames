@@ -85,11 +85,11 @@ class CardButton extends React.Component {
             }}
           >
             <VrButton >
-                <View style={{marginTop: .05, width: .4, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{marginTop: .05, width: this.props.dim.width, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                     <View style={{ margin: 0,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                         <Text
                             style={{
-                                fontSize: 0.1,
+                                fontSize: this.props.dim.valueFont,
                                 textAlign: 'center',
                                 color: this.state.color,
                             }}>
@@ -99,7 +99,7 @@ class CardButton extends React.Component {
                     <View style={{ margin: 0,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                         <Text
                             style={{
-                                fontSize: 0.2,
+                                fontSize: this.props.dim.rankFont,
                                 textAlign: 'center',
                                 color: this.state.color,
                             }}>

@@ -4,6 +4,7 @@ import {
   View,
   VrButton
 } from 'react-vr';
+import ScoreRow from './ScoreRow.js';
 
 //Element
 class ScoreCard extends React.Component {
@@ -21,26 +22,9 @@ class ScoreCard extends React.Component {
 
     }
 
-  foo(v){
 
-
-      switch (v){
-          case 1:
-              return "*";
-          case 2:
-              return "**";
-          case 3:
-              return "***";
-          case 5:
-              return "*****";
-          case 7:
-              return "*******";
-      }
-      return "***";
-
-  }
   render() {
-      var scoreCard = [
+      var player = [
           {
               name: "susan",
               score: 44,
@@ -49,32 +33,9 @@ class ScoreCard extends React.Component {
                   rank: 34
               }
           },
-          {
-              name: "stu",
-              score: 4,
-              card: {
-                  value: 3,
-                  rank: 104
-              }
-          },
-          {
-              name: "bob",
-              score: 7,
-              card: {
-                  value: 1,
-                  rank: 34
-              }
-          },
+         
           {
               name: "larry",
-              score: 7,
-              card: {
-                  value: 1,
-                  rank: 34
-              }
-          },
-          {
-              name: "wai",
               score: 0,
               card: {
                   value: 3,
@@ -82,23 +43,15 @@ class ScoreCard extends React.Component {
               }
           }].map((item, index) => {
 
-          return <Text key={index}
-                       style={{
-                           width: 0.4,
-                           height: .5,
-                           fontSize: 0.11,
-                           textAlign: 'center',
-                           color: 'black',
-                       }}>
-              {item.name}
-          </Text>
+          return <ScoreRow key={index} player={item}/>
+
       });
     return (
         <View style={{
             flexDirection: 'column',
             alignItems: 'flex-start', justifyContent: 'flex-start'
         }}>
-            {scoreCard}
+            {player}
         </View>
     )
   }
