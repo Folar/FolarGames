@@ -13,10 +13,11 @@ import TakeSix from './components/scenes/TakeSix.js';
 export default class FolarGames extends React.Component {
     constructor(){
         super();
-        this.state={mainMenu: false};
+        this.state={mainMenu: true,
+                    name:""};
     }
     updateScene() {
-
+                console.log(this.state.name);
                 this.setState({ mainMenu: false});
 
     }
@@ -28,9 +29,9 @@ export default class FolarGames extends React.Component {
         <Pano source={asset('museum.jpg')}/>
           {
               mainMenu? (
-                  <Login showButton={false} updateScene={this.updateScene.bind(this)} text={"Play"}/>
+                  <Login showButton={false}  s= {this.state} updateScene={this.updateScene.bind(this)} text={"Play"}/>
               ) : (
-                  <TakeSix showButton={false} updateScene={this.updateScene.bind(this)} text={"Play"}/>
+                  <TakeSix showButton={false} name={this.state.name} updateScene={this.updateScene.bind(this)} text={"Play"}/>
               )
           }
       </View>

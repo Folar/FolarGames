@@ -17,11 +17,11 @@ class LoginLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        name2:"Click on the keys to spell your name and then press Play",
-      name:"",
+       buffer:"",
+        name :"Click keys to spell your name and then press Play",
       showButton: false,
-      color1: "#A482DF",
-      color2: "#DBDAF1",
+      color1: "#744444",
+      color2: "#000000",
       text: this.props.text,
       borderWidths: [0, 0, 0, 0, 0, 0]
     };
@@ -34,26 +34,44 @@ class LoginLayout extends React.Component {
 
   //previously updateShowButton
   updateStage(input) {
-      console.log(this)
-      if (this.letter == '<-'){
-          str= this.t.state.name;
-          if(str.length == 1)
-              this.t.setState({showButton:false});
 
-          this.t.setState({name:str.substring(0, str.length -1)});
+      if (this.letter == '<-'){
+          str= this.t.state.buffer;
+          if(str.length == 0) {
+              return;
+          }
+          if(str.length == 1) {
+              this.t.setState({name: "Click keys to spell your name and then press Play"});
+              this.t.setState({showButton:false});
+              this.t.setState({buffer:""});
+              this.t.setState({color1: "#444444"});
+          } else {
+              this.t.setState({buffer: str.substring(0, str.length - 1)});
+              this.t.setState({name: str.substring(0, str.length - 1)});
+              this.t.props.s.name = str.substring(0, str.length - 1);
+          }
       } else {
-          this.t.setState({name:this.t.state.name + this.letter});
           this.t.setState({showButton:true});
+          this.t.setState({buffer:this.t.state.buffer + this.letter});
+          str= this.t.state.buffer;
+          this.t.setState({color1: "#000000"});
+          if(str.length == 0) {
+              this.t.setState({name: this.letter});
+              this.t.props.s.name = this.letter;
+          } else{
+              this.t.props.s.name =this.t.state.buffer + this.letter;
+              this.t.setState({name:this.t.state.buffer + this.letter});
+          }
+
       }
 
-
   }
 
-  updateScene() {
-      ;
-  }
+
 
   render() {
+
+
       var items = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n'].map((item,index) => {
 
           return <LetterButton key={index} t={this} letter={item} updateStage={this.updateStage}/>
@@ -69,6 +87,7 @@ class LoginLayout extends React.Component {
       });
     return (
       <View>
+
         <View
           style={{
             width: 3,
@@ -76,7 +95,6 @@ class LoginLayout extends React.Component {
             alignItems: 'flex-start',
             justifyContent: 'flex-start',
             layoutOrigin: [-.2, 0.3],
-            opacity: this.state.fadeIn,
             transform: [
               {translateX: -3},
               {translateZ: -3}
@@ -84,7 +102,32 @@ class LoginLayout extends React.Component {
             marginTop: -0.3
           }}
         >
-            <View style={{marginTop: -0.09, width: 5, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start'}}>
+            <View
+                style={{
+                    margin: 0.01,
+                    width: 5, flexDirection: 'row',
+                    alignItems: 'center', justifyContent: 'flex-start',
+                    layoutOrigin: [-.05, 1.6],
+                    justifyContent: 'center'
+                }}
+            >
+
+                <Text
+                    style={{
+                        fontSize: 0.3,
+                        fontFamily:'Arial',
+                        color:this.state.color2,
+                        height: .3,
+                        textAlign: 'center',
+                        transform: [
+                            {translateX: -.3}
+                        ]
+                    }}>
+                    Museum of Games
+                </Text>
+
+            </View>
+            <View style={{ height:1,width: 5, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start'}}>
                 <View style={{ margin: 0.01,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                     {items}
                 </View>
@@ -94,25 +137,25 @@ class LoginLayout extends React.Component {
                 <View style={{ margin: 0.01,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                     {items3}
                 </View>
-                <View style={{ margin: 0.01,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
 
-                </View>
 
             </View>
             <View
-                style={{  margin: 0.01,
-                    width:5, flexDirection: 'row',
-                    alignItems: 'center',justifyContent: 'flex-start',
-                    layoutOrigin: [0, -.7],
-                    justifyContent: 'center'}}
+                style={{
+                    margin: 0.01,
+                    width: 5, flexDirection: 'row',
+                    alignItems: 'center', justifyContent: 'flex-start',
+                    layoutOrigin: [0, 0.8],
+                    justifyContent: 'center'
+                }}
             >
 
                 <Text
                     style={{
                         fontSize: 0.2,
-                        height:.3,
+                        height: .3,
                         textAlign: 'center',
-                        color: "#000000",
+                        color:this.state.color1,
                         transform: [
                             {translateX: -.3}
                         ]
@@ -125,7 +168,7 @@ class LoginLayout extends React.Component {
                 style={{  margin: 0.01,
                     width:5, flexDirection: 'row',
                     alignItems: 'center',
-                    layoutOrigin: [0, -1.2],
+                    layoutOrigin: [0, 0 ],
                     justifyContent: 'center'}}
             >
 
@@ -140,6 +183,7 @@ class LoginLayout extends React.Component {
                           }} />
 
             </View>
+
         </View>
 
 

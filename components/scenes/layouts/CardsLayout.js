@@ -10,18 +10,9 @@ import { Easing } from 'react-native';
 
 import CardButton from './elements/CardButton.js';
 
-const Y_YOUR_CARDS = 2.75;
-const CARD_HEIGHT = .5;
+const {Constants} = require('./../../../utils/constants.js');
 
-const GAP_4ROWS = .6;
-const INNER_GAP_4ROWS = .3;
-const FIRST_ROW= Y_YOUR_CARDS - CARD_HEIGHT - GAP_4ROWS;
-const SECOND_ROW= FIRST_ROW - CARD_HEIGHT - INNER_GAP_4ROWS;
-const THIRD_ROW= SECOND_ROW - CARD_HEIGHT - INNER_GAP_4ROWS;
-const FORTH_ROW= THIRD_ROW - CARD_HEIGHT - INNER_GAP_4ROWS;
-const ROUND_ROW= FORTH_ROW - CARD_HEIGHT - GAP_4ROWS;
-const NAMES_ROW= ROUND_ROW - CARD_HEIGHT - INNER_GAP_4ROWS ;
-const START_X = 1.2;
+
 //Layout
 class CardsLayout extends React.Component {
 
@@ -64,7 +55,7 @@ class CardsLayout extends React.Component {
 
     //previously updateShowButton
     updateStage(input) {
-        console.log(this)
+
         if (this.letter == '<-'){
             str= this.t.state.name;
             if(str.length == 1)
@@ -85,7 +76,7 @@ class CardsLayout extends React.Component {
     }
 
     render() {
-
+        let c = new Constants();
         let cardDim = {height:.5,width:.4,valueFont:.1,rankFont:.2};
         var yourCards = [
             {rank:5,value:2},
@@ -153,7 +144,7 @@ class CardsLayout extends React.Component {
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
-                        layoutOrigin: [START_X, Y_YOUR_CARDS],
+                        layoutOrigin: [c.START_X, c.Y_YOUR_CARDS],
                         opacity: this.state.fadeIn,
                         transform: [
                             {translateX: this.state.slideLeft},
@@ -175,7 +166,7 @@ class CardsLayout extends React.Component {
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
-                        layoutOrigin: [START_X, FIRST_ROW],
+                        layoutOrigin: [c.START_X, c.FIRST_ROW],
                         opacity: this.state.fadeIn,
                         transform: [
                             {translateX: this.state.slideLeft},
@@ -197,7 +188,7 @@ class CardsLayout extends React.Component {
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
-                        layoutOrigin: [START_X, SECOND_ROW],
+                        layoutOrigin: [c.START_X, c.SECOND_ROW],
                         opacity: this.state.fadeIn,
                         transform: [
                             {translateX: this.state.slideLeft},
@@ -219,7 +210,7 @@ class CardsLayout extends React.Component {
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
-                        layoutOrigin: [START_X, THIRD_ROW],
+                        layoutOrigin: [c.START_X, c.THIRD_ROW],
                         opacity: this.state.fadeIn,
                         transform: [
                             {translateX: this.state.slideLeft},
@@ -241,7 +232,7 @@ class CardsLayout extends React.Component {
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
-                        layoutOrigin: [START_X, FORTH_ROW],
+                        layoutOrigin: [c.START_X, c.FORTH_ROW],
                         opacity: this.state.fadeIn,
                         transform: [
                             {translateX: this.state.slideLeft},
