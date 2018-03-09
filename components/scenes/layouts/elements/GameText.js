@@ -44,7 +44,7 @@ class GameText extends React.Component {
                     style={{
                         fontSize: 0.13,
                         width: 1.52,
-                        height: 1,
+                        height: .8,
                         textAlign: 'center',
                         color: "#000000"
                     }}>

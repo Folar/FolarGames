@@ -67,7 +67,7 @@ class TakeSixLayout extends React.Component {
             <View style={{
                 marginLeft: .1,
                 width: 5,
-                height: 5,
+                height: 1.4,
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start'

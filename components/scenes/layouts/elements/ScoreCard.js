@@ -31,12 +31,12 @@ class ScoreCard extends React.Component {
       }
       var p =players.map((item, index) => {
 
-          return <ScoreRow key={index} player={item}/>
+          return <ScoreRow  key={index} player={item}/>
 
       });
     return (
         <View style={{
-            flexDirection: 'column',
+            flexDirection: 'column', height:1.4,
             alignItems: 'flex-start', justifyContent: 'flex-start'
         }}>
             {p}

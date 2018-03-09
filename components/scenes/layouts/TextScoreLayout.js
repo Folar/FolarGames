@@ -44,6 +44,7 @@ class TextScoreLayout extends React.Component {
             <View
                 style={{
                     width: 0.9,
+                    height:1.4,
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
