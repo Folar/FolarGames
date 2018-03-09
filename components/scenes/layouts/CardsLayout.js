@@ -76,64 +76,44 @@ class CardsLayout extends React.Component {
     }
 
     render() {
+        var  myCards = [];
+        var  row1 =[];
+        var  row2 =[];
+        var  row3 =[];
+        var  row4 =[];
         let c = new Constants();
         let cardDim = {height:.5,width:.4,valueFont:.1,rankFont:.2};
-        var yourCards = [
-            {rank:5,value:2},
-            {rank:55,value:1},
-            {rank:5,value:1},
-            {rank:9,value:7},
-            {rank:85,value:1},
-            {rank:15,value:2},
-            {rank:11,value:5},
-            {rank:42,value:1},
-            {rank:104,value:7},
-            {rank:35,value:3}].map((item,index) => {
+        let cards =this.props.data.cards;
+        if(cards != null){
+            myCards = cards;
+            row1 =this.props.data.row1;
+            row2 =this.props.data.row2;
+            row3 =this.props.data.row3;
+            row4 =this.props.data.row4;
+        }
+
+        var yourCards = myCards.map((item,index) => {
 
             return <CardButton dim = {cardDim} key={index} t={this} card={item} updateStage={this.updateStage}/>
         });
-        var row1Cards = [
-            {rank:42,value:2},
-            {rank:75,value:1},
-            {rank:46,value:1},
-            {rank:49,value:7},
-            {rank:95,value:3}].map((item,index) => {
+        var row1Cards =
+            row1.map((item,index) => {
 
             return <CardButton dim = {cardDim} key={index} t={this} card={item} updateStage={this.updateStage}/>
         });
-        var row2Cards = [
-            {rank:52,value:2},
-            {rank:75,value:1},
-
-            {rank:35,value:3}].map((item,index) => {
+        var row2Cards = row2.map((item,index) => {
 
             return <CardButton dim = {cardDim} key={index} t={this} card={item} updateStage={this.updateStage}/>
         });
-        var row3Cards = [
-            {rank:52,value:2},
-            {rank:75,value:1},
-            {rank:56,value:1},
-            {rank:99,value:7},
-            {rank:35,value:3}].map((item,index) => {
+        var row3Cards = row3.map((item,index) => {
 
             return <CardButton dim = {cardDim}  key={index} t={this} card={item} updateStage={this.updateStage}/>
         });
-        var row4Cards = [
-            {rank:52,value:2},
-            {rank:75,value:1}].map((item,index) => {
+        var row4Cards = row4.map((item,index) => {
 
             return <CardButton dim = {cardDim} key={index} t={this} card={item} updateStage={this.updateStage}/>
         });
-        var roundCards = [
 
-            {rank:15,value:2},
-            {rank:11,value:1},
-            {rank:42,value:1},
-            {rank:99,value:7},
-            {rank:35,value:3}].map((item,index) => {
-
-            return <CardButton key={index} t={this} card={item} dim = {cardDim} updateStage={this.updateStage}/>
-        });
 
         return (
             <View>

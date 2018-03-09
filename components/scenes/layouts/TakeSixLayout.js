@@ -12,41 +12,48 @@ import TextScoreLayout from './TextScoreLayout.js';
 import CardsLayout from './CardsLayout.js';
 
 //Layout
+_this = null;
 class TakeSixLayout extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: ""
+            name: "",
+            data: {}
         };
-    }
+        _this = this;
 
+    }
     componentDidMount() {
         var W3CWebSocket = require('websocket').w3cwebsocket;
         var name = this.props.name;
         var client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
+
         client.onerror = function () {
             console.log('Connection Error');
         };
-        client.onmessage = function (x) {
-            console.log('message ' + x.toString());
 
+
+        client.onmessage = function (x) {
+            let packet = JSON.parse(x.data);
+
+            _this.setState({data:packet});
 
         };
 
         client.onopen = function () {
             console.log('WebSocket Client Connected');
 
-            function sendNumber() {
+            function sendMessage() {
                 if (client.readyState === client.OPEN) {
-                    var number = Math.round(Math.random() * 0xFFFFFF);
-                    client.send((JSON.stringify({name:name,type:"newMessage"})));;
+
+                    client.send(JSON.stringify({name:name,type:"newUser"}));
 
                 }
             }
 
-            sendNumber();
+            sendMessage();
         };
 
 
@@ -65,8 +72,8 @@ class TakeSixLayout extends React.Component {
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start'
             }}>
-                <CardsLayout text={this.props.text}/>
-                <TextScoreLayout text={this.props.text}/>
+                <CardsLayout text={this.props.text} data={this.state.data}/>
+                <TextScoreLayout text={this.props.text} data={this.state.data}/>
 
             </View>
         )

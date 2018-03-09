@@ -59,7 +59,7 @@ class TextScoreLayout extends React.Component {
             >
 
 
-                    <GameText/>
+                    <GameText data={this.props.data}/>
                     <ScoreCard/>
 
 
