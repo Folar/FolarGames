@@ -16,7 +16,7 @@ class ScoreRow extends React.Component {
       this.state = {
           name: "",
           showButton: true,
-          playing: true,
+          playing: false,
           color1: "#A482DF",
           color2: "#DBDAF1",
           text: "Start",
@@ -39,9 +39,10 @@ class ScoreRow extends React.Component {
                   style={{
                       width: 0.4,
                       height: .35,
-                      fontSize: 0.11,
+                      fontSize: 0.15,
                       textAlign: 'center',
                       color: 'black',
+
                   }}>
                 {this.props.player.name}
             </Text>{
@@ -52,9 +53,12 @@ class ScoreRow extends React.Component {
                     style={{
                         width: 0.4,
                         height: .35,
-                        fontSize: 0.2,
+                        fontSize: 0.15,
                         textAlign: 'center',
                         color: 'black',
+                        transform: [
+                            {translateY: 0}
+                        ]
                     }}>
                     {this.props.player.score}
                 </Text>

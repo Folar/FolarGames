@@ -24,31 +24,12 @@ class ScoreCard extends React.Component {
 
 
   render() {
-      var player = [
-          {
-              name: "susan",
-              score: 44,
-              card: {
-                  value: 3,
-                  rank: 34
-              }
-          },
-          {
-          name: "bob",
-          score: 62,
-          card: {
-              value: 5,
-              rank: 104
-          }
-      },
-          {
-              name: "larry",
-              score: 0,
-              card: {
-                  value: 3,
-                  rank: 64
-              }
-          }].map((item, index) => {
+      let players = [];
+      let m =this.props.data.users;
+      if(m != null){
+          players = m;
+      }
+      var p =players.map((item, index) => {
 
           return <ScoreRow key={index} player={item}/>
 
@@ -58,7 +39,7 @@ class ScoreCard extends React.Component {
             flexDirection: 'column',
             alignItems: 'flex-start', justifyContent: 'flex-start'
         }}>
-            {player}
+            {p}
         </View>
     )
   }
