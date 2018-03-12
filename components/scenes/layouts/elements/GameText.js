@@ -14,7 +14,6 @@ class GameText extends React.Component {
         super();
         this.state = {
             name: "",
-            showButton: true,
             playing: false,
             color1: "#A482DF",
             color2: "#DBDAF1",
@@ -28,11 +27,10 @@ class GameText extends React.Component {
     }
 
 
-
     render() {
         let msg = "";
-        let m =this.props.data.message;
-        if(m != null){
+        let m = this.props.data.message;
+        if (m != null) {
             msg = m;
         }
         console.log("my text data " + JSON.stringify(this.props.data) + " " + this.props.data.message);
@@ -50,30 +48,38 @@ class GameText extends React.Component {
                     }}>
                     {msg}
                 </Text>
-                <View
-                    style={{
-                        marginLeft: 0.4,
-                        paddingLeft: 0.2,
-                        paddingRight: 0.2,
-                        height: 0.3,
-                        backgroundColor: '#A482DF',
-                        borderRadius: 0.1,
-
-                        transform: [
-                            {translateX: 0}
-                        ]
-                    }}>
-                    <VrButton onClick={this.updateScene}>
-                        <Text
+                {
+                    showButton ? (
+                        <View
                             style={{
-                                fontSize: 0.2,
-                                textAlign: 'center',
-                                color: "#FFFFFF"
+                                marginLeft: 0.4,
+                                paddingLeft: 0.2,
+                                paddingRight: 0.2,
+                                height: 0.3,
+                                backgroundColor: '#A482DF',
+                                borderRadius: 0.1,
+
+                                transform: [
+                                    {translateX: 0}
+                                ]
                             }}>
-                            Start
-                        </Text>
-                    </VrButton>
-                </View>
+
+
+                            <VrButton onClick={this.props.clickButton}>
+                                <Text
+                                    style={{
+                                        fontSize: 0.2,
+                                        textAlign: 'center',
+                                        color: "#FFFFFF"
+                                    }}>
+                                    Start
+                                </Text>
+                            </VrButton>
+                        </View>) :
+                        (<View></View>)
+
+
+                }
 
             </View>
         )

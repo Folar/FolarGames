@@ -74,7 +74,104 @@ class CardsLayout extends React.Component {
     updateScene() {
 
     }
+    getBulls(item){
 
+
+        switch (item.value){
+            case 1:
+                return "*";
+            case 2:
+                return "**";
+            case 3:
+                return "***";
+            case 5:
+                return "*****";
+            case 7:
+                return "*******";
+        }
+        return "";
+
+    }
+    getColor(item,hilite) {
+        let color1="blue";
+        let color2="blue";
+        switch (item.value){
+
+            case 1:
+
+                color1 =  "#fefefe";
+                color2 = "#cc46d6";
+                break;
+
+            case 2:
+                color1 =  "#64fcff";
+                color2 = "#224d06";
+
+                break;
+            case 3:
+                color1 =  "#59eb2c";
+                color2 = "#2214c7";
+
+                break;
+            case 5:
+                color1 =  "#ab2424";
+                color2 = "#59eb2c";
+                break;
+
+            case 7:
+                color1 =  "#ebde26";
+                color2 = "#ab2424";
+                break;
+        }
+        if(hilite) {
+            return color1;
+
+        }else{
+            return color2;
+        }
+
+
+    }
+    getBackground(item,hilite) {
+        let color1="blue";
+        let color2="blue";
+        switch (item.value){
+
+            case 1:
+
+                color1 =  "#fefefe";
+                color2 = "#cc46d6";
+                break;
+
+            case 2:
+                color1 =  "#64fcff";
+                color2 = "#224d06";
+
+                break;
+            case 3:
+                color1 =  "#59eb2c";
+                color2 = "#2214c7";
+
+                break;
+            case 5:
+                color1 =  "#ab2424";
+                color2 = "#59eb2c";
+                break;
+
+            case 7:
+                color1 =  "#ebde26";
+                color2 = "#ab2424";
+                break;
+        }
+        if(hilite) {
+            return color2;
+
+        }else{
+            return color1;
+        }
+
+
+    }
     render() {
         var  myCards = [];
         var  row1 =[];
@@ -94,24 +191,24 @@ class CardsLayout extends React.Component {
 
         var yourCards = myCards.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index} t={this} card={item} updateStage={this.updateStage}/>
+            return <CardButton dim = {cardDim} key={index} t={this} color={this.getColor(item,this.props.state==3)} background={this.getBackground(item,this.props.state==3)} state={this.props.state} bulls={this.getBulls(item)} card={item} updateStage={this.updateStage}/>
         });
         var row1Cards =
             row1.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index} t={this} card={item} updateStage={this.updateStage}/>
+            return <CardButton dim = {cardDim} key={index} t={this} color={this.getColor(item,false)} background={this.getBackground(item,false)} bulls={this.getBulls(item)}  card={item} updateStage={this.updateStage}/>
         });
         var row2Cards = row2.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index} t={this} card={item} updateStage={this.updateStage}/>
+            return <CardButton dim = {cardDim} color={this.getColor(item,false)} background={this.getBackground(item,false)} key={index} t={this} bulls={this.getBulls(item)} card={item} updateStage={this.updateStage}/>
         });
         var row3Cards = row3.map((item,index) => {
 
-            return <CardButton dim = {cardDim}  key={index} t={this} card={item} updateStage={this.updateStage}/>
+            return <CardButton dim = {cardDim}  key={index} color={this.getColor(item,false)} background={this.getBackground(item,false)} bulls={this.getBulls(item)} t={this} card={item} updateStage={this.updateStage}/>
         });
         var row4Cards = row4.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index} t={this} card={item} updateStage={this.updateStage}/>
+            return <CardButton dim = {cardDim} key={index} t={this} color={this.getColor(item,false)} background={this.getBackground(item,false)}  bulls={this.getBulls(item)} card={item} updateStage={this.updateStage}/>
         });
 
 

@@ -19,17 +19,24 @@ class TakeSixLayout extends React.Component {
         super(props);
         this.state = {
             name: "",
-            data: {}
+            data: {},
+            showButton:true
         };
         _this = this;
+        this.client = null;
 
     }
+    clilckButton(){
+       // console.log("in click Button "+JSON.stringify({name:this.state.name,type:"startingGame"}));
+        this.client.send(JSON.stringify({name:this.state.name,type:"startingGame"}));
+    }
     componentDidMount() {
-        var W3CWebSocket = require('websocket').w3cwebsocket;
-        var name = this.props.name;
-        var client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+        let W3CWebSocket = require('websocket').w3cwebsocket;
+        let name = this.props.name;
+        this.setState({name:name});
+        let client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
-
+        this.client = client
         client.onerror = function () {
             console.log('Connection Error');
         };
@@ -40,6 +47,7 @@ class TakeSixLayout extends React.Component {
 
             _this.setState({data:packet});
 
+            _this.setState({showButton:packet.state<2})
         };
 
         client.onopen = function () {
@@ -72,8 +80,8 @@ class TakeSixLayout extends React.Component {
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start'
             }}>
-                <CardsLayout text={this.props.text} data={this.state.data}/>
-                <TextScoreLayout text={this.props.text} data={this.state.data}/>
+                <CardsLayout text={this.props.text} data={this.state.data} state={this.state.data.state} />
+                <TextScoreLayout text={this.props.text}  showButton={this.state.showButton} data={this.state.data} clickButton={this.clilckButton.bind(this)}/>
 
             </View>
         )
