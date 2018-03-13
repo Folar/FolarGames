@@ -54,20 +54,9 @@ class CardsLayout extends React.Component {
     }
 
     //previously updateShowButton
-    updateStage(input) {
+    updateStage() {
 
-        if (this.letter == '<-'){
-            str= this.t.state.name;
-            if(str.length == 1)
-                this.t.setState({showButton:false});
-
-            this.t.setState({name:str.substring(0, str.length -1)});
-        } else {
-            this.t.setState({name:this.t.state.name + this.letter});
-            this.t.setState({showButton:true});
-        }
-
-
+       console.log("upstage "+JSON.stringify(this.state.color1));
 
     }
 
@@ -191,24 +180,35 @@ class CardsLayout extends React.Component {
 
         var yourCards = myCards.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index} t={this} color={this.getColor(item,this.props.state==3)} background={this.getBackground(item,this.props.state==3)} state={this.props.state} bulls={this.getBulls(item)} card={item} updateStage={this.updateStage}/>
+            return <CardButton dim = {cardDim} key={index}  color={this.getColor(item,this.props.state==3)}
+                               background={this.getBackground(item,this.props.state==3)} state={this.props.state}
+                               clickable={this.props.state==3}
+                               bulls={this.getBulls(item)} card={item} pickCard={this.props.pickCard}/>
         });
         var row1Cards =
             row1.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index} t={this} color={this.getColor(item,false)} background={this.getBackground(item,false)} bulls={this.getBulls(item)}  card={item} updateStage={this.updateStage}/>
+            return <CardButton dim = {cardDim} key={index}  color={this.getColor(item,false)}
+                               background={this.getBackground(item,false)} bulls={this.getBulls(item)}
+                               card={item} pickCard={this.props.pickCard} clickable={false}/>
         });
         var row2Cards = row2.map((item,index) => {
 
-            return <CardButton dim = {cardDim} color={this.getColor(item,false)} background={this.getBackground(item,false)} key={index} t={this} bulls={this.getBulls(item)} card={item} updateStage={this.updateStage}/>
+            return <CardButton dim = {cardDim} color={this.getColor(item,false)} key={index}
+                               background={this.getBackground(item,false)} bulls={this.getBulls(item)}
+                               card={item} pickCard={this.props.pickCard} />
         });
         var row3Cards = row3.map((item,index) => {
 
-            return <CardButton dim = {cardDim}  key={index} color={this.getColor(item,false)} background={this.getBackground(item,false)} bulls={this.getBulls(item)} t={this} card={item} updateStage={this.updateStage}/>
+            return <CardButton dim = {cardDim}  key={index} color={this.getColor(item,false)} card={item}
+                               background={this.getBackground(item,false)} bulls={this.getBulls(item)}
+                               pickCard={this.props.pickCard} />
         });
         var row4Cards = row4.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index} t={this} color={this.getColor(item,false)} background={this.getBackground(item,false)}  bulls={this.getBulls(item)} card={item} updateStage={this.updateStage}/>
+            return <CardButton dim = {cardDim} key={index}  color={this.getColor(item,false)}
+                               background={this.getBackground(item,false)}  bulls={this.getBulls(item)}
+                               card={item} pickCard={this.props.pickCard} />
         });
 
 

@@ -19,6 +19,7 @@ class TakeSixLayout extends React.Component {
         super(props);
         this.state = {
             name: "",
+            card:{},
             data: {},
             showButton:true
         };
@@ -26,7 +27,12 @@ class TakeSixLayout extends React.Component {
         this.client = null;
 
     }
-    clilckButton(){
+    pickCard(x){
+        console.log("in click Button "+JSON.stringify({name:this.state.name,type:"selectCard",card:x}));
+        //this.client.send(JSON.stringify({name:this.state.name,type:"selectCard"}));
+    }
+
+    clickButton(){
        // console.log("in click Button "+JSON.stringify({name:this.state.name,type:"startingGame"}));
         this.client.send(JSON.stringify({name:this.state.name,type:"startingGame"}));
     }
@@ -80,8 +86,10 @@ class TakeSixLayout extends React.Component {
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start'
             }}>
-                <CardsLayout text={this.props.text} data={this.state.data} state={this.state.data.state} />
-                <TextScoreLayout text={this.props.text}  showButton={this.state.showButton} data={this.state.data} clickButton={this.clilckButton.bind(this)}/>
+                <CardsLayout text={this.props.text} data={this.state.data} t={this} state={this.state.data.state}
+                             pickCard={this.pickCard.bind(this)}/>
+                <TextScoreLayout text={this.props.text}  showButton={this.state.showButton} data={this.state.data}
+                                 clickButton={this.clickButton.bind(this)}/>
 
             </View>
         )

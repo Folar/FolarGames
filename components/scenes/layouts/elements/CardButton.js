@@ -23,7 +23,10 @@ class CardButton extends React.Component {
 
 
     }
-
+    invoke(){
+        if(this.props.clickable)
+            this.props.pickCard(this.props.card);
+    }
 
   render() {
 
@@ -41,8 +44,9 @@ class CardButton extends React.Component {
               borderStyle: "solid"
             }}
           >
-            <VrButton >
-                <View style={{marginTop: .05, width: this.props.dim.width, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+            <VrButton onClick={this.invoke.bind(this)}>
+                <View style={{marginTop: .05, width: this.props.dim.width, flexDirection: 'column', alignItems: 'center',
+                              justifyContent: 'center'}}>
                     <View style={{ margin: 0,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                         <Text
                             style={{
