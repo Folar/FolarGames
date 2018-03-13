@@ -12,7 +12,7 @@ import CardButton from './elements/CardButton.js';
 
 const {Constants} = require('./../../../utils/constants.js');
 
-
+const {Cards} = require('./../../../utils/cards.js');
 //Layout
 class CardsLayout extends React.Component {
 
@@ -53,114 +53,8 @@ class CardsLayout extends React.Component {
         ]).start();
     }
 
-    //previously updateShowButton
-    updateStage() {
-
-       console.log("upstage "+JSON.stringify(this.state.color1));
-
-    }
-
-    updateScene() {
-
-    }
-    getBulls(item){
 
 
-        switch (item.value){
-            case 1:
-                return "*";
-            case 2:
-                return "**";
-            case 3:
-                return "***";
-            case 5:
-                return "*****";
-            case 7:
-                return "*******";
-        }
-        return "";
-
-    }
-    getColor(item,hilite) {
-        let color1="blue";
-        let color2="blue";
-        switch (item.value){
-
-            case 1:
-
-                color1 =  "#fefefe";
-                color2 = "#cc46d6";
-                break;
-
-            case 2:
-                color1 =  "#64fcff";
-                color2 = "#224d06";
-
-                break;
-            case 3:
-                color1 =  "#59eb2c";
-                color2 = "#2214c7";
-
-                break;
-            case 5:
-                color1 =  "#ab2424";
-                color2 = "#59eb2c";
-                break;
-
-            case 7:
-                color1 =  "#ebde26";
-                color2 = "#ab2424";
-                break;
-        }
-        if(hilite) {
-            return color1;
-
-        }else{
-            return color2;
-        }
-
-
-    }
-    getBackground(item,hilite) {
-        let color1="blue";
-        let color2="blue";
-        switch (item.value){
-
-            case 1:
-
-                color1 =  "#fefefe";
-                color2 = "#cc46d6";
-                break;
-
-            case 2:
-                color1 =  "#64fcff";
-                color2 = "#224d06";
-
-                break;
-            case 3:
-                color1 =  "#59eb2c";
-                color2 = "#2214c7";
-
-                break;
-            case 5:
-                color1 =  "#ab2424";
-                color2 = "#59eb2c";
-                break;
-
-            case 7:
-                color1 =  "#ebde26";
-                color2 = "#ab2424";
-                break;
-        }
-        if(hilite) {
-            return color2;
-
-        }else{
-            return color1;
-        }
-
-
-    }
     render() {
         var  myCards = [];
         var  row1 =[];
@@ -168,6 +62,7 @@ class CardsLayout extends React.Component {
         var  row3 =[];
         var  row4 =[];
         let c = new Constants();
+        let cu = new Cards();
         let cardDim = {height:.5,width:.4,valueFont:.1,rankFont:.2};
         let cards =this.props.data.cards;
         if(cards != null){
@@ -180,34 +75,34 @@ class CardsLayout extends React.Component {
 
         var yourCards = myCards.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index}  color={this.getColor(item,this.props.state==3)}
-                               background={this.getBackground(item,this.props.state==3)} state={this.props.state}
+            return <CardButton dim = {cardDim} key={index}  color={cu.getColor(item,this.props.state==3)}
+                               background={cu.getBackground(item,this.props.state==3)} state={this.props.state}
                                clickable={this.props.state==3}
-                               bulls={this.getBulls(item)} card={item} pickCard={this.props.pickCard}/>
+                               bulls={cu.getBulls(item)} card={item} pickCard={this.props.pickCard}/>
         });
         var row1Cards =
             row1.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index}  color={this.getColor(item,false)}
-                               background={this.getBackground(item,false)} bulls={this.getBulls(item)}
+            return <CardButton dim = {cardDim} key={index}  color={cu.getColor(item,false)}
+                               background={cu.getBackground(item,false)} bulls={cu.getBulls(item)}
                                card={item} pickCard={this.props.pickCard} clickable={false}/>
         });
         var row2Cards = row2.map((item,index) => {
 
-            return <CardButton dim = {cardDim} color={this.getColor(item,false)} key={index}
-                               background={this.getBackground(item,false)} bulls={this.getBulls(item)}
+            return <CardButton dim = {cardDim} color={cu.getColor(item,false)} key={index}
+                               background={cu.getBackground(item,false)} bulls={cu.getBulls(item)}
                                card={item} pickCard={this.props.pickCard} />
         });
         var row3Cards = row3.map((item,index) => {
 
-            return <CardButton dim = {cardDim}  key={index} color={this.getColor(item,false)} card={item}
-                               background={this.getBackground(item,false)} bulls={this.getBulls(item)}
+            return <CardButton dim = {cardDim}  key={index} color={cu.getColor(item,false)} card={item}
+                               background={cu.getBackground(item,false)} bulls={cu.getBulls(item)}
                                pickCard={this.props.pickCard} />
         });
         var row4Cards = row4.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index}  color={this.getColor(item,false)}
-                               background={this.getBackground(item,false)}  bulls={this.getBulls(item)}
+            return <CardButton dim = {cardDim} key={index}  color={cu.getColor(item,false)}
+                               background={cu.getBackground(item,false)}  bulls={cu.getBulls(item)}
                                card={item} pickCard={this.props.pickCard} />
         });
 

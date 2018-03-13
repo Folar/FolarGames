@@ -1,54 +1,39 @@
 import React from 'react';
 import {
-  Text,
-  View,
-  VrButton,
-  Animated
+    Text,
+    View,
+    VrButton,
+    Animated
 } from 'react-vr';
 import CardButton from './CardButton.js';
+const {Cards} = require('./../../../../utils/cards.js');
 
-import { Easing } from 'react-native';
+import {Easing} from 'react-native';
 
 //Element
 class ScoreRow extends React.Component {
-  constructor() {
-    super();
-      this.state = {
-          name: "",
-          showButton: true,
-          playing: false,
-          color1: "#A482DF",
-          color2: "#DBDAF1",
-          text: "Start",
-          borderWidths: [0, 0, 0, 0, 0, 0]
-      };
-  }
-
-  componentDidMount() {
-
-  }
-    updateStage() {
+    constructor() {
+        super();
+        this.state = {
+            name: "",
+            showButton: true,
+            playing: false,
+            color1: "#A482DF",
+            color2: "#DBDAF1",
+            text: "Start",
+            borderWidths: [0, 0, 0, 0, 0, 0]
+        };
     }
 
-  render() {
-      let cardDim = {height:.35,width:.28,valueFont:.07,rankFont:.14};
-    const showButton = this.props.showButton;
-    return (
-        <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-            <Text
-                  style={{
-                      width: 0.4,
-                      height: .35,
-                      fontSize: 0.15,
-                      textAlign: 'center',
-                      color: 'black',
+    componentDidMount() {
 
-                  }}>
-                {this.props.player.name}
-            </Text>{
-            (this.state.playing) ? (
-                <CardButton dim={cardDim} t={this} card={this.props.player.card} updateStage={this.updateStage}/>
-            ) : (
+    }
+
+    render() {
+        let cardDim = {height: .35, width: .28, valueFont: .07, rankFont: .14};
+        let cu = new Cards();
+        return (
+            <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                 <Text
                     style={{
                         width: 0.4,
@@ -56,18 +41,35 @@ class ScoreRow extends React.Component {
                         fontSize: 0.15,
                         textAlign: 'center',
                         color: 'black',
-                        transform: [
-                            {translateY: 0}
-                        ]
-                    }}>
-                    {this.props.player.score}
-                </Text>
-            )
-        }
 
-        </View>
-    )
-  }
+                    }}>
+                    {this.props.player.name}
+                </Text>{
+                (this.props.player.playing) ? (
+                    <CardButton dim={cardDim} color={cu.getColor(this.props.player.card, false)}
+                                background={cu.getBackground(this.props.player.card, false)}
+                                bulls={cu.getBulls(this.props.player.card)}
+                                card={this.props.player.card} pickCard={this.props.pickCard}/>
+                ) : (
+                    <Text
+                        style={{
+                            width: 0.4,
+                            height: .35,
+                            fontSize: 0.15,
+                            textAlign: 'center',
+                            color: 'black',
+                            transform: [
+                                {translateY: 0}
+                            ]
+                        }}>
+                        {this.props.player.score}
+                    </Text>
+                )
+            }
+
+            </View>
+        )
+    }
 }
 
 module.exports = ScoreRow;
