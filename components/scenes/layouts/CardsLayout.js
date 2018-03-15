@@ -56,11 +56,11 @@ class CardsLayout extends React.Component {
 
 
     render() {
-        var  myCards = [];
-        var  row1 =[];
-        var  row2 =[];
-        var  row3 =[];
-        var  row4 =[];
+        let  myCards = [];
+        let  row1 =[];
+        let  row2 =[];
+        let  row3 =[];
+        let  row4 =[];
         let c = new Constants();
         let cu = new Cards();
         let cardDim = {height:.5,width:.4,valueFont:.1,rankFont:.2};
@@ -73,37 +73,37 @@ class CardsLayout extends React.Component {
             row4 =this.props.data.row4;
         }
 
-        var yourCards = myCards.map((item,index) => {
+        let yourCards = myCards.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index}  color={cu.getColor(item,this.props.state==3)}
-                               background={cu.getBackground(item,this.props.state==3)} state={this.props.state}
-                               clickable={this.props.state==3}
+            return <CardButton dim = {cardDim} key={index}  color={cu.getColor(item,this.props.state===3)} row={0}
+                               background={cu.getBackground(item,this.props.state===3)} state={this.props.state}
+                               clickable={this.props.state===3}
                                bulls={cu.getBulls(item)} card={item} pickCard={this.props.pickCard}/>
         });
-        var row1Cards =
+        let row1Cards =
             row1.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index}  color={cu.getColor(item,false)}
-                               background={cu.getBackground(item,false)} bulls={cu.getBulls(item)}
-                               card={item} pickCard={this.props.pickCard} clickable={false}/>
+            return <CardButton dim = {cardDim} key={index}  color={cu.getColor(item,item.state === 1)} row={1}
+                               background={cu.getBackground(item,item.state === 1)} bulls={cu.getBulls(item)}
+                               card={item} pickCard={this.props.pickCard} clickable={item.state === 1}/>
         });
-        var row2Cards = row2.map((item,index) => {
+        let row2Cards = row2.map((item,index) => {
 
-            return <CardButton dim = {cardDim} color={cu.getColor(item,false)} key={index}
-                               background={cu.getBackground(item,false)} bulls={cu.getBulls(item)}
-                               card={item} pickCard={this.props.pickCard} />
+            return <CardButton dim = {cardDim} color={cu.getColor(item,item.state === 1)} key={index} row={2}
+                               background={cu.getBackground(item,item.state === 1)} bulls={cu.getBulls(item)}
+                               card={item} pickCard={this.props.pickCard} clickable={item.state === 1} />
         });
-        var row3Cards = row3.map((item,index) => {
+        let row3Cards = row3.map((item,index) => {
 
-            return <CardButton dim = {cardDim}  key={index} color={cu.getColor(item,false)} card={item}
-                               background={cu.getBackground(item,false)} bulls={cu.getBulls(item)}
-                               pickCard={this.props.pickCard} />
+            return <CardButton dim = {cardDim}  key={index} color={cu.getColor(item,item.state === 1)} card={item}  row={3}
+                               background={cu.getBackground(item,item.state === 1)} bulls={cu.getBulls(item)}
+                               pickCard={this.props.pickCard} clickable={item.state === 1}/>
         });
-        var row4Cards = row4.map((item,index) => {
+        let row4Cards = row4.map((item,index) => {
 
-            return <CardButton dim = {cardDim} key={index}  color={cu.getColor(item,false)}
-                               background={cu.getBackground(item,false)}  bulls={cu.getBulls(item)}
-                               card={item} pickCard={this.props.pickCard} />
+            return <CardButton dim = {cardDim} key={index}  color={cu.getColor(item,item.state === 1)} row={4}
+                               background={cu.getBackground(item,item.state === 1)}  bulls={cu.getBulls(item)}
+                               card={item} pickCard={this.props.pickCard} clickable={item.state === 1} />
         });
 
 
@@ -154,6 +154,7 @@ class CardsLayout extends React.Component {
 
                     </View>
                 </Animated.View>
+
                 <Animated.View
                     style={{
                         width: 2.5,

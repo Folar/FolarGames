@@ -27,9 +27,13 @@ class TakeSixLayout extends React.Component {
         this.client = null;
 
     }
-    pickCard(x){
+    pickCard(x,r){
         console.log("in click Button "+JSON.stringify({name:this.state.name,type:"selectCard",card:x}));
-        this.client.send(JSON.stringify({name:this.state.name,type:"selectCard",card:x}));
+        if (r == 0)
+            this.client.send(JSON.stringify({name:this.state.name,type:"selectCard",card:x,row:r}));
+        else
+            this.client.send(JSON.stringify({name:this.state.name,type:"placeCard",card:x,row:r}));
+
     }
 
     clickButton(){

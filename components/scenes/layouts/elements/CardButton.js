@@ -25,7 +25,7 @@ class CardButton extends React.Component {
     }
     invoke(){
         if(this.props.clickable)
-            this.props.pickCard(this.props.card);
+            this.props.pickCard(this.props.card,this.props.row);
     }
 
   render() {
