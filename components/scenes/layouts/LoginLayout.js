@@ -32,6 +32,10 @@ class LoginLayout extends React.Component {
 
     }
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     //previously updateShowButton
     updateStage(input) {
 

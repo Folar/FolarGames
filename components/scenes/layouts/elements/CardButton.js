@@ -12,7 +12,7 @@ class CardButton extends React.Component {
         this.state = {
             color: "white",
             backgroundColor: "blue",
-            boredrWidth:0,
+            borderWidth:0,
             value:1,
             state:1
 
