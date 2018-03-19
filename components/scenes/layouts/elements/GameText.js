@@ -37,7 +37,7 @@ class GameText extends React.Component {
         const showButton = this.props.showButton;
 
         return (
-            <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+            <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start' ,marginRight:.1}}>
                 <Text
                     style={{
                         fontSize: 0.13,

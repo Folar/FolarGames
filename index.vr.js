@@ -1,42 +1,49 @@
 import React from 'react';
 import {
-  AppRegistry,
-  asset,
-  Pano,
-  Text,
-  View,
+    AppRegistry,
+    asset,
+    Pano,
+    Text,
+    View,
 } from 'react-vr';
 
 import Login from './components/scenes/Login.js';
 import TakeSix from './components/scenes/TakeSix.js';
 
 export default class FolarGames extends React.Component {
-    constructor(){
+    constructor() {
         super();
-        this.state={mainMenu: true,
-                    name:""};
+        this.state = {
+            mainMenu: true,
+            name: ""
+        };
     }
-    updateScene() {
-                console.log(this.state.name);
-                this.setState({ mainMenu: false});
+
+    updateScene(n) {
+        console.log(n);
+        this.setState({mainMenu: false});
+        this.setState({name: n});
 
     }
-  render() {
-      const mainMenu = this.state.mainMenu;
-    return (
-      <View>
 
-        <Pano source={asset('museum.jpg')}/>
-          {
-              mainMenu? (
-                  <Login showButton={false}  s= {this.state} updateScene={this.updateScene.bind(this)} text={"Play"}/>
-              ) : (
-                  <TakeSix showButton={false} name={this.state.name} updateScene={this.updateScene.bind(this)} text={"Play"}/>
-              )
-          }
-      </View>
-    );
-  }
+    render() {
+        const mainMenu = this.state.mainMenu;
+        return (
+            <View>
+
+                <Pano source={asset('museum.jpg')}/>
+                {
+                    mainMenu ? (
+                        <Login showButton={false} s={this.state} updateScene={this.updateScene.bind(this)}
+                               text={"Play"}/>
+                    ) : (
+                        <TakeSix showButton={false} name={this.state.name} updateScene={this.updateScene.bind(this)}
+                                 text={"Play"}/>
+                    )
+                }
+            </View>
+        );
+    }
 };
 
 AppRegistry.registerComponent('FolarGames', () => FolarGames);

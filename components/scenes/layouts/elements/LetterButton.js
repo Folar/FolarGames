@@ -22,7 +22,7 @@ class LetterButton extends React.Component {
               borderStyle: "solid"
             }}
           >
-            <VrButton onClick={ () => this.props.updateStage(1) }>
+            <VrButton onClick={ () => this.props.updateStage(this.props.letter) }>
               <Text
                 style={{
                   fontSize: 0.2,

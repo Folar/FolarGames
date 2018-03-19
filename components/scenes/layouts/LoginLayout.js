@@ -20,7 +20,7 @@ class LoginLayout extends React.Component {
             buffer: "",
             name: "Click keys to spell your name and then press Play",
             showButton: false,
-            color1: "#744444",
+            color1: "#444444",
             color2: "#000000",
             text: this.props.text,
             borderWidths: [0, 0, 0, 0, 0, 0]
@@ -36,35 +36,38 @@ class LoginLayout extends React.Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    //previously updateShowButton
+    invoke(){
+        let n = this.state.name;
+        if (n.length > 5)
+            n = n.substring(0,5);
+        this.props.updateScene(this.capitalizeFirstLetter(n));
+    }
     updateStage(input) {
+        console.log("uuu "+input );
 
-        if (this.letter == '<-') {
-            str = this.t.state.buffer;
+        if (input == '<-') {
+            str = this.state.buffer;
             if (str.length == 0) {
                 return;
             }
             if (str.length == 1) {
-                this.t.setState({name: "Click keys to spell your name and then press Play"});
-                this.t.setState({showButton: false});
-                this.t.setState({buffer: ""});
-                this.t.setState({color1: "#444444"});
+                this.setState({name: "Click keys to spell your name and then press Play"});
+                this.setState({showButton: false});
+                this.setState({buffer: ""});
+                this.setState({color1: "#444444"});
             } else {
-                this.t.setState({buffer: str.substring(0, str.length - 1)});
-                this.t.setState({name: str.substring(0, str.length - 1)});
-                this.t.props.s.name = str.substring(0, str.length - 1);
+                this.setState({buffer: str.substring(0, str.length - 1)});
+                this.setState({name: str.substring(0, str.length - 1)});
             }
         } else {
-            this.t.setState({showButton: true});
-            this.t.setState({buffer: this.t.state.buffer + this.letter});
-            str = this.t.state.buffer;
-            this.t.setState({color1: "#000000"});
+            this.setState({showButton: true});
+            this.setState({buffer: this.state.buffer + input});
+            str = this.state.buffer;
+            this.setState({color1: "#000000"});
             if (str.length == 0) {
-                this.t.setState({name: this.letter});
-                this.t.props.s.name = this.letter;
+                this.setState({name: input});
             } else {
-                this.t.props.s.name = this.t.state.buffer + this.letter;
-                this.t.setState({name: this.t.state.buffer + this.letter});
+                this.setState({name: this.state.buffer +input});
             }
 
         }
@@ -77,16 +80,16 @@ class LoginLayout extends React.Component {
 
         var items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'].map((item, index) => {
 
-            return <LetterButton key={index} t={this} letter={item} updateStage={this.updateStage}/>
+            return <LetterButton key={index} t={this} letter={item} updateStage={this.updateStage.bind(this)}/>
         });
         var items2 = ['o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '$', '#'].map((item, index) => {
 
-            return <LetterButton t={this} key={index} letter={item} updateStage={this.updateStage}/>
+            return <LetterButton t={this} key={index} letter={item} updateStage={this.updateStage.bind(this)}/>
         });
 
         var items3 = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '<-'].map((item, index) => {
 
-            return <LetterButton t={this} key={index} letter={item} updateStage={this.updateStage}/>
+            return <LetterButton t={this} key={index} letter={item} updateStage={this.updateStage.bind(this)}/>
         });
         return (
             <View>
@@ -198,7 +201,7 @@ class LoginLayout extends React.Component {
                         }}
                     >
 
-                        <Button updateScene={this.props.updateScene} showButton={this.state.showButton}
+                        <Button updateScene={this.invoke.bind(this)} showButton={this.state.showButton}
                                 text={this.state.text}
                                 style={{
                                     fontSize: 0.2,
