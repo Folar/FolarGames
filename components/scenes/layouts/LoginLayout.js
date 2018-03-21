@@ -18,9 +18,9 @@ class LoginLayout extends React.Component {
         super(props);
         this.state = {
             buffer: "",
-            name: "Click keys to spell your name and then press Play",
+            name: this.props.msg,
             showButton: false,
-            color1: "#444444",
+            color1: this.props.txtclr,
             color2: "#000000",
             text: this.props.text,
             borderWidths: [0, 0, 0, 0, 0, 0]
@@ -43,7 +43,6 @@ class LoginLayout extends React.Component {
         this.props.updateScene(this.capitalizeFirstLetter(n));
     }
     updateStage(input) {
-        console.log("uuu "+input );
 
         if (input == '<-') {
             str = this.state.buffer;

@@ -28,7 +28,6 @@ class TakeSixLayout extends React.Component {
 
     }
     pickCard(x,r){
-        console.log("in click Button "+JSON.stringify({name:this.state.name,type:"selectCard",card:x}));
         if (r == 0)
             this.client.send(JSON.stringify({name:this.state.name,type:"selectCard",card:x,row:r}));
         else
@@ -40,7 +39,11 @@ class TakeSixLayout extends React.Component {
        // console.log("in click Button "+JSON.stringify({name:this.state.name,type:"startingGame"}));
         this.client.send(JSON.stringify({name:this.state.name,type:"startingGame"}));
     }
-    componentDidMount() {
+    componentDidMount(){
+        this.connectToServer();
+    }
+
+    connectToServer() {
         let W3CWebSocket = require('websocket').w3cwebsocket;
         let name = this.props.name;
         this.setState({name:name});
@@ -54,6 +57,11 @@ class TakeSixLayout extends React.Component {
 
         client.onmessage = function (x) {
             let packet = JSON.parse(x.data);
+            if(packet.messageType === "dupUser"){
+                client.close();
+               _this.props.retryLogin();
+                return;
+            }
 
             _this.setState({data:packet});
 

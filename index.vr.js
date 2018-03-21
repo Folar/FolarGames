@@ -15,7 +15,8 @@ export default class FolarGames extends React.Component {
         super();
         this.state = {
             mainMenu: true,
-            name: ""
+            name: "Click keys to spell your name and then press Play",
+            txtclr:"#444444"
         };
     }
 
@@ -26,6 +27,14 @@ export default class FolarGames extends React.Component {
 
     }
 
+    retryLogin() {
+        let x = this.state.name;
+        this.setState({txtclr:"red"});
+        this.setState({name: x+ " has already signed on, choose another name"});
+        this.setState({mainMenu: true});
+
+
+    }
     render() {
         const mainMenu = this.state.mainMenu;
         return (
@@ -34,10 +43,11 @@ export default class FolarGames extends React.Component {
                 <Pano source={asset('museum.jpg')}/>
                 {
                     mainMenu ? (
-                        <Login showButton={false} s={this.state} updateScene={this.updateScene.bind(this)}
+                        <Login showButton={false} txtclr={this.state.txtclr} updateScene={this.updateScene.bind(this)}
+                               msg = {this.state.name}
                                text={"Play"}/>
                     ) : (
-                        <TakeSix showButton={false} name={this.state.name} updateScene={this.updateScene.bind(this)}
+                        <TakeSix showButton={false} name={this.state.name} retryLogin={this.retryLogin.bind(this)}
                                  text={"Play"}/>
                     )
                 }
