@@ -63,6 +63,7 @@ class TakeSixLayout extends React.Component {
                 return;
             }
 
+
             _this.setState({data:packet});
 
             _this.setState({showButton:packet.state<2})
