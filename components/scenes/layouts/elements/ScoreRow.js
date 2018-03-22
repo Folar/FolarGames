@@ -53,7 +53,7 @@ class ScoreRow extends React.Component {
                 ) : (
                     <Text
                         style={{
-                            width: 0.4,
+                            width: 0.28,
                             height: .35,
                             fontSize: 0.15,
                             textAlign: 'center',

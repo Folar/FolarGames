@@ -83,8 +83,8 @@ class Cards {
 
                 break;
             case 5:
-                color1 =  "#ab2424";
-                color2 = "#59eb2c";
+                color1 =  "#FF7F50";
+                color2 = "#654321";
                 break;
 
             case 7:

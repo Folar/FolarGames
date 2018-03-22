@@ -36,7 +36,7 @@ class ScoreCard extends React.Component {
       });
     return (
         <View style={{
-            flexDirection: 'column', height:1.4,
+            flexDirection: 'column', height:1.4,width:1,
             alignItems: 'flex-start', justifyContent: 'flex-start'
         }}>
             {p}
