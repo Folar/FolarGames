@@ -45,6 +45,8 @@ class TakeSixLayout extends React.Component {
 
     connectToServer() {
         let W3CWebSocket = require('websocket').w3cwebsocket;
+
+
         let name = this.props.name;
         this.setState({name:name});
         let client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
@@ -62,7 +64,6 @@ class TakeSixLayout extends React.Component {
                _this.props.retryLogin();
                 return;
             }
-
 
             _this.setState({data:packet});
 
@@ -102,6 +103,7 @@ class TakeSixLayout extends React.Component {
                 <CardsLayout text={this.props.text} data={this.state.data} t={this} state={this.state.data.state}
                              pickCard={this.pickCard.bind(this)}/>
                 <TextScoreLayout text={this.props.text}  showButton={this.state.showButton} data={this.state.data}
+                                 playAgain={this.connectToServer.bind(this)}
                                  clickButton={this.clickButton.bind(this)}/>
 
             </View>

@@ -25,7 +25,13 @@ class GameText extends React.Component {
     componentDidMount() {
 
     }
-
+    invoke(){
+        if (this.props.data.buttonText == "Again?"){
+            this.props.playAgain();
+        } else {
+            this.props.clickButton();
+        }
+    }
 
     render() {
         let msg = "";
@@ -33,8 +39,15 @@ class GameText extends React.Component {
         if (m != null) {
             msg = m;
         }
+        let showButton = this.props.showButton;
+        let buttonText = "Start"
+        let bt = this.props.data.buttonText;
+        if (bt != null && bt == "Again?") {
+            buttonText = bt;
+            showButton = true;
+        }
         console.log("my text data " + JSON.stringify(this.props.data) + " " + this.props.data.message);
-        const showButton = this.props.showButton;
+
 
         return (
             <View style={{flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start' ,marginRight:.1}}>
@@ -65,14 +78,14 @@ class GameText extends React.Component {
                             }}>
 
 
-                            <VrButton onClick={this.props.clickButton}>
+                            <VrButton onClick={this.invoke.bind(this)}>
                                 <Text
                                     style={{
                                         fontSize: 0.2,
                                         textAlign: 'center',
                                         color: "#FFFFFF"
                                     }}>
-                                    Start
+                                    {buttonText}
                                 </Text>
                             </VrButton>
                         </View>) :
