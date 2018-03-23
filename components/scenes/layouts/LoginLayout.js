@@ -10,7 +10,10 @@ import {Easing} from 'react-native';
 import LetterButton from './elements/LetterButton.js';
 
 import Button from './elements/Button.js';
-
+import {
+    asset,
+    VrSoundEffects
+} from 'react-vr';
 //Layout
 class LoginLayout extends React.Component {
 
@@ -29,8 +32,13 @@ class LoginLayout extends React.Component {
 
     componentDidMount() {
 
+        VrSoundEffects.load(this.MY_SOUND);
 
     }
+
+
+
+
 
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);

@@ -24,6 +24,7 @@ class GameText extends React.Component {
 
     componentDidMount() {
 
+
     }
     invoke(){
         if (this.props.data.buttonText == "Again?"){
@@ -46,7 +47,7 @@ class GameText extends React.Component {
             buttonText = bt;
             showButton = true;
         }
-        console.log("my text data " + JSON.stringify(this.props.data) + " " + this.props.data.message);
+        //console.log("my text data " + JSON.stringify(this.props.data) + " " + this.props.data.message);
 
 
         return (

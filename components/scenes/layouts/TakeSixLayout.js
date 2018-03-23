@@ -2,7 +2,9 @@ import React from 'react';
 import {
     View,
     Animated,
-    Text
+    Text,
+    asset,
+    VrSoundEffects
 } from 'react-vr';
 
 import {Easing} from 'react-native';
@@ -23,6 +25,7 @@ class TakeSixLayout extends React.Component {
             data: {},
             showButton:true
         };
+
         _this = this;
         this.client = null;
 
@@ -41,6 +44,8 @@ class TakeSixLayout extends React.Component {
     }
     componentDidMount(){
         this.connectToServer();
+
+        VrSoundEffects.load(asset('mooing.mp3'));
     }
 
     connectToServer() {
@@ -49,8 +54,13 @@ class TakeSixLayout extends React.Component {
 
         let name = this.props.name;
         this.setState({name:name});
-        let client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
-
+      //  let client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+        let client = null;
+        if (process.env.PORT) {
+            client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+        }else {
+            client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+        }
         this.client = client
         client.onerror = function () {
             console.log('Connection Error');
@@ -61,10 +71,14 @@ class TakeSixLayout extends React.Component {
             let packet = JSON.parse(x.data);
             if(packet.messageType === "dupUser"){
                 client.close();
-               _this.props.retryLogin();
+                _this.props.retryLogin();
                 return;
             }
-
+            console.log("mt="+ packet.messageType);
+            if(packet.messageType === "mooSound"){
+                console.log("mt2="+ packet.messageType);
+                VrSoundEffects.play(asset('mooing.mp3'));
+            }
             _this.setState({data:packet});
 
             _this.setState({showButton:packet.state<2})
