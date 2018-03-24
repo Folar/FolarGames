@@ -18,6 +18,7 @@ class CardsLayout extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             slideLeft: new Animated.Value(-1),
             fadeIn: new Animated.Value(0),
@@ -28,9 +29,16 @@ class CardsLayout extends React.Component {
             text: this.props.text,
             borderWidths: [0, 0, 0, 0, 0, 0]
         };
+        this._ismounted = false;
+        this._animate = false;
+    }
+    componentDidMount() {
+        this._ismounted = true;
+        this.animate_cards();
     }
 
-    componentDidMount() {
+    animate_cards() {
+
         Animated.sequence([
             Animated.parallel([
                 Animated.timing(
@@ -51,8 +59,12 @@ class CardsLayout extends React.Component {
                 )
             ])
         ]).start();
-    }
 
+    }
+    componentDidUpdate() {
+
+        this._animate = true;
+    }
 
     render() {
         let myCards = [];
@@ -64,6 +76,12 @@ class CardsLayout extends React.Component {
         let cu = new Cards();
         let cardDim = {height: .5, width: .4, valueFont: .1, rankFont: .2};
         let cards = this.props.data.cards;
+        if (this.props.data.reanimate && this._animate){
+            console.log("AAAAAANIMATE");
+            this._animate = false;
+        } else if (!this.props.data.reanimate){
+            this._animate = true;
+        }
         if (cards != null) {
             myCards = cards;
             row1 = this.props.data.row1;
