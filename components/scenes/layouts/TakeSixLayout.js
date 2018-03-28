@@ -56,11 +56,13 @@ class TakeSixLayout extends React.Component {
         this.setState({name:name});
       //  let client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
         let client = null;
-        if (process.env.PORT) {
+       // if (process.env.PORT ) {
+       //     console.log("DAMP_SHORE");
             client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-        }else {
-            client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
-        }
+        // }else {
+        //     console.log("LOOCAL_HOST");
+        //     client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+        // }
         this.client = client
         client.onerror = function () {
             console.log('Connection Error');

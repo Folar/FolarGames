@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     View,
-    Animated,
+    //Animated,
     Text
 } from 'react-vr';
 
@@ -20,8 +20,8 @@ class CardsLayout extends React.Component {
         super(props);
 
         this.state = {
-            slideLeft: new Animated.Value(-1),
-            fadeIn: new Animated.Value(0),
+           // slideLeft: new Animated.Value(-1),
+            //fadeIn: new Animated.Value(0),
             name: "",
             showButton: false,
             color1: "#A482DF",
@@ -39,26 +39,26 @@ class CardsLayout extends React.Component {
 
     animate_cards() {
 
-        Animated.sequence([
-            Animated.parallel([
-                Animated.timing(
-                    this.state.slideLeft,
-                    {
-                        toValue: 0,
-                        duration: 2000,
-                        easing: Easing.ease
-                    }
-                ),
-                Animated.timing(
-                    this.state.fadeIn,
-                    {
-                        toValue: 1,
-                        duration: 2000,
-                        easing: Easing.ease
-                    }
-                )
-            ])
-        ]).start();
+        // Animated.sequence([
+        //     Animated.parallel([
+        //         Animated.timing(
+        //             this.state.slideLeft,
+        //             {
+        //                 toValue: 0,
+        //                 duration: 2000,
+        //                 easing: Easing.ease
+        //             }
+        //         ),
+        //         Animated.timing(
+        //             this.state.fadeIn,
+        //             {
+        //                 toValue: 1,
+        //                 duration: 2000,
+        //                 easing: Easing.ease
+        //             }
+        //         )
+        //     ])
+        // ]).start();
 
     }
     componentDidUpdate() {
@@ -77,7 +77,6 @@ class CardsLayout extends React.Component {
         let cardDim = {height: .5, width: .4, valueFont: .1, rankFont: .2};
         let cards = this.props.data.cards;
         if (this.props.data.reanimate && this._animate){
-            console.log("AAAAAANIMATE");
             this._animate = false;
         } else if (!this.props.data.reanimate){
             this._animate = true;
@@ -128,16 +127,16 @@ class CardsLayout extends React.Component {
 
             <View style={{width: 2.5, flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
 
-                <Animated.View
+                <View
                     style={{
                         width: 2.5,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
                         layoutOrigin: [c.START_X, c.Y_YOUR_CARDS],
-                        opacity: this.state.fadeIn,
+                        opacity: 1,
                         transform: [
-                            {translateX: this.state.slideLeft},
+                            {translateX: 0},
                             {translateZ: -3}
                         ],
                         marginTop: 1
@@ -145,17 +144,17 @@ class CardsLayout extends React.Component {
                 >
                     {yourCards}
 
-                </Animated.View>
-                <Animated.View
+                </View>
+                <View
                     style={{
                         width: 2.5,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
                         layoutOrigin: [c.START_X, c.FIRST_ROW],
-                        opacity: this.state.fadeIn,
+                        opacity: 1,
                         transform: [
-                            {translateX: this.state.slideLeft},
+                            {translateX: 0},
                             {translateZ: -3}
                         ],
                         marginTop: -0.3
@@ -163,18 +162,18 @@ class CardsLayout extends React.Component {
                 >
                     {row1Cards}
 
-                </Animated.View>
+                </View>
 
-                <Animated.View
+                <View
                     style={{
                         width: 2.5,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
                         layoutOrigin: [c.START_X, c.SECOND_ROW],
-                        opacity: this.state.fadeIn,
+                        opacity: 1,
                         transform: [
-                            {translateX: this.state.slideLeft},
+                            {translateX: 0},
                             {translateZ: -3}
                         ],
                         marginTop: -0.3
@@ -182,17 +181,17 @@ class CardsLayout extends React.Component {
                 >
                     {row2Cards}
 
-                </Animated.View>
-                <Animated.View
+                </View>
+                <View
                     style={{
                         width: 2.5,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
                         layoutOrigin: [c.START_X, c.THIRD_ROW],
-                        opacity: this.state.fadeIn,
+                        opacity: 1,
                         transform: [
-                            {translateX: this.state.slideLeft},
+                            {translateX: 0},
                             {translateZ: -3}
                         ],
                         marginTop: -0.3
@@ -200,17 +199,17 @@ class CardsLayout extends React.Component {
                 >
                     {row3Cards}
 
-                </Animated.View>
-                <Animated.View
+                </View>
+                <View
                     style={{
                         width: 2.5,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
                         layoutOrigin: [c.START_X, c.FORTH_ROW],
-                        opacity: this.state.fadeIn,
+                        opacity: 1,
                         transform: [
-                            {translateX: this.state.slideLeft},
+                            {translateX: 0},
                             {translateZ: -3}
                         ],
                         marginTop: -0.3
@@ -219,7 +218,7 @@ class CardsLayout extends React.Component {
 
                     {row4Cards}
 
-                </Animated.View>
+                </View>
 
 
             </View>
