@@ -7,8 +7,7 @@ import {
     View,
 } from 'react-vr';
 
-import Login from './components/scenes/Login.js';
-import TakeSix from './components/scenes/TakeSix.js';
+import Games from './components/scenes/Games.js'
 
 export default class FolarGames extends React.Component {
     constructor() {
@@ -20,21 +19,7 @@ export default class FolarGames extends React.Component {
         };
     }
 
-    updateScene(n) {
-        console.log(n);
-        this.setState({mainMenu: false});
-        this.setState({name: n});
 
-    }
-
-    retryLogin() {
-        let x = this.state.name;
-        this.setState({txtclr:"red"});
-        this.setState({name: x+ " has already signed on, choose another name"});
-        this.setState({mainMenu: true});
-
-
-    }
     render() {
         const mainMenu = this.state.mainMenu;
         return (
@@ -42,14 +27,7 @@ export default class FolarGames extends React.Component {
 
                 <Pano source={asset('museum.jpg')}/>
                 {
-                    mainMenu ? (
-                        <Login showButton={false} txtclr={this.state.txtclr} updateScene={this.updateScene.bind(this)}
-                               msg = {this.state.name}
-                               text={"Play"}/>
-                    ) : (
-                        <TakeSix showButton={false} name={this.state.name} retryLogin={this.retryLogin.bind(this)}
-                                 text={"Play"}/>
-                    )
+                   <Games/>
                 }
             </View>
         );

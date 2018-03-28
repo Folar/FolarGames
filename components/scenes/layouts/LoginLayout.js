@@ -48,7 +48,7 @@ class LoginLayout extends React.Component {
         let n = this.state.name;
         if (n.length > 5)
             n = n.substring(0,5);
-        this.props.updateScene(this.capitalizeFirstLetter(n));
+        this.props.signon(this.capitalizeFirstLetter(n));
     }
     updateStage(input) {
 

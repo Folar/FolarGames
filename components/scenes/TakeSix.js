@@ -14,7 +14,7 @@ class TakeSix extends React.Component {
     return (
       <View>
        
-        <TakeSixLayout name={this.props.name}  text={this.props.text} retryLogin={this.props.retryLogin}/>
+        <TakeSixLayout name={this.props.name}  text={this.props.text} />
       </View>
     )
   }
