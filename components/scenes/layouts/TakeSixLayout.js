@@ -31,25 +31,14 @@ class TakeSixLayout extends React.Component {
         this.client = null;
 
     }
-    pickCard(x,r){
-        if (r == 0)
-            this.state.client.send(JSON.stringify({name:this.state.name,type:"selectCard",card:x,row:r}));
-        else
-            this.state.client.send(JSON.stringify({name:this.state.name,type:"placeCard",card:x,row:r}));
 
-    }
 
-    clickButton(){
-       // console.log("in click Button "+JSON.stringify({name:this.state.name,type:"startingGame"}));
-        this.state.client.send(JSON.stringify({name:this.state.name,type:"startingGame"}));
-    }
+
     componentDidMount(){
 
 
     }
-    connectToServer(){
 
-    }
 
 
     render() {
@@ -65,10 +54,10 @@ class TakeSixLayout extends React.Component {
                 justifyContent: 'flex-start'
             }}>
                 <CardsLayout text={this.props.text} data={this.state.data} t={this} state={this.state.data.state}
-                             pickCard={this.pickCard.bind(this)}/>
+                             pickCard={this.props.pickCard}/>
                 <TextScoreLayout text={this.props.text}  showButton={this.state.showButton} data={this.state.data}
-                                 playAgain={this.props.connectToServer}
-                                 clickButton={this.clickButton.bind(this)}/>
+                                 playAgain={this.props.playAgain}
+                                 clickButton={this.props.clickButton}/>
 
             </View>
         )

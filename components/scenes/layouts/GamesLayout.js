@@ -48,26 +48,34 @@ class GamesLayout extends React.Component {
 
 
     }
+    playAgain(){
+        this.client.close();
+        this.connectToServer();
+    }
 
     clickButton() {
         // console.log("in click Button "+JSON.stringify({name:this.state.name,type:"startingGame"}));
         this.client.send(JSON.stringify({name: this.state.name, type: "startingGame"}));
     }
+    pickCard(x,r){
+        if (r == 0)
+            this.client.send(JSON.stringify({name:this.state.name,type:"selectCard",card:x,row:r}));
+        else
+            this.client.send(JSON.stringify({name:this.state.name,type:"placeCard",card:x,row:r}));
 
+    }
     componentDidMount() {
-
-
         VrSoundEffects.load(asset('mooing.mp3'));
     }
 
     connectToServer() {
         let W3CWebSocket = require('websocket').w3cwebsocket;
 
-
+        console.log("start of connect to server ");
         let name = this.state.name;
-        console.log("in  conecttoserveer " + name);
         this.setState({name: name});
-        let client = null;
+        if (this.client)
+            this.client.close();
         if (process.env.PORT) {
             console.log("DAMP_SHORE");
             client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
@@ -87,8 +95,10 @@ class GamesLayout extends React.Component {
                 let x = _this.state.name;
                 _this.setState({name:x + " has already signed on, choose another name"});
                 _this.setState({txtclr : "red"});
-                console.log("KKKKKK "+_this.state.txtclr)
+
+                _this.setState({loginScene : false})
                 client.close();
+                _this.forceUpdate();
                 return true;
             }
             if (packet.messageType === "mooSound") {
@@ -97,6 +107,7 @@ class GamesLayout extends React.Component {
             _this.setState({data: packet});
 
             _this.setState({showButton: packet.state < 2})
+
         };
 
         client.onopen = function () {
@@ -112,13 +123,13 @@ class GamesLayout extends React.Component {
 
             sendMessage();
         };
-
+        return false;
 
     }
 
 
     render() {
-
+        console.log("games laout render");
         const login = this.state.loginScene;
         return (
             <View style={{
@@ -134,8 +145,8 @@ class GamesLayout extends React.Component {
                                  msg={this.state.name}
                                  text={"Play"}/>
                 ) : (
-                    <TakeSixLayout showButton={false} name={this.state.name} client={this.client}
-                                   text={"Play"}/>
+                    <TakeSixLayout showButton={false} name={this.state.name} client={this.client} pickCard={this.pickCard.bind(this)}
+                                   clickButton={this.clickButton.bind(this)} playAgain={this.playAgain.bind(this)} text={"Play"}/>
                 ) }
 
             </View>
