@@ -23,12 +23,10 @@ class TakeSixLayout extends React.Component {
             name: this.props.name,
             card:{},
             data: {},
-            client:this.props.client,
             showButton:true
         };
 
         _this = this;
-        this.client = null;
 
     }
 

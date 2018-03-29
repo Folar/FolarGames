@@ -14,6 +14,7 @@ import TakeSixLayout from './TakeSixLayout.js';
 import LoginLayout from './LoginLayout.js';
 
 //Layout
+let key = 0;
 _this = null;
 class GamesLayout extends React.Component {
 
@@ -37,7 +38,7 @@ class GamesLayout extends React.Component {
         this.state.name = n;
 
 
-        this.state.loginScene = this.connectToServer();
+        this.connectToServer();
         console.log("in  signon 3333" + n + "state =  " + JSON.stringify(this.state));
     }
 
@@ -93,14 +94,13 @@ class GamesLayout extends React.Component {
             let packet = JSON.parse(x.data);
             if (packet.messageType === "dupUser") {
                 let x = _this.state.name;
-                _this.setState({name:x + " has already signed on, choose another name"});
-                _this.setState({txtclr : "red"});
-
-                _this.setState({loginScene : false})
+                _this.setState({name:x + " has already signed on, choose another name",txtclr : "red"});
                 client.close();
+                key++;
                 _this.forceUpdate();
-                return true;
+                return;
             }
+            _this.setState({loginScene : false})
             if (packet.messageType === "mooSound") {
                 VrSoundEffects.play(asset('mooing.mp3'));
             }
@@ -123,7 +123,6 @@ class GamesLayout extends React.Component {
 
             sendMessage();
         };
-        return false;
 
     }
 
@@ -142,7 +141,7 @@ class GamesLayout extends React.Component {
             }}>{
                 login ? (
                     <LoginLayout showButton={false} t={this} txtclr={this.state.txtclr} signon={this.signon.bind(this)}
-                                 msg={this.state.name}
+                                 msg={this.state.name} key ={key}
                                  text={"Play"}/>
                 ) : (
                     <TakeSixLayout showButton={false} name={this.state.name} client={this.client} pickCard={this.pickCard.bind(this)}
