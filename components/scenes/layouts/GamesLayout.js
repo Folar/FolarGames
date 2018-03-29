@@ -15,7 +15,8 @@ import LoginLayout from './LoginLayout.js';
 
 //Layout
 let key = 0;
-_this = null;
+takeSixThis = null;
+let _this = null;
 class GamesLayout extends React.Component {
 
     constructor(props) {
@@ -24,10 +25,12 @@ class GamesLayout extends React.Component {
 
             name: "Click keys to spell your name and then press Play",
             loginScene: true,
-            txtclr: "#444444"
+            txtclr: "#444444",
+            data:{},
+            showButton:false
         };
 
-        _this = this;
+        _this =  takeSixThis = this;
         this.client = null;
 
     }
@@ -77,13 +80,10 @@ class GamesLayout extends React.Component {
         this.setState({name: name});
         if (this.client)
             this.client.close();
-        if (process.env.PORT) {
-            console.log("DAMP_SHORE");
+
             client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-        } else {
-            console.log("LOCAL-HOST");
-            client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
-        }
+            //client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+
         this.client = client
         client.onerror = function () {
             console.log('Connection Error');
@@ -104,9 +104,10 @@ class GamesLayout extends React.Component {
             if (packet.messageType === "mooSound") {
                 VrSoundEffects.play(asset('mooing.mp3'));
             }
-            _this.setState({data: packet});
+            takeSixThis.setState({data: packet});
 
-            _this.setState({showButton: packet.state < 2})
+            takeSixThis.setState({showButton: packet.state < 2})
+
 
         };
 
@@ -144,7 +145,8 @@ class GamesLayout extends React.Component {
                                  msg={this.state.name} key ={key}
                                  text={"Play"}/>
                 ) : (
-                    <TakeSixLayout showButton={false} name={this.state.name} client={this.client} pickCard={this.pickCard.bind(this)}
+                    <TakeSixLayout showButton={this.state.showButton} name={this.state.name} client={this.client}
+                                   pickCard={this.pickCard.bind(this)} data={this.state.data}
                                    clickButton={this.clickButton.bind(this)} playAgain={this.playAgain.bind(this)} text={"Play"}/>
                 ) }
 

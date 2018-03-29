@@ -28,10 +28,8 @@ class GameText extends React.Component {
     }
     invoke(){
         if (this.props.data.buttonText == "Again?"){
-            console.log("again;cykfikyfdti")
             this.props.playAgain();
         } else {
-            console.log("click;cykfikyfdti")
             this.props.clickButton();
         }
     }

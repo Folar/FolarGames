@@ -14,34 +14,23 @@ import TextScoreLayout from './TextScoreLayout.js';
 import CardsLayout from './CardsLayout.js';
 
 //Layout
-_this = null;
+takeSixThis = null;
 class TakeSixLayout extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: this.props.name,
-            card:{},
-            data: {},
-            showButton:true
+            data: this.props.data
         };
 
-        _this = this;
+        takeSixThis = this;
 
     }
-
-
 
     componentDidMount(){
-
-
     }
 
-
-
     render() {
-
-
         return (
             <View style={{
                 marginLeft: .1,
@@ -51,7 +40,7 @@ class TakeSixLayout extends React.Component {
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start'
             }}>
-                <CardsLayout text={this.props.text} data={this.state.data} t={this} state={this.state.data.state}
+                <CardsLayout text={this.props.text} data={this.state.data}  state={this.state.data.state}
                              pickCard={this.props.pickCard}/>
                 <TextScoreLayout text={this.props.text}  showButton={this.state.showButton} data={this.state.data}
                                  playAgain={this.props.playAgain}
