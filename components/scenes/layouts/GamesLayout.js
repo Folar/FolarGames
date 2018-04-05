@@ -27,6 +27,10 @@ class GamesLayout extends React.Component {
             loginScene: true,
             txtclr: "#444444",
             data:{},
+            takeSixTranslate:[0,0,0],
+            takeSixRoate:0,
+            //takeSixTranslate:[-3,0,-4.0],
+            //takeSixRoate:90,
             showButton:false
         };
 
@@ -147,6 +151,7 @@ class GamesLayout extends React.Component {
                 ) : (
                     <TakeSixLayout showButton={this.state.showButton} name={this.state.name} client={this.client}
                                    pickCard={this.pickCard.bind(this)} data={this.state.data}
+                                   translate={this.state.takeSixTranslate} rotate ={this.state.takeSixRoate}
                                    clickButton={this.clickButton.bind(this)} playAgain={this.playAgain.bind(this)} text={"Play"}/>
                 ) }
 

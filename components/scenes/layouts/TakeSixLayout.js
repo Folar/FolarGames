@@ -33,6 +33,11 @@ class TakeSixLayout extends React.Component {
     render() {
         return (
             <View style={{
+                layoutOrigin: [0, 0],
+                transform: [
+                    {translate:this.props.translate},
+                    {rotateY:this.props.rotate}
+                ],
                 marginLeft: .1,
                 width: 5,
                 height: 1.4,
