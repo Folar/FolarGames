@@ -12,6 +12,7 @@ import {Easing} from 'react-native';
 
 import TakeSixLayout from './TakeSixLayout.js';
 import LoginLayout from './LoginLayout.js';
+import ChoiceLayout from './ChoiceLayout.js';
 
 //Layout
 let key = 0;
@@ -27,10 +28,10 @@ class GamesLayout extends React.Component {
             loginScene: true,
             txtclr: "#444444",
             data:{},
-            takeSixTranslate:[0,0,0],
-            takeSixRoate:0,
-            //takeSixTranslate:[-3,0,-4.0],
-            //takeSixRoate:90,
+            //takeSixTranslate:[0,0,0],
+            //takeSixRoate:0,
+            takeSixTranslate:[-3 ,.95,-2.7],   // z,y,x(less moves to left)
+            takeSixRotate:90,
             showButton:false
         };
 
@@ -46,7 +47,6 @@ class GamesLayout extends React.Component {
 
 
         this.connectToServer();
-        console.log("in  signon 3333" + n + "state =  " + JSON.stringify(this.state));
     }
 
     retryLogin() {
@@ -74,6 +74,7 @@ class GamesLayout extends React.Component {
     }
     componentDidMount() {
         VrSoundEffects.load(asset('mooing.mp3'));
+        VrSoundEffects.load(asset('dice.wav'));
     }
 
     connectToServer() {
@@ -132,27 +133,23 @@ class GamesLayout extends React.Component {
     }
 
 
-    render() {
-        console.log("games laout render");
-        const login = this.state.loginScene;
+    render() {;
+        const login =  this.state.loginScene;
         return (
-            <View style={{
-                marginLeft: .1,
-                width: 5,
-                height: 1.4,
-                flexDirection: 'row',
-                alignItems: 'flex-start',
-                justifyContent: 'flex-start'
-            }}>{
+            <View >{
                 login ? (
                     <LoginLayout showButton={false} t={this} txtclr={this.state.txtclr} signon={this.signon.bind(this)}
                                  msg={this.state.name} key ={key}
                                  text={"Play"}/>
                 ) : (
-                    <TakeSixLayout showButton={this.state.showButton} name={this.state.name} client={this.client}
+                    <View>
+                        <ChoiceLayout showButton={true} text={"Play"}/>
+                        <TakeSixLayout showButton={this.state.showButton} name={this.state.name} client={this.client}
                                    pickCard={this.pickCard.bind(this)} data={this.state.data}
-                                   translate={this.state.takeSixTranslate} rotate ={this.state.takeSixRoate}
+                                   translate={this.state.takeSixTranslate} rotate ={this.state.takeSixRotate}
                                    clickButton={this.clickButton.bind(this)} playAgain={this.playAgain.bind(this)} text={"Play"}/>
+
+                    </View>
                 ) }
 
             </View>
