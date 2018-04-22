@@ -24,11 +24,11 @@ class ChoiceDiceLayout extends React.Component {
         this.state = {
 
             showButton: true,
-            die1: 2,
-            die2: 5,
-            die3: 2,
-            die4: 1,
-            die5: 6,
+            die1: "F",
+            die2: "O",
+            die3: "L",
+            die4: "A",
+            die5: "R",
             numberOfRolls: 0
 
         }
@@ -45,9 +45,11 @@ class ChoiceDiceLayout extends React.Component {
         _this.setState({die3: Math.floor(Math.random() * 6) + 1});
         _this.setState({die4: Math.floor(Math.random() * 6) + 1});
         _this.setState({die5: Math.floor(Math.random() * 6) + 1});
-        if (_this.state.numberOfRolls < 6) {
+        if (_this.state.numberOfRolls < 4) {
             _this.setState({numberOfRolls: 1 + _this.state.numberOfRolls});
-            setTimeout(_this.roll, 100);
+            setTimeout(_this.roll, 50);
+        }else{
+            _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5])
         }
     }
 
@@ -67,15 +69,10 @@ class ChoiceDiceLayout extends React.Component {
         return (
             <View>
                 <View style={{
-                    margin: 0.01,
+                    margin: 0.1,
                     flexDirection: 'row',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    layoutOrigin: [-.2, 5],
-                    transform: [
-                        {translateX: -2.5},
-                        {translateZ: -3}
-                    ]
+                    justifyContent: 'center'
                 }}>
 
                     <Die value={this.state.die1} dim={dieDim} color="black" backgroundColor="white"/>

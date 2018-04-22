@@ -8,8 +8,8 @@ import {Easing} from 'react-native';
 
 ;
 import Die from './elements/Die.js';
-
-import Button from './elements/Button.js';
+import DieClickable from './elements/DieClickable.js';
+;
 import {
     VrButton,
     asset,
@@ -24,13 +24,7 @@ class ChoiceRowLayout extends React.Component {
         this.state = {
 
             showButton: true,
-            die1: 2,
-            die2: 5,
-            die3: 2,
-            die4: 1,
-            die5: 6,
-            numberOfRolls: 0
-
+            choiceData: this.props.choiceData
         }
     }
 
@@ -38,27 +32,69 @@ class ChoiceRowLayout extends React.Component {
 
     }
 
+    getColor(row, col) {
 
-    roll() {
-        _this.setState({die1: Math.floor(Math.random() * 6) + 1});
-        _this.setState({die2: Math.floor(Math.random() * 6) + 1});
-        _this.setState({die3: Math.floor(Math.random() * 6) + 1});
-        _this.setState({die4: Math.floor(Math.random() * 6) + 1});
-        _this.setState({die5: Math.floor(Math.random() * 6) + 1});
-        if (_this.state.numberOfRolls < 6) {
-            _this.setState({numberOfRolls: 1 + _this.state.numberOfRolls});
-            setTimeout(_this.roll, 100);
+        if (this.props.choiceData.diceState) {
+
+
+            switch (this.props.choiceData.diceState[row][col]) {
+                case 0:
+                    return "white";
+                case 2:
+                    return "#bbbbbb";
+                case 3:
+                    return "black";
+                case 4:
+                    return "black";
+
+            }
         }
+        return "white";
     }
 
-    invoke() {
-        VrSoundEffects.play(asset('dice.wav'));
-        _this = this;
-        _this.setState({numberOfRolls: 1});
-        setTimeout(_this.roll, 10);
 
+    getBackgroundColor(row, col) {
+
+        if (this.props.choiceData.diceState) {
+
+
+            switch (this.props.choiceData.diceState[row][col]) {
+                case 0:
+                    return "white";
+                case 2:
+                    return "#bbbbbb";
+                case 3:
+                    return "#bbbbbb";
+                case 4:
+                    return "white";
+
+            }
+        }
+        return "white";
     }
 
+    canClick(row, col) {
+        if (this.props.choiceData.diceState) {
+
+            if (this.props.choiceData.diceState[row][col] == 2 || this.props.choiceData.diceState[row][col] == 3)
+                return true;
+        }
+        return false;
+    }
+
+    getDim(item) {
+        switch (item) {
+            case 0:
+            case 1:
+            case 2:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+                return {height: .12, width: .12, valueFont: .06, dieFont: .09, marginRight: .01};
+        }
+        return {height: .12, width: .12, valueFont: .06, dieFont: .09, marginRight: .06};
+    }
 
     render() {
         let checkDim = {height: .12, width: .12, valueFont: .06, dieFont: .09, marginRight: .01};
@@ -66,6 +102,14 @@ class ChoiceRowLayout extends React.Component {
         let rankDim = {height: .12, width: .24, valueFont: .06, dieFont: .09, marginRight: .02};
         let valueDim = {height: .12, width: .36, valueFont: .06, dieFont: .09, marginRight: .08};
 
+        let scoreBoxes =
+            [0, 1, 2,3,4,5,6,7,8,9].map((item, index) => {
+
+                return <DieClickable value="X" dim={this.getDim(item)} rank={this.props.rank} color={this.getColor(this.props.rank, item)}
+                                     backgroundColor={this.getBackgroundColor(this.props.rank, item)} pos={item}
+                                     clickable={this.canClick(this.props.rank, item)}
+                                     chooseDicePair={this.props.chooseDicePair}/>
+            });
 
         return (
             <View>
@@ -82,20 +126,11 @@ class ChoiceRowLayout extends React.Component {
                         {translateZ: 0}
                     ]
                 }}>
-                    <Die value={this.props.rank} dim={rankDim} color="black" backgroundColor="white"/>
-                    <Die value={this.props.value} dim={valueDim} color="black" backgroundColor="white"/>
-                    <Die value="" dim={checkDim} color="black" backgroundColor="white"/>
-                    <Die value="" dim={checkDim} color="black" backgroundColor="white"/>
-                    <Die value="" dim={checkDim} color="black" backgroundColor="white"/>
-                    <Die value="" dim={checkDimGap} color="black" backgroundColor="white"/>
-
-                    <Die value="" dim={checkDimGap} color="black" backgroundColor="white"/>
-
-                    <Die value="" dim={checkDim} color="black" backgroundColor="white"/>
-                    <Die value="" dim={checkDim} color="black" backgroundColor="white"/>
-                    <Die value="" dim={checkDim} color="black" backgroundColor="white"/>
-                    <Die value="" dim={checkDim} color="black" backgroundColor="white"/>
-                    <Die value="" dim={checkDimGap} color="black" backgroundColor="white"/>
+                    <Die value={this.props.rank} rank={this.props.rank} dim={rankDim} color="black"
+                         backgroundColor="white"/>
+                    <Die value={this.props.value} rank={this.props.rank} dim={valueDim} color="black"
+                         backgroundColor="white"/>
+                    {scoreBoxes}
 
                     <Die value={this.props.score} dim={valueDim} color="black" backgroundColor="white"/>
 

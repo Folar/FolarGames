@@ -7,7 +7,7 @@ import {
 import {Easing} from 'react-native';
 
 ;
-import Die from './elements/Die.js';
+import ChoiceGaitLayout from './ChoiceGaitLayout.js'
 import ChoiceScoreLayout from './ChoiceScoreLayout.js';
 import ChoiceDiceLayout from './ChoiceDiceLayout.js'
 import {
@@ -15,17 +15,18 @@ import {
     asset,
     VrSoundEffects
 } from 'react-vr';
-let _this =null;
+let _this = null;
+choiceThis = null;
 //Layout
 class ChoiceLayout extends React.Component {
 
     constructor(props) {
         super(props);
+        choiceThis =this
         this.state = {
+            choiceData: {},
+        };
 
-            showButton: true
-
-        }
     }
 
     componentDidMount() {
@@ -35,29 +36,51 @@ class ChoiceLayout extends React.Component {
 
 
 
-
-
-
     render() {
 
-
-
-
-
+        if(this.props.choiceData.diceState){
+            console.log("dataYYYY= "+this.props.choiceData.diceState[5][0]);
+        }
+        let nameList = ['Larry','Stu','Bob'].map((item, index) => {
+            return <Text style={{color:"black"}} key={index} >{item}</Text>
+        });
         return (
             <View>
 
 
-
                 <View style={{
+                    height:2,
+                    width: 5,
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-start',
+                    layoutOrigin: [.5, .8],
+                    transform: [
+                        {translateX: 0},
+                        {translateZ: -3}]
+                }}>
+                    <ChoiceDiceLayout style={{marginBottom:.2}} roll={this.props.roll} />
+                    <View style={{
                         height: 1,
                         width: 5,
-                        flexDirection: 'column',
-                        alignItems: 'center',
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
                         justifyContent: 'flex-start'
-                }}>
-                    <ChoiceDiceLayout/>
-                    <ChoiceScoreLayout/>
+                    }}>
+                         <ChoiceScoreLayout choiceData={this.props.choiceData}  chooseDicePair={this.props.chooseDicePair}/>
+                         <ChoiceGaitLayout/>
+                        <View style={{
+                            height: 3,
+                            width: 1,
+                            marginLeft:.04,
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
+                            justifyContent: 'flex-start'
+                        }}>
+                            {nameList}
+                        </View>
+
+                    </View>
 
 
                 </View>
@@ -68,4 +91,5 @@ class ChoiceLayout extends React.Component {
     }
 }
 
-module.exports = ChoiceLayout;
+module
+    .exports = ChoiceLayout;

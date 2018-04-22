@@ -17,6 +17,7 @@ import ChoiceLayout from './ChoiceLayout.js';
 //Layout
 let key = 0;
 takeSixThis = null;
+choiceThis = null;
 let _this = null;
 class GamesLayout extends React.Component {
 
@@ -28,6 +29,7 @@ class GamesLayout extends React.Component {
             loginScene: true,
             txtclr: "#444444",
             data:{},
+            choiceData:{},
             //takeSixTranslate:[0,0,0],
             //takeSixRoate:0,
             takeSixTranslate:[-3 ,.95,-2.7],   // z,y,x(less moves to left)
@@ -35,7 +37,7 @@ class GamesLayout extends React.Component {
             showButton:false
         };
 
-        _this =  takeSixThis = this;
+        _this = takeSixThis = choiceThis = this;
         this.client = null;
 
     }
@@ -72,6 +74,13 @@ class GamesLayout extends React.Component {
             this.client.send(JSON.stringify({name:this.state.name,type:"placeCard",card:x,row:r}));
 
     }
+    roll(dice){
+            this.client.send(JSON.stringify({name:this.state.name,type:"choiceRoll",dice:dice}));
+
+    }
+    chooseDicePair(rank,pos){
+        this.client.send(JSON.stringify({name:this.state.name,type:"choosePairs",rank:rank,pos:pos}));
+    }
     componentDidMount() {
         VrSoundEffects.load(asset('mooing.mp3'));
         VrSoundEffects.load(asset('dice.wav'));
@@ -86,8 +95,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-            client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-            //client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+            //client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+            client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -97,6 +106,11 @@ class GamesLayout extends React.Component {
 
         client.onmessage = function (x) {
             let packet = JSON.parse(x.data);
+            if (packet.messageType === "choosePair") {
+                choiceThis.setState({choiceData: packet.data});
+                _this.forceUpdate();
+                return;
+            }
             if (packet.messageType === "dupUser") {
                 let x = _this.state.name;
                 _this.setState({name:x + " has already signed on, choose another name",txtclr : "red"});
@@ -105,6 +119,7 @@ class GamesLayout extends React.Component {
                 _this.forceUpdate();
                 return;
             }
+
             _this.setState({loginScene : false})
             if (packet.messageType === "mooSound") {
                 VrSoundEffects.play(asset('mooing.mp3'));
@@ -133,8 +148,9 @@ class GamesLayout extends React.Component {
     }
 
 
-    render() {;
+    render() {
         const login =  this.state.loginScene;
+
         return (
             <View >{
                 login ? (
@@ -143,7 +159,9 @@ class GamesLayout extends React.Component {
                                  text={"Play"}/>
                 ) : (
                     <View>
-                        <ChoiceLayout showButton={true} text={"Play"}/>
+                        <ChoiceLayout showButton={true} text={"Play"} roll={this.roll.bind(this)}
+                                      choiceData={choiceThis.state.choiceData}
+                                      chooseDicePair={this.chooseDicePair.bind(this)}/>
                         <TakeSixLayout showButton={this.state.showButton} name={this.state.name} client={this.client}
                                    pickCard={this.pickCard.bind(this)} data={this.state.data}
                                    translate={this.state.takeSixTranslate} rotate ={this.state.takeSixRotate}

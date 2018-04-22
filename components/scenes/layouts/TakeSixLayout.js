@@ -7,7 +7,6 @@ import {
     VrSoundEffects
 } from 'react-vr';
 
-import {Easing} from 'react-native';
 
 
 import TextScoreLayout from './TextScoreLayout.js';

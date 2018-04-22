@@ -20,12 +20,20 @@ class ChoiceScoreLayout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
-            showButton: true
+            showButton: true,
+            choiceData:this.props.choiceData
         }
     }
 
     componentDidMount() {
+
+    }
+
+    getValue(v){
+        if (v == 2 || v == 12)
+            return 100;
+        return 30 + 10 * Math.abs(7- v)
+
 
     }
 
@@ -37,46 +45,33 @@ class ChoiceScoreLayout extends React.Component {
         let checkDimGap = {height: .12, width: .12, valueFont: .06, dieFont: .09, marginRight: .06};
         let scoreDim = {height: .12, width: .36, valueFont: .06, dieFont: .09, marginRight: .01};
 
+        let scoreRows =
+            [ 2,3,4,5,6,7,8,9,10,11,12].map((item, index) => {
+              return  <ChoiceRowLayout rank={item} value={this.getValue(item)} score="0" choiceData={this.props.choiceData}
+                                 chooseDicePair={this.props.chooseDicePair}/>
 
+            });
         return (
+
             <View>
 
 
                 <View style={{
-                    margin: 0.01,
+                    marginTop: 0.0,
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    layoutOrigin: [-.2, .6],
-                    transform: [
-                        {translateX: -2.5},
-                        {translateZ: -3}
-                    ]
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-start'
 
                 }}>
-                    <ChoiceRowLayout rank="2" value="100" score="0"/>
-                    <ChoiceRowLayout rank="3" value="70" score="0"/>
-                    <ChoiceRowLayout rank="4" value="60" score="0"/>
-                    <ChoiceRowLayout rank="5" value="50" score="0"/>
-                    <ChoiceRowLayout rank="6" value="40" score="0"/>
-                    <ChoiceRowLayout rank="7" value="30" score="0"/>
-                    <ChoiceRowLayout rank="8" value="40" score="0"/>
-                    <ChoiceRowLayout rank="9" value="50" score="0"/>
-                    <ChoiceRowLayout rank="10" value="60" score="0"/>
-                    <ChoiceRowLayout rank="11" value="70" score="0"/>
-                    <ChoiceRowLayout rank="12" value="100" score="0"/>
-                </View>
+                    {scoreRows}
+                    </View>
                 <View style={{
                     margin: 0.01,
+                    marginTop:.05,
+                    paddingLeft:.62,
                     flexDirection: 'row',
                     alignItems: 'flex-start',
-                    justifyContent: 'center',
-                    layoutOrigin: [0, 0],
-                    transform: [
-                        {translateX: -1.66},
-                        {translateY: .85},
-                        {translateZ: -3}
-                    ]
+                    justifyContent: 'center'
                 }}>
 
                     <Die value="-200" dim={negDim} color="black" backgroundColor="white"/>
