@@ -41,9 +41,9 @@ class ChoiceGaitLayout extends React.Component {
                     justifyContent: 'flex-start'
 
                 }}>
-                    <ChoiceGaitRowLayout rank="-" tally="0"/>
-                    <ChoiceGaitRowLayout rank="-" tally="0"/>
-                    <ChoiceGaitRowLayout rank="-" tally="0"/>
+                    <ChoiceGaitRowLayout rank="0" tally="0"   chooseDicePair={this.props.chooseDicePair} choiceData={this.props.choiceData}/>
+                    <ChoiceGaitRowLayout rank="1" tally="0"  chooseDicePair={this.props.chooseDicePair} choiceData={this.props.choiceData}/>
+                    <ChoiceGaitRowLayout rank="2" tally="0"  chooseDicePair={this.props.chooseDicePair} choiceData={this.props.choiceData}/>
 
                 </View>
 

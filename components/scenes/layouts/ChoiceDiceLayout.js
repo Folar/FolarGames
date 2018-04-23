@@ -65,7 +65,8 @@ class ChoiceDiceLayout extends React.Component {
     render() {
         let dieDim = {height: .2, width: .2, valueFont: .1, dieFont: .15,marginRight:.02};
 
-
+        let showButton = this.props.choiceShowButton;
+        let buttonText = this.props.choiceButtonText;
         return (
             <View>
                 <View style={{
@@ -80,8 +81,8 @@ class ChoiceDiceLayout extends React.Component {
                     <Die value={this.state.die3} dim={dieDim} color="black" backgroundColor="white"/>
                     <Die value={this.state.die4} dim={dieDim} color="black" backgroundColor="white"/>
                     <Die value={this.state.die5} dim={dieDim} color="black" backgroundColor="white"/>
-
-                    <View
+                    {
+                    showButton ?(<View
                         style={{
                             marginLeft: 0.4,
                             paddingLeft: 0.2,
@@ -90,7 +91,7 @@ class ChoiceDiceLayout extends React.Component {
                             backgroundColor: '#A482DF',
                             borderRadius: 0.1,
                             margin: 0.01,
-                            width: .7, flexDirection: 'row',
+                            width: 1.2, flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: 'center'
                         }}
@@ -103,10 +104,12 @@ class ChoiceDiceLayout extends React.Component {
                                     textAlign: 'center',
                                     color: "#FFFFFF"
                                 }}>
-                                Roll
+                                {buttonText}
                             </Text>
                         </VrButton>
-                    </View>
+                    </View>) :
+                    (<View/>)
+                    }
                 </View>
 
 

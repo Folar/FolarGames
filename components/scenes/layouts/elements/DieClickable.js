@@ -26,7 +26,7 @@ class DieClickable extends React.Component {
 
     invoke() {
         if (this.props.clickable)
-            this.props.chooseDicePair(this.props.rank, this.props.pos);
+            this.props.chooseDicePair(this.props.rank, this.props.pos,this.props.gaitor);
     }
 
     render() {

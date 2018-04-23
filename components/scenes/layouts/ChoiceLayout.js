@@ -22,9 +22,10 @@ class ChoiceLayout extends React.Component {
 
     constructor(props) {
         super(props);
-        choiceThis =this
+        choiceThis =this;
         this.state = {
-            choiceData: {},
+            choiceData: {}
+
         };
 
     }
@@ -38,9 +39,7 @@ class ChoiceLayout extends React.Component {
 
     render() {
 
-        if(this.props.choiceData.diceState){
-            console.log("dataYYYY= "+this.props.choiceData.diceState[5][0]);
-        }
+
         let nameList = ['Larry','Stu','Bob'].map((item, index) => {
             return <Text style={{color:"black"}} key={index} >{item}</Text>
         });
@@ -59,7 +58,8 @@ class ChoiceLayout extends React.Component {
                         {translateX: 0},
                         {translateZ: -3}]
                 }}>
-                    <ChoiceDiceLayout style={{marginBottom:.2}} roll={this.props.roll} />
+                    <ChoiceDiceLayout style={{marginBottom:.2}} roll={this.props.roll} choiceShowButton ={ this.props.choiceShowButton}
+                                      choiceButtonText = {this.props.choiceButtonText}  />
                     <View style={{
                         height: 1,
                         width: 5,
@@ -68,7 +68,7 @@ class ChoiceLayout extends React.Component {
                         justifyContent: 'flex-start'
                     }}>
                          <ChoiceScoreLayout choiceData={this.props.choiceData}  chooseDicePair={this.props.chooseDicePair}/>
-                         <ChoiceGaitLayout/>
+                         <ChoiceGaitLayout choiceData={this.props.choiceData}  chooseDicePair={this.props.chooseDicePair}/>
                         <View style={{
                             height: 3,
                             width: 1,

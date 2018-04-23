@@ -47,7 +47,7 @@ class ChoiceScoreLayout extends React.Component {
 
         let scoreRows =
             [ 2,3,4,5,6,7,8,9,10,11,12].map((item, index) => {
-              return  <ChoiceRowLayout rank={item} value={this.getValue(item)} score="0" choiceData={this.props.choiceData}
+              return  <ChoiceRowLayout rank={item} value={this.getValue(item)}  key={index} score="0" choiceData={this.props.choiceData}
                                  chooseDicePair={this.props.chooseDicePair}/>
 
             });

@@ -30,6 +30,9 @@ class GamesLayout extends React.Component {
             txtclr: "#444444",
             data:{},
             choiceData:{},
+
+            choiceShowButton : true,
+            choiceButtonText:"Roll!!!",
             //takeSixTranslate:[0,0,0],
             //takeSixRoate:0,
             takeSixTranslate:[-3 ,.95,-2.7],   // z,y,x(less moves to left)
@@ -78,8 +81,8 @@ class GamesLayout extends React.Component {
             this.client.send(JSON.stringify({name:this.state.name,type:"choiceRoll",dice:dice}));
 
     }
-    chooseDicePair(rank,pos){
-        this.client.send(JSON.stringify({name:this.state.name,type:"choosePairs",rank:rank,pos:pos}));
+    chooseDicePair(rank,pos,gaitor){
+        this.client.send(JSON.stringify({name:this.state.name,type:"choosePairs",rank:rank,pos:pos,gaitor:gaitor}));
     }
     componentDidMount() {
         VrSoundEffects.load(asset('mooing.mp3'));
@@ -108,7 +111,10 @@ class GamesLayout extends React.Component {
             let packet = JSON.parse(x.data);
             if (packet.messageType === "choosePair") {
                 choiceThis.setState({choiceData: packet.data});
-                _this.forceUpdate();
+
+                _this.setState({choiceShowButton: packet.data.choices.length == 2});
+                _this.setState({choiceButtonText: "Confirm"});
+
                 return;
             }
             if (packet.messageType === "dupUser") {
@@ -161,6 +167,8 @@ class GamesLayout extends React.Component {
                     <View>
                         <ChoiceLayout showButton={true} text={"Play"} roll={this.roll.bind(this)}
                                       choiceData={choiceThis.state.choiceData}
+                                      choiceShowButton ={ this.state.choiceShowButton}
+                                      choiceButtonText = {this.state.choiceButtonText}
                                       chooseDicePair={this.chooseDicePair.bind(this)}/>
                         <TakeSixLayout showButton={this.state.showButton} name={this.state.name} client={this.client}
                                    pickCard={this.pickCard.bind(this)} data={this.state.data}
