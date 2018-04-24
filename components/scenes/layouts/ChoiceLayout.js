@@ -6,7 +6,7 @@ import {
 
 import {Easing} from 'react-native';
 
-;
+const {Choice} = require('./../../../utils/Choice.js');
 import ChoiceGaitLayout from './ChoiceGaitLayout.js'
 import ChoiceScoreLayout from './ChoiceScoreLayout.js';
 import ChoiceDiceLayout from './ChoiceDiceLayout.js'
@@ -17,6 +17,7 @@ import {
 } from 'react-vr';
 let _this = null;
 choiceThis = null;
+let choice= new Choice();
 //Layout
 class ChoiceLayout extends React.Component {
 
@@ -24,7 +25,9 @@ class ChoiceLayout extends React.Component {
         super(props);
         choiceThis =this;
         this.state = {
-            choiceData: {}
+            choiceData: {},
+            choiceShowButton : true,
+            choiceButtonText:"Roll!!!",
 
         };
 
@@ -34,7 +37,28 @@ class ChoiceLayout extends React.Component {
 
     }
 
-
+    roll(dice){
+        //this.client.send(JSON.stringify({name:this.state.name,type:"choiceRoll",dice:dice,
+        //    buttonText:this.state.choiceButtonText}));
+        if(this.state.choiceButtonText == "Confirm") {
+            this.setState({choiceData: choice.confirm()});
+            this.setState({choiceButtonText: "Roll!!!"});
+        } else {
+            this.setState({choiceData: choice.roll(dice)});
+            this.setState({choiceShowButton: false});
+        }
+    }
+    chooseDicePair(rank,pos,gaitor){
+        //this.client.send(JSON.stringify({name:this.state.name,type:"choosePairs",rank:rank,pos:pos,gaitor:gaitor}));
+        let s = choice.setSecondDieChoices(rank,pos,gaitor);
+        this.setState({choiceShowButton: s.gameState != 1});
+        if(s.gameState == 0){
+            this.setState({choiceButtonText: "Roll!!!"});
+        }else {
+            this.setState({choiceButtonText: "Confirm"});
+        }
+        this.setState({choiceData:s});
+    }
 
 
     render() {
@@ -58,8 +82,8 @@ class ChoiceLayout extends React.Component {
                         {translateX: 0},
                         {translateZ: -3}]
                 }}>
-                    <ChoiceDiceLayout style={{marginBottom:.2}} roll={this.props.roll} choiceShowButton ={ this.props.choiceShowButton}
-                                      choiceButtonText = {this.props.choiceButtonText}  />
+                    <ChoiceDiceLayout style={{marginBottom:.2}} roll={this.roll.bind(this)} choiceShowButton ={ this.state.choiceShowButton}
+                                      choiceButtonText = {this.state.choiceButtonText}  />
                     <View style={{
                         height: 1,
                         width: 5,
@@ -67,8 +91,8 @@ class ChoiceLayout extends React.Component {
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start'
                     }}>
-                         <ChoiceScoreLayout choiceData={this.props.choiceData}  chooseDicePair={this.props.chooseDicePair}/>
-                         <ChoiceGaitLayout choiceData={this.props.choiceData}  chooseDicePair={this.props.chooseDicePair}/>
+                         <ChoiceScoreLayout choiceData={this.state.choiceData}  chooseDicePair={this.chooseDicePair.bind(this)}/>
+                         <ChoiceGaitLayout choiceData={this.state.choiceData}  chooseDicePair={this.chooseDicePair.bind(this)}/>
                         <View style={{
                             height: 3,
                             width: 1,
