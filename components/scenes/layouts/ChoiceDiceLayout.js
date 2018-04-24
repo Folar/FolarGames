@@ -49,11 +49,20 @@ class ChoiceDiceLayout extends React.Component {
             _this.setState({numberOfRolls: 1 + _this.state.numberOfRolls});
             setTimeout(_this.roll, 50);
         }else{
-            _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5])
+            _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5]);;
         }
     }
 
     invoke() {
+        if(this.props.choiceButtonText == "Confirm") {
+            _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5]);
+            _this.state.die1 = 'F';
+            _this.state.die2 = 'O';
+            _this.state.die3 = 'L';
+            _this.state.die4 = 'A';
+            _this.state.die5 = 'R';
+            return;
+        }
         VrSoundEffects.play(asset('dice.wav'));
         _this = this;
         _this.setState({numberOfRolls: 1});

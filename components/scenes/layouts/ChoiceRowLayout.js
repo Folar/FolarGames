@@ -91,6 +91,8 @@ class ChoiceRowLayout extends React.Component {
             case 6:
             case 7:
             case 8:
+            case 9:
+            case 10:
                 return {height: .12, width: .12, valueFont: .06, dieFont: .09, marginRight: .01};
         }
         return {height: .12, width: .12, valueFont: .06, dieFont: .09, marginRight: .06};
@@ -103,7 +105,7 @@ class ChoiceRowLayout extends React.Component {
         let valueDim = {height: .12, width: .36, valueFont: .06, dieFont: .09, marginRight: .08};
 
         let scoreBoxes =
-            [0, 1, 2,3,4,5,6,7,8,9].map((item, index) => {
+            [0, 1, 2,3,4,5,6,7,8,9,10,11].map((item, index) => {
 
                 return <DieClickable value="X" dim={this.getDim(item)} rank={this.props.rank} color={this.getColor(this.props.rank, item)}
                                      backgroundColor={this.getBackgroundColor(this.props.rank, item)} pos={item}  key={index}

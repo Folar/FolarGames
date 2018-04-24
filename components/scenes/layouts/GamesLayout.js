@@ -78,7 +78,8 @@ class GamesLayout extends React.Component {
 
     }
     roll(dice){
-            this.client.send(JSON.stringify({name:this.state.name,type:"choiceRoll",dice:dice}));
+            this.client.send(JSON.stringify({name:this.state.name,type:"choiceRoll",dice:dice,
+                                             buttonText:this.state.choiceButtonText}));
 
     }
     chooseDicePair(rank,pos,gaitor){
@@ -112,9 +113,12 @@ class GamesLayout extends React.Component {
             if (packet.messageType === "choosePair") {
                 choiceThis.setState({choiceData: packet.data});
 
-                _this.setState({choiceShowButton: packet.data.choices.length == 2});
-                _this.setState({choiceButtonText: "Confirm"});
-
+                _this.setState({choiceShowButton: packet.data.gameState != 1});
+                if(packet.data.gameState == 0){
+                    _this.setState({choiceButtonText: "Roll!!!"});
+                }else {
+                    _this.setState({choiceButtonText: "Confirm"});
+                }
                 return;
             }
             if (packet.messageType === "dupUser") {

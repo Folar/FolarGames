@@ -36,6 +36,19 @@ class ChoiceScoreLayout extends React.Component {
 
 
     }
+    getScore(row){
+        if (this.props.choiceData.diceData) {
+            return this.props.choiceData.diceData[row].score;
+        }
+        return "0"
+    }
+
+    getTotalScore(){
+        if (this.props.choiceData.totalScore) {
+            return this.props.choiceData.totalScore;
+        }
+        return "0"
+    }
 
 
     render() {
@@ -47,7 +60,8 @@ class ChoiceScoreLayout extends React.Component {
 
         let scoreRows =
             [ 2,3,4,5,6,7,8,9,10,11,12].map((item, index) => {
-              return  <ChoiceRowLayout rank={item} value={this.getValue(item)}  key={index} score="0" choiceData={this.props.choiceData}
+              return  <ChoiceRowLayout rank={item} value={this.getValue(item)}  key={index} score={this.getScore(item)}
+                                       choiceData={this.props.choiceData}
                                  chooseDicePair={this.props.chooseDicePair}/>
 
             });
@@ -80,8 +94,10 @@ class ChoiceScoreLayout extends React.Component {
                     <Die value="+" dim={checkDim} color="black" backgroundColor="white"/>
                     <Die value="+" dim={checkDim} color="black" backgroundColor="white"/>
                     <Die value="+" dim={checkDim} color="black" backgroundColor="white"/>
-                    <Die value="+" dim={checkDimGap} color="black" backgroundColor="white"/>
-                    <Die value="-80" dim={scoreDim} color="black" backgroundColor="white"/>
+                    <Die value="+" dim={checkDim} color="black" backgroundColor="white"/>
+                    <Die value="0" dim={checkDim} color="black" backgroundColor="white"/>
+                    <Die value="0" dim={checkDimGap} color="black" backgroundColor="white"/>
+                    <Die value={this.getTotalScore()} dim={scoreDim} color="black" backgroundColor="white"/>
 
 
                 </View>
