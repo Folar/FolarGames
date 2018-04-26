@@ -40,16 +40,21 @@ class ChoiceLayout extends React.Component {
     roll(dice){
         //this.client.send(JSON.stringify({name:this.state.name,type:"choiceRoll",dice:dice,
         //    buttonText:this.state.choiceButtonText}));
-        if(this.state.choiceButtonText == "Confirm") {
+
+        if (this.state.choiceButtonText == "Confirm") {
             let gs = choice.confirm();
             this.setState({choiceData: gs});
             if(gs.gameState == 3)
                 this.setState({choiceButtonText: "Again?"});
             else
                 this.setState({choiceButtonText: "Roll!!!"});
-        } else {
+
+        } else if(this.state.choiceButtonText == "Roll!!!"){
             this.setState({choiceData: choice.roll(dice)});
             this.setState({choiceShowButton: false});
+        } else {
+            this.setState({choiceData: choice.resetState(dice)});
+            this.setState({choiceButtonText: "Roll!!!"});
         }
     }
     chooseDicePair(rank,pos,gaitor){
@@ -65,6 +70,8 @@ class ChoiceLayout extends React.Component {
     }
 
     getMessage(){
+        if(this.state.choiceData == null)
+            return "Welcome! Press the Start button when all the players have joined";
         let m = this.state.choiceData.message;
         if (m != null) {
             return m;

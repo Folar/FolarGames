@@ -16,6 +16,7 @@ class Choice {
     resetState() {
         this.state = {
             dice: [0, 0, 0, 0, 0],
+            message: "Welcome! Press the Start button when all the players have joined",
             currentClicks: 0,
             gaitors: [],
             gameState:0,
@@ -143,15 +144,15 @@ class Choice {
             this.state.diceData[this.state.choices[1]].count++;
         if (this.state.gaitorChoice > 0)
             this.state.gaitorCount[this.state.gaitorsIndex[this.state.gaitorChoice]]++;
-
-
-        if (  this.state.gaitorCount[this.state.gaitorsIndex[this.state.gaitorChoice]] == 8){
-            this.state.message =  "You finished the game with a score of"+ this.state.totalScore;
+        let i = this.state.gaitorsIndex[this.state.gaitorChoice];
+        this.setCheckState();
+        if (  this.state.gaitorCount[i] == 8){
+            this.state.message =  "You finished the game with a score of "+ this.state.totalScore;
             this.state.gameState = 3;
         }else {
             this.state.gameState = 0;
         }
-        this.setCheckState();
+
         return this.state;
     }
 

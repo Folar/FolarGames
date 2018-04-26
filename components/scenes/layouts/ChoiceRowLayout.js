@@ -34,7 +34,7 @@ class ChoiceRowLayout extends React.Component {
 
     getColor(row, col) {
 
-        if (this.props.choiceData.diceState) {
+        if (this.props.choiceData &&  this.props.choiceData.diceState) {
 
 
             switch (this.props.choiceData.diceState[row][col]) {
@@ -55,7 +55,7 @@ class ChoiceRowLayout extends React.Component {
 
     getBackgroundColor(row, col) {
 
-        if (this.props.choiceData.diceState) {
+        if ( this.props.choiceData && this.props.choiceData.diceState) {
 
 
             switch (this.props.choiceData.diceState[row][col]) {
@@ -74,7 +74,7 @@ class ChoiceRowLayout extends React.Component {
     }
 
     canClick(row, col) {
-        if (this.props.choiceData.diceState) {
+        if (this.props.choiceData &&this.props.choiceData.diceState) {
 
             if (this.props.choiceData.diceState[row][col] == 2 || this.props.choiceData.diceState[row][col] == 3)
                 return true;

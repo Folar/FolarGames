@@ -37,14 +37,14 @@ class ChoiceScoreLayout extends React.Component {
 
     }
     getScore(row){
-        if (this.props.choiceData.diceData) {
+        if (this.props.choiceData && this.props.choiceData.diceData) {
             return this.props.choiceData.diceData[row].score;
         }
         return "0"
     }
 
     getTotalScore(){
-        if (this.props.choiceData.totalScore) {
+        if (this.props.choiceData && this.props.choiceData.totalScore) {
             return this.props.choiceData.totalScore;
         }
         return "0"

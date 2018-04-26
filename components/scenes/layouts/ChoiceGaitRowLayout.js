@@ -32,7 +32,7 @@ class ChoiceGaitRowLayout extends React.Component {
     }
     getColor(row, col) {
 
-        if (this.props.choiceData.gaitorsState) {
+        if (this.props.choiceData && this.props.choiceData.gaitorsState) {
 
 
             switch (this.props.choiceData.gaitorsState[row][col]) {
@@ -53,7 +53,7 @@ class ChoiceGaitRowLayout extends React.Component {
 
     getBackgroundColor(row, col) {
 
-        if (this.props.choiceData.gaitorsState) {
+        if (this.props.choiceData && this.props.choiceData.gaitorsState) {
 
 
             switch (this.props.choiceData.gaitorsState[row][col]) {
@@ -72,13 +72,13 @@ class ChoiceGaitRowLayout extends React.Component {
     }
 
     getValue(row){
-        if (this.props.choiceData.gaitorsDisplay) {
+        if (this.props.choiceData && this.props.choiceData.gaitorsDisplay) {
             return this.props.choiceData.gaitorsDisplay[row];
         }
         return "-"
     }
     canClick(row, col) {
-        if (this.props.choiceData.gaitorsState) {
+        if (this.props.choiceData && this.props.choiceData.gaitorsState) {
 
             if ( this.props.choiceData.gaitorsState[row][col] == 3)
                 return true;
