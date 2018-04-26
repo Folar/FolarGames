@@ -143,8 +143,15 @@ class Choice {
             this.state.diceData[this.state.choices[1]].count++;
         if (this.state.gaitorChoice > 0)
             this.state.gaitorCount[this.state.gaitorsIndex[this.state.gaitorChoice]]++;
+
+
+        if (  this.state.gaitorCount[this.state.gaitorsIndex[this.state.gaitorChoice]] == 8){
+            this.state.message =  "You finished the game with a score of"+ this.state.totalScore;
+            this.state.gameState = 3;
+        }else {
+            this.state.gameState = 0;
+        }
         this.setCheckState();
-        this.state.gameState = 0;
         return this.state;
     }
 
@@ -298,6 +305,8 @@ class Choice {
             if (this.state.choices.length == 1) {
                 this.setCheckState();
                 this.state.diceState[val][data.count] = 3;
+                this.state.message = "Choose your second dice pair by clicking on a gray square " +
+                                      "or click on a gray square with an \"X\" to undo the first selection";
                 for (let item in cr) {
                     let indexes = this.findLastThree(cr[item]);
                     this.chk2ndPairs(this.state.dice[indexes[0]], this.state.dice[indexes[1]], this.state.dice[indexes[2]]);
@@ -305,6 +314,8 @@ class Choice {
                     this.chk2ndPairs(this.state.dice[indexes[1]], this.state.dice[indexes[2]], this.state.dice[indexes[0]]);
                 }
             } else {
+                this.state.message = "Confirm your choice" +
+                    " or click a gray square with an \"X\" to undo a selection";
                 this.setSecondCheckState(val);
                 let sum = this.state.dice[0] + this.state.dice[1] + this.state.dice[2] + this.state.dice[3] + this.state.dice[4];
                 this.setGaitor(sum - (this.state.choices[0] + this.state.choices[1]));
@@ -355,6 +366,9 @@ class Choice {
 
     roll(dice) {
         let results = [];
+        let free = "";
+        if (this.isGaitorsFull() && this.howManyGaitorsInRoll(dice) ==0)
+            free = "Great you have a free roll! ";
         this.resetBeforeRoll();
         let d = this.state.dice = dice;
         this.chkPairs(0, 1, results);
@@ -370,6 +384,7 @@ class Choice {
         this.setCheckState();
         this.setFirstDieChoices(results);
         this.state.gameState = 1;
+        this.state.message =  free +"Choose your first dice pair by clicking on a gray square";
         return this.state;
 
     }

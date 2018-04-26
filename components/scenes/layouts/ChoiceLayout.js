@@ -41,8 +41,12 @@ class ChoiceLayout extends React.Component {
         //this.client.send(JSON.stringify({name:this.state.name,type:"choiceRoll",dice:dice,
         //    buttonText:this.state.choiceButtonText}));
         if(this.state.choiceButtonText == "Confirm") {
-            this.setState({choiceData: choice.confirm()});
-            this.setState({choiceButtonText: "Roll!!!"});
+            let gs = choice.confirm();
+            this.setState({choiceData: gs});
+            if(gs.gameState == 3)
+                this.setState({choiceButtonText: "Again?"});
+            else
+                this.setState({choiceButtonText: "Roll!!!"});
         } else {
             this.setState({choiceData: choice.roll(dice)});
             this.setState({choiceShowButton: false});
@@ -60,6 +64,13 @@ class ChoiceLayout extends React.Component {
         this.setState({choiceData:s});
     }
 
+    getMessage(){
+        let m = this.state.choiceData.message;
+        if (m != null) {
+            return m;
+        }
+        return "Welcome! Press the Start button when all the players have joined";
+    }
 
     render() {
 
@@ -92,7 +103,7 @@ class ChoiceLayout extends React.Component {
                         justifyContent: 'flex-start'
                     }}>
                          <ChoiceScoreLayout choiceData={this.state.choiceData}  chooseDicePair={this.chooseDicePair.bind(this)}/>
-                         <ChoiceGaitLayout choiceData={this.state.choiceData}  chooseDicePair={this.chooseDicePair.bind(this)}/>
+                         <ChoiceGaitLayout message={this.getMessage()} choiceData={this.state.choiceData}  chooseDicePair={this.chooseDicePair.bind(this)}/>
                         <View style={{
                             height: 3,
                             width: 1,
