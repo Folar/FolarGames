@@ -71,18 +71,18 @@ class ChoiceLayout extends React.Component {
 
     getMessage(){
         if(this.state.choiceData == null)
-            return "Welcome! Press the Start button when all the players have joined";
+            return "Press Roll";
         let m = this.state.choiceData.message;
         if (m != null) {
             return m;
         }
-        return "Welcome! Press the Start button when all the players have joined";
+        return "Press Roll";
     }
 
     render() {
 
 
-        let nameList = ['Larry','Stu','Bob'].map((item, index) => {
+        let nameList = [].map((item, index) => {
             return <Text style={{color:"black"}} key={index} >{item}</Text>
         });
         return (

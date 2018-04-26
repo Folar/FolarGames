@@ -43,12 +43,17 @@ class LoginLayout extends React.Component {
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-
+    invoke2(){
+        let n = this.state.name;
+        if (n.length > 5)
+            n = n.substring(0,5);
+        this.props.signon(this.capitalizeFirstLetter(n),3);
+    }
     invoke(){
         let n = this.state.name;
         if (n.length > 5)
             n = n.substring(0,5);
-        this.props.signon(this.capitalizeFirstLetter(n));
+        this.props.signon(this.capitalizeFirstLetter(n),2);
     }
     updateStage(input) {
 
@@ -93,7 +98,6 @@ class LoginLayout extends React.Component {
 
             return <LetterButton t={this} key={index} letter={item} updateStage={this.updateStage.bind(this)}/>
         });
-
         var items3 = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '<-'].map((item, index) => {
 
             return <LetterButton t={this} key={index} letter={item} updateStage={this.updateStage.bind(this)}/>
@@ -209,7 +213,17 @@ class LoginLayout extends React.Component {
                     >
 
                         <Button updateScene={this.invoke.bind(this)} showButton={this.state.showButton}
-                                text={this.state.text}
+                                text="6 nimmt!"
+                                style={{
+                                    fontSize: 0.2,
+                                    textAlign: 'center',
+                                    color: "#000000",
+                                    transform: [
+                                        {translateX: 0}
+                                    ]
+                                }}/>
+                        <Button updateScene={this.invoke2.bind(this)} showButton={this.state.showButton}
+                                text="Dice Solitare"
                                 style={{
                                     fontSize: 0.2,
                                     textAlign: 'center',
@@ -221,11 +235,14 @@ class LoginLayout extends React.Component {
 
                     </View>
 
+
                 </View>
 
 
             </View>
         )
+
+
     }
 }
 

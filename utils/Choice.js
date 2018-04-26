@@ -149,8 +149,10 @@ class Choice {
         if (  this.state.gaitorCount[i] == 8){
             this.state.message =  "You finished the game with a score of "+ this.state.totalScore;
             this.state.gameState = 3;
+            this.state.message = "Play Again?";
         }else {
             this.state.gameState = 0;
+            this.state.message = "Press Roll";
         }
 
         return this.state;

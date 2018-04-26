@@ -26,16 +26,16 @@ class GamesLayout extends React.Component {
         this.state = {
 
             name: "Click keys to spell your name and then press Play",
-            loginScene: true,
+            loginScene: 1,
             txtclr: "#444444",
             data:{},
             choiceData:{},
 
             choiceShowButton : true,
             choiceButtonText:"Roll!!!",
-            //takeSixTranslate:[0,0,0],
+            takeSixTranslate:[0,0,0],
             //takeSixRoate:0,
-            takeSixTranslate:[-3 ,.95,-2.7],   // z,y,x(less moves to left)
+            //takeSixTranslate:[-3 ,.95,-2.7],   // z,y,x(less moves to left)
             takeSixRotate:90,
             showButton:false
         };
@@ -46,12 +46,13 @@ class GamesLayout extends React.Component {
     }
 
 
-    signon(n) {
-
-        this.state.name = n;
-
-
-        this.connectToServer();
+    signon(n,gameType) {
+        if (gameType == 3){
+            this.setState({loginScene : 3});
+        }else {
+            this.state.name = n;
+            this.connectToServer();
+        }
     }
 
     retryLogin() {
@@ -99,8 +100,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-            //client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-            client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+            client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+            //client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -130,7 +131,7 @@ class GamesLayout extends React.Component {
                 return;
             }
 
-            _this.setState({loginScene : false})
+            _this.setState({loginScene : 2})
             if (packet.messageType === "mooSound") {
                 VrSoundEffects.play(asset('mooing.mp3'));
             }
@@ -163,24 +164,29 @@ class GamesLayout extends React.Component {
 
         return (
             <View >{
-                login ? (
+                login == 1 ? (
                     <LoginLayout showButton={false} t={this} txtclr={this.state.txtclr} signon={this.signon.bind(this)}
                                  msg={this.state.name} key ={key}
                                  text={"Play"}/>
-                ) : (
+                ) : login == 2 ? (
                     <View>
-                        <ChoiceLayout showButton={true} text={"Play"} roll={this.roll.bind(this)}
-                                      choiceData={choiceThis.state.choiceData}
-                                      choiceShowButton ={ this.state.choiceShowButton}
-                                      choiceButtonText = {this.state.choiceButtonText}
-                                      chooseDicePair={this.chooseDicePair.bind(this)}/>
+
                         <TakeSixLayout showButton={this.state.showButton} name={this.state.name} client={this.client}
                                    pickCard={this.pickCard.bind(this)} data={this.state.data}
                                    translate={this.state.takeSixTranslate} rotate ={this.state.takeSixRotate}
                                    clickButton={this.clickButton.bind(this)} playAgain={this.playAgain.bind(this)} text={"Play"}/>
 
                     </View>
-                ) }
+                    ) : (
+                    <View>
+                        <ChoiceLayout showButton={true} text={"Play"} roll={this.roll.bind(this)}
+                                      choiceData={choiceThis.state.choiceData}
+                                      choiceShowButton ={ this.state.choiceShowButton}
+                                      choiceButtonText = {this.state.choiceButtonText}
+                                      chooseDicePair={this.chooseDicePair.bind(this)}/>
+                    </View>
+                )
+            }
 
             </View>
         )

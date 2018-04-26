@@ -54,7 +54,7 @@ class ChoiceDiceLayout extends React.Component {
     }
 
     invoke() {
-        if(this.props.choiceButtonText == "Confirm") {
+        if(this.props.choiceButtonText == "Confirm" || this.props.choiceButtonText == "Again?") {
             _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5]);
             _this.state.die1 = 'F';
             _this.state.die2 = 'O';
