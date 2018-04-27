@@ -147,9 +147,10 @@ class Choice {
         let i = this.state.gaitorsIndex[this.state.gaitorChoice];
         this.setCheckState();
         if (  this.state.gaitorCount[i] == 8){
-            this.state.message =  "You finished the game with a score of "+ this.state.totalScore;
+            this.state.message =  "You finished the game with a score of "+ this.state.totalScore +
+                ". Play Again?";
             this.state.gameState = 3;
-            this.state.message = "Play Again?";
+
         }else {
             this.state.gameState = 0;
             this.state.message = "Press Roll";
@@ -169,7 +170,25 @@ class Choice {
         return (30 + 10 * Math.abs(7- row)) * (count - 5);
 
     }
-
+    setTempScore(){
+        let data = this.state.diceData;
+        let ts = 0;
+        for (let item in data) {
+            let cnt =data[item].count;
+            if (this.state.diceState[item][data[item].count] == 3){
+                cnt++;
+                if (this.state.diceState[item][data[item].count + 1] == 3){
+                    cnt++;
+                }
+                if (cnt > 10)
+                    cnt = 10;
+            }
+            let s = this.getScore( item, cnt);
+            data[item].score = s;
+            ts += s;
+        }
+        this.state.totalScore = ts;
+    }
     setCheckState() {
         let data = this.state.diceData;
         let ts = 0;
@@ -323,6 +342,7 @@ class Choice {
                 let sum = this.state.dice[0] + this.state.dice[1] + this.state.dice[2] + this.state.dice[3] + this.state.dice[4];
                 this.setGaitor(sum - (this.state.choices[0] + this.state.choices[1]));
             }
+            this.setTempScore();
         }
         return this.state;
 
