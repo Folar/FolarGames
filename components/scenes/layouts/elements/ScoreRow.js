@@ -32,18 +32,21 @@ class ScoreRow extends React.Component {
     render() {
         let cardDim = {height: .35, width: .28, valueFont: .07, rankFont: .14};
         let cu = new Cards();
+        let n =this.props.player.name;
+        if(n.length >1 && n.endsWith("$"))
+            n = n.substring(0,n.length -1);
         return (
             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                 <Text
                     style={{
-                        width: 0.4,
+                        width: 0.52,
                         height: .35,
                         fontSize: 0.15,
                         textAlign: 'left',
                         color: 'black',
 
                     }}>
-                    {this.props.player.name}
+                    {n}
                 </Text>{
                 (this.props.player.playing) ? (
                     <CardButton dim={cardDim} color={cu.getColor(this.props.player.card, false)}

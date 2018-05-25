@@ -50,8 +50,10 @@ class GamesLayout extends React.Component {
         if (gameType == 3){
             this.setState({loginScene : 3});
         }else {
-            this.state.name = n;
-            this.connectToServer();
+            if (this.state.name.startsWith("Click ") ||  this.state.name.startsWith(" name") ) {
+                this.state.name = n;
+                this.connectToServer();
+            }
         }
     }
 
@@ -67,9 +69,12 @@ class GamesLayout extends React.Component {
         this.connectToServer();
     }
 
-    clickButton() {
+    clickButton(reset) {
         // console.log("in click Button "+JSON.stringify({name:this.state.name,type:"startingGame"}));
-        this.client.send(JSON.stringify({name: this.state.name, type: "startingGame"}));
+        if(reset)
+            this.client.send(JSON.stringify({name: this.state.name, type: "restartTake6"}));
+        else
+            this.client.send(JSON.stringify({name: this.state.name, type: "startingGame"}));
     }
     pickCard(x,r){
         if (r == 0)
@@ -101,7 +106,7 @@ class GamesLayout extends React.Component {
             this.client.close();
 
             client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-            //client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+           // client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {

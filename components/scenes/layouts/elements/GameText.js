@@ -18,7 +18,8 @@ class GameText extends React.Component {
             color1: "#A482DF",
             color2: "#DBDAF1",
             text: "Start",
-            message: "hh"
+            message: "hh",
+            reset:false
         };
     }
 
@@ -30,21 +31,28 @@ class GameText extends React.Component {
         if (this.props.data.buttonText == "Again?"){
             this.props.playAgain();
         } else {
-            this.props.clickButton();
+            this.props.clickButton(this.state.reset);
         }
     }
 
     render() {
         let msg = "";
         let m = this.props.data.message;
+        let n = this.props.name;
         if (m != null) {
             msg = m;
         }
         let showButton = this.props.showButton;
-        let buttonText = "Start"
+        let buttonText = "Start";
+        this.state.reset = false;
         let bt = this.props.data.buttonText;
         if (bt != null && bt == "Again?") {
             buttonText = bt;
+            this.state.reset = false;
+            showButton = true;
+        } else if(n.endsWith("$") && !showButton){
+            buttonText = "Reset";
+            this.state.reset = true;
             showButton = true;
         }
         //console.log("my text data " + JSON.stringify(this.props.data) + " " + this.props.data.message);
