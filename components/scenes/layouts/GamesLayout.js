@@ -37,7 +37,8 @@ class GamesLayout extends React.Component {
             //takeSixRoate:0,
             //takeSixTranslate:[-3 ,.95,-2.7],   // z,y,x(less moves to left)
             takeSixRotate:90,
-            showButton:false
+            showButton:false,
+            admin:false
         };
 
         _this = takeSixThis = choiceThis = this;
@@ -50,7 +51,12 @@ class GamesLayout extends React.Component {
         if (gameType == 3){
             this.setState({loginScene : 3});
         }else {
-            if (this.state.name.startsWith("Click ") ||  this.state.name.startsWith(" name") ) {
+            if (this.state.name.startsWith("Click ") ||  this.state.name.endsWith(" name") ) {
+
+                if(n.endsWith("$") && n.length>1){
+                    this.state.admin = true;
+                    n = n.substring(0 ,n.length - 1)
+                }
                 this.state.name = n;
                 this.connectToServer();
             }
@@ -105,8 +111,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-            client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-           // client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+           client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+            //client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -177,7 +183,7 @@ class GamesLayout extends React.Component {
                     <View>
 
                         <TakeSixLayout showButton={this.state.showButton} name={this.state.name} client={this.client}
-                                   pickCard={this.pickCard.bind(this)} data={this.state.data}
+                                   pickCard={this.pickCard.bind(this)} data={this.state.data} admin={this.state.admin}
                                    translate={this.state.takeSixTranslate} rotate ={this.state.takeSixRotate}
                                    clickButton={this.clickButton.bind(this)} playAgain={this.playAgain.bind(this)} text={"Play"}/>
 

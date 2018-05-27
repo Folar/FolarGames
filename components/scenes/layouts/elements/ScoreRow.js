@@ -33,8 +33,7 @@ class ScoreRow extends React.Component {
         let cardDim = {height: .35, width: .28, valueFont: .07, rankFont: .14};
         let cu = new Cards();
         let n =this.props.player.name;
-        if(n.length >1 && n.endsWith("$"))
-            n = n.substring(0,n.length -1);
+
         return (
             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                 <Text
