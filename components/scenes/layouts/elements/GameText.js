@@ -31,7 +31,10 @@ class GameText extends React.Component {
         if (this.props.data.buttonText == "Again?"){
             this.props.playAgain();
         } else {
-            this.props.clickButton(this.state.reset);
+            if (this.props.fakeadmin && this.state.reset == true)
+                this.props.playMoo();
+            else
+                this.props.clickButton(this.state.reset);
         }
     }
 
@@ -45,12 +48,13 @@ class GameText extends React.Component {
         let showButton = this.props.showButton;
         let buttonText = "Start";
         this.state.reset = false;
+        debugger;
         let bt = this.props.data.buttonText;
         if (bt != null && bt == "Again?") {
             buttonText = bt;
             this.state.reset = false;
             showButton = true;
-        } else if( !showButton && this.props.admin){
+        } else if( !showButton && (this.props.admin ||this.props.fakeadmin )){
             buttonText = "Reset";
             this.state.reset = true;
             showButton = true;

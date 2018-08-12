@@ -45,7 +45,8 @@ class TakeSixLayout extends React.Component {
                              pickCard={this.props.pickCard}/>
                 <TextScoreLayout text={this.props.text}  showButton={this.state.showButton} data={this.state.data}
                                  playAgain={this.props.playAgain}
-                                 clickButton={this.props.clickButton} name ={this.props.name} admin={this.props.admin} />
+                                 clickButton={this.props.clickButton} name ={this.props.name} admin={this.props.admin}
+                                 fakeadmin={this.props.fakeadmin} playMoo={this.props.playMoo}  />
 
             </View>
         )

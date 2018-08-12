@@ -61,7 +61,8 @@ class TextScoreLayout extends React.Component {
 
 
                     <GameText data={this.props.data} showButton={this.props.showButton} playAgain={this.props.playAgain}
-                              admin={this.props.admin} clickButton={this.props.clickButton} name={this.props.name} />
+                              admin={this.props.admin} clickButton={this.props.clickButton} name={this.props.name}
+                              fakeadmin={this.props.fakeadmin} playMoo={this.props.playMoo}/>
                     <ScoreCard data={this.props.data}/>
 
 

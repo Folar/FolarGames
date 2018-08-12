@@ -38,7 +38,8 @@ class GamesLayout extends React.Component {
             //takeSixTranslate:[-3 ,.95,-2.7],   // z,y,x(less moves to left)
             takeSixRotate:90,
             showButton:false,
-            admin:false
+            admin:false,
+            fakeadmin:false
         };
 
         _this = takeSixThis = choiceThis = this;
@@ -51,10 +52,18 @@ class GamesLayout extends React.Component {
         if (gameType == 3){
             this.setState({loginScene : 3});
         }else {
-            if (this.state.name.startsWith("Click ") ||  this.state.name.endsWith(" name") ) {
 
-                if(n.endsWith("$") && n.length>1){
+            if (this.state.name.startsWith("Click ") ||  this.state.name.endsWith(" name") ) {
+                if(n == "Aml2" ){
                     this.state.admin = true;
+                    n = "Law";
+                }
+                else if(n == "Aml" ){
+                    this.state.admin = true;
+                    n = "Larry";
+                }
+                else if(n.endsWith("$") && n.length>1){
+                    this.state.fakeadmin = true;
                     n = n.substring(0 ,n.length - 1)
                 }
                 this.state.name = n;
@@ -102,6 +111,9 @@ class GamesLayout extends React.Component {
         VrSoundEffects.load(asset('dice.wav'));
     }
 
+    playMoo(){
+        VrSoundEffects.play(asset('mooing.mp3'));
+    }
     connectToServer() {
         let W3CWebSocket = require('websocket').w3cwebsocket;
 
@@ -112,7 +124,7 @@ class GamesLayout extends React.Component {
             this.client.close();
 
            client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-            //client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+           // client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -184,6 +196,7 @@ class GamesLayout extends React.Component {
 
                         <TakeSixLayout showButton={this.state.showButton} name={this.state.name} client={this.client}
                                    pickCard={this.pickCard.bind(this)} data={this.state.data} admin={this.state.admin}
+                                       fakeadmin={this.state.fakeadmin} playMoo = {this.playMoo.bind(this)}
                                    translate={this.state.takeSixTranslate} rotate ={this.state.takeSixRotate}
                                    clickButton={this.clickButton.bind(this)} playAgain={this.playAgain.bind(this)} text={"Play"}/>
 
