@@ -48,7 +48,7 @@ class GameText extends React.Component {
         let showButton = this.props.showButton;
         let buttonText = "Start";
         this.state.reset = false;
-        debugger;
+
         let bt = this.props.data.buttonText;
         if (bt != null && bt == "Again?") {
             buttonText = bt;

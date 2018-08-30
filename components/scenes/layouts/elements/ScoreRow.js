@@ -32,7 +32,7 @@ class ScoreRow extends React.Component {
     render() {
         let cardDim = {height: .35, width: .28, valueFont: .07, rankFont: .14};
         let cu = new Cards();
-        let n =this.props.player.name;
+        let n = this.props.player.name;
 
         return (
             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
@@ -48,24 +48,46 @@ class ScoreRow extends React.Component {
                     {n}
                 </Text>{
                 (this.props.player.playing) ? (
-                    <CardButton dim={cardDim} color={cu.getColor(this.props.player.card, false)}
-                                background={cu.getBackground(this.props.player.card, false)}
-                                bulls={cu.getBulls(this.props.player.card)}
-                                card={this.props.player.card} pickCard={this.props.pickCard}/>
+                    <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+
+                        <Text
+                            style={{
+                                width: 0.28,
+                                height: .35,
+                                fontSize: 0.15,
+                                textAlign: 'center',
+                                color: 'black',
+                                transform: [
+                                    {translateY: 0}
+                                ]
+                            }}>
+                            {this.props.player.score}
+                        </Text>
+                        <CardButton dim={cardDim} color={cu.getColor(this.props.player.card, false)}
+                                    background={cu.getBackground(this.props.player.card, false)}
+                                    bulls={cu.getBulls(this.props.player.card)}
+                                    card={this.props.player.card} pickCard={this.props.pickCard}/>
+                    </View>
                 ) : (
-                    <Text
-                        style={{
-                            width: 0.28,
-                            height: .35,
-                            fontSize: 0.15,
-                            textAlign: 'center',
-                            color: 'black',
-                            transform: [
-                                {translateY: 0}
-                            ]
-                        }}>
-                        {this.props.player.score}
-                    </Text>
+                    <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                        <Text
+                            style={{
+                                width: 0.28,
+                                height: .35,
+                                fontSize: 0.15,
+                                textAlign: 'center',
+                                color: 'black',
+                                transform: [
+                                    {translateY: 0}
+                                ]
+                            }}>
+                            {this.props.player.score}
+                        </Text>
+                        <CardButton dim={cardDim} color="#cccccc"
+                                    background="#cccccc"
+                                    bulls="1"
+                                    card={{bulls:1,rank:1}} pickCard={false}/>
+                    </View>
                 )
             }
 
