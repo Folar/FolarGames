@@ -5,7 +5,6 @@
 class Cards {
     getBulls(item){
 
-
         switch (item.value){
             case 1:
                 return "*";
