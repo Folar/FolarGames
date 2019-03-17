@@ -14,7 +14,7 @@ class TakeSix extends React.Component {
     return (
       <View>
        
-        <GamesLayout />
+        <GamesLayout  />
       </View>
     )
   }

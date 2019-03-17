@@ -20,6 +20,7 @@ class CardsLayout extends React.Component {
 
         this.state = {
             name: "",
+            zorder:this.props.zorder,
             showButton: false,
             color1: "#A482DF",
             color2: "#DBDAF1",
@@ -39,6 +40,7 @@ class CardsLayout extends React.Component {
     }
 
     render() {
+        let zorder= this.state.zorder;
         let myCards = [];
         let row1 = [];
         let row2 = [];
@@ -105,7 +107,7 @@ class CardsLayout extends React.Component {
                         opacity: 1,
                         transform: [
                             {translateX: 0},
-                            {translateZ: -3}
+                            {translateZ: zorder}
                         ],
                         marginTop: 1
                     }}
@@ -123,7 +125,7 @@ class CardsLayout extends React.Component {
                         opacity: 1,
                         transform: [
                             {translateX: 0},
-                            {translateZ: -3}
+                            {translateZ: zorder}
                         ],
                         marginTop: -0.3
                     }}
@@ -142,7 +144,7 @@ class CardsLayout extends React.Component {
                         opacity: 1,
                         transform: [
                             {translateX: 0},
-                            {translateZ: -3}
+                            {translateZ: zorder}
                         ],
                         marginTop: -0.3
                     }}
@@ -160,7 +162,7 @@ class CardsLayout extends React.Component {
                         opacity: 1,
                         transform: [
                             {translateX: 0},
-                            {translateZ: -3}
+                            {translateZ: zorder}
                         ],
                         marginTop: -0.3
                     }}
@@ -178,7 +180,7 @@ class CardsLayout extends React.Component {
                         opacity: 1,
                         transform: [
                             {translateX: 0},
-                            {translateZ: -3}
+                            {translateZ: zorder}
                         ],
                         marginTop: -0.3
                     }}

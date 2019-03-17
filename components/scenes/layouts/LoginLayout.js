@@ -21,6 +21,7 @@ class LoginLayout extends React.Component {
         super(props);
         this.state = {
             buffer: "",
+            zorder: this.props.zorder,
             name: this.props.msg,
             showButton: false,
             color1: this.props.txtclr,
@@ -88,7 +89,7 @@ class LoginLayout extends React.Component {
 
 
     render() {
-
+        let zorder= this.state.zorder;
 
         var items = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'].map((item, index) => {
 
@@ -114,7 +115,7 @@ class LoginLayout extends React.Component {
                         layoutOrigin: [-.2, 0.3],
                         transform: [
                             {translateX: -3},
-                            {translateZ: -3}
+                            {translateZ: zorder}
                         ],
                         marginTop: -0.3
                     }}

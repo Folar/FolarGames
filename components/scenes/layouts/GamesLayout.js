@@ -188,13 +188,13 @@ class GamesLayout extends React.Component {
         return (
             <View >{
                 login == 1 ? (
-                    <LoginLayout showButton={false} t={this} txtclr={this.state.txtclr} signon={this.signon.bind(this)}
+                    <LoginLayout zorder={-6} showButton={false} t={this} txtclr={this.state.txtclr} signon={this.signon.bind(this)}
                                  msg={this.state.name} key ={key}
                                  text={"Play"}/>
                 ) : login == 2 ? (
                     <View>
 
-                        <TakeSixLayout showButton={this.state.showButton} name={this.state.name} client={this.client}
+                        <TakeSixLayout zorder={-6} showButton={this.state.showButton} name={this.state.name} client={this.client}
                                    pickCard={this.pickCard.bind(this)} data={this.state.data} admin={this.state.admin}
                                        fakeadmin={this.state.fakeadmin} playMoo = {this.playMoo.bind(this)}
                                    translate={this.state.takeSixTranslate} rotate ={this.state.takeSixRotate}
@@ -203,7 +203,7 @@ class GamesLayout extends React.Component {
                     </View>
                     ) : (
                     <View>
-                        <ChoiceLayout showButton={true} text={"Play"} roll={this.roll.bind(this)}
+                        <ChoiceLayout  zorder={-5} showButton={true} text={"Play"} roll={this.roll.bind(this)}
                                       choiceData={choiceThis.state.choiceData}
                                       choiceShowButton ={ this.state.choiceShowButton}
                                       choiceButtonText = {this.state.choiceButtonText}

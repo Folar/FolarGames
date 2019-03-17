@@ -41,9 +41,9 @@ class TakeSixLayout extends React.Component {
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start'
             }}>
-                <CardsLayout text={this.props.text} data={this.state.data}  state={this.state.data.state}
+                <CardsLayout zorder={this.props.zorder} text={this.props.text} data={this.state.data}  state={this.state.data.state}
                              pickCard={this.props.pickCard}/>
-                <TextScoreLayout text={this.props.text}  showButton={this.state.showButton} data={this.state.data}
+                <TextScoreLayout zorder={this.props.zorder} text={this.props.text}  showButton={this.state.showButton} data={this.state.data}
                                  playAgain={this.props.playAgain}
                                  clickButton={this.props.clickButton} name ={this.props.name} admin={this.props.admin}
                                  fakeadmin={this.props.fakeadmin} playMoo={this.props.playMoo}  />

@@ -19,6 +19,7 @@ class TextScoreLayout extends React.Component {
         super(props);
         this.state = {
             name: "",
+            zorder:this.props.zorder,
             showButton: true,
             playing: false,
             color1: "#A482DF",
@@ -38,7 +39,7 @@ class TextScoreLayout extends React.Component {
 
     render() {
 
-
+        let zorder = this.state.zorder;
         return (
 
             <View
@@ -53,7 +54,7 @@ class TextScoreLayout extends React.Component {
                     transform: [
                         {translateX: -3.3},
                         {translateY: .67},
-                        {translateZ: -3}
+                        {translateZ: zorder}
                     ],
                     marginTop: -0.3
                 }}

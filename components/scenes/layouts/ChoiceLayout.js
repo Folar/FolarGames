@@ -26,6 +26,7 @@ class ChoiceLayout extends React.Component {
         choiceThis =this;
         this.state = {
             choiceData: {},
+            zorder:this.props.zorder,
             choiceShowButton : true,
             choiceButtonText:"Roll!!!",
 
@@ -98,7 +99,7 @@ class ChoiceLayout extends React.Component {
                     layoutOrigin: [.5, .8],
                     transform: [
                         {translateX: 0},
-                        {translateZ: -3}]
+                        {translateZ: this.state.zorder}]
                 }}>
                     <ChoiceDiceLayout style={{marginBottom:.2}} roll={this.roll.bind(this)} choiceShowButton ={ this.state.choiceShowButton}
                                       choiceButtonText = {this.state.choiceButtonText}  />
