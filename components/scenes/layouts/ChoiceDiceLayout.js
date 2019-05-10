@@ -15,7 +15,9 @@ import {
     asset,
     VrSoundEffects
 } from 'react-vr';
+import CardButton from "./elements/CardButton";
 let _this = null;
+let  rolln =0;
 //Layout
 class ChoiceDiceLayout extends React.Component {
 
@@ -24,12 +26,16 @@ class ChoiceDiceLayout extends React.Component {
         this.state = {
 
             showButton: true,
-            die1: "F",
-            die2: "O",
-            die3: "L",
-            die4: "A",
-            die5: "R",
-            numberOfRolls: 0
+            die1: this.props.init[0],
+            die2:  this.props.init[1],
+            die3:  this.props.init[2],
+            die4:  this.props.init[3],
+            die5:  this.props.init[4],
+            die6:  this.props.init[5],
+            die7:  this.props.init[6],
+            die8:  this.props.init[7],
+            numberOfRolls: 0,
+            di:-1
 
         }
     }
@@ -40,27 +46,48 @@ class ChoiceDiceLayout extends React.Component {
 
 
     roll() {
-        _this.setState({die1: Math.floor(Math.random() * 6) + 1});
-        _this.setState({die2: Math.floor(Math.random() * 6) + 1});
-        _this.setState({die3: Math.floor(Math.random() * 6) + 1});
-        _this.setState({die4: Math.floor(Math.random() * 6) + 1});
-        _this.setState({die5: Math.floor(Math.random() * 6) + 1});
+
+        if(rolln<20){
+            _this.setState({die1: Math.floor(Math.random() * 6) + 1});
+            _this.setState({die2: Math.floor(Math.random() * 6) + 1});
+            _this.setState({die3: Math.floor(Math.random() * 6) + 1});
+            _this.setState({die4: Math.floor(Math.random() * 6) + 1});
+            _this.setState({die5: Math.floor(Math.random() * 6) + 1});
+            _this.setState({die6: Math.floor(Math.random() * 6) + 1});
+            _this.setState({die7: Math.floor(Math.random() * 6) + 1});
+            _this.setState({die8: Math.floor(Math.random() * 6) + 1});
+
+        }else {
+            _this.setState({die1:2});
+            _this.setState({die2: 2});
+            _this.setState({die3: 2});
+            _this.setState({die4: 2});
+            _this.setState({die5:2});
+            _this.setState({die6: 2});
+            _this.setState({die7: 2});
+            _this.setState({die8: 2});
+        }
         if (_this.state.numberOfRolls < 4) {
             _this.setState({numberOfRolls: 1 + _this.state.numberOfRolls});
             setTimeout(_this.roll, 50);
         }else{
-            _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5]);;
+            _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5,
+                _this.state.die6,_this.state.die7,_this.state.die8]);
         }
     }
 
     invoke() {
         if(this.props.choiceButtonText == "Confirm" || this.props.choiceButtonText == "Again?") {
-            _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5]);
-            _this.state.die1 = 'F';
-            _this.state.die2 = 'O';
-            _this.state.die3 = 'L';
-            _this.state.die4 = 'A';
-            _this.state.die5 = 'R';
+            _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5,
+                _this.state.die6,_this.state.die7,_this.state.die8]);
+            _this.state.die1 = this.props.init[0];
+            _this.state.die2 = this.props.init[1];
+            _this.state.die3 = this.props.init[2];
+            _this.state.die4 = this.props.init[3];
+            _this.state.die5 = this.props.init[4];
+            _this.state.die6 = this.props.init[5];
+            _this.state.die7 = this.props.init[6];
+            _this.state.die8 = this.props.init[7];
             return;
         }
         VrSoundEffects.play(asset('dice.wav'));
@@ -69,13 +96,92 @@ class ChoiceDiceLayout extends React.Component {
         setTimeout(_this.roll, 10);
 
     }
+    choose(d){
+        if(!this.props.clickable) return;
+        this.setState({di:d})
+    }
+    conv(){
+        let dies=[];
+        switch (this.props.num) {
+            case 1:
+                dies.push(this.state.die1);
+                break;
+            case 2:
+                dies.push(this.state.die1);
+                dies.push(this.state.die2);
+                break;
+            case 3:
+                dies.push(this.state.die1);
+                dies.push(this.state.die2);
+                dies.push(this.state.die3);
+                break;
+            case 4:
+                dies.push(this.state.die1);
+                dies.push(this.state.die2);
+                dies.push(this.state.die3);
+                dies.push(this.state.die4);
+                break;
+            case 5:
+                dies.push(this.state.die1);
+                dies.push(this.state.die2);
+                dies.push(this.state.die3);
+                dies.push(this.state.die4);
+                dies.push(this.state.die5);
+                break;
+            case 6:
+                dies.push(this.state.die1);
+                dies.push(this.state.die2);
+                dies.push(this.state.die3);
+                dies.push(this.state.die4);
+                dies.push(this.state.die5);
+                dies.push(this.state.die6);
+                break;
+            case 7:
+                dies.push(this.state.die1);
+                dies.push(this.state.die2);
+                dies.push(this.state.die3);
+                dies.push(this.state.die4);
+                dies.push(this.state.die5);
+                dies.push(this.state.die6);
+                dies.push(this.state.die7);
+                break;
+            case 8:
+                dies.push(this.state.die1);
+                dies.push(this.state.die2);
+                dies.push(this.state.die3);
+                dies.push(this.state.die4);
+                dies.push(this.state.die5);
+                dies.push(this.state.die6);
+                dies.push(this.state.die7);
+                dies.push(this.state.die8);
+                break;
+        }
+        return dies;
+    }
 
-
+    getBackground(index){
+        let dies=this.conv();
+        for (let i = 0; i<this.props.num;i++){
+            if(dies[index]== dies[this.state.di])
+                return "lightgray";
+        }
+        return "white"
+    }
     render() {
+        _this = this;
         let dieDim = {height: .2, width: .2, valueFont: .1, dieFont: .15,marginRight:.02};
 
         let showButton = this.props.choiceShowButton;
         let buttonText = this.props.choiceButtonText;
+        let dies=this.conv();
+
+
+        let row1Cards =
+            dies.map((item, index) => {
+                return <VrButton onClick={this.choose.bind(this,index)} key={index}>
+                    <Die value={item} key={index}  dim={dieDim}   color="black" backgroundColor={_this.getBackground(index)} />
+                </VrButton>
+            });
         return (
             <View>
                 <View style={{
@@ -84,12 +190,9 @@ class ChoiceDiceLayout extends React.Component {
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}>
+                    {row1Cards}
 
-                    <Die value={this.state.die1} dim={dieDim} color="black" backgroundColor="white"/>
-                    <Die value={this.state.die2} dim={dieDim} color="black" backgroundColor="white"/>
-                    <Die value={this.state.die3} dim={dieDim} color="black" backgroundColor="white"/>
-                    <Die value={this.state.die4} dim={dieDim} color="black" backgroundColor="white"/>
-                    <Die value={this.state.die5} dim={dieDim} color="black" backgroundColor="white"/>
+
                     {
                     showButton ?(<View
                         style={{
