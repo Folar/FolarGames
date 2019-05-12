@@ -13,11 +13,13 @@ import {Easing} from 'react-native';
 import TakeSixLayout from './TakeSixLayout.js';
 import LoginLayout from './LoginLayout.js';
 import ChoiceLayout from './ChoiceLayout.js';
+import BocaLayout from './BocaLayout.js';
 
 //Layout
 let key = 0;
 takeSixThis = null;
 choiceThis = null;
+bocaThis = null;
 let _this = null;
 class GamesLayout extends React.Component {
 
@@ -188,26 +190,34 @@ class GamesLayout extends React.Component {
         return (
             <View >{
                 login == 1 ? (
-                    <LoginLayout zorder={-6} showButton={false} t={this} txtclr={this.state.txtclr} signon={this.signon.bind(this)}
+                    <LoginLayout zorder={-3} showButton={false} t={this} txtclr={this.state.txtclr} signon={this.signon.bind(this)}
                                  msg={this.state.name} key ={key}
                                  text={"Play"}/>
                 ) : login == 2 ? (
                     <View>
 
-                        <TakeSixLayout zorder={-6} showButton={this.state.showButton} name={this.state.name} client={this.client}
+                        <TakeSixLayout zorder={-4} showButton={this.state.showButton} name={this.state.name} client={this.client}
                                    pickCard={this.pickCard.bind(this)} data={this.state.data} admin={this.state.admin}
                                        fakeadmin={this.state.fakeadmin} playMoo = {this.playMoo.bind(this)}
                                    translate={this.state.takeSixTranslate} rotate ={this.state.takeSixRotate}
                                    clickButton={this.clickButton.bind(this)} playAgain={this.playAgain.bind(this)} text={"Play"}/>
 
                     </View>
-                    ) : (
+                    ) : login == 3 ?(
                     <View>
-                        <ChoiceLayout  zorder={-5} showButton={true} text={"Play"} roll={this.roll.bind(this)}
+                        <ChoiceLayout  zorder={-3} showButton={true} text={"Play"} roll={this.roll.bind(this)}
                                       choiceData={choiceThis.state.choiceData}
                                       choiceShowButton ={ this.state.choiceShowButton}
                                       choiceButtonText = {this.state.choiceButtonText}
                                       chooseDicePair={this.chooseDicePair.bind(this)}/>
+                    </View>
+                ): (
+                    <View>
+                        <BocaLayout  zorder={-3} showButton={true} text={"Play"} roll={this.roll.bind(this)}
+                                       choiceData={choiceThis.state.choiceData}
+                                       choiceShowButton ={ this.state.choiceShowButton}
+                                       choiceButtonText = {this.state.choiceButtonText}
+                                       chooseDicePair={this.chooseDicePair.bind(this)}/>
                     </View>
                 )
             }

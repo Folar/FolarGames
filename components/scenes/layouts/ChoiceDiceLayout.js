@@ -163,7 +163,7 @@ class ChoiceDiceLayout extends React.Component {
         let dies=this.conv();
         for (let i = 0; i<this.props.num;i++){
             if(dies[index]== dies[this.state.di])
-                return "lightgray";
+                return "gray";
         }
         return "white"
     }
