@@ -19,6 +19,7 @@ import {
 let _this = null;
 choiceThis = null;
 let choice = new Choice();
+let colors = ["yellow", "cyan", "pink", "green", "orange", "#b19cd9"];
 
 //Layout
 class BocaLayout extends React.Component {
@@ -26,8 +27,281 @@ class BocaLayout extends React.Component {
     constructor(props) {
         super(props);
         choiceThis = this;
+
         this.state = {
             choiceData: {},
+            bocaData: {
+                players: ['Larry', 'Mary', 'Nancy', 'Alan', 'Huy'],
+                fieldColors:["yellow", "cyan", "pink", "green", "orange", "#b19cd9"],
+                money: [
+                    [
+                        {
+                            color: "black",
+                            value: "60 grand"
+                        },
+                        {
+                            color: "black",
+                            value: "40 grand"
+                        },
+                        {
+                            color: colors[0],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[0],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[0],
+                            value: "11 grand"
+                        }
+                    ],
+                    [
+                        {
+                            color: "black",
+                            value: "50 grand"
+                        },
+                        {
+                            color: colors[1],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[1],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[1],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[1],
+                            value: "11 grand"
+                        }
+                    ],
+                    [
+                        {
+                            color: "black",
+                            value: "10 grand"
+                        },
+                        {
+                            color: "black",
+                            value: "10 grand"
+                        },
+                        {
+                            color: "black",
+                            value: "10 grand"
+                        },
+                        {
+                            color: "black",
+                            value: "10 grand"
+                        },
+                        {
+                            color: "black",
+                            value: "10 grand"
+                        }
+                    ],
+                    [
+                        {
+                            color: "black",
+                            value: "50 grand"
+                        },
+                        {
+                            color: colors[3],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[3],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[3],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[3],
+                            value: "11 grand"
+                        }
+                    ],
+                    [
+                        {
+                            color: "black",
+                            value: "80 grand"
+                        },
+                        {
+                            color: colors[4],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[4],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[4],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[4],
+                            value: "11 grand"
+                        }
+                    ],
+                    [
+                        {
+                            color: "black",
+                            value: "70 grand"
+                        },
+                        {
+                            color: colors[5],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[5],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[5],
+                            value: "11 grand"
+                        },
+                        {
+                            color: colors[5],
+                            value: "11 grand"
+                        }
+                    ]
+                ],
+                fieldPlayers: [
+                    [
+                        {
+                            color: "black",
+                            value: "Larry: 4"
+                        },
+                        {
+                            color: "black",
+                            value: "Nancy: 2"
+                        },
+                        {
+                            color: colors[0],
+                            value: "."
+                        },
+                        {
+                            color: colors[0],
+                            value: "."
+                        },
+                        {
+                            color: colors[0],
+                            value: "."
+                        }
+                    ],
+                    [
+                        {
+                            color: "black",
+                            value: "Huy: 3"
+                        },
+                        {
+                            color: colors[1],
+                            value: "."
+                        },
+                        {
+                            color: colors[1],
+                            value: "."
+                        },
+                        {
+                            color: colors[1],
+                            value: "."
+                        },
+                        {
+                            color: colors[1],
+                            value: "."
+                        }
+                    ],
+                    [
+                        {
+                            color: "black",
+                            value: "Nancy: 3"
+                        },
+                        {
+                            color: "black",
+                            value: "Alan: 2"
+                        },
+                        {
+                            color: "black",
+                            value: "Mary: 2"
+                        },
+                        {
+                            color: "black",
+                            value: "Huy:1"
+                        },
+                        {
+                            color: "black",
+                            value: "Larry: 1"
+                        }
+                    ],
+                    [
+                        {
+                            color: "black",
+                            value: "Mary: 1"
+                        },
+                        {
+                            color: colors[3],
+                            value: "."
+                        },
+                        {
+                            color: colors[3],
+                            value: "."
+                        },
+                        {
+                            color: colors[3],
+                            value: "."
+                        },
+                        {
+                            color: colors[3],
+                            value: "."
+                        }
+                    ],
+                    [
+                        {
+                            color: "black",
+                            value: "Alan: 4"
+                        },
+                        {
+                            color: colors[4],
+                            value: "."
+                        },
+                        {
+                            color: colors[4],
+                            value: "."
+                        },
+                        {
+                            color: colors[4],
+                            value: "."
+                        },
+                        {
+                            color: colors[4],
+                            value: "."
+                        }
+                    ],
+                    [
+                        {
+                            color: "black",
+                            value: "Mary: 4"
+                        },
+                        {
+                            color: colors[5],
+                            value: "."
+                        },
+                        {
+                            color: colors[5],
+                            value: "."
+                        },
+                        {
+                            color: colors[5],
+                            value: "."
+                        },
+                        {
+                            color: colors[5],
+                            value: "."
+                        }
+                    ]
+                ]
+            },
             zorder: this.props.zorder,
             choiceShowButton: true,
             choiceButtonText: "Roll!!!",
@@ -86,7 +360,7 @@ class BocaLayout extends React.Component {
     render() {
 
 
-        let nameList = ["glu","gfy"].map((item, index) => {
+        let nameList = ["glu", "gfy"].map((item, index) => {
             return <Text style={{color: "black"}} key={index}>{item}</Text>
         });
         return (
@@ -116,7 +390,7 @@ class BocaLayout extends React.Component {
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start'
                     }}>
-                        < BocaFieldsLayout choiceData={this.state.choiceData}
+                        < BocaFieldsLayout bocaData={this.state.bocaData}
                                            chooseDicePair={this.chooseDicePair.bind(this)}/>
                         <ChoiceGaitLayout message={this.getMessage()} choiceData={this.state.choiceData}
                                           chooseDicePair={this.chooseDicePair.bind(this)}/>

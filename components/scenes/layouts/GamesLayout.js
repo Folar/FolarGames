@@ -185,7 +185,7 @@ class GamesLayout extends React.Component {
 
 
     render() {
-        const login =  this.state.loginScene;
+        const login =  4;//this.state.loginScene;
 
         return (
             <View >{

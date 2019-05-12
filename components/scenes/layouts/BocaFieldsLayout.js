@@ -22,7 +22,8 @@ class BocaFieldsLayout extends React.Component {
         super(props);
         this.state = {
             showButton: true,
-            choiceData: this.props.choiceData
+            choiceData: this.props.choiceData,
+            bocaData: this.props.bocaData
         }
     }
 
@@ -54,7 +55,15 @@ class BocaFieldsLayout extends React.Component {
 
 
     render() {
+        let vals = ["One","Two","Three","Four","Five","Six"]
+        let fieldData =
+            vals.map((item, index) => {
+                return
+                <BocaField value={vals[index]} backgroundColor={this.state.bocaData.fieldColors[index]}
+                           money={this.state.bocaData.money[index]}
+                                 players={this.state.bocaData.fieldPlayers[index]}/>
 
+            });
         return (
 
             <View>
@@ -69,12 +78,33 @@ class BocaFieldsLayout extends React.Component {
                     alignItems: 'flex-start',
                     justifyContent: 'center'
                 }}>
-                    <BocaField value="One" backgroundColor="yellow"/>
-                    <BocaField value="Two" backgroundColor="cyan"/>
-                    <BocaField value="Three" backgroundColor="pink"/>
-                    <BocaField value="Four" backgroundColor="green"/>
-                    <BocaField value="Five" backgroundColor="orange"/>
-                    <BocaField value="Six" backgroundColor="#b19cd9"/>
+                    <BocaField value={vals[0]}
+                               backgroundColor={this.state.bocaData.fieldColors[0]}
+                               money={this.state.bocaData.money[0]}
+                               players={this.state.bocaData.fieldPlayers[0]}/>
+
+                    <BocaField value={vals[1]}
+                               backgroundColor={this.state.bocaData.fieldColors[1]}
+                               money={this.state.bocaData.money[1]}
+                               players={this.state.bocaData.fieldPlayers[1]}/>
+                    <BocaField value={vals[2]}
+                                backgroundColor={this.state.bocaData.fieldColors[2]}
+                                money={this.state.bocaData.money[2]}
+                               players={this.state.bocaData.fieldPlayers[2]}/>
+
+                    <BocaField value={vals[3]}
+                                backgroundColor={this.state.bocaData.fieldColors[3]}
+                                money={this.state.bocaData.money[3]}
+                                players={this.state.bocaData.fieldPlayers[3]}/>
+                    <BocaField value={vals[4]}
+                               backgroundColor={this.state.bocaData.fieldColors[4]}
+                               money={this.state.bocaData.money[4]}
+                               players={this.state.bocaData.fieldPlayers[4]}/>
+                    <BocaField value={vals[5]}
+                               backgroundColor={this.state.bocaData.fieldColors[5]}
+                               money={this.state.bocaData.money[5]}
+                               players={this.state.bocaData.fieldPlayers[5]}/>
+
 
 
 

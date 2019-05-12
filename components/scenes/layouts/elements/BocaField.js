@@ -75,11 +75,11 @@ class BocaField extends React.Component {
                 value: "."
             }
         ]
-        let fieldDim = {height: 1.8, width: .6, valueFont: .06, dieFont: .09, marginRight: .06};
+        let fieldDim = {height: 2, width: .55, valueFont: .06, dieFont: .09, marginRight: .06};
 
 
         let moneyData =
-            money.map((item, index) => {
+            this.props.money.map((item, index) => {
                 return <Text
                     style={{
                         fontSize: fieldDim.dieFont,
@@ -92,7 +92,7 @@ class BocaField extends React.Component {
 
             });
         let playerData =
-            player.map((item, index) => {
+            this.props.players.map((item, index) => {
                 return <Text
                     style={{
                         fontSize: fieldDim.dieFont,
