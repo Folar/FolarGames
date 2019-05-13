@@ -77,7 +77,9 @@ class BocaField extends React.Component {
         ]
         let fieldDim = {height: 2, width: .55, valueFont: .06, dieFont: .09, marginRight: .06};
 
-
+        let moneyless = [];
+        for (let i = 0;i < 5 - this.props.money.length;i++)
+            moneyless.push(i);
         let moneyData =
             this.props.money.map((item, index) => {
                 return <Text
@@ -91,6 +93,19 @@ class BocaField extends React.Component {
                 </Text>
 
             });
+        let nomoney =
+            moneyless.map((item, index) => {
+                return <Text
+                    style={{
+                        fontSize: fieldDim.dieFont,
+                        textAlign: 'center',
+                        color: this.props.backgroundColor,
+                    }}>
+
+                    {"11 grand"}
+                </Text>
+
+            });
         let playerData =
             this.props.players.map((item, index) => {
                 return <Text
@@ -100,7 +115,7 @@ class BocaField extends React.Component {
                         color: item.color,
                     }}>
 
-                    {item.value}
+                    {item.name +": "+item.value}
                 </Text>
 
             });
@@ -134,6 +149,9 @@ class BocaField extends React.Component {
                         {"."}
                     </Text>
                     {moneyData}
+                    {nomoney}
+
+
                     <Text
                         style={{
                             fontSize: .05,

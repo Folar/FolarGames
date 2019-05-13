@@ -42,40 +42,12 @@ class BocaLayout extends React.Component {
                         {
                             color: "black",
                             value: "40 grand"
-                        },
-                        {
-                            color: colors[0],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[0],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[0],
-                            value: "11 grand"
                         }
                     ],
                     [
                         {
                             color: "black",
                             value: "50 grand"
-                        },
-                        {
-                            color: colors[1],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[1],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[1],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[1],
-                            value: "11 grand"
                         }
                     ],
                     [
@@ -104,66 +76,18 @@ class BocaLayout extends React.Component {
                         {
                             color: "black",
                             value: "50 grand"
-                        },
-                        {
-                            color: colors[3],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[3],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[3],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[3],
-                            value: "11 grand"
                         }
                     ],
                     [
                         {
                             color: "black",
                             value: "80 grand"
-                        },
-                        {
-                            color: colors[4],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[4],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[4],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[4],
-                            value: "11 grand"
                         }
                     ],
                     [
                         {
                             color: "black",
                             value: "70 grand"
-                        },
-                        {
-                            color: colors[5],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[5],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[5],
-                            value: "11 grand"
-                        },
-                        {
-                            color: colors[5],
-                            value: "11 grand"
                         }
                     ]
                 ],
@@ -171,133 +95,68 @@ class BocaLayout extends React.Component {
                     [
                         {
                             color: "black",
-                            value: "Larry: 4"
+                            name: "Larry",
+                            value: 4
                         },
                         {
                             color: "black",
-                            value: "Nancy: 2"
-                        },
-                        {
-                            color: colors[0],
-                            value: "."
-                        },
-                        {
-                            color: colors[0],
-                            value: "."
-                        },
-                        {
-                            color: colors[0],
-                            value: "."
+                            name: "Nancy",
+                            value: 4
                         }
                     ],
                     [
                         {
                             color: "black",
-                            value: "Huy: 3"
-                        },
-                        {
-                            color: colors[1],
-                            value: "."
-                        },
-                        {
-                            color: colors[1],
-                            value: "."
-                        },
-                        {
-                            color: colors[1],
-                            value: "."
-                        },
-                        {
-                            color: colors[1],
-                            value: "."
+                            name: "Huy",
+                            value: 4
                         }
                     ],
                     [
                         {
                             color: "black",
-                            value: "Nancy: 3"
+                            name: "Nancy",
+                            value: "4"
                         },
                         {
                             color: "black",
-                            value: "Alan: 2"
+                            name: "Alan",
+                            value: 3
                         },
                         {
                             color: "black",
-                            value: "Mary: 2"
+                            name: "Mary",
+                            value: 2
                         },
                         {
                             color: "black",
-                            value: "Huy:1"
+                            name: "Huy",
+                            value: 1
                         },
                         {
                             color: "black",
-                            value: "Larry: 1"
+                            name: "Larry",
+                            value: 1
                         }
                     ],
                     [
                         {
                             color: "black",
-                            value: "Mary: 1"
-                        },
-                        {
-                            color: colors[3],
-                            value: "."
-                        },
-                        {
-                            color: colors[3],
-                            value: "."
-                        },
-                        {
-                            color: colors[3],
-                            value: "."
-                        },
-                        {
-                            color: colors[3],
-                            value: "."
+                            name: "Mary",
+                            value: 1
                         }
                     ],
                     [
                         {
                             color: "black",
-                            value: "Alan: 4"
-                        },
-                        {
-                            color: colors[4],
-                            value: "."
-                        },
-                        {
-                            color: colors[4],
-                            value: "."
-                        },
-                        {
-                            color: colors[4],
-                            value: "."
-                        },
-                        {
-                            color: colors[4],
-                            value: "."
+                            name: "Alan",
+                            value: 4
                         }
                     ],
                     [
                         {
                             color: "black",
-                            value: "Mary: 4"
-                        },
-                        {
-                            color: colors[5],
-                            value: "."
-                        },
-                        {
-                            color: colors[5],
-                            value: "."
-                        },
-                        {
-                            color: colors[5],
-                            value: "."
-                        },
-                        {
-                            color: colors[5],
-                            value: "."
+                            name: "Mary",
+                            value: 3
                         }
                     ]
                 ]
