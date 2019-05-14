@@ -119,6 +119,22 @@ class BocaField extends React.Component {
                 </Text>
 
             });
+        let playerless = [];
+        for (let i = 0;i < 5 - this.props.players.length;i++)
+            playerless.push(i)
+        let noplayers =
+            playerless.map((item, index) => {
+                return <Text
+                    style={{
+                        fontSize: fieldDim.dieFont,
+                        textAlign: 'center',
+                        color: this.props.backgroundColor,
+                    }}>
+
+                    {"Www#w: 0"}
+                </Text>
+
+            });
         return (
             <View
                 style={{
@@ -156,7 +172,7 @@ class BocaField extends React.Component {
                         style={{
                             fontSize: .05,
                             textAlign: 'center',
-                            color: "yellow",
+                            color: this.props.color,
                         }}>
                         {"."}
                     </Text>
@@ -178,12 +194,14 @@ class BocaField extends React.Component {
                         style={{
                             fontSize: .05,
                             textAlign: 'center',
-                            color: "yellow",
+                            color: this.props.color,
                         }}>
                         {"."}
                     </Text>
 
                     {playerData}
+                    {noplayers}
+
                 </View>
 
 

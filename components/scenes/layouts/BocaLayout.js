@@ -20,6 +20,150 @@ let _this = null;
 choiceThis = null;
 let choice = new Choice();
 let colors = ["yellow", "cyan", "pink", "green", "orange", "#b19cd9"];
+let cp = {colors: ["yellow", "cyan", "pink", "green", "orange", "#b19cd9"]};
+let fp = {
+    players: [
+
+
+        [
+            {
+                color: "black",
+                name: "Nancy",
+                value: 5
+            },
+            {
+                color: "black",
+                name: "Huy",
+                value: 4
+            },
+            {
+                color: "black",
+                name: "Larry",
+                value: 3
+            }
+        ],
+        [
+            {
+                color: "black",
+                name: "Huy",
+                value: 4
+            }
+        ],
+        [
+            {
+                color: "black",
+                name: "Nancy",
+                value: "4"
+            },
+            {
+                color: "black",
+                name:
+                    "Alan",
+                value:
+                    3
+            }
+            ,
+            {
+                color: "black",
+                name:
+                    "Mary",
+                value:
+                    2
+            }
+            ,
+            {
+                color: "black",
+                name:
+                    "Huy",
+                value:
+                    1
+            }
+            ,
+            {
+                color: "black",
+                name:
+                    "Larry",
+                value:
+                    1
+            }
+        ],
+        [
+            {
+                color: "black",
+                name: "Mary",
+                value: 1
+            }
+        ],
+        [
+            {
+                color: "black",
+                name: "Alan",
+                value: 4
+            }
+        ],
+        []
+    ]
+}
+let mon = {
+    money: [
+        [
+            {
+                color: "black",
+                value: "60 grand"
+            },
+            {
+                color: "black",
+                value: "40 grand"
+            }
+        ],
+        [
+            {
+                color: "black",
+                value: "50 grand"
+            }
+        ],
+        [
+            {
+                color: "black",
+                value: "10 grand"
+            },
+            {
+                color: "black",
+                value: "10 grand"
+            },
+            {
+                color: "black",
+                value: "10 grand"
+            },
+            {
+                color: "black",
+                value: "10 grand"
+            },
+            {
+                color: "black",
+                value: "10 grand"
+            }
+        ],
+        [
+            {
+                color: "black",
+                value: "50 grand"
+            }
+        ],
+        [
+            {
+                color: "black",
+                value: "80 grand"
+            }
+        ],
+        [
+            {
+                color: "black",
+                value: "70 grand"
+            }
+        ]
+    ]
+}
 
 //Layout
 class BocaLayout extends React.Component {
@@ -31,141 +175,20 @@ class BocaLayout extends React.Component {
         this.state = {
             choiceData: {},
             bocaData: {
+                player: 'Larry',
                 players: ['Larry', 'Mary', 'Nancy', 'Alan', 'Huy'],
-                fieldColors:["yellow", "cyan", "pink", "green", "orange", "#b19cd9"],
-                money: [
-                    [
-                        {
-                            color: "black",
-                            value: "60 grand"
-                        },
-                        {
-                            color: "black",
-                            value: "40 grand"
-                        }
-                    ],
-                    [
-                        {
-                            color: "black",
-                            value: "50 grand"
-                        }
-                    ],
-                    [
-                        {
-                            color: "black",
-                            value: "10 grand"
-                        },
-                        {
-                            color: "black",
-                            value: "10 grand"
-                        },
-                        {
-                            color: "black",
-                            value: "10 grand"
-                        },
-                        {
-                            color: "black",
-                            value: "10 grand"
-                        },
-                        {
-                            color: "black",
-                            value: "10 grand"
-                        }
-                    ],
-                    [
-                        {
-                            color: "black",
-                            value: "50 grand"
-                        }
-                    ],
-                    [
-                        {
-                            color: "black",
-                            value: "80 grand"
-                        }
-                    ],
-                    [
-                        {
-                            color: "black",
-                            value: "70 grand"
-                        }
-                    ]
-                ],
-                fieldPlayers: [
-                    [
-                        {
-                            color: "black",
-                            name: "Larry",
-                            value: 4
-                        },
-                        {
-                            color: "black",
-                            name: "Nancy",
-                            value: 4
-                        }
-                    ],
-                    [
-                        {
-                            color: "black",
-                            name: "Huy",
-                            value: 4
-                        }
-                    ],
-                    [
-                        {
-                            color: "black",
-                            name: "Nancy",
-                            value: "4"
-                        },
-                        {
-                            color: "black",
-                            name: "Alan",
-                            value: 3
-                        },
-                        {
-                            color: "black",
-                            name: "Mary",
-                            value: 2
-                        },
-                        {
-                            color: "black",
-                            name: "Huy",
-                            value: 1
-                        },
-                        {
-                            color: "black",
-                            name: "Larry",
-                            value: 1
-                        }
-                    ],
-                    [
-                        {
-                            color: "black",
-                            name: "Mary",
-                            value: 1
-                        }
-                    ],
-                    [
-                        {
-                            color: "black",
-                            name: "Alan",
-                            value: 4
-                        }
-                    ],
-                    [
-                        {
-                            color: "black",
-                            name: "Mary",
-                            value: 3
-                        }
-                    ]
-                ]
+                fieldColors: ["yellow", "cyan", "pink", "green", "orange", "#b19cd9"],
+                money: mon.money,
+                fieldPlayers: fp.players
             },
             zorder: this.props.zorder,
-            choiceShowButton: true,
-            choiceButtonText: "Roll!!!",
+            choiceShowButton:
+                true,
+            choiceButtonText:
+                "Roll!!!",
 
-        };
+        }
+        ;
 
     }
 
@@ -192,6 +215,38 @@ class BocaLayout extends React.Component {
             this.setState({choiceData: choice.resetState(dice)});
             this.setState({choiceButtonText: "Roll!!!"});
         }
+    }
+    compare(a, b){
+        return (a.value - b.value)*-1;
+    }
+    selectDice(di, qty) {
+
+        let cs = JSON.parse(JSON.stringify(cp))
+        let ps = JSON.parse(JSON.stringify(fp));
+
+        this.state.bocaData.fieldColors = cs.colors;
+        this.state.bocaData.fieldColors[di-1] = "gray";
+
+        this.state.bocaData.fieldPlayers = ps.players;
+        let fplayers  =  this.state.bocaData.fieldPlayers[di-1];
+        let addPlayer = true;
+
+        for (let i = 0; i< fplayers.length;i++){
+            if(fplayers[i].name == this.state.bocaData.player ){
+                fplayers[i].value = fplayers[i].value + qty;
+                addPlayer = false;
+            }
+        }
+        if(addPlayer)
+
+            fplayers.push({
+                color: "black",
+                name: this.state.bocaData.player,
+                value: qty
+            })
+        fplayers.sort(this.compare)
+        this.setState({bocaData: this.state.bocaData});
+
     }
 
     chooseDicePair(rank, pos, gaitor) {
@@ -241,7 +296,7 @@ class BocaLayout extends React.Component {
                                       choiceShowButton={this.state.choiceShowButton}
                                       choiceButtonText={this.state.choiceButtonText} num={8}
                                       init={['B', 'O', 'C', 'A', 'D', 'I', 'C', 'E']}
-                                      clickable={true}/>
+                                      clickable={true} selectDice={this.selectDice.bind(this)}/>
                     <View style={{
                         height: 1,
                         width: 5,

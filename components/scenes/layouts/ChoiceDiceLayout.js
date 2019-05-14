@@ -98,7 +98,15 @@ class ChoiceDiceLayout extends React.Component {
     }
     choose(d){
         if(!this.props.clickable) return;
-        this.setState({di:d})
+        this.setState({di:d});
+        let cnt = 0;
+            let dies=this.conv();
+            for (let i = 0; i<this.props.num;i++){
+                if(dies[i]== dies[d])
+                    cnt++;
+            }
+
+        this.props.selectDice(dies[d],cnt);
     }
     conv(){
         let dies=[];
