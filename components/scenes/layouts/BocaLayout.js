@@ -7,14 +7,10 @@ import {
 import {Easing} from 'react-native';
 
 const {Choice} = require('./../../../utils/Choice.js');
-import ChoiceGaitLayout from './ChoiceGaitLayout.js';
+import BocaTextScoreLayout from './BocaTextScoreLayout.js';
 import ChoiceDiceLayout from './ChoiceDiceLayout.js'
 import BocaFieldsLayout from './BocaFieldsLayout.js';
-import {
-    VrButton,
-    asset,
-    VrSoundEffects
-} from 'react-vr';
+
 
 let _this = null;
 choiceThis = null;
@@ -53,7 +49,7 @@ let fp = {
             {
                 color: "black",
                 name: "Nancy",
-                value: "4"
+                value: 4
             },
             {
                 color: "black",
@@ -109,61 +105,62 @@ let mon = {
         [
             {
                 color: "black",
-                value: "60 grand"
+                value: 60
             },
             {
                 color: "black",
-                value: "40 grand"
+                value: 40
             }
         ],
         [
             {
                 color: "black",
-                value: "50 grand"
+                value: 50
             }
         ],
         [
             {
                 color: "black",
-                value: "10 grand"
+                value: 10
             },
             {
                 color: "black",
-                value: "10 grand"
+                value: 10
             },
             {
                 color: "black",
-                value: "10 grand"
+                value: 10
             },
             {
                 color: "black",
-                value: "10 grand"
+                value: 10
             },
             {
                 color: "black",
-                value: "10 grand"
+                value: 10
             }
         ],
         [
             {
                 color: "black",
-                value: "50 grand"
+                value: 90
             }
         ],
         [
             {
                 color: "black",
-                value: "80 grand"
+                value: 80
             }
         ],
         [
             {
                 color: "black",
-                value: "70 grand"
+                value: 70
             }
         ]
     ]
 }
+
 
 //Layout
 class BocaLayout extends React.Component {
@@ -175,11 +172,38 @@ class BocaLayout extends React.Component {
         this.state = {
             choiceData: {},
             bocaData: {
-                player: 'Larry',
-                players: ['Larry', 'Mary', 'Nancy', 'Alan', 'Huy'],
+                player: 'Alan',
+                players: [
+                    {
+                        name: 'Larry',
+                        money: 70,
+                        diceLeft :4
+                    },
+                    {
+                        name: 'Mary',
+                        money: 40,
+                        diceLeft :8
+                    },
+                    {
+                        name: 'Nancy',
+                        money: 40,
+                        diceLeft :5
+                    },
+                    {
+                        name: 'Alan',
+                        money: 30,
+                        diceLeft :4
+                    }, {
+                        name: 'Huy',
+                        money: 20,
+                        diceLeft :4
+                    }],
                 fieldColors: ["yellow", "cyan", "pink", "green", "orange", "#b19cd9"],
                 money: mon.money,
-                fieldPlayers: fp.players
+                fieldPlayers: fp.players,
+                round:1,
+                currentPlayer:"Nancy",
+                currentIndex:2
             },
             zorder: this.props.zorder,
             choiceShowButton:
@@ -216,35 +240,41 @@ class BocaLayout extends React.Component {
             this.setState({choiceButtonText: "Roll!!!"});
         }
     }
-    compare(a, b){
-        return (a.value - b.value)*-1;
+
+    compare(a, b) {
+        return (a.value - b.value) * -1;
     }
+
     selectDice(di, qty) {
 
+
+        //this.refs.cdl.setDice([1,2,33,4,5,6,6,7]);
         let cs = JSON.parse(JSON.stringify(cp))
         let ps = JSON.parse(JSON.stringify(fp));
 
         this.state.bocaData.fieldColors = cs.colors;
-        this.state.bocaData.fieldColors[di-1] = "gray";
+        this.state.bocaData.fieldColors[di - 1] = "gray";
 
         this.state.bocaData.fieldPlayers = ps.players;
-        let fplayers  =  this.state.bocaData.fieldPlayers[di-1];
+        let fplayers = this.state.bocaData.fieldPlayers[di - 1];
         let addPlayer = true;
 
-        for (let i = 0; i< fplayers.length;i++){
-            if(fplayers[i].name == this.state.bocaData.player ){
+        for (let i = 0; i < fplayers.length; i++) {
+            debugger;
+            if (fplayers[i].name == this.state.bocaData.currentPlayer) {
                 fplayers[i].value = fplayers[i].value + qty;
                 addPlayer = false;
             }
         }
-        if(addPlayer)
+        if (addPlayer)
 
             fplayers.push({
                 color: "black",
-                name: this.state.bocaData.player,
+                name: this.state.bocaData.currentPlayer,
                 value: qty
             })
         fplayers.sort(this.compare)
+
         this.setState({bocaData: this.state.bocaData});
 
     }
@@ -292,9 +322,10 @@ class BocaLayout extends React.Component {
                         {translateX: 0},
                         {translateZ: this.state.zorder}]
                 }}>
-                    <ChoiceDiceLayout style={{marginBottom: .2}} roll={this.roll.bind(this)}
+                    <ChoiceDiceLayout  ref="cdl"  style={{marginBottom: .2}} roll={this.roll.bind(this)}
                                       choiceShowButton={this.state.choiceShowButton}
-                                      choiceButtonText={this.state.choiceButtonText} num={8}
+                                      choiceButtonText={this.state.choiceButtonText}
+                                       num={this.state.bocaData.players[this.state.bocaData.currentIndex].diceLeft}
                                       init={['B', 'O', 'C', 'A', 'D', 'I', 'C', 'E']}
                                       clickable={true} selectDice={this.selectDice.bind(this)}/>
                     <View style={{
@@ -306,18 +337,8 @@ class BocaLayout extends React.Component {
                     }}>
                         < BocaFieldsLayout bocaData={this.state.bocaData}
                                            chooseDicePair={this.chooseDicePair.bind(this)}/>
-                        <ChoiceGaitLayout message={this.getMessage()} choiceData={this.state.choiceData}
-                                          chooseDicePair={this.chooseDicePair.bind(this)}/>
-                        <View style={{
-                            height: 3,
-                            width: 1,
-                            marginLeft: .04,
-                            flexDirection: 'column',
-                            alignItems: 'flex-start',
-                            justifyContent: 'flex-start'
-                        }}>
-                            {nameList}
-                        </View>
+                        <BocaTextScoreLayout message={this.getMessage()} bocaData={this.state.bocaData}/>
+
 
                     </View>
 

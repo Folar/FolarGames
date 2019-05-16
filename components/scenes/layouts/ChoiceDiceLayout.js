@@ -108,6 +108,27 @@ class ChoiceDiceLayout extends React.Component {
 
         this.props.selectDice(dies[d],cnt);
     }
+    setDice(die){
+
+        _this.state.die1 = die[0];
+        _this.state.die2 = die[1];
+        _this.state.die3 = die[2];
+        _this.state.die4 = die[3];
+        _this.state.die5 = die[4];
+        _this.state.die6 = die[5];
+        _this.state.die7 = die[6];
+        _this.state.die8 = die[7];
+    }
+    resetDice(){
+        _this.state.die1 = this.props.init[0];
+        _this.state.die2 = this.props.init[1];
+        _this.state.die3 = this.props.init[2];
+        _this.state.die4 = this.props.init[3];
+        _this.state.die5 = this.props.init[4];
+        _this.state.die6 = this.props.init[5];
+        _this.state.die7 = this.props.init[6];
+        _this.state.die8 = this.props.init[7];
+    }
     conv(){
         let dies=[];
         switch (this.props.num) {

@@ -89,7 +89,7 @@ class BocaField extends React.Component {
                         color: item.color,
                     }}>
 
-                    {item.value}
+                    {item.value + " grand"}
                 </Text>
 
             });
