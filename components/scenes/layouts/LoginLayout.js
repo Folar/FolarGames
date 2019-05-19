@@ -44,6 +44,12 @@ class LoginLayout extends React.Component {
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+    invokeBocaDice(){
+        let n = this.state.name;
+        if (n.length > 5)
+            n = n.substring(0,5);
+        this.props.signon(this.capitalizeFirstLetter(n),4);
+    }
     invoke2(){
         let n = this.state.name;
         if (n.length > 5)
@@ -124,7 +130,7 @@ class LoginLayout extends React.Component {
                         style={{
                             margin: 0.01,
                             width: 5, flexDirection: 'row',
-                            alignItems: 'center', justifyContent: 'flex-start',
+                            alignItems: 'center',
                             layoutOrigin: [-.05, 1.6],
                             justifyContent: 'center'
                         }}
@@ -183,7 +189,7 @@ class LoginLayout extends React.Component {
                         style={{
                             margin: 0.01,
                             width: 5, flexDirection: 'row',
-                            alignItems: 'center', justifyContent: 'flex-start',
+                            alignItems: 'center',
                             layoutOrigin: [0, 0.8],
                             justifyContent: 'center'
                         }}
@@ -225,6 +231,16 @@ class LoginLayout extends React.Component {
                                 }}/>
                         <Button updateScene={this.invoke2.bind(this)} showButton={this.state.showButton}
                                 text="Dice Solitare"
+                                style={{
+                                    fontSize: 0.2,
+                                    textAlign: 'center',
+                                    color: "#000000",
+                                    transform: [
+                                        {translateX: 0}
+                                    ]
+                                }}/>
+                        <Button updateScene={this.invokeBocaDice.bind(this)} showButton={this.state.showButton}
+                                text="Boca Dice"
                                 style={{
                                     fontSize: 0.2,
                                     textAlign: 'center',

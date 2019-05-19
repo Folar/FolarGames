@@ -34,7 +34,7 @@ class BocaTextScoreLayout extends React.Component {
 
         let nameList = names.map((item, index) => {
             let val = item;
-            if (this.props.bocaData.player == item)
+            if (this.props.player == item)
                 val +=": "+ this.props.bocaData.players[index].money + " grand";
             if(item == this.props.bocaData.currentPlayer)
                 return <Text style={{width:1 ,color: "black",backgroundColor:"white"}} key={index}>{val}</Text>
@@ -85,7 +85,7 @@ class BocaTextScoreLayout extends React.Component {
                             justifyContent: 'flex-start',
                             color: "#000000"
                         }}>
-                        Round 1
+                        {"Round "+this.props.bocaData.round }
                     </Text>
 
                 </View>
