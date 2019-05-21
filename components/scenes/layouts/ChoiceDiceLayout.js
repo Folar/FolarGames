@@ -16,8 +16,10 @@ import {
     VrSoundEffects
 } from 'react-vr';
 import CardButton from "./elements/CardButton";
+
 let _this = null;
-let  rolln =0;
+let rolln = 0;
+
 //Layout
 class ChoiceDiceLayout extends React.Component {
 
@@ -27,15 +29,15 @@ class ChoiceDiceLayout extends React.Component {
 
             showButton: true,
             die1: this.props.init[0],
-            die2:  this.props.init[1],
-            die3:  this.props.init[2],
-            die4:  this.props.init[3],
-            die5:  this.props.init[4],
-            die6:  this.props.init[5],
-            die7:  this.props.init[6],
-            die8:  this.props.init[7],
+            die2: this.props.init[1],
+            die3: this.props.init[2],
+            die4: this.props.init[3],
+            die5: this.props.init[4],
+            die6: this.props.init[5],
+            die7: this.props.init[6],
+            die8: this.props.init[7],
             numberOfRolls: 0,
-            di:-1
+            di: -1
 
         }
     }
@@ -47,7 +49,7 @@ class ChoiceDiceLayout extends React.Component {
 
     roll() {
 
-        if(rolln<20){
+        if (rolln < 20) {
             _this.setState({die1: Math.floor(Math.random() * 6) + 1});
             _this.setState({die2: Math.floor(Math.random() * 6) + 1});
             _this.setState({die3: Math.floor(Math.random() * 6) + 1});
@@ -57,12 +59,12 @@ class ChoiceDiceLayout extends React.Component {
             _this.setState({die7: Math.floor(Math.random() * 6) + 1});
             _this.setState({die8: Math.floor(Math.random() * 6) + 1});
 
-        }else {
-            _this.setState({die1:2});
+        } else {
+            _this.setState({die1: 2});
             _this.setState({die2: 2});
             _this.setState({die3: 2});
             _this.setState({die4: 2});
-            _this.setState({die5:2});
+            _this.setState({die5: 2});
             _this.setState({die6: 2});
             _this.setState({die7: 2});
             _this.setState({die8: 2});
@@ -70,45 +72,62 @@ class ChoiceDiceLayout extends React.Component {
         if (_this.state.numberOfRolls < 4) {
             _this.setState({numberOfRolls: 1 + _this.state.numberOfRolls});
             setTimeout(_this.roll, 50);
-        }else{
-            _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5,
-                _this.state.die6,_this.state.die7,_this.state.die8]);
+        } else {
+
+                _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
+                    _this.state.die5, _this.state.die6, _this.state.die7, _this.state.die8]);
         }
     }
 
     invoke() {
-        if(this.props.choiceButtonText == "Confirm" || this.props.choiceButtonText == "Again?") {
-            _this.props.roll([_this.state.die1, _this.state.die2,_this.state.die3,_this.state.die4,_this.state.die5,
-                _this.state.die6,_this.state.die7,_this.state.die8]);
-            _this.state.die1 = this.props.init[0];
-            _this.state.die2 = this.props.init[1];
-            _this.state.die3 = this.props.init[2];
-            _this.state.die4 = this.props.init[3];
-            _this.state.die5 = this.props.init[4];
-            _this.state.die6 = this.props.init[5];
-            _this.state.die7 = this.props.init[6];
-            _this.state.die8 = this.props.init[7];
-            return;
-        }
-        VrSoundEffects.play(asset('dice.wav'));
-        _this = this;
-        _this.setState({numberOfRolls: 1});
-        setTimeout(_this.roll, 10);
-
-    }
-    choose(d){
-        if(!this.props.clickable) return;
-        this.setState({di:d});
-        let cnt = 0;
-            let dies=this.conv();
-            for (let i = 0; i<this.props.num;i++){
-                if(dies[i]== dies[d])
-                    cnt++;
+        if (this.props.game == "choice") {
+            debugger;
+            if (this.props.choiceButtonText == "Confirm" || this.props.choiceButtonText == "Again?") {
+                _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4, _this.state.die5,
+                    _this.state.die6, _this.state.die7, _this.state.die8]);
+                _this.state.die1 = this.props.init[0];
+                _this.state.die2 = this.props.init[1];
+                _this.state.die3 = this.props.init[2];
+                _this.state.die4 = this.props.init[3];
+                _this.state.die5 = this.props.init[4];
+                _this.state.die6 = this.props.init[5];
+                _this.state.die7 = this.props.init[6];
+                _this.state.die8 = this.props.init[7];
+                return;
             }
+            VrSoundEffects.play(asset('dice.wav'));
+            _this = this;
+            _this.setState({numberOfRolls: 1});
+            setTimeout(_this.roll, 10);
+        } else if (this.props.game == "boca") {
+            if (this.props.choiceButtonText == "Roll!!") {
+                VrSoundEffects.play(asset('dice.wav'));
+                _this = this;
+                _this.setState({numberOfRolls: 1});
+                setTimeout(_this.roll, 10);
+            } else if (this.props.choiceButtonText == "Start") {
+                this.props.sendMessage({name:this.props.player,type:"startBocaDice"})
 
-        this.props.selectDice(dies[d],cnt);
+
+            }
+        }
+
     }
-    setDice(die){
+
+    choose(d) {
+        if (!this.props.clickable) return;
+        this.setState({di: d});
+        let cnt = 0;
+        let dies = this.conv();
+        for (let i = 0; i < this.props.num; i++) {
+            if (dies[i] == dies[d])
+                cnt++;
+        }
+
+        this.props.selectDice(dies[d], cnt);
+    }
+
+    setDice(die) {
 
         _this.state.die1 = die[0];
         _this.state.die2 = die[1];
@@ -119,7 +138,8 @@ class ChoiceDiceLayout extends React.Component {
         _this.state.die7 = die[6];
         _this.state.die8 = die[7];
     }
-    resetDice(){
+
+    resetDice() {
         _this.state.die1 = this.props.init[0];
         _this.state.die2 = this.props.init[1];
         _this.state.die3 = this.props.init[2];
@@ -129,8 +149,9 @@ class ChoiceDiceLayout extends React.Component {
         _this.state.die7 = this.props.init[6];
         _this.state.die8 = this.props.init[7];
     }
-    conv(){
-        let dies=[];
+
+    conv() {
+        let dies = [];
         switch (this.props.num) {
             case 1:
                 dies.push(this.state.die1);
@@ -188,27 +209,29 @@ class ChoiceDiceLayout extends React.Component {
         return dies;
     }
 
-    getBackground(index){
-        let dies=this.conv();
-        for (let i = 0; i<this.props.num;i++){
-            if(dies[index]== dies[this.state.di])
+    getBackground(index) {
+        let dies = this.conv();
+        for (let i = 0; i < this.props.num; i++) {
+            if (dies[index] == dies[this.state.di])
                 return "gray";
         }
         return "white"
     }
+
     render() {
         _this = this;
-        let dieDim = {height: .2, width: .2, valueFont: .1, dieFont: .15,marginRight:.02};
+        let dieDim = {height: .2, width: .2, valueFont: .1, dieFont: .15, marginRight: .02};
 
         let showButton = this.props.choiceShowButton;
         let buttonText = this.props.choiceButtonText;
-        let dies=this.conv();
+        let dies = this.conv();
 
 
         let row1Cards =
             dies.map((item, index) => {
-                return <VrButton onClick={this.choose.bind(this,index)} key={index}>
-                    <Die value={item} key={index}  dim={dieDim}   color="black" backgroundColor={_this.getBackground(index)} />
+                return <VrButton onClick={this.choose.bind(this, index)} key={index}>
+                    <Die value={item} key={index} dim={dieDim} color="black"
+                         backgroundColor={_this.getBackground(index)}/>
                 </VrButton>
             });
         return (
@@ -223,33 +246,33 @@ class ChoiceDiceLayout extends React.Component {
 
 
                     {
-                    showButton ?(<View
-                        style={{
-                            marginLeft: 0.4,
-                            paddingLeft: 0.2,
-                            paddingRight: 0.2,
-                            height: 0.2,
-                            backgroundColor: '#A482DF',
-                            borderRadius: 0.1,
-                            margin: 0.01,
-                            width: 1.2, flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                    >
-
-                        <VrButton onClick={this.invoke.bind(this)}>
-                            <Text
+                        showButton ? (<View
                                 style={{
-                                    fontSize: 0.2,
-                                    textAlign: 'center',
-                                    color: "#FFFFFF"
-                                }}>
-                                {buttonText}
-                            </Text>
-                        </VrButton>
-                    </View>) :
-                    (<View/>)
+                                    marginLeft: 0.4,
+                                    paddingLeft: 0.2,
+                                    paddingRight: 0.2,
+                                    height: 0.2,
+                                    backgroundColor: '#A482DF',
+                                    borderRadius: 0.1,
+                                    margin: 0.01,
+                                    width: 1.2, flexDirection: 'row',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                            >
+
+                                <VrButton onClick={this.invoke.bind(this)}>
+                                    <Text
+                                        style={{
+                                            fontSize: 0.2,
+                                            textAlign: 'center',
+                                            color: "#FFFFFF"
+                                        }}>
+                                        {buttonText}
+                                    </Text>
+                                </VrButton>
+                            </View>) :
+                            (<View/>)
                     }
                 </View>
 

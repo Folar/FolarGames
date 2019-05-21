@@ -108,6 +108,7 @@ class ChoiceLayout extends React.Component {
                                       choiceShowButton={this.state.choiceShowButton}
                                       choiceButtonText={this.state.choiceButtonText} num={5}
                                       init={['F', 'O', 'L', 'A', 'R', 'A', 'C', 'K']}
+                                      game={"choice"}
                                       clickable={false}/>
                     <View style={{
                         height: 1,

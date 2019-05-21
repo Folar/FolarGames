@@ -79,6 +79,7 @@ class GamesLayout extends React.Component {
                 currentIndex: 0,
                 round: 1,
                 buttonText:"Start",
+                buttonShow:true,
                 dice:[]
             },
             choiceShowButton: true,
@@ -146,6 +147,11 @@ class GamesLayout extends React.Component {
 
     }
 
+    sendBocaMessage(d){
+        this.client.send(JSON.stringify(d));
+
+    }
+
     roll(dice) {
         this.client.send(JSON.stringify({
             name: this.state.name, type: "choiceRoll", dice: dice,
@@ -192,6 +198,7 @@ class GamesLayout extends React.Component {
 
 
         client.onmessage = function (x) {
+            debugger;
             let packet = JSON.parse(x.data);
             if (packet.messageType === "choosePair") {
                 choiceThis.setState({choiceData: packet.data});
@@ -221,6 +228,7 @@ class GamesLayout extends React.Component {
                 takeSixThis.setState({data: packet});
                 takeSixThis.setState({showButton: packet.state < 2})
             } else {
+                debugger;
                  _this.setState({bocaData: packet});
                 _this.refs.bl.setData( packet);
             }
@@ -282,9 +290,11 @@ class GamesLayout extends React.Component {
                     </View>
                 ) : (
                     <View>
-                        <BocaLayout zorder={-3} showButton={true} text={"Play"} roll={this.roll.bind(this)}
+                        <BocaLayout zorder={-3} showButton={true} text={"Play"}
+                                    roll={this.roll.bind(this)}
                                     bocaData={this.state.bocaData}
                                     ref="bl"
+                                    sendBocaMessage={this.sendBocaMessage.bind(this)}
                                     player={this.state.name}/>
                     </View>
                 )

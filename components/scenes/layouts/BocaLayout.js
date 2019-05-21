@@ -15,40 +15,8 @@ import BocaFieldsLayout from './BocaFieldsLayout.js';
 let _this = null;
 choiceThis = null;
 let choice = new Choice();
-let colors = ["yellow", "cyan", "pink", "green", "orange", "#b19cd9"];
-let cp = {colors: ["yellow", "cyan", "pink", "green", "orange", "#b19cd9"]};
-let fp = {
-    players: [
 
 
-        [],
-        [],
-        [],
-        [],
-        [],
-        []
-    ]
-}
-let mon = {
-    money: [
-        [
-        ],
-        [
-
-        ],
-        [
-
-
-        ],
-        [
-
-        ],
-        [
-        ],
-        [
-        ]
-    ]
-}
 
 
 //Layout
@@ -78,39 +46,12 @@ class BocaLayout extends React.Component {
     }
 
     roll(dice) {
-        //this.client.send(JSON.stringify({name:this.state.name,type:"choiceRoll",dice:dice,
-        //    buttonText:this.state.choiceButtonText}));
-
-        if (this.state.choiceButtonText == "Confirm") {
-            let gs = choice.confirm();
-            this.setState({choiceData: gs});
-            if (gs.gameState == 3)
-                this.setState({choiceButtonText: "Again?"});
-            else
-                this.setState({choiceButtonText: "Roll!!!"});
-
-        } else if (this.state.choiceButtonText == "Roll!!!") {
-            this.setState({choiceData: choice.roll(dice)});
-            this.setState({choiceShowButton: false});
-        } else {
-            this.setState({choiceData: choice.resetState(dice)});
-            this.setState({choiceButtonText: "Roll!!!"});
-        }
+        this.state.bocaData.buttonText="";
+        this.setState({bocaData:this.state.bocaData});
     }
 
 
 
-    chooseDicePair(rank, pos, gaitor) {
-        //this.client.send(JSON.stringify({name:this.state.name,type:"choosePairs",rank:rank,pos:pos,gaitor:gaitor}));
-        let s = choice.setSecondDieChoices(rank, pos, gaitor);
-        this.setState({choiceShowButton: s.gameState != 1});
-        if (s.gameState == 0) {
-            this.setState({choiceButtonText: "Roll!!!"});
-        } else {
-            this.setState({choiceButtonText: "Confirm"});
-        }
-        this.setState({choiceData: s});
-    }
 
     getMessage() {
         if (this.props.bocaData == undefined)
@@ -127,6 +68,10 @@ class BocaLayout extends React.Component {
         debugger;
         this.setState({bocaData:d});
 
+    }
+    canShow(){
+        return this.state.bocaData.buttonText.length>0 && (this.state.bocaData.buttonText =="Start"||
+            this.props.player == this.state.bocaData.currentPlayer)
     }
     selectDice(di, qty) {
 
@@ -156,15 +101,16 @@ class BocaLayout extends React.Component {
                 value: qty
             })
         fplayers.sort(this.compare)
-
+        this.state.bocaData.buttonText="Confirm";
+        this.setState({bocaData:this.state.bocaData});
         this.setState({
-            bocaData: this.state.bocaData,
-            choiceShowButton: true, choiceButtonText: "Confirm"
+            bocaData: this.state.bocaData
         });
 
     }
 
     render() {
+        debugger;
         return (
             <View>
 
@@ -180,12 +126,17 @@ class BocaLayout extends React.Component {
                         {translateX: 0},
                         {translateZ: this.state.zorder}]
                 }}>
-                    <ChoiceDiceLayout  ref="cdl"  style={{marginBottom: .2}} roll={this.roll.bind(this)}
-                                      choiceShowButton={true}
+                    <ChoiceDiceLayout  ref="cdl"  style={{marginBottom: .2}}
+                                       sendMessage={this.props.sendBocaMessage}
+                                      choiceShowButton={this.canShow()}
                                       choiceButtonText={this.state.bocaData.buttonText}
                                        num={this.props.bocaData.players[this.props.bocaData.currentIndex].diceLeft}
                                       init={['B', 'O', 'C', 'A', 'D', 'I', 'C', 'E']}
-                                      clickable={true} selectDice={this.selectDice.bind(this)}/>
+                                      clickable={true} selectDice={this.selectDice.bind(this)}
+                                       game={"boca"}
+                                       roll={this.roll.bind(this)}
+                                       player={this.props.player}/>
+
                     <View style={{
                         height: 1,
                         width: 5,
@@ -193,8 +144,7 @@ class BocaLayout extends React.Component {
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start'
                     }}>
-                        < BocaFieldsLayout bocaData={this.state.bocaData}
-                                           chooseDicePair={this.chooseDicePair.bind(this)}/>
+                        <BocaFieldsLayout bocaData={this.state.bocaData}/>
                         <BocaTextScoreLayout message={this.getMessage()} bocaData={this.state.bocaData}
                                              player={this.props.player}/>
 
