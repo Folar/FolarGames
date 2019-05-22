@@ -80,7 +80,10 @@ class GamesLayout extends React.Component {
                 round: 1,
                 buttonText:"Start",
                 buttonShow:true,
-                dice:[]
+                dice:[],
+                totalDice:0,
+                selectedDice :0,
+                startIndex:0
             },
             choiceShowButton: true,
             choiceButtonText: "Roll!!!",
@@ -198,7 +201,7 @@ class GamesLayout extends React.Component {
 
 
         client.onmessage = function (x) {
-            debugger;
+           // debugger;
             let packet = JSON.parse(x.data);
             if (packet.messageType === "choosePair") {
                 choiceThis.setState({choiceData: packet.data});
@@ -228,7 +231,10 @@ class GamesLayout extends React.Component {
                 takeSixThis.setState({data: packet});
                 takeSixThis.setState({showButton: packet.state < 2})
             } else {
-                debugger;
+
+                if (packet.type === "rollDice") {
+                    _this.refs.bl.setDice( packet.dice,packet.selectedDice);
+                }
                  _this.setState({bocaData: packet});
                 _this.refs.bl.setData( packet);
             }

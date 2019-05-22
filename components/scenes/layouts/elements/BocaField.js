@@ -25,56 +25,11 @@ class BocaField extends React.Component {
 
     }
 
-    invoke() {
-        if (this.props.clickable)
-            this.props.pickCard(this.props.card, this.props.row);
-    }
+
 
     render() {
-        let player = [
-            {
-                color: "black",
-                value: "Larry: 1"
-            },
-            {
-                color: "black",
-                value: "Darlene: 2"
-            },
-            {
-                color: this.props.backgroundColor,
-                value: "."
-            },
-            {
-                color: this.props.backgroundColor,
-                value: "."
-            },
-            {
-                color: this.props.backgroundColor,
-                value: "."
-            }
-        ]
-        let money = [
-            {
-                color: "black",
-                value: "40 grand"
-            },
-            {
-                color: "black",
-                value: "90 grand"
-            },
-            {
-                color: this.props.backgroundColor,
-                value: "."
-            },
-            {
-                color: this.props.backgroundColor,
-                value: "."
-            },
-            {
-                color: this.props.backgroundColor,
-                value: "."
-            }
-        ]
+
+
         let fieldDim = {height: 2, width: .55, valueFont: .06, dieFont: .09, marginRight: .06};
 
         let moneyless = [];

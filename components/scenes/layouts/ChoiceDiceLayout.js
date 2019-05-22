@@ -18,7 +18,7 @@ import {
 import CardButton from "./elements/CardButton";
 
 let _this = null;
-let rolln = 0;
+let rolltest = false;
 
 //Layout
 class ChoiceDiceLayout extends React.Component {
@@ -49,7 +49,7 @@ class ChoiceDiceLayout extends React.Component {
 
     roll() {
 
-        if (rolln < 20) {
+        if (!rolltest) {
             _this.setState({die1: Math.floor(Math.random() * 6) + 1});
             _this.setState({die2: Math.floor(Math.random() * 6) + 1});
             _this.setState({die3: Math.floor(Math.random() * 6) + 1});
@@ -60,9 +60,9 @@ class ChoiceDiceLayout extends React.Component {
             _this.setState({die8: Math.floor(Math.random() * 6) + 1});
 
         } else {
-            _this.setState({die1: 2});
+            _this.setState({die1: 1});
             _this.setState({die2: 2});
-            _this.setState({die3: 2});
+            _this.setState({die3: 1});
             _this.setState({die4: 2});
             _this.setState({die5: 2});
             _this.setState({die6: 2});
@@ -73,15 +73,14 @@ class ChoiceDiceLayout extends React.Component {
             _this.setState({numberOfRolls: 1 + _this.state.numberOfRolls});
             setTimeout(_this.roll, 50);
         } else {
-
-                _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
-                    _this.state.die5, _this.state.die6, _this.state.die7, _this.state.die8]);
+            _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
+                    _this.state.die5, _this.state.die6, _this.state.die7, _this.state.die8],
+                _this.state.di);
         }
     }
 
     invoke() {
         if (this.props.game == "choice") {
-            debugger;
             if (this.props.choiceButtonText == "Confirm" || this.props.choiceButtonText == "Again?") {
                 _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4, _this.state.die5,
                     _this.state.die6, _this.state.die7, _this.state.die8]);
@@ -105,10 +104,13 @@ class ChoiceDiceLayout extends React.Component {
                 _this = this;
                 _this.setState({numberOfRolls: 1});
                 setTimeout(_this.roll, 10);
-            } else if (this.props.choiceButtonText == "Start") {
+            } else if (this.props.choiceButtonText == "Start" ) {
                 this.props.sendMessage({name:this.props.player,type:"startBocaDice"})
 
-
+            }else if (this.props.choiceButtonText == "Confirm" ){
+                _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
+                        _this.state.die5, _this.state.die6, _this.state.die7, _this.state.die8],
+                    _this.state.di);
             }
         }
 
@@ -127,7 +129,7 @@ class ChoiceDiceLayout extends React.Component {
         this.props.selectDice(dies[d], cnt);
     }
 
-    setDice(die) {
+    setDice(die,di) {
 
         _this.state.die1 = die[0];
         _this.state.die2 = die[1];
@@ -137,6 +139,7 @@ class ChoiceDiceLayout extends React.Component {
         _this.state.die6 = die[5];
         _this.state.die7 = die[6];
         _this.state.die8 = die[7];
+        _this.state.di = di;
     }
 
     resetDice() {

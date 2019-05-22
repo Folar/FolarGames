@@ -52,18 +52,16 @@ class BocaFieldsLayout extends React.Component {
         }
         return "0"
     }
-
+    getBC(i){
+        let c = this.props.bocaData.fieldColors[i]
+        debugger;
+        return c;
+    }
 
     render() {
         let vals = ["One","Two","Three","Four","Five","Six"]
-        let fieldData =
-            vals.map((item, index) => {
-                return
-                <BocaField value={vals[index]} backgroundColor={this.props.bocaData.fieldColors[index]}
-                           money={this.state.bocaData.money[index]}
-                                 players={this.props.bocaData.fieldPlayers[index]}/>
 
-            });
+
         return (
 
             <View>
@@ -79,7 +77,7 @@ class BocaFieldsLayout extends React.Component {
                     justifyContent: 'center'
                 }}>
                     <BocaField value={vals[0]}
-                               backgroundColor={this.state.bocaData.fieldColors[0]}
+                               backgroundColor={this.getBC(0)}
                                money={this.props.bocaData.money[0]}
                                players={this.props.bocaData.fieldPlayers[0]}/>
 
