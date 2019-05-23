@@ -81,6 +81,7 @@ class GamesLayout extends React.Component {
                 buttonText:"Start",
                 buttonShow:true,
                 dice:[],
+                diceNum:8,
                 totalDice:0,
                 selectedDice :0,
                 startIndex:0

@@ -111,6 +111,9 @@ class ChoiceDiceLayout extends React.Component {
                 _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
                         _this.state.die5, _this.state.die6, _this.state.die7, _this.state.die8],
                     _this.state.di);
+            }else if (this.props.choiceButtonText == "Pass Dice" ) {
+                this.props.sendMessage({name:this.props.player,type:"passBocaDice"})
+
             }
         }
 

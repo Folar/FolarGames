@@ -45,14 +45,15 @@ class BocaLayout extends React.Component {
 
     roll(dice,di) {
         if(this.state.bocaData.buttonText ==  "Confirm"){
-            this.state.bocaData.buttonText = "Continue";
+            this.state.bocaData.buttonText = "";
             debugger;
             this.state.bocaData.message = "Continue to next player";
             this.setState({bocaData: this.state.bocaData});
             this.props.sendBocaMessage({
                 name: this.props.player, type: "rollBocaDice",
                 dice: dice, selectedDice: di,
-                fld:this.state.bocaData.fieldPlayers[dice[di]-1]
+                fld:this.state.bocaData.fieldPlayers[dice[di]-1],
+                qty:this.state.qty
             });
         } else {
             this.state.bocaData.buttonText = "";
@@ -149,7 +150,7 @@ class BocaLayout extends React.Component {
                                        sendMessage={this.props.sendBocaMessage}
                                       choiceShowButton={this.canShow()}
                                       choiceButtonText={this.state.bocaData.buttonText}
-                                       num={this.props.bocaData.players[this.props.bocaData.currentIndex].diceLeft}
+                                       num={this.props.bocaData.diceNum}
                                       init={['B', 'O', 'C', 'A', 'D', 'I', 'C', 'E']}
                                       clickable={this.canClick()} selectDice={this.selectDice.bind(this)}
                                        game={"boca"}
