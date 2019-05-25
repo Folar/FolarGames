@@ -105,7 +105,7 @@ class ChoiceDiceLayout extends React.Component {
                 _this.setState({numberOfRolls: 1});
                 setTimeout(_this.roll, 10);
             } else if (this.props.choiceButtonText == "Start" ) {
-                this.props.sendMessage({name:this.props.player,type:"startBocaDice"})
+                this.props.sendMessage({name:this.props.player,type:"startBocaDice"});
 
             }else if (this.props.choiceButtonText == "Confirm" ){
                 _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
@@ -113,6 +113,9 @@ class ChoiceDiceLayout extends React.Component {
                     _this.state.di);
             }else if (this.props.choiceButtonText == "Pass Dice" ) {
                 this.props.sendMessage({name:this.props.player,type:"passBocaDice"})
+
+            }else if (this.props.choiceButtonText == "Start Next Round" ) {
+                this.props.sendMessage({name:this.props.player,type:"NextRoundBocaDice"});
 
             }
         }
@@ -154,6 +157,7 @@ class ChoiceDiceLayout extends React.Component {
         _this.state.die6 = this.props.init[5];
         _this.state.die7 = this.props.init[6];
         _this.state.die8 = this.props.init[7];
+        _this.state.di = -1;
     }
 
     conv() {

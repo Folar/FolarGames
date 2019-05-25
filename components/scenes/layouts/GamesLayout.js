@@ -236,7 +236,10 @@ class GamesLayout extends React.Component {
                 if (packet.type === "rollDice") {
                     _this.refs.bl.setDice( packet.dice,packet.selectedDice);
                 }
-                 _this.setState({bocaData: packet});
+                if (packet.type === "passDice") {
+                    _this.refs.bl.resetDice( packet.dice,packet.selectedDice);
+                }
+                _this.setState({bocaData: packet});
                 _this.refs.bl.setData( packet);
             }
 
@@ -259,9 +262,7 @@ class GamesLayout extends React.Component {
 
     }
 
-    compare(a, b) {
-        return (a.value - b.value) * -1;
-    }
+
 
 
     render() {

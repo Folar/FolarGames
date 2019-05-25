@@ -46,7 +46,6 @@ class BocaLayout extends React.Component {
     roll(dice,di) {
         if(this.state.bocaData.buttonText ==  "Confirm"){
             this.state.bocaData.buttonText = "";
-            debugger;
             this.state.bocaData.message = "Continue to next player";
             this.setState({bocaData: this.state.bocaData});
             this.props.sendBocaMessage({
@@ -80,6 +79,10 @@ class BocaLayout extends React.Component {
     }
     setDice(dice,sel){
         this.refs.cdl.setDice(dice,sel);
+
+    }
+    resetDice(){
+        this.refs.cdl.resetDice();
 
     }
 
@@ -121,12 +124,15 @@ class BocaLayout extends React.Component {
                 name: this.state.bocaData.currentPlayer,
                 value: qty
             })
-        fplayers.sort(this.compare)
+        fplayers = fplayers.sort(this.compare);
         this.state.bocaData.buttonText="Confirm";
         this.setState({bocaData:this.state.bocaData,di:di,qty:qty});
         this.setState({bocaData:this.state.bocaData,di:di,qty:qty});
 
 
+    }
+    compare(a, b) {
+        return (a.value - b.value) * -1;
     }
 
     render() {
