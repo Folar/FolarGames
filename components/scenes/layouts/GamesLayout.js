@@ -218,6 +218,7 @@ class GamesLayout extends React.Component {
             if (packet.messageType === "dupUser") {
                 let x = _this.state.name;
                 _this.setState({name: x + " has already signed on, choose another name", txtclr: "red"});
+                _this.setState({loginScene:1})
                 client.close();
                 key++;
                 _this.forceUpdate();
