@@ -54,7 +54,6 @@ class BocaFieldsLayout extends React.Component {
     }
     getBC(i){
         let c = this.props.bocaData.fieldColors[i]
-        debugger;
         return c;
     }
 

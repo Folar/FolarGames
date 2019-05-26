@@ -96,15 +96,15 @@ class BocaLayout extends React.Component {
     }
     canShow(){
         return this.state.bocaData.buttonText.length>0 && (this.state.bocaData.buttonText =="Start"||
+            this.state.bocaData.buttonText =="Reset"||
             this.props.player == this.state.bocaData.currentPlayer)
     }
     selectDice(di, qty) {
 
-        let cs = JSON.parse(JSON.stringify({colors: this.state.bocaData.ofieldColors}))
+        let cs = JSON.parse(JSON.stringify({colors: this.state.bocaData.ofieldColors}));
         let ps = JSON.parse(JSON.stringify({players: this.state.bocaData.ofieldPlayers}));
 
         this.state.bocaData.fieldColors = cs.colors;
-        debugger;
         this.state.bocaData.fieldColors[di - 1] = "gray";
 
         this.state.bocaData.fieldPlayers = ps.players;
