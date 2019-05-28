@@ -129,10 +129,13 @@ class GamesLayout extends React.Component {
 
 
     }
-
+    playAgain2() {
+        this.client.close();
+        this.connectToServer(4);
+    }
     playAgain() {
         this.client.close();
-        this.connectToServer();
+        this.connectToServer(2);
     }
 
     clickButton(reset) {
@@ -237,7 +240,7 @@ class GamesLayout extends React.Component {
                 if (packet.type === "rollDice") {
                     _this.refs.bl.setDice( packet.dice,packet.selectedDice);
                 }
-                if (packet.type === "passDice") {
+                if (packet.type === "passDice" || packet.type === "Restart") {
                     _this.refs.bl.resetDice( packet.dice,packet.selectedDice);
                 }
                 _this.setState({bocaData: packet});
@@ -304,7 +307,8 @@ class GamesLayout extends React.Component {
                                     bocaData={this.state.bocaData}
                                     ref="bl"
                                     sendBocaMessage={this.sendBocaMessage.bind(this)}
-                                    player={this.state.name}/>
+                                    player={this.state.name}
+                                    playAgain={this.playAgain2.bind(this)}/>
                     </View>
                 )
             }

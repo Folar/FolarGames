@@ -118,6 +118,8 @@ class ChoiceDiceLayout extends React.Component {
             } else if (this.props.choiceButtonText.startsWith("Start Rnd")) {
                 this.props.sendMessage({name: this.props.player, type: "nextRoundBocaDice"});
 
+            } else if (this.props.choiceButtonText.startsWith("Restart")){
+                this.props.playAgain();
             }
         }
 
@@ -246,7 +248,7 @@ class ChoiceDiceLayout extends React.Component {
                 </VrButton>
             });
         if (this.props.choiceButtonText.startsWith("Start Rnd")||
-            this.props.choiceButtonText == "Reset" ||
+            this.props.choiceButtonText == "Restart" ||
             this.props.choiceButtonText == "Pass Dice" )
             row1Cards =<Text> &nbsp;</Text>;
         return (

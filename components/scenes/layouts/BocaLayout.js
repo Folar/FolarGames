@@ -96,7 +96,7 @@ class BocaLayout extends React.Component {
     }
     canShow(){
         return this.state.bocaData.buttonText.length>0 && (this.state.bocaData.buttonText =="Start"||
-            this.state.bocaData.buttonText =="Reset"||
+            this.state.bocaData.buttonText =="Restart"||
             this.props.player == this.state.bocaData.currentPlayer)
     }
     selectDice(di, qty) {
@@ -161,7 +161,8 @@ class BocaLayout extends React.Component {
                                       clickable={this.canClick()} selectDice={this.selectDice.bind(this)}
                                        game={"boca"}
                                        roll={this.roll.bind(this)}
-                                       player={this.props.player}/>
+                                       player={this.props.player}
+                                       playAgain={this.props.playAgain}/>
 
                     <View style={{
                         height: 1,
@@ -172,7 +173,7 @@ class BocaLayout extends React.Component {
                     }}>
                         <BocaFieldsLayout bocaData={this.state.bocaData}/>
                         <BocaTextScoreLayout message={this.getMessage()} bocaData={this.state.bocaData}
-                                             player={this.props.player}/>
+                                             player={this.props.player} />
 
 
                     </View>

@@ -38,7 +38,7 @@ class BocaTextScoreLayout extends React.Component {
             if (this.props.bocaData.buttonText.startsWith("Start Rnd")) {
                 if(item == this.props.bocaData.players[index].name)
                     val += ": " + this.props.bocaData.players[index].money + " grand*"
-            } else if (this.props.bocaData.buttonText == "Reset") {
+            } else if (this.props.bocaData.buttonText == "Restart") {
                 if(item == this.props.bocaData.players[index].name)
                     val += ": " + this.props.bocaData.players[index].money + " grand"
             } else if (this.props.player == item)
