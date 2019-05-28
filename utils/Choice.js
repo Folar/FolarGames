@@ -126,6 +126,8 @@ class Choice {
     howManyGaitorsInRoll(dice) {
         let cnt = 0;
         for (let item in dice) {
+            if(item > 4)
+                break;
             if (this.isAGaitor(dice[item]))
                 cnt++;
         }
@@ -390,6 +392,7 @@ class Choice {
     roll(dice) {
         let results = [];
         let free = "";
+
         if (this.isGaitorsFull() && this.howManyGaitorsInRoll(dice) ==0)
             free = "Great you have a free roll! ";
         this.resetBeforeRoll();
