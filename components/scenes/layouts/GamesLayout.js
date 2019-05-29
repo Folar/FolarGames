@@ -282,7 +282,7 @@ class GamesLayout extends React.Component {
                 ) : login == 2 ? (
                     <View>
 
-                        <TakeSixLayout zorder={-4} showButton={this.state.showButton} name={this.state.name}
+                        <TakeSixLayout zorder={-6} showButton={this.state.showButton} name={this.state.name}
                                        client={this.client}
                                        pickCard={this.pickCard.bind(this)} data={this.state.data}
                                        admin={this.state.admin}
@@ -294,7 +294,7 @@ class GamesLayout extends React.Component {
                     </View>
                 ) : login == 3 ? (
                     <View>
-                        <ChoiceLayout zorder={-3} showButton={true} text={"Play"} roll={this.roll.bind(this)}
+                        <ChoiceLayout zorder={-6} showButton={true} text={"Play"} roll={this.roll.bind(this)}
                                       choiceData={choiceThis.state.choiceData}
                                       choiceShowButton={this.state.choiceShowButton}
                                       choiceButtonText={this.state.choiceButtonText}
@@ -302,7 +302,7 @@ class GamesLayout extends React.Component {
                     </View>
                 ) : (
                     <View>
-                        <BocaLayout zorder={-3} showButton={true} text={"Play"}
+                        <BocaLayout zorder={-6} showButton={true} text={"Play"}
                                     roll={this.roll.bind(this)}
                                     bocaData={this.state.bocaData}
                                     ref="bl"
