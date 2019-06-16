@@ -34,8 +34,15 @@ class BocaTextScoreLayout extends React.Component {
 
         let nameList = names.map((item, index) => {
             let val = item;
-            debugger;
-            if (this.props.bocaData.buttonText.startsWith("Start Rnd")) {
+            if (!this.props.bocaData.buttonText.startsWith("Start Rnd")&&
+                this.props.bocaData.buttonText != "Finish" &&
+                this.props.bocaData.buttonText != "Start" &&
+                this.props.bocaData.buttonText != "Restart") {
+                val += "("+this.props.bocaData.players[index].diceLeft+")";
+            }
+            console.log(this.props.bocaData.buttonText);
+            if (this.props.bocaData.buttonText.startsWith("Start Rnd")||
+                this.props.bocaData.buttonText == "Finish") {
                 if(item == this.props.bocaData.players[index].name)
                     val += ": " + this.props.bocaData.players[index].money + " grand*"
             } else if (this.props.bocaData.buttonText == "Restart") {
@@ -83,7 +90,7 @@ class BocaTextScoreLayout extends React.Component {
                         {this.props.message}
                     </Text>
 
-                    <Text
+                    {this.props.bocaData.round <5 ? (<Text
                         style={{
                             fontSize: 0.18,
                             width: 1.52,
@@ -92,8 +99,9 @@ class BocaTextScoreLayout extends React.Component {
                             justifyContent: 'flex-start',
                             color: "#000000"
                         }}>
-                        {"Round "+this.props.bocaData.round }
-                    </Text>
+                            {"Round "+this.props.bocaData.round}
+                    </Text>) : (<Text>&nbsp;</Text>)
+                    }
 
                 </View>
 

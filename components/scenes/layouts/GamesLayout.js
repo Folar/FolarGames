@@ -195,8 +195,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-        client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-       // client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+        //client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+        client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -239,12 +239,12 @@ class GamesLayout extends React.Component {
 
                 if (packet.type === "rollDice") {
                     _this.refs.bl.setDice( packet.dice,packet.selectedDice);
-                }
-                if (packet.type === "passDice" || packet.type === "Restart") {
+                }else if (packet.type === "passDice" || packet.type === "Restart") {
                     _this.refs.bl.resetDice( packet.dice,packet.selectedDice);
                 }
                 _this.setState({bocaData: packet});
                 _this.refs.bl.setData( packet);
+
             }
 
 

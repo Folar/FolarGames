@@ -95,7 +95,9 @@ class BocaLayout extends React.Component {
             this.props.player == this.state.bocaData.currentPlayer;
     }
     canShow(){
-        return this.state.bocaData.buttonText.length>0 && (this.state.bocaData.buttonText =="Start"||
+        return this.state.bocaData.buttonText.length>0 &&
+            this.state.bocaData.buttonText !="Pass Dice" &&  this.state.bocaData.buttonText !="Finish" &&
+            (this.state.bocaData.buttonText =="Start"||
             this.state.bocaData.buttonText =="Restart"||
             this.props.player == this.state.bocaData.currentPlayer)
     }
@@ -110,22 +112,26 @@ class BocaLayout extends React.Component {
         this.state.bocaData.fieldPlayers = ps.players;
         let fplayers = this.state.bocaData.fieldPlayers[di - 1];
         let addPlayer = true;
+        let tot = 0;
 
         for (let i = 0; i < fplayers.length; i++) {
             if (fplayers[i].name == this.state.bocaData.currentPlayer) {
-                fplayers[i].value = fplayers[i].value + qty;
+                tot = fplayers[i].value = fplayers[i].value + qty;
                 addPlayer = false;
             }
         }
-        if (addPlayer)
-
+        if (addPlayer) {
+            tot = qty;
             fplayers.push({
                 color: "black",
                 name: this.state.bocaData.currentPlayer,
                 value: qty
-            })
+            });
+        }
         fplayers = fplayers.sort(this.compare);
         this.state.bocaData.buttonText="Confirm";
+        this.props.bocaData.message = "You clicked on the "+di+" die, you now have " + tot +
+            " die on the " +di+".";
         this.setState({bocaData:this.state.bocaData,di:di,qty:qty});
         this.setState({bocaData:this.state.bocaData,di:di,qty:qty});
 

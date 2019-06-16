@@ -73,9 +73,18 @@ class ChoiceDiceLayout extends React.Component {
             _this.setState({numberOfRolls: 1 + _this.state.numberOfRolls});
             setTimeout(_this.roll, 50);
         } else {
-            _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
-                    _this.state.die5, _this.state.die6, _this.state.die7, _this.state.die8],
-                _this.state.di);
+            let arr = _this.conv(8);
+            if (_this.props.game == "boca")
+                arr = arr.sort((a, b) => a - b);
+            _this.setState({die1: arr[0]});
+            _this.setState({die2: arr[1]});
+            _this.setState({die3: arr[2]});
+            _this.setState({die4: arr[3]});
+            _this.setState({die5: arr[4]});
+            _this.setState({die6: arr[5]});
+            _this.setState({die7: arr[6]});
+            _this.setState({die8: arr[7]});
+            _this.props.roll(arr,  _this.state.di);
         }
     }
 
@@ -163,9 +172,9 @@ class ChoiceDiceLayout extends React.Component {
         _this.state.di = -1;
     }
 
-    conv() {
+    conv(n = this.props.num) {
         let dies = [];
-        switch (this.props.num) {
+        switch (n) {
             case 1:
                 dies.push(this.state.die1);
                 break;
@@ -249,7 +258,8 @@ class ChoiceDiceLayout extends React.Component {
             });
         if (this.props.choiceButtonText.startsWith("Start Rnd")||
             this.props.choiceButtonText == "Restart" ||
-            this.props.choiceButtonText == "Pass Dice" )
+            this.props.choiceButtonText == "Pass Dice"||
+            this.props.choiceButtonText == "Finish")
             row1Cards =<Text> &nbsp;</Text>;
         return (
             <View>
