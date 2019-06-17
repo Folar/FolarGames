@@ -195,8 +195,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-        //client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-        client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+        client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+       // client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -236,7 +236,6 @@ class GamesLayout extends React.Component {
                 takeSixThis.setState({data: packet});
                 takeSixThis.setState({showButton: packet.state < 2})
             } else {
-
                 if (packet.type === "rollDice") {
                     _this.refs.bl.setDice( packet.dice,packet.selectedDice);
                 }else if (packet.type === "passDice" || packet.type === "Restart") {
