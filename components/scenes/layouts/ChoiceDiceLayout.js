@@ -74,8 +74,15 @@ class ChoiceDiceLayout extends React.Component {
             setTimeout(_this.roll, 50);
         } else {
             let arr = _this.conv(8);
-            if (_this.props.game == "boca")
-                arr = arr.sort((a, b) => a - b);
+            if (_this.props.game == "boca") {
+                if(_this.props.num<8){
+                    arr = arr.splice(0,_this.props.num).sort((a, b) => a - b);
+                    for(let i = _this.props.num;i<8;i++)
+                        arr.push(7);
+                }
+                else
+                    arr = arr.sort((a, b) => a - b);
+            }
             _this.setState({die1: arr[0]});
             _this.setState({die2: arr[1]});
             _this.setState({die3: arr[2]});
