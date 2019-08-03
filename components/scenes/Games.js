@@ -13,8 +13,7 @@ class TakeSix extends React.Component {
   render() {
     return (
       <View>
-       
-        <GamesLayout  />
+        <GamesLayout chgImg={this.props.chgImg} />
       </View>
     )
   }

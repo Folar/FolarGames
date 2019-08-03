@@ -14,6 +14,7 @@ import TakeSixLayout from './TakeSixLayout.js';
 import LoginLayout from './LoginLayout.js';
 import ChoiceLayout from './ChoiceLayout.js';
 import BocaLayout from './BocaLayout.js';
+import DiverLayout from './DiverLayout.js';
 
 //Layout
 let key = 0;
@@ -59,7 +60,7 @@ class GamesLayout extends React.Component {
         this.state = {
 
             name: "Click keys to spell your name and then press Play",
-            loginScene: 1,
+            loginScene: 5,
             txtclr: "#444444",
             data: {},
             choiceData: {},
@@ -299,9 +300,9 @@ class GamesLayout extends React.Component {
                                       choiceButtonText={this.state.choiceButtonText}
                                       chooseDicePair={this.chooseDicePair.bind(this)}/>
                     </View>
-                ) : (
+                ) :login == 4 ? (
                     <View>
-                        <BocaLayout zorder={-3} showButton={true} text={"Play"}
+                        <BocaLayout zorder={-4} showButton={true} text={"Play"}
                                     roll={this.roll.bind(this)}
                                     bocaData={this.state.bocaData}
                                     ref="bl"
@@ -309,7 +310,18 @@ class GamesLayout extends React.Component {
                                     player={this.state.name}
                                     playAgain={this.playAgain2.bind(this)}/>
                     </View>
-                )
+                ) : (
+                                       <View>
+                                           <DiverLayout zorder={-4} showButton={true} text={"Play"}
+                                                       roll={this.roll.bind(this)}
+                                                       bocaData={this.state.bocaData}
+                                                       ref="bl"
+                                                       chgImg={this.props.chgImg}
+                                                       sendBocaMessage={this.sendBocaMessage.bind(this)}
+                                                       player={this.state.name}
+                                                       playAgain={this.playAgain2.bind(this)}/>
+                                       </View>
+                                   )
             }
 
             </View>

@@ -62,10 +62,16 @@ class LoginLayout extends React.Component {
             n = n.substring(0,5);
         this.props.signon(this.capitalizeFirstLetter(n),2);
     }
+    invokeDiver(){
+        let n = this.state.name;
+        if (n.length > 5)
+            n = n.substring(0,5);
+        this.props.signon(this.capitalizeFirstLetter(n),5);
+    }
     updateStage(input) {
 
         if (input == '<-') {
-            str = this.state.buffer;
+           let  str = this.state.buffer;
             if (str.length == 0) {
                 return;
             }
@@ -81,7 +87,7 @@ class LoginLayout extends React.Component {
         } else {
             this.setState({showButton: true});
             this.setState({buffer: this.state.buffer + input});
-            str = this.state.buffer;
+            let str = this.state.buffer;
             this.setState({color1: "#000000"});
             if (str.length == 0) {
                 this.setState({name: input});
@@ -241,6 +247,16 @@ class LoginLayout extends React.Component {
                                 }}/>
                         <Button updateScene={this.invokeBocaDice.bind(this)} showButton={this.state.showButton}
                                 text="Boca Dice"
+                                style={{
+                                    fontSize: 0.2,
+                                    textAlign: 'center',
+                                    color: "#000000",
+                                    transform: [
+                                        {translateX: 0}
+                                    ]
+                                }}/>
+                        <Button updateScene={this.invokeDiver.bind(this)} showButton={this.state.showButton}
+                                text="Diver"
                                 style={{
                                     fontSize: 0.2,
                                     textAlign: 'center',

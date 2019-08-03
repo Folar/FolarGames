@@ -33,7 +33,7 @@ class BocaField extends React.Component {
         let fieldDim = {height: 2, width: .55, valueFont: .06, dieFont: .09, marginRight: .06};
 
         let moneyless = [];
-        debugger;
+
         for (let i = 0;i < 5 - this.props.money.length;i++)
             moneyless.push(i);
         let moneyData =

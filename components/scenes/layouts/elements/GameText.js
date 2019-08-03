@@ -55,7 +55,7 @@ class GameText extends React.Component {
             this.state.reset = false;
             showButton = true;
         } else if( !showButton && (this.props.admin ||this.props.fakeadmin )){
-            buttonText = "Reset";
+            buttonText = "Reset  v1";
             this.state.reset = true;
             showButton = true;
         }
