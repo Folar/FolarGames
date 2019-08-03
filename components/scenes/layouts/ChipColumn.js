@@ -38,10 +38,10 @@ class ChipColumn extends React.Component {
             topX = .15;
         let  x =[topX,1.2,.1,-1,-2.1,-3.2,-4.3,bottomX];
         let  y =[.4,.2,0,-.2,-.4,-.6,-.8,-1];
-        let data = ["Larry","Sue","Bob","Ax","Larry","Sue","Bob","Ax"]
-        let chips = data.map((item, index) => {
-
-            return <Chip x={x[index]} y={y[index]} size={.5} name={item} color={"cyan"}/>
+        let chips = this.props.data.map((item, index) => {
+            if (item.type == 'F')
+                return <Flag x={x[index]} y={y[index]} />
+            return <Chip x={x[index]} y={y[index]} size={item.size} name={item.name} color={item.color}/>
         });
 
         return (
