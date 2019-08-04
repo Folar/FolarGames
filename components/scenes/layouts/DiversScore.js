@@ -12,7 +12,7 @@ class DiversScore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            color: "white",
+            color: "red",
             backgroundColor: "blue",
             value:1
 
@@ -52,7 +52,7 @@ class DiversScore extends React.Component {
                             height: .35,
                             fontSize: 0.15,
                             textAlign: 'left',
-                            color: 'cyan',
+                            color: this.state.color,
 
                         }}>
                         {""}
@@ -65,7 +65,7 @@ class DiversScore extends React.Component {
                             height: .35,
                             fontSize: 0.15,
                             textAlign: 'center',
-                            color: 'cyan',
+                            color: this.state.color,
                             transform: [
                                 {translateY: 0}
                             ]
@@ -78,7 +78,7 @@ class DiversScore extends React.Component {
                             height: .35,
                             fontSize: 0.15,
                             textAlign: 'center',
-                            color: 'cyan',
+                            color: this.state.color,
                             transform: [
                                 {translateY: 0}
                             ]
@@ -92,7 +92,7 @@ class DiversScore extends React.Component {
                             height: .35,
                             fontSize: 0.15,
                             textAlign: 'center',
-                            color: 'cyan',
+                            color: this.state.color,
                             transform: [
                                 {translateY: 0}
                             ]
@@ -112,7 +112,7 @@ class DiversScore extends React.Component {
                             height: .35,
                             fontSize: 0.20,
                             textAlign: 'left',
-                            color: 'cyan',
+                            color: this.state.color,
 
                         }}>
                         {"Oxygen:"+O+"/25"}
@@ -126,7 +126,7 @@ class DiversScore extends React.Component {
                             height: .35,
                             fontSize: 0.20,
                             textAlign: 'left',
-                            color: 'cyan',
+                            color: this.state.color,
 
                         }}>
                         {"Round:"+rnd}

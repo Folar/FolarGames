@@ -21,6 +21,7 @@ class DiverScoreRow extends React.Component {
             playing: false,
             color1: "#A482DF",
             color2: "#DBDAF1",
+            color:"red",
             text: "Start",
             borderWidths: [0, 0, 0, 0, 0, 0]
         };
@@ -42,7 +43,7 @@ class DiverScoreRow extends React.Component {
                         height: .35,
                         fontSize: 0.15,
                         textAlign: 'left',
-                        color: 'cyan',
+                        color: this.state.color,
 
                     }}>
                     {n}
@@ -55,7 +56,7 @@ class DiverScoreRow extends React.Component {
                         height: .35,
                         fontSize: 0.15,
                         textAlign: 'center',
-                        color: 'cyan',
+                        color: this.state.color,
                         transform: [
                             {translateY: 0}
                         ]
@@ -68,7 +69,7 @@ class DiverScoreRow extends React.Component {
                         height: .35,
                         fontSize: 0.15,
                         textAlign: 'center',
-                        color: 'cyan',
+                        color: this.state.color,
                         transform: [
                             {translateY: 0}
                         ]
@@ -82,7 +83,7 @@ class DiverScoreRow extends React.Component {
                         height: .35,
                         fontSize: 0.15,
                         textAlign: 'center',
-                        color: 'cyan',
+                        color: this.state.color,
                         transform: [
                             {translateY: 0}
                         ]
