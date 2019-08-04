@@ -40,8 +40,9 @@ class ChipColumn extends React.Component {
         let  y =[.4,.2,0,-.2,-.4,-.6,-.8,-1];
         let chips = this.props.data.map((item, index) => {
             if (item.type == 'F')
-                return <Flag x={x[index]} y={y[index]} />
-            return <Chip x={x[index]} y={y[index]} size={item.size} name={item.name} color={item.color}/>
+                return <Flag x={x[index]} y={y[index]} key={index} />
+            return <Chip x={x[index]} y={y[index]} size={item.size} name={item.name}
+                         color={item.color} key={index} />
         });
 
         return (
@@ -51,24 +52,11 @@ class ChipColumn extends React.Component {
                 flexDirection: 'column',
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start',
-                layoutOrigin: [-.13, 1.1],
+                layoutOrigin: [1.2, 1.1],
                 transform: [
                     {translateX: 0}]
             }}>
                 {chips}
-
-                {/*<Chip x={topX} y={.4} size={.7} name={""} color={"blue"}/>*/}
-                {/*<Chip x={1.2} y={.2} size={.7} name={""} color={"blue"}/>*/}
-                {/*<Flag x={.1} y={0} size={.8} name={""} color={"blue"}/>*/}
-                {/*<Chip x={-1} y={-.2} size={.8} name={""} color={"cyan"}/>*/}
-                {/*<Chip x={-2.1} y={-.4} size={.8} name={"Lisa"} color={"cyan"}/>*/}
-                {/*<Chip x={-3.2} y={-.6} size={.8} name={"Stuart"} color={"cyan"}/>*/}
-                {/*<Chip x={-4.3} y={-.8} size={.8} name={"Larry"} color={"cyan"}/>*/}
-                {/*<Chip x={bottomX} y={-1} size={.5} name={"Ariz"} color={"cyan"}/>*/}
-
-
-
-
 
             </View>
 

@@ -10,8 +10,10 @@ import {Easing} from 'react-native';
 const {Choice} = require('./../../../utils/Choice.js');
 
 import ChipColumn from './ChipColumn.js';
+import DiversScore from './DiversScore.js';
 ;
-import ChoiceDiceLayout from './ChoiceDiceLayout.js'
+import DiverDiceLayout from './DiverDiceLayout.js'
+
 
 
 
@@ -31,6 +33,41 @@ class BocaLayout extends React.Component {
 
         this.state = {
             diveData: {
+                round:1,
+                oxygen:24,
+                msg:" the start msg",
+                players:[
+                    {name:"Larry",
+                        score:0,
+                        treasure:1,
+                        position: -1,
+                        direction:"Down"},
+                    {name:"Barry",
+                        score:0,
+                        treasure:1,
+                        position: -1,
+                        direction:"Down"},
+                    {name:"Edmun",
+                        score:0,
+                        treasure:1,
+                        position: -1,
+                        direction:"Down"},
+                    {name:"Eric",
+                        score:0,
+                        treasure:1,
+                        position: -1,
+                        direction:"Down"},
+                    {name:"Rich",
+                        score:0,
+                        treasure:1,
+                        position: -1,
+                        direction:"Down"},
+                    {name:"Sarah",
+                        score:20,
+                        treasure:2,
+                        position: -1,
+                        direction:"Down"},
+                ],
                 chips:[
                     {name:"",
                         type:'C',
@@ -234,6 +271,9 @@ class BocaLayout extends React.Component {
         }
     }
 
+    foo(){
+
+    }
 
 
 
@@ -325,18 +365,23 @@ class BocaLayout extends React.Component {
                     layoutOrigin: [1, 0],
                     transform: [
                         {translateX: 0},
+                        {rotateY: .7},
                         {translateZ: this.state.zorder}]
                 }}>
-
-
-                    {/*<Chip x={2.3} y={.4} size={.8} name={""} color={"blue"}/>*/}
-                    {/*<Chip x={1.2} y={.2} size={.8} name={""} color={"blue"}/>*/}
-                    {/*<Chip x={.1} y={0} size={.8} name={""} color={"blue"}/>*/}
-                    {/*<Chip x={-1} y={-.2} size={.8} name={""} color={"cyan"}/>*/}
-                    {/*<Chip x={-2.1} y={-.4} size={.8} name={"Lisa"} color={"cyan"}/>*/}
-                    {/*<Chip x={-3.2} y={-.6} size={.8} name={"Stuart"} color={"cyan"}/>*/}
-                    {/*<Chip x={-4.3} y={-.8} size={.8} name={"Larry"} color={"cyan"}/>*/}
-                    {/*<Chip x={-5.4} y={-1} size={.8} name={"Ariz"} color={"cyan"}/>*/}
+                    <DiversScore
+                                data={this.state.diveData}/>
+                    <DiverDiceLayout  ref="cdl"
+                                      msg={this.state.diveData.msg}
+                                       sendMessage={this.foo}
+                                       choiceShowButton={true}
+                                       choiceButtonText={"dive"}
+                                       num={2}
+                                       init={['B', 'O']}
+                                       clickable={false} selectDice={this.foo.bind(this)}
+                                       game={"boca"}
+                                       roll={this.foo.bind(this)}
+                                       player={"larry"}
+                                       playAgain={this.props.foo}/>
 
                     <ChipColumn topX={true} bottomX={false}
                                 data={this.state.diveData.chips.slice(0,8).reverse()}/>
