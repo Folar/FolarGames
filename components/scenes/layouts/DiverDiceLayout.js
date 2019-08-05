@@ -69,26 +69,38 @@ class DiverDiceLayout extends React.Component {
 
     invoke() {
 
-        if (this.props.choiceButtonText == "Roll!!") {
+        if (this.props.buttonText == "dive") {
             VrSoundEffects.play(asset('dice.wav'));
             _this = this;
             _this.setState({numberOfRolls: 1});
             setTimeout(_this.roll, 10);
-        } else if (this.props.choiceButtonText == "Start") {
+        } else if (this.props.buttonText == "Start") {
             this.props.sendMessage({name: this.props.player, type: "startBocaDice"});
 
-        } else if (this.props.choiceButtonText == "Confirm") {
+        } else if (this.props.buttonText == "Confirm") {
             _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
                     _this.state.die5, _this.state.die6, _this.state.die7, _this.state.die8],
                 _this.state.di);
-        } else if (this.props.choiceButtonText == "Pass Dice") {
+        } else if (this.props.buttonText == "Pass Dice") {
             this.props.sendMessage({name: this.props.player, type: "passBocaDice"})
 
-        } else if (this.props.choiceButtonText.startsWith("Start Rnd")) {
+        } else if (this.props.buttonText.startsWith("Start Rnd")) {
             this.props.sendMessage({name: this.props.player, type: "nextRoundBocaDice"});
 
-        } else if (this.props.choiceButtonText.startsWith("Restart")) {
+        } else if (this.props.buttonText.startsWith("Restart")) {
             this.props.playAgain();
+        }
+
+
+    }
+
+    invoke2() {
+
+        if (this.props.buttonText2 == "dive") {
+            VrSoundEffects.play(asset('dice.wav'));
+            _this = this;
+            _this.setState({numberOfRolls: 1});
+            setTimeout(_this.roll, 10);
         }
 
 
@@ -149,26 +161,28 @@ class DiverDiceLayout extends React.Component {
         _this = this;
         let dieDim = {height: .2, width: .2, valueFont: .1, dieFont: .15, marginRight: .02};
 
-        let showButton = this.props.choiceShowButton;
-        let buttonText = this.props.choiceButtonText;
+        let showButton = this.props.showButton;
+        let showButton2 = this.props.showButton2;
+        let buttonText = this.props.buttonText;
+        let buttonText2 = this.props.buttonText2;
         let dies = this.conv();
 
 
         let row1Cards =
             dies.map((item, index) => {
-                return <VrButton onClick={this.choose.bind(this, index)} key={index}>
+                return <VrButton  key={index}>
                     <Die value={item} key={index} dim={dieDim} color="black"
                          backgroundColor={_this.getBackground(index)}/>
                 </VrButton>
             });
-        if (this.props.choiceButtonText.startsWith("Start Rnd") ||
-            this.props.choiceButtonText == "Restart" ||
-            this.props.choiceButtonText == "Pass Dice" ||
-            this.props.choiceButtonText == "Finish")
+        if (this.props.buttonText.startsWith("Start Rnd") ||
+            this.props.buttonText == "Restart" ||
+            this.props.buttonText == "Pass Dice" ||
+            this.props.buttonText == "Finish")
             row1Cards = <Text> &nbsp;</Text>;
         return (
             <View style={{
-                layoutOrigin: [0.31, 2.2],
+                layoutOrigin: [-.27, 2.2],
                 flexDirection: 'column', height: 1, width: 4, paddingLeft: .1,
                 alignItems: 'flex-start', justifyContent: 'flex-start'
             }}>
@@ -185,14 +199,14 @@ class DiverDiceLayout extends React.Component {
                     {
                         showButton ? (<View
                                 style={{
-                                    marginLeft: 0.4,
-                                    paddingLeft: 0.2,
-                                    paddingRight: 0.2,
+                                    marginLeft: 0.2,
+                                    paddingLeft: 0.1,
+                                    paddingRight: 0.1,
                                     height: 0.2,
                                     backgroundColor: '#A482DF',
                                     borderRadius: 0.1,
                                     margin: 0.01,
-                                    width: 1.4, flexDirection: 'row',
+                                    width: 1, flexDirection: 'row',
                                     alignItems: 'center',
                                     justifyContent: 'center'
                                 }}
@@ -206,6 +220,35 @@ class DiverDiceLayout extends React.Component {
                                             color: "#FFFFFF"
                                         }}>
                                         {buttonText}
+                                    </Text>
+                                </VrButton>
+                            </View>) :
+                            (<View/>)
+                    }
+                    {
+                        showButton2 ? (<View
+                                style={{
+                                    marginLeft: 0.1,
+                                    paddingLeft: 0.2,
+                                    paddingRight: 0.2,
+                                    height: 0.2,
+                                    backgroundColor: '#A482DF',
+                                    borderRadius: 0.1,
+                                    margin: 0.01,
+                                    width: 2, flexDirection: 'row',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                            >
+
+                                <VrButton onClick={this.invoke2.bind(this)}>
+                                    <Text
+                                        style={{
+                                            fontSize: 0.2,
+                                            textAlign: 'center',
+                                            color: "#FFFFFF"
+                                        }}>
+                                        {buttonText2}
                                     </Text>
                                 </VrButton>
                             </View>) :

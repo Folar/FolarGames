@@ -12,7 +12,7 @@ class DiversScore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            color: "red",
+            color: "black",
             backgroundColor: "blue",
             value:1
 
@@ -41,8 +41,9 @@ class DiversScore extends React.Component {
         });
         return (
             <View style={{
-                layoutOrigin: [0, 2],
-                flexDirection: 'column', height:1,width:4, paddingLeft:.1,
+                layoutOrigin: [.2,.65],opacity:1,
+                flexDirection: 'column', height:3.4,width:1.7, paddingLeft:.1,
+                // backgroundColor:"#AAAAAA",
                 alignItems: 'flex-start', justifyContent: 'flex-start'
             }}>
                 <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
@@ -63,6 +64,7 @@ class DiversScore extends React.Component {
                         style={{
                             width: 0.35,
                             height: .35,
+                            opacity:1,
                             fontSize: 0.15,
                             textAlign: 'center',
                             color: this.state.color,

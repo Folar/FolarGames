@@ -373,12 +373,12 @@ class BocaLayout extends React.Component {
                     <DiverDiceLayout  ref="cdl"
                                       msg={this.state.diveData.msg}
                                        sendMessage={this.foo}
-                                       choiceShowButton={true}
-                                       choiceButtonText={"dive"}
+                                       showButton={true}
+                                      showButton2={false}
+                                       buttonText={"dive"}
+                                      buttonText2={"Pick Up Treasure"}
                                        num={2}
                                        init={['B', 'O']}
-                                       clickable={false} selectDice={this.foo.bind(this)}
-                                       game={"boca"}
                                        roll={this.foo.bind(this)}
                                        player={"larry"}
                                        playAgain={this.props.foo}/>
