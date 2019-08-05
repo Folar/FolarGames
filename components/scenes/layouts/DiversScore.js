@@ -41,8 +41,8 @@ class DiversScore extends React.Component {
         });
         return (
             <View style={{
-                layoutOrigin: [.2,.65],opacity:1,
-                flexDirection: 'column', height:3.4,width:1.7, paddingLeft:.1,
+                layoutOrigin: [-.5,.65],opacity:1,
+                flexDirection: 'column', height:3.4,width:1.5, paddingLeft:.1,
                 // backgroundColor:"#AAAAAA",
                 alignItems: 'flex-start', justifyContent: 'flex-start'
             }}>
@@ -50,7 +50,7 @@ class DiversScore extends React.Component {
                     <Text
                         style={{
                             width: 0.52,
-                            height: .35,
+                            height: .25,
                             fontSize: 0.15,
                             textAlign: 'left',
                             color: this.state.color,
@@ -63,7 +63,7 @@ class DiversScore extends React.Component {
                     <Text
                         style={{
                             width: 0.35,
-                            height: .35,
+                            height: .25,
                             opacity:1,
                             fontSize: 0.15,
                             textAlign: 'center',
@@ -77,7 +77,7 @@ class DiversScore extends React.Component {
                     <Text
                         style={{
                             width: 0.28,
-                            height: .35,
+                            height: .25,
                             fontSize: 0.15,
                             textAlign: 'center',
                             color: this.state.color,
@@ -91,7 +91,7 @@ class DiversScore extends React.Component {
                     <Text
                         style={{
                             width: 0.35,
-                            height: .35,
+                            height: .25,
                             fontSize: 0.15,
                             textAlign: 'center',
                             color: this.state.color,

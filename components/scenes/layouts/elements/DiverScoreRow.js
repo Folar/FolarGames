@@ -74,7 +74,7 @@ class DiverScoreRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.treasure}
+                    {this.props.player.treasure.length}
                 </Text>
 
                 <Text

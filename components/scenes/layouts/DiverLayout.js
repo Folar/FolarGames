@@ -34,22 +34,33 @@ class BocaLayout extends React.Component {
         this.state = {
             diveData: {
                 round:1,
+                buttonText:"Start",
+                buttonText2:"",
                 oxygen:24,
                 msg:" the start msg",
                 players:[
                     {name:"Larry",
                         score:0,
-                        treasure:1,
+                        treasure:[{name:"",
+                            type:'C',
+                            color:"#2dcded",
+                            value:3,
+                            size:.5},
+                            {name:"",
+                            type:'C',
+                            color:"#2dcded",
+                            value:3,
+                            size:.5}],
                         position: -1,
                         direction:"Down"},
                     {name:"Barry",
                         score:0,
-                        treasure:1,
+                        treasure:[],
                         position: -1,
                         direction:"Down"},
                     {name:"Edmun",
                         score:0,
-                        treasure:1,
+                        treasure:[],
                         position: -1,
                         direction:"Down"},
                     {name:"Eric",
@@ -59,12 +70,12 @@ class BocaLayout extends React.Component {
                         direction:"Down"},
                     {name:"Rich",
                         score:0,
-                        treasure:1,
+                        treasure:[],
                         position: -1,
                         direction:"Down"},
                     {name:"Sarah",
                         score:20,
-                        treasure:2,
+                        treasure:[],
                         position: -1,
                         direction:"Down"},
                 ],
@@ -373,10 +384,10 @@ class BocaLayout extends React.Component {
                     <DiverDiceLayout  ref="cdl"
                                       msg={this.state.diveData.msg}
                                        sendMessage={this.foo}
-                                       showButton={true}
-                                      showButton2={false}
-                                       buttonText={"dive"}
-                                      buttonText2={"Pick Up Treasure"}
+                                       showButton={this.state.diveData.buttonText.length>0}
+                                      showButton2={this.state.diveData.buttonText2.length>0}
+                                       buttonText={this.state.diveData.buttonText}
+                                      buttonText2={this.state.diveData.buttonText}
                                        num={2}
                                        init={['B', 'O']}
                                        roll={this.foo.bind(this)}

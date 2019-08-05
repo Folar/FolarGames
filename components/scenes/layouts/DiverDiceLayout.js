@@ -54,9 +54,9 @@ class DiverDiceLayout extends React.Component {
             _this.setState({die2: 2});
 
         }
-        if (_this.state.numberOfRolls < 4) {
+        if (_this.state.numberOfRolls < 7) {
             _this.setState({numberOfRolls: 1 + _this.state.numberOfRolls});
-            setTimeout(_this.roll, 50);
+            setTimeout(_this.roll, 70);
         } else {
             let arr = _this.conv(2);
 
@@ -100,7 +100,7 @@ class DiverDiceLayout extends React.Component {
             VrSoundEffects.play(asset('dice.wav'));
             _this = this;
             _this.setState({numberOfRolls: 1});
-            setTimeout(_this.roll, 10);
+            setTimeout(_this.roll, 50);
         }
 
 
