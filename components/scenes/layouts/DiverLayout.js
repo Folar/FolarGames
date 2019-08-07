@@ -32,221 +32,7 @@ class BocaLayout extends React.Component {
         bocaThis = this;
 
         this.state = {
-            diveData: {
-                round:1,
-                buttonText:"Start",
-                buttonText2:"",
-                oxygen:24,
-                msg:" the start msg",
-                players:[
-                    {name:"Larry",
-                        score:0,
-                        treasure:[{name:"",
-                            type:'C',
-                            color:"#2dcded",
-                            value:3,
-                            size:.5},
-                            {name:"",
-                            type:'C',
-                            color:"#2dcded",
-                            value:3,
-                            size:.5}],
-                        position: -1,
-                        direction:"Down"},
-                    {name:"Barry",
-                        score:0,
-                        treasure:[],
-                        position: -1,
-                        direction:"Down"},
-                    {name:"Edmun",
-                        score:0,
-                        treasure:[],
-                        position: -1,
-                        direction:"Down"},
-                    {name:"Eric",
-                        score:0,
-                        treasure:1,
-                        position: -1,
-                        direction:"Down"},
-                    {name:"Rich",
-                        score:0,
-                        treasure:[],
-                        position: -1,
-                        direction:"Down"},
-                    {name:"Sarah",
-                        score:20,
-                        treasure:[],
-                        position: -1,
-                        direction:"Down"},
-                ],
-                chips:[
-                    {name:"",
-                        type:'C',
-                        color:"#2dcded",
-                        value:3,
-                        size:.5},
-                    {name:"",
-                        type:'F',
-                        color:"#2dcded",
-                        value:3,
-                        size:.5},
-                    {name:"",
-                        type:'C',
-                        color:"#2dcded",
-                        value:3,
-                        size:.5},
-                    {name:"",
-                        type:'C',
-                        color:"#2dcded",
-                        value:3,
-                        size:.5},
-                    {name:"",
-                        type:'C',
-                        color:"#2dcded",
-                        value:3,
-                        size:.5},
-                    {name:"",
-                        type:'C',
-                        color:"#2dcded",
-                        value:3,
-                        size:.5},
-                    {name:"",
-                        type:'C',
-                        color:"#2dcded",
-                        value:3,
-                        size:.5},
-                    {name:"",
-                        type:'C',
-                        color:"#2dcded",
-                        value:3,
-                        size:.5},
-
-                    {name:"",
-                        type:'C',
-                        color:"#40aed6",
-                        value:3,
-                        size:.6},
-                    {name:"",
-                        type:'C',
-                        color:"#40aed6",
-                        value:3,
-                        size:.6},
-                    {name:"",
-                        type:'C',
-                        color:"#40a3d6",
-                        value:3,
-                        size:.6},
-                    {name:"",
-                        type:'C',
-                        color:"#40aed6",
-                        value:3,
-                        size:.6},
-                    {name:"",
-                        type:'C',
-                        color:"#40aed6",
-                        value:3,
-                        size:.6},
-                    {name:"",
-                        type:'C',
-                        color:"#40aed6",
-                        value:3,
-                        size:.6},
-                    {name:"",
-                        type:'C',
-                        color:"#40aed6",
-                        value:3,
-                        size:.6},
-                    {name:"",
-                        type:'C',
-                        color:"#40aed6",
-                        value:3,
-                        size:.6},
-
-                    {name:"",
-                        type:'C',
-                        color:"#3c7da3",
-                        value:3,
-                        size:.7},
-                    {name:"",
-                        type:'C',
-                        color:"#3c7da3",
-                        value:3,
-                        size:.7},
-                    {name:"",
-                        type:'C',
-                        color:"#3c7da3",
-                        value:3,
-                        size:.7},
-                    {name:"",
-                        type:'C',
-                        color:"#3c7da3",
-                        value:3,
-                        size:.7},
-                    {name:"",
-                        type:'C',
-                        color:"#3c7da3",
-                        value:3,
-                        size:.7},
-                    {name:"",
-                        type:'C',
-                        color:"#3c7da3",
-                        value:3,
-                        size:.7},
-                    {name:"",
-                        type:'C',
-                        color:"#3c7da3",
-                        value:3,
-                        size:.7},
-                    {name:"",
-                        type:'F',
-                        color:"#3c7da3",
-                        value:3,
-                        size:.7},
-
-                    {name:"",
-                        type:'C',
-                        color:"#406280",
-                        value:3,
-                        size:.8},
-                    {name:"",
-                        type:'C',
-                        color:"#406280",
-                        value:3,
-                        size:.8},
-                    {name:"",
-                        type:'C',
-                        color:"#406280",
-                        value:3,
-                        size:.8},
-                    {name:"",
-                        type:'C',
-                        color:"#406280",
-                        value:3,
-                        size:.8},
-                    {name:"",
-                        type:'C',
-                        color:"#406280",
-                        value:3,
-                        size:.8},
-                    {name:"",
-                        type:'C',
-                        color:"#406280",
-                        value:3,
-                        size:.8},
-                    {name:"",
-                        type:'C',
-                        color:"#406280",
-                        value:3,
-                        size:.8},
-                    {name:"",
-                        type:'C',
-                        color:"#406280",
-                        value:3,
-                        size:.8}
-                ]
-            },
-            bocaData:  this.props.bocaData,
-
+            diverData:  this.props.diverData,
             zorder: this.props.zorder,
             di:0,
             qty:0
@@ -265,7 +51,7 @@ class BocaLayout extends React.Component {
             this.state.bocaData.buttonText = "";
             this.state.bocaData.message = "Continue to next player";
             this.setState({bocaData: this.state.bocaData});
-            this.props.sendBocaMessage({
+            this.props.sendDiverMessage({
                 name: this.props.player, type: "rollBocaDice",
                 dice: dice, selectedDice: di,
                 fld:this.state.bocaData.fieldPlayers[dice[di]-1],
@@ -275,7 +61,7 @@ class BocaLayout extends React.Component {
             this.state.bocaData.buttonText = "";
             this.state.bocaData.message = "Select a dice and then press Confirm";
             this.setState({bocaData: this.state.bocaData});
-            this.props.sendBocaMessage({
+            this.props.sendDiverMessage({
                 name: this.props.player, type: "rollBocaDice",
                 dice: dice, selectedDice: -1
             });
@@ -307,7 +93,7 @@ class BocaLayout extends React.Component {
     }
 
     setData(d){
-        this.setState({bocaData:d});
+        this.setState({diverData:d});
 
     }
     canClick(){
@@ -380,26 +166,26 @@ class BocaLayout extends React.Component {
                         {translateZ: this.state.zorder}]
                 }}>
                     <DiversScore
-                                data={this.state.diveData}/>
+                                data={this.state.diverData}/>
                     <DiverDiceLayout  ref="cdl"
-                                      msg={this.state.diveData.msg}
-                                       sendMessage={this.foo}
-                                       showButton={this.state.diveData.buttonText.length>0}
-                                      showButton2={this.state.diveData.buttonText2.length>0}
-                                       buttonText={this.state.diveData.buttonText}
-                                      buttonText2={this.state.diveData.buttonText}
+                                      msg={this.state.diverData.message}
+                                       sendMessage={this.props.sendDiverMessage}
+                                       showButton={this.state.diverData.buttonText.length>0}
+                                      showButton2={this.state.diverData.buttonText2.length>0}
+                                       buttonText={this.state.diverData.buttonText}
+                                      buttonText2={this.state.diverData.buttonText2}
                                        num={2}
-                                       init={['B', 'O']}
+                                       init={['D', 'D']}
                                        roll={this.foo.bind(this)}
-                                       player={"larry"}
-                                       playAgain={this.props.foo}/>
+                                       player={this.props.player}
+                                       playAgain={this.props.playAgain}/>
 
                     <ChipColumn topX={true} bottomX={false}
-                                data={this.state.diveData.chips.slice(0,8).reverse()}/>
-                    <ChipColumn topX={false} bottomX={true}  data={this.state.diveData.chips.slice(8,16)}/>
+                                data={this.state.diverData.chips.slice(0,8).reverse()}/>
+                    <ChipColumn topX={false} bottomX={true}  data={this.state.diverData.chips.slice(8,16)}/>
                     <ChipColumn topX={true} bottomX={false}
-                                data={this.state.diveData.chips.slice(16,24).reverse()}/>
-                    <ChipColumn topX={false} bottomX={false}  data={this.state.diveData.chips.slice(24)}/>
+                                data={this.state.diverData.chips.slice(16,24).reverse()}/>
+                    <ChipColumn topX={false} bottomX={false}  data={this.state.diverData.chips.slice(24)}/>
 
 
 

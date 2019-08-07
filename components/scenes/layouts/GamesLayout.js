@@ -60,9 +60,182 @@ class GamesLayout extends React.Component {
         this.state = {
 
             name: "Click keys to spell your name and then press Play",
-            loginScene: 5,
+            loginScene: 1,
             txtclr: "#444444",
             data: {},
+            diverData: {
+                            round:1,
+                            buttonText:"Start",
+                            buttonText2:"",
+                            oxygen:25,
+                            message:"",
+                            players:[],
+                            chips:[
+                                {name:"",
+                                    type:'C',
+                                    color:"#2dcded",
+                                    value:3,
+                                    size:.5},
+                                {name:"",
+                                    type:'F',
+                                    color:"#2dcded",
+                                    value:3,
+                                    size:.5},
+                                {name:"",
+                                    type:'C',
+                                    color:"#2dcded",
+                                    value:3,
+                                    size:.5},
+                                {name:"",
+                                    type:'C',
+                                    color:"#2dcded",
+                                    value:3,
+                                    size:.5},
+                                {name:"",
+                                    type:'C',
+                                    color:"#2dcded",
+                                    value:3,
+                                    size:.5},
+                                {name:"",
+                                    type:'C',
+                                    color:"#2dcded",
+                                    value:3,
+                                    size:.5},
+                                {name:"",
+                                    type:'C',
+                                    color:"#2dcded",
+                                    value:3,
+                                    size:.5},
+                                {name:"",
+                                    type:'C',
+                                    color:"#2dcded",
+                                    value:3,
+                                    size:.5},
+
+                                {name:"",
+                                    type:'C',
+                                    color:"#40aed6",
+                                    value:3,
+                                    size:.6},
+                                {name:"",
+                                    type:'C',
+                                    color:"#40aed6",
+                                    value:3,
+                                    size:.6},
+                                {name:"",
+                                    type:'C',
+                                    color:"#40a3d6",
+                                    value:3,
+                                    size:.6},
+                                {name:"",
+                                    type:'C',
+                                    color:"#40aed6",
+                                    value:3,
+                                    size:.6},
+                                {name:"",
+                                    type:'C',
+                                    color:"#40aed6",
+                                    value:3,
+                                    size:.6},
+                                {name:"",
+                                    type:'C',
+                                    color:"#40aed6",
+                                    value:3,
+                                    size:.6},
+                                {name:"",
+                                    type:'C',
+                                    color:"#40aed6",
+                                    value:3,
+                                    size:.6},
+                                {name:"",
+                                    type:'C',
+                                    color:"#40aed6",
+                                    value:3,
+                                    size:.6},
+
+                                {name:"",
+                                    type:'C',
+                                    color:"#3c7da3",
+                                    value:3,
+                                    size:.7},
+                                {name:"",
+                                    type:'C',
+                                    color:"#3c7da3",
+                                    value:3,
+                                    size:.7},
+                                {name:"",
+                                    type:'C',
+                                    color:"#3c7da3",
+                                    value:3,
+                                    size:.7},
+                                {name:"",
+                                    type:'C',
+                                    color:"#3c7da3",
+                                    value:3,
+                                    size:.7},
+                                {name:"",
+                                    type:'C',
+                                    color:"#3c7da3",
+                                    value:3,
+                                    size:.7},
+                                {name:"",
+                                    type:'C',
+                                    color:"#3c7da3",
+                                    value:3,
+                                    size:.7},
+                                {name:"",
+                                    type:'C',
+                                    color:"#3c7da3",
+                                    value:3,
+                                    size:.7},
+                                {name:"",
+                                    type:'F',
+                                    color:"#3c7da3",
+                                    value:3,
+                                    size:.7},
+
+                                {name:"",
+                                    type:'C',
+                                    color:"#406280",
+                                    value:3,
+                                    size:.8},
+                                {name:"",
+                                    type:'C',
+                                    color:"#406280",
+                                    value:3,
+                                    size:.8},
+                                {name:"",
+                                    type:'C',
+                                    color:"#406280",
+                                    value:3,
+                                    size:.8},
+                                {name:"",
+                                    type:'C',
+                                    color:"#406280",
+                                    value:3,
+                                    size:.8},
+                                {name:"",
+                                    type:'C',
+                                    color:"#406280",
+                                    value:3,
+                                    size:.8},
+                                {name:"",
+                                    type:'C',
+                                    color:"#406280",
+                                    value:3,
+                                    size:.8},
+                                {name:"",
+                                    type:'C',
+                                    color:"#406280",
+                                    value:3,
+                                    size:.8},
+                                {name:"",
+                                    type:'C',
+                                    color:"#406280",
+                                    value:3,
+                                    size:.8}
+                            ]
+                        },
             choiceData: {},
             bocaData: {
                 players: [
@@ -130,6 +303,10 @@ class GamesLayout extends React.Component {
 
 
     }
+    playAgain3() {
+        this.client.close();
+        this.connectToServer(5);
+    }
     playAgain2() {
         this.client.close();
         this.connectToServer(4);
@@ -196,8 +373,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-        client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-       // client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+        //client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+        client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -206,7 +383,7 @@ class GamesLayout extends React.Component {
 
 
         client.onmessage = function (x) {
-           // debugger;
+
             let packet = JSON.parse(x.data);
             if (packet.messageType === "choosePair") {
                 choiceThis.setState({choiceData: packet.data});
@@ -236,7 +413,7 @@ class GamesLayout extends React.Component {
             if (gt == 2) {
                 takeSixThis.setState({data: packet});
                 takeSixThis.setState({showButton: packet.state < 2})
-            } else {
+            } else   if (gt == 4 ) {
                 if (packet.type === "rollDice") {
                     _this.refs.bl.setDice( packet.dice,packet.selectedDice);
                 }else if (packet.type === "passDice" || packet.type === "Restart") {
@@ -245,7 +422,18 @@ class GamesLayout extends React.Component {
                 _this.setState({bocaData: packet});
                 _this.refs.bl.setData( packet);
 
-            }
+            } else   if (gt ==5 ) {
+              if (packet.type === "rollDice") {
+                  _this.refs.dl.setDice( packet.dice,-1);
+              }else if (packet.type === "passDice" || packet.type === "Restart") {
+                  _this.refs.dl.resetDice( packet.dice,-1);
+              }
+              debugger;
+              _this.setState({diverData: packet});
+              _this.refs.dl.setData( packet);
+
+          }
+
 
 
         };
@@ -314,12 +502,12 @@ class GamesLayout extends React.Component {
                                        <View>
                                            <DiverLayout zorder={-4} showButton={true} text={"Play"}
                                                        roll={this.roll.bind(this)}
-                                                       bocaData={this.state.bocaData}
-                                                       ref="bl"
+                                                       diverData={this.state.diverData}
+                                                       ref="dl"
                                                        chgImg={this.props.chgImg}
-                                                       sendBocaMessage={this.sendBocaMessage.bind(this)}
+                                                       sendDiverMessage={this.sendBocaMessage.bind(this)}
                                                        player={this.state.name}
-                                                       playAgain={this.playAgain2.bind(this)}/>
+                                                       playAgain={this.playAgain3.bind(this)}/>
                                        </View>
                                    )
             }

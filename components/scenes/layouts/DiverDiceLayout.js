@@ -69,13 +69,13 @@ class DiverDiceLayout extends React.Component {
 
     invoke() {
 
-        if (this.props.buttonText == "dive") {
+        if (this.props.buttonText == "Roll!!") {
             VrSoundEffects.play(asset('dice.wav'));
             _this = this;
             _this.setState({numberOfRolls: 1});
             setTimeout(_this.roll, 10);
         } else if (this.props.buttonText == "Start") {
-            this.props.sendMessage({name: this.props.player, type: "startBocaDice"});
+            this.props.sendMessage({name: this.props.player, type: "startDiver"});
 
         } else if (this.props.buttonText == "Confirm") {
             _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
