@@ -424,7 +424,7 @@ class GamesLayout extends React.Component {
 
             } else   if (gt ==5 ) {
               if (packet.type === "rollDice") {
-                  _this.refs.dl.setDice( packet.dice,-1);
+                  _this.refs.dl.setDice( packet.di1,packet.di2);
               }else if (packet.type === "passDice" || packet.type === "Restart") {
                   _this.refs.dl.resetDice( packet.dice,-1);
               }

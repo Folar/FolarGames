@@ -62,7 +62,7 @@ class DiverDiceLayout extends React.Component {
 
             _this.setState({die1: arr[0]});
             _this.setState({die2: arr[1]});
-
+            _this.props.sendMessage({type:"DIVER",name: _this.props.player, action: "roll",di1:Number(arr[0]),di2:Number(arr[1])});
             _this.props.roll(arr, _this.state.di);
         }
     }
@@ -75,7 +75,7 @@ class DiverDiceLayout extends React.Component {
             _this.setState({numberOfRolls: 1});
             setTimeout(_this.roll, 10);
         } else if (this.props.buttonText == "Start") {
-            this.props.sendMessage({name: this.props.player, type: "startDiver"});
+            _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "startDiver"});
 
         } else if (this.props.buttonText == "Confirm") {
             _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
@@ -119,11 +119,10 @@ class DiverDiceLayout extends React.Component {
         this.props.selectDice(dies[d], cnt);
     }
 
-    setDice(die, di) {
-
-        _this.state.die1 = die[0];
-        _this.state.die2 = die[1];
-        _this.state.di = di;
+    setDice(di1, di2) {
+        debugger;
+        _this.state.die1 = di1;
+        _this.state.die2 = di2;
     }
 
     resetDice() {

@@ -47,7 +47,7 @@ class Chip extends React.Component {
                     }}
                 />
                 <Text  style={{
-                    color: 'black',
+                    color: this.props.textColor,
                     fontSize:.3,
                     textAlign: 'left',
                     transform: [{translate: [-0.3,.25,0]}, {rotateX: 0}],

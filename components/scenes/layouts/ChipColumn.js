@@ -42,7 +42,7 @@ class ChipColumn extends React.Component {
             if (item.type == 'F')
                 return <Flag x={x[index]} y={y[index]} key={index} />
             return <Chip x={x[index]} y={y[index]} size={item.size} name={item.name}
-                         color={item.color} key={index} />
+                         color={item.color} key={index} textColor={item.textColor} />
         });
 
         return (
