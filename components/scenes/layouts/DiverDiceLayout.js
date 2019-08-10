@@ -43,7 +43,7 @@ class DiverDiceLayout extends React.Component {
 
 
     roll() {
-
+        debugger;
         if (!rolltest) {
             _this.setState({die1: Math.floor(Math.random() * 3) + 1});
             _this.setState({die2: Math.floor(Math.random() * 3) + 1});
@@ -69,58 +69,54 @@ class DiverDiceLayout extends React.Component {
 
     invoke() {
 
-        if (this.props.buttonText == "Roll!!") {
-            VrSoundEffects.play(asset('dice.wav'));
-            _this = this;
-            _this.setState({numberOfRolls: 1});
-            setTimeout(_this.roll, 10);
-        } else if (this.props.buttonText == "Start") {
-            _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "startDiver"});
+        switch(this.props.buttonText) {
+            case "Start":
+                _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "startDiver"});
+                break;
+            case "Roll!!":
+                VrSoundEffects.play(asset('dice.wav'));
+                _this = this;
+                _this.setState({numberOfRolls: 1});
+                setTimeout(_this.roll, 10);
+                break;
 
-        } else if (this.props.buttonText == "Confirm") {
-            _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
-                    _this.state.die5, _this.state.die6, _this.state.die7, _this.state.die8],
-                _this.state.di);
-        } else if (this.props.buttonText == "Pass Dice") {
-            this.props.sendMessage({name: this.props.player, type: "passBocaDice"})
-
-        } else if (this.props.buttonText.startsWith("Start Rnd")) {
-            this.props.sendMessage({name: this.props.player, type: "nextRoundBocaDice"});
-
-        } else if (this.props.buttonText.startsWith("Restart")) {
-            this.props.playAgain();
+            case "Pass":
+                _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "pass"});
+                break
+            case "Restart":
+                this.props.playAgain();
+                //_this.props.sendMessage({type:"DIVER",name: this.props.player, action: "restart"});
+                break;
+            case "Next Round":
+                _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "nextRound"});
+                break;
         }
-
 
     }
 
     invoke2() {
 
-        if (this.props.buttonText2 == "dive") {
-            VrSoundEffects.play(asset('dice.wav'));
-            _this = this;
-            _this.setState({numberOfRolls: 1});
-            setTimeout(_this.roll, 50);
+        switch(this.props.buttonText2) {
+            case "Change Direction":
+                _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "changeDirection"});
+                break;
+            case "Pass":
+                _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "pass"});
+                break
+            case "Drop a tresaure":
+                _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "drop"});
+                break;
+            case "Pick up a treasure":
+                _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "pickup"});
+                break;
         }
 
 
     }
 
-    choose(d) {
-        if (!this.props.clickable) return;
-        this.setState({di: d});
-        let cnt = 0;
-        let dies = this.conv();
-        for (let i = 0; i < this.props.num; i++) {
-            if (dies[i] == dies[d])
-                cnt++;
-        }
 
-        this.props.selectDice(dies[d], cnt);
-    }
 
     setDice(di1, di2) {
-        debugger;
         _this.state.die1 = di1;
         _this.state.die2 = di2;
     }
@@ -128,8 +124,6 @@ class DiverDiceLayout extends React.Component {
     resetDice() {
         _this.state.die1 = this.props.init[0];
         _this.state.die2 = this.props.init[1];
-
-        _this.state.di = -1;
     }
 
     conv(n = 2) {
@@ -148,11 +142,6 @@ class DiverDiceLayout extends React.Component {
     }
 
     getBackground(index) {
-        let dies = this.conv();
-        for (let i = 0; i < this.props.num; i++) {
-            if (dies[index] == dies[this.state.di])
-                return "gray";
-        }
         return "white"
     }
 
