@@ -4,17 +4,17 @@ import {
     View,
     VrButton
 } from 'react-vr';
-import DiverScoreRow from './elements/DiverScoreRow.js';
+import TreasureRow from './elements/TreasureRow.js';
 
 
 //Element
-class DiversScore extends React.Component {
+class DiversTreasure extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             color: "black",
             backgroundColor: "blue",
-            value:1
+            value: 1
 
         };
     }
@@ -35,18 +35,16 @@ class DiversScore extends React.Component {
             rnd = this.props.data.round;
         }
         var p =players.map((item, index) => {
-// cp={this.props.data.currentIndex == index?"white":""}
-            if(this.props.data.currentIndex == index)
-            return(
-                    <View key={index} style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start' ,backgroundColor:"white"}}>
-                            <DiverScoreRow style={{backgroundColor:"white"}}  key={index} player={item} />
+                return(
+                    <View key={index} style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start' }}>
+                        <TreasureRow   key={index} player={item} />
                     </View>
                 );
-            return  <DiverScoreRow  key={index} player={item} />
+
         });
         return (
             <View style={{
-                layoutOrigin: [-.5,.65],opacity:1,
+                layoutOrigin: [-2,0],opacity:1,
                 flexDirection: 'column', height:3.4,width:1.5, paddingLeft:.1,
                 // backgroundColor:"#AAAAAA",
                 alignItems: 'flex-start', justifyContent: 'flex-start'
@@ -58,7 +56,7 @@ class DiversScore extends React.Component {
                             height: .25,
                             fontSize: 0.15,
                             textAlign: 'left',
-                            color: this.state.color,
+                            color: "white",
 
                         }}>
                         {""}
@@ -72,12 +70,12 @@ class DiversScore extends React.Component {
                             opacity:1,
                             fontSize: 0.15,
                             textAlign: 'center',
-                            color: this.state.color,
+                            color: "white",
                             transform: [
                                 {translateY: 0}
                             ]
                         }}>
-                        {"Score"}
+                        {"S"}
                     </Text>
                     <Text
                         style={{
@@ -85,12 +83,12 @@ class DiversScore extends React.Component {
                             height: .25,
                             fontSize: 0.15,
                             textAlign: 'center',
-                            color: this.state.color,
+                            color: "white",
                             transform: [
                                 {translateY: 0}
                             ]
                         }}>
-                        {"Trs"}
+                        {"M "}
                     </Text>
 
                     <Text
@@ -99,50 +97,36 @@ class DiversScore extends React.Component {
                             height: .25,
                             fontSize: 0.15,
                             textAlign: 'center',
-                            color: this.state.color,
+                            color: "white",
                             transform: [
                                 {translateY: 0}
                             ]
                         }}>
-                        {"Dir"}
+                        {"L "}
                     </Text>
 
-
+                    <Text
+                        style={{
+                            width: 0.35,
+                            height: .25,
+                            fontSize: 0.15,
+                            textAlign: 'center',
+                            color: "white",
+                            transform: [
+                                {translateY: 0}
+                            ]
+                        }}>
+                        {"XL"}
+                    </Text>
 
 
                 </View>
                 {p}
-                <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-                    <Text
-                        style={{
-                            width: 1.4,
-                            height: .35,
-                            fontSize: 0.20,
-                            textAlign: 'left',
-                            color: this.state.color,
 
-                        }}>
-                        {"Oxygen:"+O+"/25"}
-                    </Text>
-                </View>
-
-                <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
-                    <Text
-                        style={{
-                            width: 1.4,
-                            height: .35,
-                            fontSize: 0.20,
-                            textAlign: 'left',
-                            color: this.state.color,
-
-                        }}>
-                        {"Round:"+rnd}
-                    </Text>
-                </View>
 
             </View>
         )
     }
 }
 
-module.exports = DiversScore;
+module.exports = DiversTreasure;

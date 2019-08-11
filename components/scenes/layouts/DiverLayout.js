@@ -11,25 +11,18 @@ const {Choice} = require('./../../../utils/Choice.js');
 
 import ChipColumn from './ChipColumn.js';
 import DiversScore from './DiversScore.js';
-;
+import DiversTreasure from './DiversTreasure.js';
 import DiverDiceLayout from './DiverDiceLayout.js'
 
 
 
 
-let _this = null;
-choiceThis = null;
-let choice = new Choice();
-
-
-
 
 //Layout
-class BocaLayout extends React.Component {
+class DiverLayout extends React.Component {
 
     constructor(props) {
         super(props);
-        bocaThis = this;
 
         this.state = {
             diverData:  this.props.diverData,
@@ -149,6 +142,7 @@ class BocaLayout extends React.Component {
 
     render() {
 
+        let show = true;
         return (
             <View>
 
@@ -165,8 +159,8 @@ class BocaLayout extends React.Component {
                         {rotateY: .7},
                         {translateZ: this.state.zorder}]
                 }}>
-                    <DiversScore
-                                data={this.state.diverData}/>
+                    <DiversScore data={this.state.diverData}/>
+
                     <DiverDiceLayout  ref="cdl"
                                       msg={this.state.diverData.message}
                                        sendMessage={this.props.sendDiverMessage}
@@ -179,15 +173,14 @@ class BocaLayout extends React.Component {
                                        roll={this.foo.bind(this)}
                                        player={this.props.player}
                                        playAgain={this.props.playAgain}/>
+                    { show ? (<DiversTreasure data={this.state.diverData}/>): (<Text></Text>)}
 
-                    <ChipColumn topX={true} bottomX={false}
-                                data={this.state.diverData.chips.slice(0,8).reverse()}/>
+                    <ChipColumn topX={true} bottomX={false} data={this.state.diverData.chips.slice(0,8).reverse()}/>
+
                     <ChipColumn topX={false} bottomX={true}  data={this.state.diverData.chips.slice(8,16)}/>
-                    <ChipColumn topX={true} bottomX={false}
-                                data={this.state.diverData.chips.slice(16,24).reverse()}/>
+                    <ChipColumn topX={true} bottomX={false} data={this.state.diverData.chips.slice(16,24).reverse()}/>
+
                     <ChipColumn topX={false} bottomX={false}  data={this.state.diverData.chips.slice(24)}/>
-
-
 
                 </View>
 
@@ -198,4 +191,4 @@ class BocaLayout extends React.Component {
 }
 
 module
-    .exports = BocaLayout;
+    .exports = DiverLayout;
