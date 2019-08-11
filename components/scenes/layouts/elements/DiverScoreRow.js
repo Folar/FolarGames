@@ -34,9 +34,12 @@ class DiverScoreRow extends React.Component {
     render() {
 
         let n = this.props.player.name;
-
+        let bg= this.props.cp;
+        bg="red"
+        debugger;
         return (
-            <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+
+            <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start' }}>
                 <Text
                     style={{
                         width: 0.52,

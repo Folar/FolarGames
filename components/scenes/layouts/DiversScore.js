@@ -28,16 +28,21 @@ class DiversScore extends React.Component {
         let O = 25;
         let rnd = 1
         let m =this.props.data.players;
+
         if(m != null){
             players = m;
             O = this.props.data.oxygen;
             rnd = this.props.data.round;
         }
         var p =players.map((item, index) => {
-
-            return <DiverScoreRow  key={index} player={item}
-            />
-
+// cp={this.props.data.currentIndex == index?"white":""}
+            if(this.props.data.currentIndex == index)
+            return(
+                    <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start' ,backgroundColor:"white"}}>
+                            <DiverScoreRow style={{backgroundColor:"white"}}  key={index} player={item} />
+                    </View>
+                );
+            return  <DiverScoreRow style={{backgroundColor:"white"}}  key={index} player={item} />
         });
         return (
             <View style={{
