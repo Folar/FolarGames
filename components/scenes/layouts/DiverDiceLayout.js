@@ -246,7 +246,7 @@ class DiverDiceLayout extends React.Component {
                 <Text
                     style={{
                         width: 2,
-                        height: 1,
+                        height: 1.5,
                         fontSize: 0.15,
                         textAlign: 'left',
                         color: 'white',

@@ -141,8 +141,27 @@ class DiverLayout extends React.Component {
     }
 
     render() {
-
+        let len =  this.state.diverData.chips.length;
         let show = true;
+        let chips1 =[];
+        let chips2 =[];
+        let chips3 =[];
+        let chips4 =[];
+        if(len < 8) {
+            chips1 = this.state.diverData.chips.slice(0, len).reverse();
+        } else if(len < 16) {
+            chips1 = this.state.diverData.chips.slice(0, 8).reverse();
+            chips2 = this.state.diverData.chips.slice(8, len)();
+        } else if(len < 24) {
+            chips1 = this.state.diverData.chips.slice(0, 8).reverse();
+            chips2 = this.state.diverData.chips.slice(8, 16)();
+            chips3 = this.state.diverData.chips.slice(16, len).reverse();
+        } else {
+            chips1 = this.state.diverData.chips.slice(0, 8).reverse();
+            chips2 = this.state.diverData.chips.slice(8, 16);
+            chips3 = this.state.diverData.chips.slice(16,24).reverse();
+            chips4 = this.state.diverData.chips.slice(24, len)
+        }
         return (
             <View>
 
@@ -175,12 +194,10 @@ class DiverLayout extends React.Component {
                                        playAgain={this.props.playAgain}/>
                     { show ? (<DiversTreasure data={this.state.diverData}/>): (<Text></Text>)}
 
-                    <ChipColumn topX={true} bottomX={false} data={this.state.diverData.chips.slice(0,8).reverse()}/>
-
-                    <ChipColumn topX={false} bottomX={true}  data={this.state.diverData.chips.slice(8,16)}/>
-                    <ChipColumn topX={true} bottomX={false} data={this.state.diverData.chips.slice(16,24).reverse()}/>
-
-                    <ChipColumn topX={false} bottomX={false}  data={this.state.diverData.chips.slice(24)}/>
+                    <ChipColumn  topX={true} bottomX={false} data={chips1}/>
+                    <ChipColumn topX={false} bottomX={true}  data={chips2}/>
+                    <ChipColumn topX={true} bottomX={false} data={chips3}/>
+                    <ChipColumn topX={false} bottomX={false}  data={chips4}/>
 
                 </View>
 
