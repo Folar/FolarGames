@@ -64,7 +64,7 @@ class TreasureRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.score}
+                    {this.props.player.s}
                 </Text>
                 <Text
                     style={{
@@ -77,7 +77,7 @@ class TreasureRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.treasure.length}
+                    {this.props.player.m}
                 </Text>
 
                 <Text
@@ -91,7 +91,7 @@ class TreasureRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.score}
+                    {this.props.player.l}
                 </Text>
 
                 <Text
@@ -105,7 +105,7 @@ class TreasureRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.score}
+                    {this.props.player.xl}
                 </Text>
 
 
