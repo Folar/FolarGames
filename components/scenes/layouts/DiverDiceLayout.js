@@ -43,7 +43,7 @@ class DiverDiceLayout extends React.Component {
 
 
     roll() {
-        debugger;
+
         if (!rolltest) {
             _this.setState({die1: Math.floor(Math.random() * 3) + 1});
             _this.setState({die2: Math.floor(Math.random() * 3) + 1});

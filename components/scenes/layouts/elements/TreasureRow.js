@@ -35,8 +35,7 @@ class TreasureRow extends React.Component {
 
         let n = this.props.player.name;
         let bg= this.props.cp;
-        bg="red"
-        debugger;
+        bg="red";
         return (
 
             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start' }}>

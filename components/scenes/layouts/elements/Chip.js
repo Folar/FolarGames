@@ -25,6 +25,8 @@ class Chip extends React.Component {
 
 
     render() {
+        let nn = this.props.name ;
+        if(this.props.sizes.length> 1) nn += this.props.sizes;
 
         return (
             <View style={{
@@ -51,7 +53,7 @@ class Chip extends React.Component {
                     fontSize:.3,
                     textAlign: 'left',
                     transform: [{translate: [-0.3,.25,0]}, {rotateX: 0}],
-                }}>{this.props.name}</Text>
+                }}>{nn}</Text>
 
             </View>
         )

@@ -36,7 +36,7 @@ class DiverScoreRow extends React.Component {
         let n = this.props.player.name;
         let bg= this.props.cp;
         bg="red"
-        debugger;
+
         return (
 
             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start' }}>
