@@ -84,8 +84,7 @@ class DiverDiceLayout extends React.Component {
                 _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "pass"});
                 break
             case "Restart":
-                this.props.playAgain();
-                //_this.props.sendMessage({type:"DIVER",name: this.props.player, action: "restart"});
+                _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "startDiver"});
                 break;
             case "Next Round":
                 _this.props.sendMessage({type:"DIVER",name: this.props.player, action: "nextRound"});

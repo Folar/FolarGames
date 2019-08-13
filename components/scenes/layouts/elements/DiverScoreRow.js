@@ -36,6 +36,7 @@ class DiverScoreRow extends React.Component {
         let n = this.props.player.name;
         let bg= this.props.cp;
         bg="red"
+        let treasure = this.props.player.s + this.props.player.m +this.props.player.l +this.props.player.xl;
 
         return (
 
@@ -77,7 +78,7 @@ class DiverScoreRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.treasure.length}
+                    {treasure}
                 </Text>
 
                 <Text
