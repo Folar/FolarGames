@@ -27,6 +27,9 @@ class Chip extends React.Component {
     render() {
         let nn = this.props.name ;
         if(this.props.sizes.length> 1) nn += this.props.sizes;
+        let fw = 200;
+        if(this.props.textColor != 'red')
+            fw = 700
 
         return (
             <View style={{
@@ -51,6 +54,7 @@ class Chip extends React.Component {
                 <Text  style={{
                     color: this.props.textColor,
                     fontSize:.3,
+                    fontWeight:fw,
                     textAlign: 'left',
                     transform: [{translate: [-0.3,.25,0]}, {rotateX: 0}],
                 }}>{nn}</Text>
