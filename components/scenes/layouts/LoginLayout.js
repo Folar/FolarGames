@@ -8,7 +8,7 @@ import {Easing} from 'react-native';
 
 ;
 import LetterButton from './elements/LetterButton.js';
-
+import Zoom from './elements/Zoom';
 import Button from './elements/Button.js';
 import {
     asset,
@@ -99,7 +99,9 @@ class LoginLayout extends React.Component {
 
     }
 
-
+    zoom(z){
+        this.props.zoom(z);
+    }
     render() {
         let zorder= this.state.zorder;
 
@@ -127,11 +129,12 @@ class LoginLayout extends React.Component {
                         layoutOrigin: [-.2, 0.3],
                         transform: [
                             {translateX: -3},
-                            {translateZ: zorder}
+                            {translateZ: this.state.zorder}
                         ],
                         marginTop: -0.3
                     }}
                 >
+                    <Zoom zoom={this.zoom.bind(this)}/>
                     <View
                         style={{
                             margin: 0.01,

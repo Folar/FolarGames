@@ -63,6 +63,9 @@ class GamesLayout extends React.Component {
             loginScene: 1,
             txtclr: "#444444",
             data: {},
+            zoom:-3,
+            dtX:-2,
+            dtY:0,
             diverData: {
                             round:1,
                             buttonText:"Start",
@@ -396,6 +399,12 @@ class GamesLayout extends React.Component {
         VrSoundEffects.play(asset('mooing.mp3'));
     }
 
+    zoom(z){
+        this.setState({zoom:-5,
+                        dtX:-2.3,dtY:-.2});
+        //this.forceUpdate();
+    }
+
     connectToServer(gt) {
         let W3CWebSocket = require('websocket').w3cwebsocket;
 
@@ -491,18 +500,19 @@ class GamesLayout extends React.Component {
 
     render() {
         const login = this.state.loginScene;
-
+console.log("hukhvk "+this.state.zoom);
         return (
             <View>{
                 login == 1 ? (
-                    <LoginLayout zorder={-3} showButton={false} t={this} txtclr={this.state.txtclr}
+                    <LoginLayout zorder={this.state.zoom} showButton={false} t={this} txtclr={this.state.txtclr}
                                  signon={this.signon.bind(this)}
+                                 zoom={this.zoom.bind(this)}
                                  msg={this.state.name} key={key}
                                  text={"Play"}/>
                 ) : login == 2 ? (
                     <View>
 
-                        <TakeSixLayout zorder={-4} showButton={this.state.showButton} name={this.state.name}
+                        <TakeSixLayout zorder={this.state.zoom} showButton={this.state.showButton} name={this.state.name}
                                        client={this.client}
                                        pickCard={this.pickCard.bind(this)} data={this.state.data}
                                        admin={this.state.admin}
@@ -514,7 +524,8 @@ class GamesLayout extends React.Component {
                     </View>
                 ) : login == 3 ? (
                     <View>
-                        <ChoiceLayout zorder={-3} showButton={true} text={"Play"} roll={this.roll.bind(this)}
+                        <ChoiceLayout zorder={this.state.zoom -1} showButton={true} text={"Play"} roll={this.roll.bind(this)}
+                                      zoom={this.zoom.bind(this)}
                                       choiceData={choiceThis.state.choiceData}
                                       choiceShowButton={this.state.choiceShowButton}
                                       choiceButtonText={this.state.choiceButtonText}
@@ -522,7 +533,7 @@ class GamesLayout extends React.Component {
                     </View>
                 ) :login == 4 ? (
                     <View>
-                        <BocaLayout zorder={-4} showButton={true} text={"Play"}
+                        <BocaLayout zorder={this.state.zoom} showButton={true} text={"Play"}
                                     roll={this.roll.bind(this)}
                                     bocaData={this.state.bocaData}
                                     ref="bl"
@@ -532,9 +543,11 @@ class GamesLayout extends React.Component {
                     </View>
                 ) : (
                                        <View>
-                                           <DiverLayout zorder={-4} showButton={true} text={"Play"}
+                                           <DiverLayout zorder={this.state.zoom -2} showButton={true} text={"Play"}
                                                        roll={this.roll.bind(this)}
                                                        diverData={this.state.diverData}
+                                                       dtX={this.state.dtX}
+                                                       dtY={this.state.dtY}
                                                        ref="dl"
                                                        chgImg={this.props.chgImg}
                                                        sendDiverMessage={this.sendBocaMessage.bind(this)}

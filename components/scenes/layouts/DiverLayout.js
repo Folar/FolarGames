@@ -192,7 +192,7 @@ class DiverLayout extends React.Component {
                                        roll={this.foo.bind(this)}
                                        player={this.props.player}
                                        playAgain={this.props.playAgain}/>
-                    { show ? (<DiversTreasure data={this.state.diverData}/>): (<Text></Text>)}
+                    { show ? (<DiversTreasure data={this.state.diverData}  x={this.props.dtX} y={this.props.dtY}/>): (<Text></Text>)}
 
                     <ChipColumn  topX={true} bottomX={false} data={chips1}/>
                     <ChipColumn topX={false} bottomX={true}  data={chips2}/>

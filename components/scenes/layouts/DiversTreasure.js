@@ -44,7 +44,7 @@ class DiversTreasure extends React.Component {
         });
         return (
             <View style={{
-                layoutOrigin: [-2,0],opacity:1,
+                layoutOrigin: [this.props.x, this.props.y],opacity:1,
                 flexDirection: 'column', height:3.4,width:1.5, paddingLeft:.1,
                 // backgroundColor:"#AAAAAA",
                 alignItems: 'flex-start', justifyContent: 'flex-start'
