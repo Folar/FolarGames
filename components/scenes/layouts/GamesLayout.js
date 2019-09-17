@@ -401,7 +401,7 @@ class GamesLayout extends React.Component {
 
     zoom(z){
         this.setState({zoom:-5,
-                        dtX:-2.3,dtY:-.2});
+                        dtX:-2.5,dtY:-.4});
         //this.forceUpdate();
     }
 
@@ -500,11 +500,13 @@ class GamesLayout extends React.Component {
 
     render() {
         const login = this.state.loginScene;
-console.log("hukhvk "+this.state.zoom);
+        let adj = 2;
+        if (login == 5 && this.state.zoom == -5)
+            adj = 5;
         return (
             <View>{
                 login == 1 ? (
-                    <LoginLayout zorder={this.state.zoom} showButton={false} t={this} txtclr={this.state.txtclr}
+                    <LoginLayout zorder={this.state.zoom-2} showButton={false} t={this} txtclr={this.state.txtclr}
                                  signon={this.signon.bind(this)}
                                  zoom={this.zoom.bind(this)}
                                  msg={this.state.name} key={key}
@@ -543,7 +545,7 @@ console.log("hukhvk "+this.state.zoom);
                     </View>
                 ) : (
                                        <View>
-                                           <DiverLayout zorder={this.state.zoom -2} showButton={true} text={"Play"}
+                                           <DiverLayout zorder={this.state.zoom -adj} showButton={true} text={"Play"}
                                                        roll={this.roll.bind(this)}
                                                        diverData={this.state.diverData}
                                                        dtX={this.state.dtX}
