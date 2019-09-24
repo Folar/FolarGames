@@ -49,7 +49,7 @@ class BocaLayout extends React.Component {
             this.state.bocaData.message = "Continue to next player";
             this.setState({bocaData: this.state.bocaData});
             this.props.sendBocaMessage({
-                name: this.props.player, type: "rollBocaDice",
+                name: this.props.player, action: "rollBocaDice",type:"BOCA",
                 dice: dice, selectedDice: di,
                 fld:this.state.bocaData.fieldPlayers[dice[di]-1],
                 qty:this.state.qty
@@ -59,7 +59,7 @@ class BocaLayout extends React.Component {
             this.state.bocaData.message = "Select a dice and then press Confirm";
             this.setState({bocaData: this.state.bocaData});
             this.props.sendBocaMessage({
-                name: this.props.player, type: "rollBocaDice",
+                name: this.props.player, action: "rollBocaDice",type:"BOCA",
                 dice: dice, selectedDice: -1
             });
         }
