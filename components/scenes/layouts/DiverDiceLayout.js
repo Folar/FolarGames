@@ -147,6 +147,7 @@ class DiverDiceLayout extends React.Component {
     render() {
         _this = this;
         let dieDim = {height: .2, width: .2, valueFont: .1, dieFont: .15, marginRight: .02};
+        let dieDim2 = {height: .2, width: 1, valueFont: .1, dieFont: .15, marginRight: .02};
 
         let showButton = this.props.showButton;
         let showButton2 = this.props.showButton2;
@@ -170,7 +171,7 @@ class DiverDiceLayout extends React.Component {
         return (
             <View style={{
                 layoutOrigin: [-.27, 2.2],
-                flexDirection: 'column', height: 1, width: 4, paddingLeft: .1,
+                flexDirection: 'column', height: 1, width: 4.3, paddingLeft: .1,
                 alignItems: 'flex-start', justifyContent: 'flex-start'
             }}>
 
@@ -181,7 +182,10 @@ class DiverDiceLayout extends React.Component {
                     justifyContent: 'center'
                 }}>
                     {row1Cards}
-
+                    <VrButton  key={3}>
+                        <Die value={7} key={7} dim={dieDim2} color="black"
+                             backgroundColor={_this.getBackground(2)}/>
+                    </VrButton>
 
                     {
                         showButton ? (<View

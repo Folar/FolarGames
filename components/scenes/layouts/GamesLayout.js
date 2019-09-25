@@ -354,16 +354,16 @@ class GamesLayout extends React.Component {
     clickButton(reset) {
         // console.log("in click Button "+JSON.stringify({name:this.state.name,type:"startingGame"}));
         if (reset)
-            this.client.send(JSON.stringify({name: this.state.name, type: "restartTake6"}));
+            this.client.send(JSON.stringify({name: this.state.name, type: "restartTake6", action: "restartTake6"}));
         else
-            this.client.send(JSON.stringify({name: this.state.name, type: "startingGame"}));
+            this.client.send(JSON.stringify({name: this.state.name, type: "TAKE6", action: "startingGame"}));
     }
 
     pickCard(x, r) {
         if (r == 0)
-            this.client.send(JSON.stringify({name: this.state.name, type: "selectCard", card: x, row: r}));
+            this.client.send(JSON.stringify({name: this.state.name,type: "TAKE6", action: "selectCard", card: x, row: r}));
         else
-            this.client.send(JSON.stringify({name: this.state.name, type: "placeCard", card: x, row: r}));
+            this.client.send(JSON.stringify({name: this.state.name, type: "TAKE6", action: "placeCard", card: x, row: r}));
 
     }
 
