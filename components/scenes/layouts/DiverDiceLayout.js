@@ -30,7 +30,7 @@ class DiverDiceLayout extends React.Component {
             showButton: true,
             die1: this.props.init[0],
             die2: this.props.init[1],
-
+            bonusDie:"",
             numberOfRolls: 0,
             di: -1
 
@@ -48,6 +48,8 @@ class DiverDiceLayout extends React.Component {
             _this.setState({die1: Math.floor(Math.random() * 3) + 1});
             _this.setState({die2: Math.floor(Math.random() * 3) + 1});
 
+            _this.setState({bonusDie: Math.floor(Math.random() * 6) });
+
 
         } else {
             _this.setState({die1: 1});
@@ -62,7 +64,8 @@ class DiverDiceLayout extends React.Component {
 
             _this.setState({die1: arr[0]});
             _this.setState({die2: arr[1]});
-            _this.props.sendMessage({type:"DIVER",name: _this.props.player, action: "roll",di1:Number(arr[0]),di2:Number(arr[1])});
+            _this.props.sendMessage({type:"DIVER",name: _this.props.player, action: "roll",bonus:_this.state.bonusDie,
+                di1:Number(arr[0]),di2:Number(arr[1])});
             _this.props.roll(arr, _this.state.di);
         }
     }
@@ -123,6 +126,7 @@ class DiverDiceLayout extends React.Component {
     resetDice() {
         _this.state.die1 = this.props.init[0];
         _this.state.die2 = this.props.init[1];
+        _this.state.bonusDie = 0;
     }
 
     conv(n = 2) {
@@ -147,7 +151,7 @@ class DiverDiceLayout extends React.Component {
     render() {
         _this = this;
         let dieDim = {height: .2, width: .2, valueFont: .1, dieFont: .15, marginRight: .02};
-        let dieDim2 = {height: .2, width: 1, valueFont: .1, dieFont: .15, marginRight: .02};
+        let dieDim2 = {height: .2, width: 1, valueFont: .08, dieFont: .12, marginRight: .02};
 
         let showButton = this.props.showButton;
         let showButton2 = this.props.showButton2;
@@ -155,7 +159,7 @@ class DiverDiceLayout extends React.Component {
         let buttonText2 = this.props.buttonText2;
         let dies = this.conv();
 
-
+        let bonus=["","gain 2 oxygen","lose 1 oxygen","move 1 extra ","move 2 extra ","shark attack"];
         let row1Cards =
             dies.map((item, index) => {
                 return <VrButton  key={index}>
@@ -183,7 +187,7 @@ class DiverDiceLayout extends React.Component {
                 }}>
                     {row1Cards}
                     <VrButton  key={3}>
-                        <Die value={7} key={7} dim={dieDim2} color="black"
+                        <Die value={bonus[_this.state.bonusDie]} key={7} dim={dieDim2} color="black"
                              backgroundColor={_this.getBackground(2)}/>
                     </VrButton>
 

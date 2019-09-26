@@ -188,7 +188,7 @@ class DiverLayout extends React.Component {
                                        buttonText={this.state.diverData.buttonText}
                                       buttonText2={this.state.diverData.buttonText2}
                                        num={2}
-                                       init={['D', 'D']}
+                                       init={['G', 'D']}
                                        roll={this.foo.bind(this)}
                                        player={this.props.player}
                                        playAgain={this.props.playAgain}/>
