@@ -42,7 +42,11 @@ class DiversScore extends React.Component {
                             <DiverScoreRow style={{backgroundColor:"white"}}  key={index} player={item} />
                     </View>
                 );
-            return  <DiverScoreRow  key={index} player={item} />
+            return  (
+                <View key={index} style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start' ,backgroundColor:"lightgray"}}>
+                    <DiverScoreRow style={{backgroundColor:"#0808008"}}  key={index} player={item} />
+                </View>
+            );
         });
         return (
             <View style={{
@@ -51,7 +55,7 @@ class DiversScore extends React.Component {
                 // backgroundColor:"#AAAAAA",
                 alignItems: 'flex-start', justifyContent: 'flex-start'
             }}>
-                <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start',backgroundColor:"lightgray"}}>
                     <Text
                         style={{
                             width: 0.52,
@@ -112,10 +116,10 @@ class DiversScore extends React.Component {
 
                 </View>
                 {p}
-                <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start',backgroundColor:"lightgray", paddingTop:.1,}}>
                     <Text
                         style={{
-                            width: 1.4,
+                            width: 1.5,
                             height: .35,
                             fontSize: 0.20,
                             textAlign: 'left',
@@ -126,10 +130,10 @@ class DiversScore extends React.Component {
                     </Text>
                 </View>
 
-                <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start', backgroundColor:"lightgray"}}>
                     <Text
                         style={{
-                            width: 1.4,
+                            width: 1.5,
                             height: .35,
                             fontSize: 0.20,
                             textAlign: 'left',

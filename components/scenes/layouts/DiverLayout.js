@@ -147,14 +147,15 @@ class DiverLayout extends React.Component {
         let chips2 =[];
         let chips3 =[];
         let chips4 =[];
-        if(len < 8) {
+        console.log("len ="+ len);
+        if(len <= 8) {
             chips1 = this.state.diverData.chips.slice(0, len).reverse();
-        } else if(len < 16) {
+        } else if(len <= 16) {
             chips1 = this.state.diverData.chips.slice(0, 8).reverse();
-            chips2 = this.state.diverData.chips.slice(8, len)();
-        } else if(len < 24) {
+            chips2 = this.state.diverData.chips.slice(8, len);
+        } else if(len <= 24) {
             chips1 = this.state.diverData.chips.slice(0, 8).reverse();
-            chips2 = this.state.diverData.chips.slice(8, 16)();
+            chips2 = this.state.diverData.chips.slice(8, 16);
             chips3 = this.state.diverData.chips.slice(16, len).reverse();
         } else {
             chips1 = this.state.diverData.chips.slice(0, 8).reverse();
