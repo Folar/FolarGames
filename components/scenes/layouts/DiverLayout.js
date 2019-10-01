@@ -76,8 +76,8 @@ class DiverLayout extends React.Component {
         }
         return "Press Roll";
     }
-    setDice(dice,sel){
-        this.refs.cdl.setDice(dice,sel);
+    setDice(dice,dice2,bonus){
+        this.refs.cdl.setDice(dice,dice2,bonus);
 
     }
     resetDice(){
@@ -147,7 +147,6 @@ class DiverLayout extends React.Component {
         let chips2 =[];
         let chips3 =[];
         let chips4 =[];
-        console.log("len ="+ len);
         if(len <= 8) {
             chips1 = this.state.diverData.chips.slice(0, len).reverse();
         } else if(len <= 16) {

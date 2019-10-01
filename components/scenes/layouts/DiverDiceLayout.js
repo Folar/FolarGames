@@ -30,7 +30,7 @@ class DiverDiceLayout extends React.Component {
             showButton: true,
             die1: this.props.init[0],
             die2: this.props.init[1],
-            bonusDie:"",
+            bonusDie:0,
             numberOfRolls: 0,
             di: -1
 
@@ -118,9 +118,11 @@ class DiverDiceLayout extends React.Component {
 
 
 
-    setDice(di1, di2) {
+    setDice(di1, di2,bonus) {
         _this.state.die1 = di1;
         _this.state.die2 = di2;
+        _this.setState({bonusDie : bonus});
+       console.log("bonus = "+bonus)
     }
 
     resetDice() {
