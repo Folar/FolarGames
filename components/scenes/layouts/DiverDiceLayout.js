@@ -161,7 +161,7 @@ class DiverDiceLayout extends React.Component {
         let buttonText2 = this.props.buttonText2;
         let dies = this.conv();
 
-        let bonus=["","gain 2 oxygen","lose 1 oxygen","move 1 extra ","move 2 extra ","shark attack"];
+        let bonus=["Greedy Diver","gain 2 oxygen","lose 1 oxygen","move 1 extra ","move 2 extra ","shark attack"];
         let row1Cards =
             dies.map((item, index) => {
                 return <VrButton  key={index}>

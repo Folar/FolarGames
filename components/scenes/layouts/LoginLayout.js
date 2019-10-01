@@ -239,7 +239,7 @@ class LoginLayout extends React.Component {
                                     ]
                                 }}/>
                         <Button updateScene={this.invoke2.bind(this)} showButton={this.state.showButton}
-                                text="Dice Solitare"
+                                text="Choice"
                                 style={{
                                     fontSize: 0.2,
                                     textAlign: 'center',
@@ -259,7 +259,7 @@ class LoginLayout extends React.Component {
                                     ]
                                 }}/>
                         <Button updateScene={this.invokeDiver.bind(this)} showButton={this.state.showButton}
-                                text="Diver"
+                                text="Greedy Diver"
                                 style={{
                                     fontSize: 0.2,
                                     textAlign: 'center',

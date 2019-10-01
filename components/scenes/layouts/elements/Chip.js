@@ -27,9 +27,9 @@ class Chip extends React.Component {
     render() {
         let nn = this.props.name ;
         if(this.props.sizes.length> 1) nn += this.props.sizes;
-        let fw = 200;
+        let fw = 700;
         if(this.props.textColor != 'red')
-            fw = 700
+            fw = 400
 
         return (
             <View style={{
