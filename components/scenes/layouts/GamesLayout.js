@@ -15,7 +15,7 @@ import LoginLayout from './LoginLayout.js';
 import ChoiceLayout from './ChoiceLayout.js';
 import BocaLayout from './BocaLayout.js';
 import DiverLayout from './DiverLayout.js';
-
+import ChoiceScore from './ChoiceScore.js'
 //Layout
 let key = 0;
 takeSixThis = null;
@@ -272,6 +272,7 @@ class GamesLayout extends React.Component {
                             ]
                         },
             choiceData: {},
+            gameData: {},
             bocaData: {
                 players: [
                     {
@@ -296,7 +297,7 @@ class GamesLayout extends React.Component {
                 startIndex:0
             },
             choiceShowButton: true,
-            choiceButtonText: "Roll!!!",
+            choiceButtonText: "Start",
             takeSixTranslate: [0, 0, 0],
             //takeSixRoate:0,
             //takeSixTranslate:[-3 ,.95,-2.7],   // z,y,x(less moves to left)
@@ -315,7 +316,7 @@ class GamesLayout extends React.Component {
     signon(n, gameType) {
 
         _this.setState({loginScene: gameType});
-        if (gameType != 3) {
+        if (true) {
             if (this.state.name.startsWith("Click ") || this.state.name.endsWith(" name")) {
                 if (n == "Aml2") {
                     this.state.admin = true;
@@ -338,15 +339,19 @@ class GamesLayout extends React.Component {
 
 
     }
+     playAgain5() {
+            this.client.close();
+            this.connectToServer(5);
+        }
     playAgain3() {
         this.client.close();
-        this.connectToServer(5);
+        this.connectToServer(3);
     }
-    playAgain2() {
+    playAgain4() {
         this.client.close();
         this.connectToServer(4);
     }
-    playAgain() {
+    playAgain2() {
         this.client.close();
         this.connectToServer(2);
     }
@@ -405,6 +410,7 @@ class GamesLayout extends React.Component {
         //this.forceUpdate();
     }
 
+
     connectToServer(gt) {
         let W3CWebSocket = require('websocket').w3cwebsocket;
 
@@ -414,8 +420,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-        client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-       // client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+       // client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+       client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -426,18 +432,9 @@ class GamesLayout extends React.Component {
         client.onmessage = function (x) {
 
             let packet = JSON.parse(x.data);
-            if (packet.messageType === "choosePair") {
-                choiceThis.setState({choiceData: packet.data});
 
-                _this.setState({choiceShowButton: packet.data.gameState != 1});
-                if (packet.data.gameState == 0) {
-                    _this.setState({choiceButtonText: "Roll!!!"});
-                } else {
-                    _this.setState({choiceButtonText: "Confirm"});
-                }
-                return;
-            }
             if (packet.messageType === "dupUser") {
+debugger;
                 let x = _this.state.name;
                 _this.setState({name: x + " has already signed on, choose another name", txtclr: "red"});
                 _this.setState({loginScene:1})
@@ -454,7 +451,15 @@ class GamesLayout extends React.Component {
             if (gt == 2) {
                 takeSixThis.setState({data: packet});
                 takeSixThis.setState({showButton: packet.state < 2})
-            } else   if (gt == 4 ) {
+            }else   if (gt ==  3 ) {
+               if (packet.type == "Roll") {
+                VrSoundEffects.play(asset('dice.wav'));
+                   _this.refs.cl.rollDice(  packet.dice);
+               }
+               _this.setState({gameData: packet});
+               _this.refs.cl.setData( packet);
+
+           } else   if (gt == 4 ) {
                 if (packet.type === "rollDice") {
                     _this.refs.bl.setDice( packet.dice,packet.selectedDice);
                 }else if (packet.type === "passDice" || packet.type === "Restart") {
@@ -520,7 +525,7 @@ class GamesLayout extends React.Component {
                                        admin={this.state.admin}
                                        fakeadmin={this.state.fakeadmin} playMoo={this.playMoo.bind(this)}
                                        translate={this.state.takeSixTranslate} rotate={this.state.takeSixRotate}
-                                       clickButton={this.clickButton.bind(this)} playAgain={this.playAgain.bind(this)}
+                                       clickButton={this.clickButton.bind(this)} playAgain={this.playAgain2.bind(this)}
                                        text={"Play"}/>
 
                     </View>
@@ -528,10 +533,15 @@ class GamesLayout extends React.Component {
                     <View>
                         <ChoiceLayout zorder={this.state.zoom -1} showButton={true} text={"Play"} roll={this.roll.bind(this)}
                                       zoom={this.zoom.bind(this)}
-                                      choiceData={choiceThis.state.choiceData}
+                                      ref="cl"
+                                      sendMessage={this.sendBocaMessage.bind(this)}
+                                      choiceData={this.state.choiceData}
+                                      gameData={this.state.gameData}
+                                      player={this.state.name}
                                       choiceShowButton={this.state.choiceShowButton}
                                       choiceButtonText={this.state.choiceButtonText}
-                                      chooseDicePair={this.chooseDicePair.bind(this)}/>
+                                      chooseDicePair={this.chooseDicePair.bind(this)}
+                                      playAgain={this.playAgain3.bind(this)}/>
                     </View>
                 ) :login == 4 ? (
                     <View>
@@ -541,7 +551,7 @@ class GamesLayout extends React.Component {
                                     ref="bl"
                                     sendBocaMessage={this.sendBocaMessage.bind(this)}
                                     player={this.state.name}
-                                    playAgain={this.playAgain2.bind(this)}/>
+                                    playAgain={this.playAgain4.bind(this)}/>
                     </View>
                 ) : (
                                        <View>
@@ -554,7 +564,7 @@ class GamesLayout extends React.Component {
                                                        chgImg={this.props.chgImg}
                                                        sendDiverMessage={this.sendBocaMessage.bind(this)}
                                                        player={this.state.name}
-                                                       playAgain={this.playAgain3.bind(this)}/>
+                                                       playAgain={this.playAgain5.bind(this)}/>
                                        </View>
                                    )
             }

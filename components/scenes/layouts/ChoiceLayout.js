@@ -10,14 +10,17 @@ const {Choice} = require('./../../../utils/Choice.js');
 import ChoiceGaitLayout from './ChoiceGaitLayout.js'
 import ChoiceScoreLayout from './ChoiceScoreLayout.js';
 import ChoiceDiceLayout from './ChoiceDiceLayout.js'
+
+
 import {
     VrButton,
     asset,
     VrSoundEffects
 } from 'react-vr';
+import ChoiceScore from "./ChoiceScore";
 
 let _this = null;
-choiceThis = null;
+
 let choice = new Choice();
 
 //Layout
@@ -25,12 +28,12 @@ class ChoiceLayout extends React.Component {
 
     constructor(props) {
         super(props);
-        choiceThis = this;
         this.state = {
             choiceData: {},
+            gameData:{},
             zorder: this.props.zorder,
             choiceShowButton: true,
-            choiceButtonText: "Roll!!!",
+            choiceButtonText: "Start",
 
         };
 
@@ -40,30 +43,37 @@ class ChoiceLayout extends React.Component {
 
     }
 
-    roll(dice) {
-        //this.client.send(JSON.stringify({name:this.state.name,type:"choiceRoll",dice:dice,
-        //    buttonText:this.state.choiceButtonText}));
+    reset(){
+        choice.resetState();
+        this.setState({choiceData:{} });
+    }
+    setData(d){
+        this.setState({gameData:d, choiceShowButton:d.buttonText !="",choiceButtonText:d.buttonText});
 
-        if (this.state.choiceButtonText == "Confirm") {
+    }
+
+    confirm() {
+
             let gs = choice.confirm();
-            this.setState({choiceData: gs});
-            if (gs.gameState == 3)
-                this.setState({choiceButtonText: "Again?"});
-            else
-                this.setState({choiceButtonText: "Roll!!!"});
+            if (gs.gameState == 3){
+                this.state.gameData.message = gs.message;
+            }
+            this.setState({choiceData: gs,choiceShowButton:false});
+            this.props.sendMessage({name: this.props.player, action: "confirm",type:"CHOICE",score:gs.totalScore,done:gs.gameState == 3});
 
-        } else if (this.state.choiceButtonText == "Roll!!!") {
-            this.setState({choiceData: choice.roll(dice)});
-            this.setState({choiceShowButton: false});
-        } else {
-            this.setState({choiceData: choice.resetState(dice)});
-            this.setState({choiceButtonText: "Roll!!!"});
-        }
+
+    }
+    markRoll(dice) {
+        let state = choice.roll(dice);
+        this.state.gameData.message = state.message;
+        this.setState({choiceData: state});
+        this.setState({choiceShowButton: false});
     }
 
     chooseDicePair(rank, pos, gaitor) {
         //this.client.send(JSON.stringify({name:this.state.name,type:"choosePairs",rank:rank,pos:pos,gaitor:gaitor}));
         let s = choice.setSecondDieChoices(rank, pos, gaitor);
+        this.state.gameData.message = s.message;
         this.setState({choiceShowButton: s.gameState != 1});
         if (s.gameState == 0) {
             this.setState({choiceButtonText: "Roll!!!"});
@@ -74,13 +84,16 @@ class ChoiceLayout extends React.Component {
     }
 
     getMessage() {
-        if (this.state.choiceData == null)
-            return "Press Roll";
-        let m = this.state.choiceData.message;
+        if (this.state.gameData == null)
+            return "Press Start";
+        let m = this.state.gameData.message;
         if (m != null) {
             return m;
         }
         return "Press Roll";
+    }
+    rollDice(  dice){
+        this.refs.cdl.rollDice(  dice.die1,dice.die2,dice.die3,dice.die4,dice.die5,choice);
     }
 
     render() {
@@ -104,10 +117,16 @@ class ChoiceLayout extends React.Component {
                         {translateX: 0},
                         {translateZ: this.state.zorder}]
                 }}>
-                    <ChoiceDiceLayout style={{marginBottom: .2}} roll={this.roll.bind(this)}
+                    <ChoiceDiceLayout style={{marginBottom: .2}} confirm={this.confirm.bind(this)}
+                                      markRoll={this.markRoll.bind(this)}
                                       choiceShowButton={this.state.choiceShowButton}
+                                      sendMessage={this.props.sendMessage}
                                       choiceButtonText={this.state.choiceButtonText} num={5}
                                       init={['F', 'O', 'L', 'A', 'R', 'A', 'C', 'K']}
+                                      ref="cdl"
+                                      playAgain={this.props.playAgain}
+                                      player={this.props.player}
+                                      reset ={this.reset.bind(this)}
                                       game={"choice"}
                                       clickable={false}/>
                     <View style={{
@@ -119,20 +138,14 @@ class ChoiceLayout extends React.Component {
                     }}>
                         <ChoiceScoreLayout choiceData={this.state.choiceData}
                                            chooseDicePair={this.chooseDicePair.bind(this)}/>
-                        <ChoiceGaitLayout message={this.getMessage()} choiceData={this.state.choiceData}
-                                          chooseDicePair={this.chooseDicePair.bind(this)}/>
-                        <View style={{
-                            height: 3,
-                            width: 1,
-                            marginLeft: .04,
-                            flexDirection: 'column',
-                            alignItems: 'flex-start',
-                            justifyContent: 'flex-start'
-                        }}>
-                            {nameList}
-                        </View>
 
-                    </View>
+                        <ChoiceGaitLayout message={this.getMessage()} choiceData={this.state.choiceData}
+                                          gameData={this.state.gameData}
+                                          chooseDicePair={this.chooseDicePair.bind(this)}/>
+                        <View>
+                            <ChoiceScore  data={this.props.gameData}/></View>
+
+                        </View>
 
 
                 </View>

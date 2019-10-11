@@ -140,6 +140,7 @@ class Choice {
     }
 
     confirm(){
+        let END_CONDITION =8;
         if(this.state.diceData[this.state.choices[0]].count <10)
             this.state.diceData[this.state.choices[0]].count++;
         if(this.state.diceData[this.state.choices[1]].count <10)
@@ -148,14 +149,11 @@ class Choice {
             this.state.gaitorCount[this.state.gaitorsIndex[this.state.gaitorChoice]]++;
         let i = this.state.gaitorsIndex[this.state.gaitorChoice];
         this.setCheckState();
-        if (  this.state.gaitorCount[i] == 8){
-            this.state.message =  "You finished the game with a score of "+ this.state.totalScore +
-                ". Play Again?";
+        if (  this.state.gaitorCount[i] == END_CONDITION){
+            debugger;
+            this.state.message =  "You finished the game with a score of "+ this.state.totalScore + ". ";
             this.state.gameState = 3;
 
-        }else {
-            this.state.gameState = 0;
-            this.state.message = "Press Roll";
         }
 
         return this.state;
