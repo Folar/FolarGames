@@ -121,8 +121,8 @@ class ChoiceLayout extends React.Component {
                                       markRoll={this.markRoll.bind(this)}
                                       choiceShowButton={this.state.choiceShowButton}
                                       sendMessage={this.props.sendMessage}
-                                      choiceButtonText={this.state.choiceButtonText} num={5}
-                                      init={['F', 'O', 'L', 'A', 'R', 'A', 'C', 'K']}
+                                      choiceButtonText={this.state.choiceButtonText} num={5} numX = {0}
+                                      init={['F', 'O', 'L', 'A', 'R', 'A', 'C', 'K','!','!']}
                                       ref="cdl"
                                       playAgain={this.props.playAgain}
                                       player={this.props.player}

@@ -43,8 +43,11 @@ class ChoiceDiceLayout extends React.Component {
             die6: this.props.init[5],
             die7: this.props.init[6],
             die8: this.props.init[7],
+            dieX1: this.props.init[8],
+            dieX2: this.props.init[9],
             numberOfRolls: 0,
-            di: -1
+            di: -1,
+            diX:-1
 
         }
     }
@@ -72,7 +75,8 @@ class ChoiceDiceLayout extends React.Component {
             _this.setState({die6: Math.floor(Math.random() * 6) + 1});
             _this.setState({die7: Math.floor(Math.random() * 6) + 1});
             _this.setState({die8: Math.floor(Math.random() * 6) + 1});
-
+            _this.setState({dieX1: Math.floor(Math.random() * 6) + 1 });
+            _this.setState({dieX2: Math.floor(Math.random() * 6) + 1 });
         } else {
             _this.setState({die1: 1});
             _this.setState({die2: 2});
@@ -82,6 +86,8 @@ class ChoiceDiceLayout extends React.Component {
             _this.setState({die6: 2});
             _this.setState({die7: 2});
             _this.setState({die8: 2});
+            _this.setState({dieX1: 1});
+            _this.setState({dieX2: 1});
         }
         if (_this.state.numberOfRolls < 4) {
             _this.setState({numberOfRolls: 1 + _this.state.numberOfRolls});
@@ -89,13 +95,21 @@ class ChoiceDiceLayout extends React.Component {
         } else {
 
             if (_this.props.game == "boca") {
-                let arr = _this.conv(8);
+                let arr = _this.conv(8,2)[0];
                 if (_this.props.num < 8) {
                     arr = arr.splice(0, _this.props.num).sort((a, b) => a - b);
                     for (let i = _this.props.num; i < 8; i++)
                         arr.push(7);
                 } else
                     arr = arr.sort((a, b) => a - b);
+
+                let arrX = _this.conv(8,2)[1];
+                if (_this.props.numX < 2) {
+                    arrX = arrX.splice(0, _this.props.numX).sort((a, b) => a - b);
+                    for (let i = _this.props.numX; i < 2; i++)
+                        arrX.push(7);
+                } else
+                    arrX = arrX.sort((a, b) => a - b);
 
                 _this.setState({die1: arr[0]});
                 _this.setState({die2: arr[1]});
@@ -105,14 +119,16 @@ class ChoiceDiceLayout extends React.Component {
                 _this.setState({die6: arr[5]});
                 _this.setState({die7: arr[6]});
                 _this.setState({die8: arr[7]});
-                _this.props.roll(arr, _this.state.di);
+                _this.setState({dieX1: arrX[0]});
+                _this.setState({dieX2: arrX[1]});
+                _this.props.roll(arr, _this.state.di,arrX, _this.state.diX);
             } else {
                 _this.setState({die1: _this.state.d1});
                 _this.setState({die2: _this.state.d2});
                 _this.setState({die3: _this.state.d3});
                 _this.setState({die4: _this.state.d4});
                 _this.setState({die5: _this.state.d5});
-                let arr = _this.conv(5);
+                let arr = _this.conv(5)[0];
                 _this.props.markRoll(arr);
 
 
@@ -133,6 +149,8 @@ class ChoiceDiceLayout extends React.Component {
                 _this.state.die6 = this.props.init[5];
                 _this.state.die7 = this.props.init[6];
                 _this.state.die8 = this.props.init[7];
+                _this.state.dieX1 = this.props.init[8];
+                _this.state.dieX2 = this.props.init[9];
                 return;
 
             } else if (this.props.choiceButtonText == "Restart") {
@@ -161,7 +179,7 @@ class ChoiceDiceLayout extends React.Component {
             } else if (this.props.choiceButtonText == "Confirm") {
                 _this.props.roll([_this.state.die1, _this.state.die2, _this.state.die3, _this.state.die4,
                         _this.state.die5, _this.state.die6, _this.state.die7, _this.state.die8],
-                    _this.state.di);
+                    _this.state.di,[_this.state.dieX1, _this.state.dieX2],_this.state.diX);
             } else if (this.props.choiceButtonText == "Pass Dice") {
                 this.props.sendMessage({name: this.props.player, action: "passBocaDice", type: "BOCA"})
 
@@ -178,17 +196,47 @@ class ChoiceDiceLayout extends React.Component {
     choose(d) {
         if (!this.props.clickable) return;
         this.setState({di: d});
+        this.setState({diX: -1});
         let cnt = 0;
-        let dies = this.conv();
+        let cntX = 0
+        let dies = this.conv()[0];
+        let diesX = this.conv()[1];
         for (let i = 0; i < this.props.num; i++) {
             if (dies[i] == dies[d])
                 cnt++;
         }
+        for (let i = 0; i < this.props.numX; i++) {
+            if (diesX[i] == dies[d])
+                cntX++;
+        }
 
-        this.props.selectDice(dies[d], cnt);
+        this.props.selectDice(dies[d], cnt, cntX);
     }
 
-    setDice(die, di) {
+    chooseX(d) {
+        if (!this.props.clickable) return;
+        this.setState({di: -1});
+        this.setState({diX: d});
+        let cnt = 0;
+        let cntX = 0;
+        let dies = this.conv()[0];
+        let diesX = this.conv()[1];
+        for (let i = 0; i < this.props.numX; i++) {
+            if (diesX[i] == diesX[d])
+                cntX++;
+        }
+        for (let i = 0; i < this.props.num; i++) {
+            if (dies[i] == diesX[d])
+                cnt++;
+        }
+
+        this.props.selectDice(diesX[d], cnt, cntX);
+    }
+
+
+
+
+    setDice(die, di,dieX,diX) {
 
         _this.state.die1 = die[0];
         _this.state.die2 = die[1];
@@ -198,7 +246,10 @@ class ChoiceDiceLayout extends React.Component {
         _this.state.die6 = die[5];
         _this.state.die7 = die[6];
         _this.state.die8 = die[7];
+        _this.state.dieX1 = dieX[0];
+        _this.state.dieX2 = dieX[1];
         _this.state.di = di;
+        _this.state.diX = diX;
     }
 
     resetDice() {
@@ -210,11 +261,23 @@ class ChoiceDiceLayout extends React.Component {
         _this.state.die6 = this.props.init[5];
         _this.state.die7 = this.props.init[6];
         _this.state.die8 = this.props.init[7];
+        _this.state.dieX1 = this.props.init[8];
+        _this.state.dieX2 = this.props.init[9];
         _this.state.di = -1;
     }
 
-    conv(n = this.props.num) {
+    conv(n = this.props.num, nx = this.props.numX) {
         let dies = [];
+        let diesX = [];
+        switch (nx) {
+            case 1:
+                diesX.push(this.state.dieX1);
+                break;
+            case 2:
+                diesX.push(this.state.dieX1);
+                diesX.push(this.state.dieX2);
+                break;
+        }
         switch (n) {
             case 1:
                 dies.push(this.state.die1);
@@ -269,13 +332,28 @@ class ChoiceDiceLayout extends React.Component {
                 dies.push(this.state.die8);
                 break;
         }
-        return dies;
+        return [dies, diesX];
+    }
+
+
+    getBackgroundX(index) {
+        let dies = this.conv()[0];
+        let diesX = this.conv()[1];
+        let sel = this.state.di != -1 ? dies[this.state.di] : diesX[this.state.diX];
+        for (let i = 0; i < this.props.numX; i++) {
+            if (diesX[index] == sel)
+                return "pink";
+        }
+        return "red"
     }
 
     getBackground(index) {
-        let dies = this.conv();
+        let dies = this.conv()[0];
+        let diesX = this.conv()[1];
+        let sel = this.state.di != -1 ? dies[this.state.di] : diesX[this.state.diX];
+
         for (let i = 0; i < this.props.num; i++) {
-            if (dies[index] == dies[this.state.di])
+            if (dies[index] == sel)
                 return "gray";
         }
         return "white"
@@ -287,7 +365,8 @@ class ChoiceDiceLayout extends React.Component {
 
         let showButton = this.props.choiceShowButton;
         let buttonText = this.props.choiceButtonText;
-        let dies = this.conv();
+        let dies = this.conv()[0];
+        let diesX = this.conv()[1];
 
 
         let row1Cards =
@@ -297,11 +376,20 @@ class ChoiceDiceLayout extends React.Component {
                          backgroundColor={_this.getBackground(index)}/>
                 </VrButton>
             });
+        let house =
+            diesX.map((item, index) => {
+                return <VrButton onClick={this.chooseX.bind(this, index)} key={index}>
+                    <Die value={item} key={index+8} dim={dieDim} color="black"
+                         backgroundColor={_this.getBackgroundX(index)}/>
+                </VrButton>
+            });
         if (this.props.choiceButtonText.startsWith("Start Rnd") ||
             this.props.choiceButtonText == "Restart" ||
             this.props.choiceButtonText == "Pass Dice" ||
-            this.props.choiceButtonText == "Finish")
+            this.props.choiceButtonText == "Finish") {
             row1Cards = <Text> &nbsp;</Text>;
+            house = <Text> &nbsp;</Text>;
+        }
         return (
             <View>
                 <View style={{
@@ -310,9 +398,16 @@ class ChoiceDiceLayout extends React.Component {
                     alignItems: 'center',
                     justifyContent: 'center'
                 }}>
-                    {row1Cards}
+                    <View style={{
+                        margin: 0.1,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        {row1Cards}
+                        {house}
 
-
+                    </View>
                     {
                         showButton ? (<View
                                 style={{

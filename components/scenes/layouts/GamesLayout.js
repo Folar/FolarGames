@@ -292,6 +292,7 @@ class GamesLayout extends React.Component {
                 buttonShow:true,
                 dice:[],
                 diceNum:8,
+                diceXNum:2,
                 totalDice:0,
                 selectedDice :0,
                 startIndex:0
@@ -420,8 +421,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-        client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-       //client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+       // client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+       client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -461,8 +462,9 @@ class GamesLayout extends React.Component {
 
            } else   if (gt == 4 ) {
                 if (packet.type === "rollDice") {
-                    _this.refs.bl.setDice( packet.dice,packet.selectedDice);
+                    _this.refs.bl.setDice( packet.dice,packet.selectedDice,packet.diceX,packet.selectedDiceX);
                 }else if (packet.type === "passDice" || packet.type === "Restart") {
+                debugger;
                     _this.refs.bl.resetDice( packet.dice,packet.selectedDice);
                 }
                 _this.setState({bocaData: packet});

@@ -12,8 +12,7 @@ import ChoiceDiceLayout from './ChoiceDiceLayout.js'
 import BocaFieldsLayout from './BocaFieldsLayout.js';
 
 
-let _this = null;
-choiceThis = null;
+let _this = null;;
 let choice = new Choice();
 
 
@@ -24,7 +23,6 @@ class BocaLayout extends React.Component {
 
     constructor(props) {
         super(props);
-        bocaThis = this;
 
         this.state = {
             choiceData: {},
@@ -43,16 +41,20 @@ class BocaLayout extends React.Component {
 
     }
 
-    roll(dice,di) {
+    roll(dice,di,diceX,diX) {
+        let idx = di != -1? dice[di]-1 :diceX[diX]- 1;
         if(this.state.bocaData.buttonText ==  "Confirm"){
+            debugger;
             this.state.bocaData.buttonText = "";
             this.state.bocaData.message = "Continue to next player";
             this.setState({bocaData: this.state.bocaData});
             this.props.sendBocaMessage({
                 name: this.props.player, action: "rollBocaDice",type:"BOCA",
                 dice: dice, selectedDice: di,
-                fld:this.state.bocaData.fieldPlayers[dice[di]-1],
-                qty:this.state.qty
+                diceX: diceX, selectedDiceX: diX,
+                fld:this.state.bocaData.fieldPlayers[idx],
+                qty:this.state.qty,
+                qtyX:this.state.qtyX
             });
         } else {
             this.state.bocaData.buttonText = "";
@@ -60,7 +62,8 @@ class BocaLayout extends React.Component {
             this.setState({bocaData: this.state.bocaData});
             this.props.sendBocaMessage({
                 name: this.props.player, action: "rollBocaDice",type:"BOCA",
-                dice: dice, selectedDice: -1
+                dice: dice, selectedDice: -1,
+                diceX: diceX, selectedDiceX: -1
             });
         }
     }
@@ -77,8 +80,8 @@ class BocaLayout extends React.Component {
         }
         return "Press Roll";
     }
-    setDice(dice,sel){
-        this.refs.cdl.setDice(dice,sel);
+    setDice(dice,sel,diceX,selX){
+        this.refs.cdl.setDice(dice,sel,diceX,selX);
 
     }
     resetDice(){
@@ -101,7 +104,7 @@ class BocaLayout extends React.Component {
             this.state.bocaData.buttonText =="Restart"||
             this.props.player == this.state.bocaData.currentPlayer)
     }
-    selectDice(di, qty) {
+    selectDice(di, qty, qtyX) {
 
         let cs = JSON.parse(JSON.stringify({colors: this.state.bocaData.ofieldColors}));
         let ps = JSON.parse(JSON.stringify({players: this.state.bocaData.ofieldPlayers}));
@@ -114,26 +117,46 @@ class BocaLayout extends React.Component {
         let addPlayer = true;
         let tot = 0;
 
-        for (let i = 0; i < fplayers.length; i++) {
-            if (fplayers[i].name == this.state.bocaData.currentPlayer) {
-                tot = fplayers[i].value = fplayers[i].value + qty;
-                addPlayer = false;
+        if(qty != 0) {
+            for (let i = 0; i < fplayers.length; i++) {
+                if (fplayers[i].name == this.state.bocaData.currentPlayer) {
+                    tot = fplayers[i].value = fplayers[i].value + qty;
+                    addPlayer = false;
+                }
+            }
+            if (addPlayer) {
+                tot = qty;
+                fplayers.push({
+                    color: "black",
+                    name: this.state.bocaData.currentPlayer,
+                    value: qty
+                });
             }
         }
-        if (addPlayer) {
-            tot = qty;
-            fplayers.push({
-                color: "black",
-                name: this.state.bocaData.currentPlayer,
-                value: qty
-            });
+        addPlayer= true;
+        if(qtyX != 0) {
+             debugger;
+            for (let i = 0; i < fplayers.length; i++) {
+                if ("@House" == fplayers[i].name) {
+                    tot = fplayers[i].value = fplayers[i].value + qtyX;
+                    addPlayer = false;
+                }
+            }
+            if (addPlayer) {
+                tot = qtyX;
+                fplayers.push({
+                    color: "black",
+                    name: "@House",
+                    value: qtyX
+                });
+            }
         }
         fplayers = fplayers.sort(this.compare);
         this.state.bocaData.buttonText="Confirm";
         this.props.bocaData.message = "You clicked on the "+di+" die, you now have " + tot +
             " die on the " +di+".";
-        this.setState({bocaData:this.state.bocaData,di:di,qty:qty});
-        this.setState({bocaData:this.state.bocaData,di:di,qty:qty});
+        this.setState({bocaData:this.state.bocaData,di:di,qty:qty,diX:di,qtyX:qtyX});
+
 
 
     }
@@ -162,8 +185,8 @@ class BocaLayout extends React.Component {
                                        sendMessage={this.props.sendBocaMessage}
                                       choiceShowButton={this.canShow()}
                                       choiceButtonText={this.state.bocaData.buttonText}
-                                       num={this.props.bocaData.diceNum}
-                                      init={['B', 'O', 'C', 'A', 'D', 'I', 'C', 'E']}
+                                       num={this.props.bocaData.diceNum} numX={this.props.bocaData.diceXNum}
+                                      init={['B', 'O', 'C', 'A', 'D', 'I', 'C', 'E','!','!']}
                                       clickable={this.canClick()} selectDice={this.selectDice.bind(this)}
                                        game={"boca"}
                                        roll={this.roll.bind(this)}
