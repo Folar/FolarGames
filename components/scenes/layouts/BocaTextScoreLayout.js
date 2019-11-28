@@ -38,7 +38,10 @@ class BocaTextScoreLayout extends React.Component {
                 this.props.bocaData.buttonText != "Finish" &&
                 this.props.bocaData.buttonText != "Start" &&
                 this.props.bocaData.buttonText != "Restart") {
-                val += "("+this.props.bocaData.players[index].diceLeft+")";
+                let X =  "";
+                if (this.props.bocaData.players[index].diceXLeft >0)
+                    X = ","+ this.props.bocaData.players[index].diceXLeft;
+                val += "("+this.props.bocaData.players[index].diceLeft+ X +")";
             }
             console.log(this.props.bocaData.buttonText);
             if (this.props.bocaData.buttonText.startsWith("Start Rnd")||

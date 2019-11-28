@@ -133,17 +133,17 @@ class BocaLayout extends React.Component {
                 });
             }
         }
+        let totX=0;
         addPlayer= true;
         if(qtyX != 0) {
-             debugger;
             for (let i = 0; i < fplayers.length; i++) {
                 if ("@House" == fplayers[i].name) {
-                    tot = fplayers[i].value = fplayers[i].value + qtyX;
+                    totX = fplayers[i].value = fplayers[i].value + qtyX;
                     addPlayer = false;
                 }
             }
             if (addPlayer) {
-                tot = qtyX;
+                totX = qtyX;
                 fplayers.push({
                     color: "black",
                     name: "@House",
@@ -153,8 +153,21 @@ class BocaLayout extends React.Component {
         }
         fplayers = fplayers.sort(this.compare);
         this.state.bocaData.buttonText="Confirm";
-        this.props.bocaData.message = "You clicked on the "+di+" die, you now have " + tot +
-            " die on the " +di+".";
+        let msg1 = "";
+        let msg2 = "";
+        if (tot > 0){
+            msg1 = ", you now have " + tot +" die on the " +di;
+            if (totX > 0){
+                msg1 += " and";
+            }
+        }
+
+        if (totX > 0){
+            if (tot == 0)
+                msg2 =","
+            msg2 += " the house has " + totX +" die on the " +di;
+        }
+        this.props.bocaData.message = "You clicked on the "+di + msg1 +msg2 + ".";
         this.setState({bocaData:this.state.bocaData,di:di,qty:qty,diX:di,qtyX:qtyX});
 
 
