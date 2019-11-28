@@ -44,7 +44,7 @@ class BocaLayout extends React.Component {
     roll(dice,di,diceX,diX) {
         let idx = di != -1? dice[di]-1 :diceX[diX]- 1;
         if(this.state.bocaData.buttonText ==  "Confirm"){
-            debugger;
+
             this.state.bocaData.buttonText = "";
             this.state.bocaData.message = "Continue to next player";
             this.setState({bocaData: this.state.bocaData});
