@@ -94,8 +94,8 @@ class AcquireHotelStats extends React.Component {
         });
         return (
             <View style={{
-                layoutOrigin: [0,0],opacity:1,
-                flexDirection: 'column', height:3.4,width:3.5, paddingLeft:.1,
+                layoutOrigin: [-.1,0],opacity:1,
+                flexDirection: 'column', height:3.4,width:2, paddingLeft:.1,
                 alignItems: 'flex-start', justifyContent: 'flex-start'
             }}>
                 <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>

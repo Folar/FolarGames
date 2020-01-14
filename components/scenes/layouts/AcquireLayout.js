@@ -7,6 +7,7 @@ import {
 
 import AcquireBoardLayout from './AcquireBoardLayout.js';
 import AcquireHotelStats from './AcquireHotelStats.js';
+import AcquirePlayerStats from './AcquirePlayerStats.js';
 
 
 
@@ -180,11 +181,11 @@ class AcquireLayout extends React.Component {
 
                 <View style={{
                     height: 2,
-                    width: 7,
+                    width: 3,
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    layoutOrigin: [.5, 1],
+                    layoutOrigin: [1.5, 1],
                     transform: [
                         {translateX: 0},
                         {translateZ: this.state.zorder}]
@@ -193,13 +194,14 @@ class AcquireLayout extends React.Component {
 
                     <View style={{
                         height: 1,
-                        width: 5,
+                        width: 2,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start'
                     }}>
                         <AcquireBoardLayout/>
                         <AcquireHotelStats/>
+                        <AcquirePlayerStats/>
 
 
                     </View>
