@@ -97,7 +97,7 @@ class AcquirePlayerStats extends React.Component {
 
     }
     getRowColor(i){
-        return "white";
+        return i%2 == 0 ?"white" :"lightblue"
     }
 
     render() {
@@ -121,12 +121,12 @@ class AcquirePlayerStats extends React.Component {
                 <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
                     <Text
                         style={{
-                            width: 0.66,
+                            width: 0.55,
                             height: .20,
                             fontSize: 0.11,
                             textAlign: 'left',
                             color: this.state.color,
-                            backgroundColor:"white"
+                            backgroundColor:"lightgray"
 
                         }}>
                         {""}

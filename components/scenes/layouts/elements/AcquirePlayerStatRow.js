@@ -43,12 +43,12 @@ class AcquirePlayerStatRow extends React.Component {
             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start' }}>
                 <Text
                     style={{
-                        width: 0.66,
+                        width: 0.55,
                         height: this.state.rowHeight,
                         fontSize: this.props.fontSize,
                         fontWeight:300,
                         textAlign: 'left',
-                        backgroundColor: 'white',
+                        backgroundColor: this.props.rc,
                         color:"black"
 
                     }}>

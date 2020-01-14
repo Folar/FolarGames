@@ -185,7 +185,7 @@ class AcquireLayout extends React.Component {
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    layoutOrigin: [1.5, 1],
+                    layoutOrigin: [1.3, 1],
                     transform: [
                         {translateX: 0},
                         {translateZ: this.state.zorder}]
@@ -200,8 +200,28 @@ class AcquireLayout extends React.Component {
                         justifyContent: 'flex-start'
                     }}>
                         <AcquireBoardLayout/>
-                        <AcquireHotelStats/>
-                        <AcquirePlayerStats/>
+                        <View style={{
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
+                            justifyContent: 'flex-start',
+                            layoutOrigin: [0, 0],
+                            transform: [
+                                {translateX: 0},
+                                {translateZ: 0}]
+                        }}>
+                            <View style={{
+                                flexDirection: 'row',
+                                alignItems: 'flex-start',
+                                justifyContent: 'flex-start',
+                                layoutOrigin: [0, 0],
+                                transform: [
+                                    {translateX: 0},
+                                    {translateZ: 0}]
+                            }}>
+                                <AcquireHotelStats/>
+                                <AcquirePlayerStats/>
+                            </View>
+                        </View>
 
 
                     </View>
