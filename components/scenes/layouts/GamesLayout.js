@@ -16,6 +16,7 @@ import ChoiceLayout from './ChoiceLayout.js';
 import BocaLayout from './BocaLayout.js';
 import DiverLayout from './DiverLayout.js';
 import ChoiceScore from './ChoiceScore.js'
+import AcquireLayout from './AcquireLayout.js'
 //Layout
 let key = 0;
 takeSixThis = null;
@@ -421,8 +422,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-       // client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-       client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+        client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+       //client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -555,20 +556,30 @@ class GamesLayout extends React.Component {
                                     player={this.state.name}
                                     playAgain={this.playAgain4.bind(this)}/>
                     </View>
-                ) : (
-                                       <View>
-                                           <DiverLayout zorder={this.state.zoom -adj} showButton={true} text={"Play"}
-                                                       roll={this.roll.bind(this)}
-                                                       diverData={this.state.diverData}
-                                                       dtX={this.state.dtX}
-                                                       dtY={this.state.dtY}
-                                                       ref="dl"
-                                                       chgImg={this.props.chgImg}
-                                                       sendDiverMessage={this.sendBocaMessage.bind(this)}
-                                                       player={this.state.name}
-                                                       playAgain={this.playAgain5.bind(this)}/>
-                                       </View>
-                                   )
+                ) :login == 5 ? (
+                   <View>
+                       <DiverLayout zorder={this.state.zoom -adj} showButton={true} text={"Play"}
+                                   roll={this.roll.bind(this)}
+                                   diverData={this.state.diverData}
+                                   dtX={this.state.dtX}
+                                   dtY={this.state.dtY}
+                                   ref="dl"
+                                   chgImg={this.props.chgImg}
+                                   sendDiverMessage={this.sendBocaMessage.bind(this)}
+                                   player={this.state.name}
+                                   playAgain={this.playAgain5.bind(this)}/>
+                   </View>
+               ): (
+                   <View>
+                        <AcquireLayout zorder={this.state.zoom} showButton={true} text={"Play"}
+                                                           roll={this.roll.bind(this)}
+                                                           bocaData={this.state.bocaData}
+                                                           ref="acq"
+                                                           sendBocaMessage={this.sendBocaMessage.bind(this)}
+                                                           player={this.state.name}
+                                                           playAgain={this.playAgain4.bind(this)}/>
+                   </View>
+               )
             }
 
             </View>
