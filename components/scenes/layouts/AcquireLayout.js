@@ -12,7 +12,149 @@ import AcquireDialogLayout from './AcquireDialogLayout.js';
 
 
 
+var stk = {
+    title: "Tower takeover or Luxor",
+    survivor: "Tower",
+    defunct: "Luxor",
+    keep: 10,
+    swap: 0,
+    sell: 0,
+    total: 10,
+    label: "Swap",
+    survivorColor: "yellow",
+    defunctColor: "red",
+    survivorTotal: 4,
+    info:"larry wins first and second bonos for 3000 \n ydtdytkk lfyulkfuk xxxxx 7dytdjtdj tsrsy  trtrse zRgree \nify,j d ydtdjh \ndsgfhSRd hfszh hrzrdey rzey "
+}
+var hotels =[
+    {
+        name: "Luxor",
+        color: "red",
+        available: 15,
+        size: 2,
+        price: 200
+    },
+    {
+        name: "Tower",
+        color: "yellow",
+        available: 22,
+        size: 2,
+        price: 200
+    },
+    {
+        name: "American",
+        color: "#8787ff",
+        available: 25,
+        size: 0,
+        price: 0
+    },
+    {
+        name: "Worldwide",
+        color: "#c3af91",
+        available: 25,
+        size: 0,
+        price: 0
+    },
+    {
+        name: "Festival",
+        color: "green",
+        available: 25,
+        size: 0,
+        price: 0
+    },
+    {
+        name: "Continental",
+        color: "cyan",
+        available: 25,
+        size: 0,
+        price: 0
+    },
+    {
+        name: "Imperial",
+        color: "pink",
+        available: 25,
+        size: 0,
+        price: 0
+    }
 
+
+
+
+];
+var players =[
+    {
+        name: "Larry",
+        luxor:10,
+        tower:3,
+        american:5,
+        festival:0,
+        worldwide: 25,
+        continental: 0,
+        imperial: 0,
+        money:6000
+    },
+    {
+        name: "dino",
+        luxor:0,
+        tower:0,
+        american:5,
+        festival:0,
+        worldwide: 25,
+        continental: 0,
+        imperial: 0,
+        money:4500
+    },
+    {
+        name: "jacob",
+        luxor:0,
+        tower:0,
+        american:5,
+        festival:0,
+        worldwide: 25,
+        continental: 0,
+        imperial: 0,
+        money:700
+    },
+    {
+        name: "Peter",
+        luxor:0,
+        tower:0,
+        american:5,
+        festival:0,
+        worldwide: 25,
+        continental: 0,
+        imperial: 0,
+        money:6000
+    },
+    {
+        name: "joey",
+        luxor:0,
+        tower:0,
+        american:5,
+        festival:0,
+        worldwide: 2,
+        continental: 0,
+        imperial: 0,
+        money:4500
+    },
+    {
+        name: "trump",
+        luxor:0,
+        tower:0,
+        american:5,
+        festival:0,
+        worldwide: 25,
+        continental: 0,
+        imperial: 0,
+        money:700
+    }
+
+
+
+
+
+
+];
 
 
 //Layout
@@ -22,8 +164,7 @@ class AcquireLayout extends React.Component {
         super(props);
 
         this.state = {
-            choiceData: {},
-            bocaData:  this.props.bocaData,
+            stk:stk,
 
             zorder: this.props.zorder-1,
             di:0,
@@ -40,6 +181,54 @@ class AcquireLayout extends React.Component {
 
 
 
+    invoke(type,cnt){
+        switch (type) {
+            case "Swap":
+            case "Sell":
+                stk.label = type;
+                this.setState({stk:stk})
+                break;
+            case "SwapV":
+                if (cnt < stk.swap){
+                    stk.keep += (stk.swap - cnt)
+                } else if (cnt > stk.swap) {
+                    if(cnt <= stk.keep+stk.swap)
+                        stk.keep = stk.keep +stk.swap -cnt;
+                    else{
+                        stk.sell = stk.total - cnt ;
+                        stk.keep = 0;
+                    }
+
+                }
+                stk.swap = cnt;
+                this.setState({stk:stk})
+                break;
+
+            case "SellV":
+                if (cnt < stk.sell){
+                    stk.keep += (stk.sell - cnt)
+                } else if (cnt > stk.sell) {
+                    if(cnt <= stk.keep+stk.sell)
+                        stk.keep = stk.keep +stk.sell -cnt;
+                    else{
+                        let t = stk.keep;
+
+                        stk.swap = stk.total - cnt;
+                        stk.keep = 0;
+                        if(stk.swap % 2 == 1){
+                            stk.keep  = 1;
+                            stk.swap--;
+                        }
+                    }
+
+                }
+                stk.sell = cnt;
+                this.setState({stk:stk})
+                break;
+
+        }
+
+    }
 
 
 
@@ -111,10 +300,10 @@ class AcquireLayout extends React.Component {
                                     {translateX: 0},
                                     {translateZ: 0}]
                             }}>
-                                <AcquireHotelStats/>
-                                <AcquirePlayerStats/>
+                                <AcquireHotelStats  hotels={hotels}/>
+                                <AcquirePlayerStats players={players}/>
                             </View>
-                            <AcquireDialogLayout type={1}/>
+                            <AcquireDialogLayout type={1} stock={this.state.stk} invoke={this.invoke.bind(this)}/>
                         </View>
 
 

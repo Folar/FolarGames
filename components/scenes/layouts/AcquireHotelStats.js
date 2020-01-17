@@ -6,61 +6,7 @@ import {
 } from 'react-vr';
 import AcquireHotelStatRow from './elements/AcquireHotelStatRow.js';
 
-var hotels =[
-    {
-        name: "Luxor",
-        color: "red",
-        available: 25,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "Tower",
-        color: "yellow",
-        available: 25,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "American",
-        color: "#8787ff",
-        available: 25,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "Worldwide",
-        color: "#c3af91",
-        available: 25,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "Festival",
-        color: "green",
-        available: 25,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "Continental",
-        color: "cyan",
-        available: 25,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "Imperial",
-        color: "pink",
-        available: 25,
-        size: 0,
-        price: 0
-    }
 
-
-
-
-];
 //Element
 class AcquireHotelStats extends React.Component {
     constructor(props) {
@@ -83,7 +29,7 @@ class AcquireHotelStats extends React.Component {
     render() {
 
         var color = "white"
-        var p =hotels.map((item, index) => {
+        var p =this.props.hotels.map((item, index) => {
 
             return  (
                 <View key={index} style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'

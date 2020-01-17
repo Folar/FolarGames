@@ -6,80 +6,7 @@ import {
 } from 'react-vr';
 import AcquirePlayerStatRow from './elements/AcquirePlayerStatRow.js';
 
-var players =[
-    {
-        name: "Larry",
-        luxor:0,
-        tower:1,
-        american:5,
-        festival:0,
-        worldwide: 25,
-        continental: 0,
-        imperial: 0,
-        money:6000
-    },
-    {
-        name: "dino",
-        luxor:0,
-        tower:1,
-        american:5,
-        festival:0,
-        worldwide: 25,
-        continental: 0,
-        imperial: 0,
-        money:4500
-    },
-    {
-        name: "jacob",
-        luxor:0,
-        tower:1,
-        american:5,
-        festival:0,
-        worldwide: 25,
-        continental: 0,
-        imperial: 0,
-        money:700
-    },
-    {
-        name: "Peter",
-        luxor:0,
-        tower:1,
-        american:5,
-        festival:0,
-        worldwide: 25,
-        continental: 0,
-        imperial: 0,
-        money:6000
-    },
-    {
-        name: "joey",
-        luxor:0,
-        tower:1,
-        american:5,
-        festival:0,
-        worldwide: 2,
-        continental: 0,
-        imperial: 0,
-        money:4500
-    },
-    {
-        name: "trump",
-        luxor:0,
-        tower:1,
-        american:5,
-        festival:0,
-        worldwide: 25,
-        continental: 0,
-        imperial: 0,
-        money:700
-    }
 
-
-
-
-
-
-];
 //Element
 class AcquirePlayerStats extends React.Component {
     constructor(props) {
@@ -103,7 +30,7 @@ class AcquirePlayerStats extends React.Component {
     render() {
 
         var color = "white"
-        var p =players.map((item, index) => {
+        var p =this.props.players.map((item, index) => {
 
             return  (
                 <View key={index} style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'
