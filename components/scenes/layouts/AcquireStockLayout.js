@@ -17,14 +17,12 @@ import ValueClickable from './elements/ValueClickable.js';
 //Layout
 class AcquireStockLayout extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor(state) {
+        super(state);
 
         this.state = {
-
-
-        }
-        ;
+            stock: this.props.stock
+        };
 
     }
 
@@ -44,26 +42,44 @@ class AcquireStockLayout extends React.Component {
         return (a.value - b.value) * -1;
     }
 
-    invoke(){
 
-    }
-    canClick(row, col) {
 
-        return false;
-    }
 
     getDim(item) {
         return {height: .13, width: .13, valueFont: .06, dieFont: .11, marginRight: .016};
     }
+    OK(){
+       // this.props.invoke('swap',this.props.value)
+    }
+    sell(){
+        this.props.invoke('Sell',0)
+    }
+    swap(){
+        this.props.invoke('Swap',0)
+    }
+    invoke(cnt){
+        this.props.invoke(this.props.stock.label+"V",cnt)
+    }
 
     render() {
+        let arr= [];
+        var idx = 0;
+        if(this.props.stock.label == "Swap"){
+            idx = this.props.stock.swap;
+            for(var i = 0;i<=this.props.stock.total; i= i+2)
+                arr.push(i);
+        } else{
+            idx = this.props.stock.sell;
+            for(var i = 0;i<=this.props.stock.total; i++)
+                arr.push(i);
+        }
+
         let scoreBoxes =
-            [0,1, 2,3,4,5,6,7,8,9,10,11,12,1, 2,3,4,5,6,7,8,9,10,11,12,25].map((item, index) => {
+            arr.map((item, index) => {
 
                 return <ValueClickable value={item} dim={this.getDim(item)}  color={"black"}
-                                     backgroundColor={ index ==0 ?"white" :  this.props.stock.defunctColor}
-                                     clickable={true}
-                                     chooseDicePair={this.invoke} />
+                                     backgroundColor={ idx == item ?"white" :  this.state.stock.defunctColor}
+                                     clickable={true} invoke={this.invoke.bind(this)} />
             });
 
         return (
@@ -94,7 +110,7 @@ class AcquireStockLayout extends React.Component {
                             color:"black"
 
                         }}>
-                        {this.props.stock.title}
+                        {this.state.stock.title}
                     </Text>
 
                     <View style={{
@@ -112,11 +128,11 @@ class AcquireStockLayout extends React.Component {
                             fontSize: .1,
                             fontWeight:400,
                             textAlign: 'center',
-                            backgroundColor: this.props.stock.survivorColor,
+                            backgroundColor: this.state.stock.survivorColor,
                             color:"black"
 
                         }}>
-                        {this.props.stock.survivor}
+                        {this.state.stock.survivor}
                         </Text>
                             <Text
                                 style={{
@@ -125,11 +141,11 @@ class AcquireStockLayout extends React.Component {
                                     fontSize: .1,
                                     fontWeight:400,
                                     textAlign: 'center',
-                                    backgroundColor: this.props.stock.defunctColor,
+                                    backgroundColor: this.state.stock.defunctColor,
                                     color:"black"
 
                                 }}>
-                                {this.props.stock.defunct}
+                                {this.state.stock.defunct}
                         </Text>
                         <View
                             style={{
@@ -145,7 +161,7 @@ class AcquireStockLayout extends React.Component {
                                 justifyContent: 'center'
                             }}
                         >
-                            <VrButton onClick={this.invoke.bind(this)}>
+                            <VrButton onClick={this.OK.bind(this)}>
                                 <Text
                                     style={{
                                         fontSize: 0.15,
@@ -180,7 +196,7 @@ class AcquireStockLayout extends React.Component {
                                 color:"black"
 
                             }}>
-                            {this.props.stock.info}
+                            {this.state.stock.info}
                         </Text>
                     </View>
 
@@ -201,7 +217,7 @@ class AcquireStockLayout extends React.Component {
                                 paddingRight: 0.2,
                                 height: 0.15,
                                 opacity:1,
-                                backgroundColor: this.props.stock.defunctColor,
+                                backgroundColor: this.state.stock.defunctColor,
                                 borderRadius: 0.00,
                                 margin: 0.01,
                                 width: 1, flexDirection: 'row',
@@ -217,7 +233,7 @@ class AcquireStockLayout extends React.Component {
                                         textAlign: 'center',
                                         color: "black"
                                     }}>
-                                    {"Keep 5"}
+                                    {"Keep "+this.state.stock.keep}
                                 </Text>
                             </VrButton>
                         </View>
@@ -227,7 +243,7 @@ class AcquireStockLayout extends React.Component {
                                 paddingLeft: 0.2,
                                 paddingRight: 0.2,
                                 height: 0.15,
-                                backgroundColor: this.props.stock.defunctColor,
+                                backgroundColor: this.state.stock.defunctColor,
                                 borderRadius: 0.1,
                                 margin: 0.01,
                                 width: 1.2, flexDirection: 'row',
@@ -235,7 +251,7 @@ class AcquireStockLayout extends React.Component {
                                 justifyContent: 'center'
                             }}
                         >
-                            <VrButton onClick={this.invoke.bind(this)}>
+                            <VrButton onClick={this.swap.bind(this)}>
                                 <Text
                                     style={{
                                         fontSize: 0.15,
@@ -243,7 +259,7 @@ class AcquireStockLayout extends React.Component {
                                         textAlign: 'center',
                                         color: "black"
                                     }}>
-                                    {"Swap 0"}
+                                    {"Swap " +  this.state.stock.swap}
                                 </Text>
                             </VrButton>
                         </View>
@@ -253,7 +269,7 @@ class AcquireStockLayout extends React.Component {
                                 paddingLeft: 0.2,
                                 paddingRight: 0.2,
                                 height: 0.15,
-                                backgroundColor: this.props.stock.defunctColor,
+                                backgroundColor: this.state.stock.defunctColor,
                                 borderRadius: 0.1,
                                 margin: 0.01,
                                 width: 1.2, flexDirection: 'row',
@@ -261,7 +277,7 @@ class AcquireStockLayout extends React.Component {
                                 justifyContent: 'center'
                             }}
                         >
-                            <VrButton onClick={this.invoke.bind(this)}>
+                            <VrButton onClick={this.sell.bind(this)}>
                                 <Text
                                     style={{
                                         fontSize: 0.15,
@@ -269,7 +285,7 @@ class AcquireStockLayout extends React.Component {
                                         fontWeight:500,
                                         color: "black"
                                     }}>
-                                    {"Sell 0"}
+                                    {"Sell "+ this.state.stock.sell }
                                 </Text>
                             </VrButton>
                         </View>
@@ -289,11 +305,11 @@ class AcquireStockLayout extends React.Component {
                                 fontWeight:600,
                                 textAlign: 'left',
                                 marginRight:.05,
-                                backgroundColor:  this.props.stock.defunctColor,
+                                backgroundColor:  this.state.stock.defunctColor,
                                 color:"black"
 
                             }}>
-                            {"Swap Shares:"}
+                            {this.state.stock.label + " Shares:"}
                         </Text>
                         {scoreBoxes}
 

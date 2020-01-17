@@ -507,7 +507,7 @@ class GamesLayout extends React.Component {
 
 
     render() {
-        const login = this.state.loginScene;
+        const login =6; this.state.loginScene;
         let adj = 2;
         if (login == 5 && this.state.zoom == -5)
             adj = 5;
