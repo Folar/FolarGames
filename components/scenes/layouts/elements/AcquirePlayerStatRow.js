@@ -68,7 +68,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.luxor}
+                    {this.props.player.hotels[0]}
                 </Text>
                 <Text
                     style={{
@@ -82,7 +82,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.tower}
+                    {this.props.player.hotels[1]}
                 </Text>
                 <Text
                     style={{
@@ -96,7 +96,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.american}
+                    {this.props.player.hotels[2]}
                 </Text>
                 <Text
                     style={{
@@ -110,7 +110,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.worldwide}
+                    {this.props.player.hotels[3]}
                 </Text>
                 <Text
                     style={{
@@ -124,7 +124,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.festival}
+                    {this.props.player.hotels[4]}
                 </Text>
                 <Text
                     style={{
@@ -138,7 +138,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.continental}
+                    {this.props.player.hotels[5]}
                 </Text>
                 <Text
                     style={{
@@ -152,7 +152,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.imperial}
+                    {this.props.player.hotels[6]}
                 </Text>
 
                 <Text

@@ -71,68 +71,33 @@ var hotels =[
 var players =[
     {
         name: "Larry",
-        luxor:10,
-        tower:3,
-        american:5,
-        festival:0,
-        worldwide: 25,
-        continental: 0,
-        imperial: 0,
-        money:6000
+        hotels:[10,3 ,0,0,0,0,0],
+
+        money:3400
     },
     {
         name: "dino",
-        luxor:0,
-        tower:0,
-        american:5,
-        festival:0,
-        worldwide: 25,
-        continental: 0,
-        imperial: 0,
+        hotels:[0,0 ,0,0,0,0,0],
         money:4500
     },
     {
         name: "jacob",
-        luxor:0,
-        tower:0,
-        american:5,
-        festival:0,
-        worldwide: 25,
-        continental: 0,
-        imperial: 0,
-        money:700
+        hotels:[0,0 ,0,0,0,0,0],
+        money:6000
     },
     {
         name: "Peter",
-        luxor:0,
-        tower:0,
-        american:5,
-        festival:0,
-        worldwide: 25,
-        continental: 0,
-        imperial: 0,
+        hotels:[0,0 ,0,0,0,0,0],
         money:6000
     },
     {
         name: "joey",
-        luxor:0,
-        tower:0,
-        american:5,
-        festival:0,
-        worldwide: 2,
-        continental: 0,
-        imperial: 0,
+        hotels:[0,0 ,0,0,0,0,0],
         money:4500
     },
     {
         name: "trump",
-        luxor:0,
-        tower:0,
-        american:5,
-        festival:0,
-        worldwide: 25,
-        continental: 0,
-        imperial: 0,
+        hotels:[0,0 ,0,0,0,0,0],
         money:700
     }
 
@@ -183,7 +148,7 @@ class AcquireLayout extends React.Component {
     }
 
     index(str){
-        return ["Luxor","Tower","American","Wordwide","Festival","Continental","Imperial"].indexOf(str);
+        return ["Luxor","Tower","American","Worldwide","Festival","Continental","Imperial"].indexOf(str);
     }
 
 
@@ -213,54 +178,9 @@ class AcquireLayout extends React.Component {
                 players[0].money = stk.playerMoneyBase + stk.sell * stk.defunctPrice;
                 hotels[idxS].available = stk.hotelAvailSurvivorBase - stk.swap/2;
                 hotels[idxD].available = stk.hotelAvailDefunctBase +stk.swap;
+                players[0].hotels[idxD] = stk.playerDefunctBase - stk.swap;
+                players[0].hotels[idxS] = stk.playerSurvivorBase + stk.swap/2;;
 
-
-                switch(stk.defunct){
-                    case "Luxor":
-                        players[0].luxor = stk.playerDefunctBase - stk.swap;
-                        break;
-                    case "Tower":
-                        players[0].tower = stk.playerDefunctBase - stk.swap;
-                        break;
-                    case "American":
-                        players[0].american = stk.playerDefunctBase - stk.swap;
-                        break;
-                    case "Worldwide":
-                        players[0].worldwide = stk.playerDefunctBase - stk.swap;
-                        break;
-                    case "Festival":
-                        players[0].festival = stk.playerDefunctBase - stk.swap;
-                        break;
-                    case "Continental":
-                        players[0].continental = stk.playerDefunctBase - stk.swap;
-                        break;
-                    case "Imperial":
-                        players[0].imperial = stk.playerDefunctBase - stk.swap;
-                        break;
-                }
-                switch(stk.survivor){
-                    case "Luxor":
-                        players[0].luxor = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "Tower":
-                        players[0].tower = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "American":
-                        players[0].american = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "Worldwide":
-                        players[0].worldwide = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "Festival":
-                        players[0].festival = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "Continental":
-                        players[0].continental = sstk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "Imperial":
-                        players[0].imperial = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                }
 
 
 

@@ -52,33 +52,12 @@ class AcquireSubHotelLayout extends React.Component {
     getDim(item) {
         return {height: .08, width: .367, valueFont: .07, dieFont: .07, marginRight: 0};
     }
-
+    index(str){
+        return ["Luxor","Tower","American","Worldwide","Festival","Continental","Imperial"].indexOf(str);
+    }
 
     getSummary(hotel,player){
-        let amt = 0;
-        switch(hotel.name){
-            case "Luxor":
-                amt = player.luxor
-                break;
-            case "Tower":
-                amt =player.tower;
-                break;
-            case "American":
-                amt =player.american;
-                break;
-            case "Worldwide":
-                amt =player.worldwide;
-                break;
-            case "Festival":
-                amt =player.festival ;
-                break;
-            case "Continental":
-                amt =player.continental ;
-                break;
-            case "Imperial":
-                amt =player.imperial;
-                break;
-        }
+        let amt = player.hotels[this.index(hotel.name)]
         return amt +"/" +  hotel.available + "/$" +  hotel.price;
     }
     render() {
