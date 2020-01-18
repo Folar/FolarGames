@@ -12,34 +12,21 @@ import AcquireDialogLayout from './AcquireDialogLayout.js';
 
 
 
-var stk = {
-    title: "Tower takeover or Luxor",
-    survivor: "Tower",
-    defunct: "Luxor",
-    keep: 10,
-    swap: 0,
-    sell: 0,
-    total: 10,
-    label: "Swap",
-    survivorColor: "yellow",
-    defunctColor: "red",
-    survivorTotal: 4,
-    info:"larry wins first and second bonos for 3000 \n ydtdytkk lfyulkfuk xxxxx 7dytdjtdj tsrsy  trtrse zRgree \nify,j d ydtdjh \ndsgfhSRd hfszh hrzrdey rzey "
-}
+
 var hotels =[
     {
         name: "Luxor",
         color: "red",
         available: 15,
-        size: 2,
-        price: 200
+        size: 0,
+        price: 0
     },
     {
         name: "Tower",
         color: "yellow",
         available: 22,
-        size: 2,
-        price: 200
+        size: 4,
+        price: 4
     },
     {
         name: "American",
@@ -150,12 +137,27 @@ var players =[
     }
 
 
-
-
-
-
 ];
-
+var stk = {
+    title: "Tower takeover or Luxor",
+    survivor: "Tower",
+    defunct: "Luxor",
+    keep: 10,
+    swap: 0,
+    sell: 0,
+    total: 10,
+    label: "Swap",
+    survivorColor: "yellow",
+    defunctColor: "red",
+    survivorTotal: 4,
+    defunctPrice:200,
+    playerMoneyBase:6000,
+    playerSurvivorBase:3,
+    playerDefunctBase:10,
+    hotelAvailDefunctBase:15,
+    hotelAvailSurvivorBase:22,
+    info:"larry wins first and second bonos for 3000 \n ydtdytkk lfyulkfuk xxxxx 7dytdjtdj tsrsy  trtrse zRgree \nify,j d ydtdjh \ndsgfhSRd hfszh hrzrdey rzey "
+}
 
 //Layout
 class AcquireLayout extends React.Component {
@@ -165,7 +167,8 @@ class AcquireLayout extends React.Component {
 
         this.state = {
             stk:stk,
-
+            hotels:hotels,
+            players:players,
             zorder: this.props.zorder-1,
             di:0,
             qty:0
@@ -179,6 +182,9 @@ class AcquireLayout extends React.Component {
 
     }
 
+    index(str){
+        return ["Luxor","Tower","American","Wordwide","Festival","Continental","Imperial"].indexOf(str);
+    }
 
 
     invoke(type,cnt){
@@ -189,6 +195,8 @@ class AcquireLayout extends React.Component {
                 this.setState({stk:stk})
                 break;
             case "SwapV":
+                let idxS = this.index(stk.survivor);
+                let idxD = this.index(stk.defunct);
                 if (cnt < stk.swap){
                     stk.keep += (stk.swap - cnt)
                 } else if (cnt > stk.swap) {
@@ -201,10 +209,68 @@ class AcquireLayout extends React.Component {
 
                 }
                 stk.swap = cnt;
-                this.setState({stk:stk})
+
+                players[0].money = stk.playerMoneyBase + stk.sell * stk.defunctPrice;
+                hotels[idxS].available = stk.hotelAvailSurvivorBase - stk.swap/2;
+                hotels[idxD].available = stk.hotelAvailDefunctBase +stk.swap;
+
+
+                switch(stk.defunct){
+                    case "Luxor":
+                        players[0].luxor = stk.playerDefunctBase - stk.swap;
+                        break;
+                    case "Tower":
+                        players[0].tower = stk.playerDefunctBase - stk.swap;
+                        break;
+                    case "American":
+                        players[0].american = stk.playerDefunctBase - stk.swap;
+                        break;
+                    case "Worldwide":
+                        players[0].worldwide = stk.playerDefunctBase - stk.swap;
+                        break;
+                    case "Festival":
+                        players[0].festival = stk.playerDefunctBase - stk.swap;
+                        break;
+                    case "Continental":
+                        players[0].continental = stk.playerDefunctBase - stk.swap;
+                        break;
+                    case "Imperial":
+                        players[0].imperial = stk.playerDefunctBase - stk.swap;
+                        break;
+                }
+                switch(stk.survivor){
+                    case "Luxor":
+                        players[0].luxor = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "Tower":
+                        players[0].tower = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "American":
+                        players[0].american = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "Worldwide":
+                        players[0].worldwide = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "Festival":
+                        players[0].festival = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "Continental":
+                        players[0].continental = sstk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "Imperial":
+                        players[0].imperial = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                }
+
+
+
+                this.setState({stk:stk,hotels:hotels,players:players})
                 break;
 
             case "SellV":
+                idxS = this.index(stk.survivor);
+                idxD = this.index(stk.defunct);
+                debugger;
                 if (cnt < stk.sell){
                     stk.keep += (stk.sell - cnt)
                 } else if (cnt > stk.sell) {
@@ -223,7 +289,59 @@ class AcquireLayout extends React.Component {
 
                 }
                 stk.sell = cnt;
-                this.setState({stk:stk})
+                players[0].money = stk.playerMoneyBase + stk.sell * stk.defunctPrice;
+                hotels[idxS].available = stk.hotelAvailSurvivorBase - stk.swap/2;
+                hotels[idxD].available = stk.hotelAvailDefunctBase +stk.swap + stk.sell;
+
+
+                switch(stk.defunct){
+                    case "Luxor":
+                        players[0].luxor = stk.playerDefunctBase - stk.swap - stk.sell;
+                        break;
+                    case "Tower":
+                        players[0].tower = stk.playerDefunctBase - stk.swap - stk.sell;
+                        break;
+                    case "American":
+                        players[0].american = stk.playerDefunctBase - stk.swap - stk.sell;
+                        break;
+                    case "Worldwide":
+                        players[0].worldwide = stk.playerDefunctBase - stk.swap - stk.sell;
+                        break;
+                    case "Festival":
+                        players[0].festival = stk.playerDefunctBase - stk.swap - stk.sell;
+                        break;
+                    case "Continental":
+                        players[0].continental = stk.playerDefunctBase - stk.swap - stk.sell;
+                        break;
+                    case "Imperial":
+                        players[0].imperial = stk.playerDefunctBase - stk.swap - stk.sell;
+                        break;
+                }
+                switch(stk.survivor){
+                    case "Luxor":
+                        players[0].luxor = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "Tower":
+                        players[0].tower = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "American":
+                        players[0].american = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "Worldwide":
+                        players[0].worldwide = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "Festival":
+                        players[0].festival = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "Continental":
+                        players[0].continental = sstk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                    case "Imperial":
+                        players[0].imperial = stk.playerSurvivorBase + stk.swap/2;;
+                        break;
+                }
+
+                this.setState({stk:stk,hotels:hotels,players:players})
                 break;
 
         }
@@ -254,6 +372,7 @@ class AcquireLayout extends React.Component {
     compare(a, b) {
         return (a.value - b.value) * -1;
     }
+
 
     render() {
 
