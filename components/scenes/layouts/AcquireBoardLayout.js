@@ -18,6 +18,7 @@ import {
     asset,
     VrSoundEffects
 } from 'react-vr';
+import AcquireHotelStats from "./AcquireHotelStats";
 //Layout
 class AcquireBoardLayout extends React.Component {
 
@@ -68,7 +69,7 @@ class AcquireBoardLayout extends React.Component {
 
                 }}>
                     <AcquireHotelLayout/>
-                    <AcquireSubHotelLayout/>
+                    <AcquireSubHotelLayout  hotels={this.props.hotels} players={this.props.players}/>
                     {scoreRows}
                     <AcquireTileLayout/>
 

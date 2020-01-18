@@ -26,7 +26,7 @@ var hotels =[
         color: "yellow",
         available: 22,
         size: 4,
-        price: 4
+        price: 400
     },
     {
         name: "American",
@@ -400,7 +400,7 @@ class AcquireLayout extends React.Component {
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start'
                     }}>
-                        <AcquireBoardLayout/>
+                        <AcquireBoardLayout  hotels={hotels}  players={players}/>
                         <View style={{
                             flexDirection: 'column',
                             alignItems: 'flex-start',

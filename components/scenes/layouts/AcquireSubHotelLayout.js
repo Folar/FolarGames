@@ -53,10 +53,42 @@ class AcquireSubHotelLayout extends React.Component {
         return {height: .08, width: .367, valueFont: .07, dieFont: .07, marginRight: 0};
     }
 
-    render() {
 
+    getSummary(hotel,player){
+        let amt = 0;
+        switch(hotel.name){
+            case "Luxor":
+                amt = player.luxor
+                break;
+            case "Tower":
+                amt =player.tower;
+                break;
+            case "American":
+                amt =player.american;
+                break;
+            case "Worldwide":
+                amt =player.worldwide;
+                break;
+            case "Festival":
+                amt =player.festival ;
+                break;
+            case "Continental":
+                amt =player.continental ;
+                break;
+            case "Imperial":
+                amt =player.imperial;
+                break;
+        }
+        return amt +"/" +  hotel.available + "/$" +  hotel.price;
+    }
+    render() {
+        let arr=[];
+        for (let i = 0;i<7; i++){
+
+            arr.push(this.getSummary(this.props.hotels[i],this.props.players[0]));
+        }
         let scoreBoxes =
-            ["0/25/$0", "0/25/$0","0/25/$0","0/25/$0","0/25/$0", "0/25/$0","0/25/$0"].map((item, index) => {
+            arr.map((item, index) => {
 
                 return <DieClickable value={this.getValue(item)} dim={this.getDim(item)} rank={this.props.rank} color={this.getColor( item)}
                                      backgroundColor={this.getBackgroundColor( item)} pos={item}  key={index}
