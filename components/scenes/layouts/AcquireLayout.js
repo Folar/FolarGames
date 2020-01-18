@@ -190,7 +190,7 @@ class AcquireLayout extends React.Component {
             case "SellV":
                 idxS = this.index(stk.survivor);
                 idxD = this.index(stk.defunct);
-                debugger;
+
                 if (cnt < stk.sell){
                     stk.keep += (stk.sell - cnt)
                 } else if (cnt > stk.sell) {

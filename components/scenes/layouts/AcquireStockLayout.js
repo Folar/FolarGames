@@ -3,11 +3,7 @@ import {
     View,
     Text, VrButton
 } from 'react-vr';
-
-
-import AcquireBoardLayout from './AcquireBoardLayout.js';
-import AcquireHotelStats from './AcquireHotelStats.js';
-import AcquirePlayerStats from './AcquirePlayerStats.js';
+;
 import ValueClickable from './elements/ValueClickable.js';
 
 
@@ -57,29 +53,42 @@ class AcquireStockLayout extends React.Component {
     swap(){
         this.props.invoke('Swap',0)
     }
-    invoke(cnt){
-        this.props.invoke(this.props.stock.label+"V",cnt)
+    invokeSell(cnt){
+        this.props.invoke("SellV",cnt)
+    }
+    invokeSwap(cnt){
+        this.props.invoke("SwapV",cnt)
     }
 
     render() {
-        let arr= [];
-        var idx = 0;
-        if(this.props.stock.label == "Swap"){
-            idx = this.props.stock.swap;
-            for(var i = 0;i<=this.props.stock.total; i= i+2)
-                arr.push(i);
-        } else{
-            idx = this.props.stock.sell;
-            for(var i = 0;i<=this.props.stock.total; i++)
-                arr.push(i);
-        }
+        let arrSwap= [];
+        let arrSell= [];
+        var idxSell = 0;
+        var idxSwap = 0;
 
-        let scoreBoxes =
-            arr.map((item, index) => {
+        idxSwap = this.props.stock.swap;
+        for(var i = 0;i<=this.props.stock.total; i= i+2)
+            arrSwap.push(i);
+
+        idxSell = this.props.stock.sell;
+        for(var i = 0;i<=this.props.stock.total; i++)
+            arrSell.push(i);
+
+
+        let swap =
+            arrSwap.map((item, index) => {
 
                 return <ValueClickable value={item} dim={this.getDim(item)}  color={"black"}
-                                     backgroundColor={ idx == item ?"white" :  this.state.stock.defunctColor}
-                                     clickable={true} invoke={this.invoke.bind(this)} />
+                                     backgroundColor={ idxSwap == item ?"white" :  this.state.stock.survivorColor}
+                                     clickable={true} invoke={this.invokeSwap.bind(this)} />
+            });
+
+        let sell =
+            arrSell.map((item, index) => {
+
+                return <ValueClickable value={item} dim={this.getDim(item)}  color={"black"}
+                                       backgroundColor={ idxSell == item ?"white" :  this.state.stock.defunctColor}
+                                       clickable={true} invoke={this.invokeSell.bind(this)} />
             });
 
         return (
@@ -243,15 +252,15 @@ class AcquireStockLayout extends React.Component {
                                 paddingLeft: 0.2,
                                 paddingRight: 0.2,
                                 height: 0.15,
-                                backgroundColor: this.state.stock.defunctColor,
-                                borderRadius: 0.1,
+                                backgroundColor: this.state.stock.survivorColor,
+                                borderRadius: 0.0,
                                 margin: 0.01,
                                 width: 1.2, flexDirection: 'row',
                                 alignItems: 'center',
                                 justifyContent: 'center'
                             }}
                         >
-                            <VrButton onClick={this.swap.bind(this)}>
+                            <VrButton >
                                 <Text
                                     style={{
                                         fontSize: 0.15,
@@ -270,14 +279,14 @@ class AcquireStockLayout extends React.Component {
                                 paddingRight: 0.2,
                                 height: 0.15,
                                 backgroundColor: this.state.stock.defunctColor,
-                                borderRadius: 0.1,
+                                borderRadius: 0.0,
                                 margin: 0.01,
                                 width: 1.2, flexDirection: 'row',
                                 alignItems: 'center',
                                 justifyContent: 'center'
                             }}
                         >
-                            <VrButton onClick={this.sell.bind(this)}>
+                            <VrButton >
                                 <Text
                                     style={{
                                         fontSize: 0.15,
@@ -305,13 +314,37 @@ class AcquireStockLayout extends React.Component {
                                 fontWeight:600,
                                 textAlign: 'left',
                                 marginRight:.05,
+                                backgroundColor:  this.state.stock.survivorColor,
+                                color:"black"
+
+                            }}>
+                            { "Swap Shares:"}
+                        </Text>
+                        {swap}
+
+                    </View>
+                    <View style={{
+                        height: .3,
+                        width: 5,
+                        layoutOrigin: [-.05, .3],
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'flex-start'
+                    }}>
+                        <Text
+                            style={{
+                                width: 0.66,
+                                height: .13,
+                                fontWeight:600,
+                                textAlign: 'left',
+                                marginRight:.05,
                                 backgroundColor:  this.state.stock.defunctColor,
                                 color:"black"
 
                             }}>
-                            {this.state.stock.label + " Shares:"}
+                            { "Sell Shares:"}
                         </Text>
-                        {scoreBoxes}
+                        {sell}
 
                     </View>
 
