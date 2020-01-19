@@ -65,8 +65,8 @@ class AcquireTileLayout extends React.Component {
         return false;
     }
 
-    getDim(item) {
-        return {height: .12, width: .42, valueFont: .07, dieFont: .07, marginRight: .01,fontWeight:700};
+    getDim(fw) {
+        return {height: .18, width: .28, valueFont: .07, dieFont: .09, marginRight: .01,fontWeight:fw};
     }
 
     render() {
@@ -74,10 +74,10 @@ class AcquireTileLayout extends React.Component {
         let scoreBoxes =
             ["1-H", "4-C","6-C","12-E","10-B","4-A"].map((item, index) => {
 
-                return <TileClickable value={this.getValue(item)} dim={this.getDim(item)} rank={this.props.rank} color={this.getColor( item)}
-                                     backgroundColor={this.getBackgroundColor( item)} pos={item}  key={index}
+                return <TileClickable value={this.getValue(item)} dim={this.getDim(700)}  color={this.getColor( item)}
+                                     backgroundColor={this.getBackgroundColor( item)}   key={index}
                                      clickable={this.canClick(this.props.rank, item)}
-                                     chooseDicePair={this.props.chooseDicePair} gaitor={false}/>
+                                     chooseDicePair={this.props.chooseDicePair} />
             });
 
         return (
@@ -95,7 +95,19 @@ class AcquireTileLayout extends React.Component {
                         {translateZ: 0}
                     ]
                 }}>
+                    <TileClickable value={"Larry"} dim={this.getDim(400)}  color={"black"}
+                                   backgroundColor={"white"}   key={422}
+                                   clickable={false}
+                                   chooseDicePair={this.props.chooseDicePair} />
                     {scoreBoxes}
+                    <TileClickable value={"6000"} dim={this.getDim(400)}  color={"black"}
+                                   backgroundColor={"lightgray"}   key={423}
+                                   clickable={false}
+                                   chooseDicePair={this.props.chooseDicePair} />
+                    <TileClickable value={""} dim={this.getDim(400)}  color={"black"}
+                                   backgroundColor={"lightgray"}   key={4223}
+                                   clickable={false}
+                                   chooseDicePair={this.props.chooseDicePair} />
 
 
 

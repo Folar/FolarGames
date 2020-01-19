@@ -55,7 +55,7 @@ class TileClickable extends React.Component {
                     }}>
                         <Text
                             style={{
-                                fontSize: this.props.dim.dieFont,fontWeight:700,
+                                fontSize: this.props.dim.dieFont,fontWeight:this.props.dim.fontWeight,
                                 textAlign: 'center',
                                 color: this.props.color,
                             }}>

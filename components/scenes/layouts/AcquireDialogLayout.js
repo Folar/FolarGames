@@ -12,6 +12,7 @@ import {
 
 import AcquireChooseSurvivorLayout from './AcquireChooseSurvivorLayout.js';
 import AcquireStockLayout from './AcquireStockLayout.js';
+import AcquireInstruction from './AcquireInstructionLayout.js';
 
 //Layout
 
@@ -44,8 +45,9 @@ class AcquireDialogLayout extends React.Component {
                     </View>
 
                ): (
+
                    <View>
-                       <Text>   {""}</Text>
+                       <AcquireInstruction/>
                    </View>
                )
             }

@@ -146,7 +146,7 @@ class AcquireLayout extends React.Component {
             merger:merger,
             hotels:hotels,
             players:players,
-            zorder: this.props.zorder-1,
+            zorder: this.props.zorder-.8,
             di:0,
             qty:0
 
@@ -385,7 +385,7 @@ class AcquireLayout extends React.Component {
                                 <AcquireHotelStats  hotels={hotels}/>
                                 <AcquirePlayerStats players={players}/>
                             </View>
-                            <AcquireDialogLayout type={2} stock={this.state.stk}  merger={this.state.merger} invoke={this.invoke.bind(this)}/>
+                            <AcquireDialogLayout type={1} stock={this.state.stk}  merger={this.state.merger} invoke={this.invoke.bind(this)}/>
                         </View>
 
 

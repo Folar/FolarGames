@@ -65,7 +65,7 @@ class AcquireHotelLayout extends React.Component {
     }
 
     getDim(item) {
-        return {height: .08, width: .357, valueFont: .07, dieFont: .07, marginRight: .01};
+        return {height: .1, width: .357, valueFont: .07, dieFont: .075, marginRight: .01};
     }
 
     render() {

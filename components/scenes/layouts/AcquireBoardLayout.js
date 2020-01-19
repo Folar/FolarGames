@@ -72,8 +72,33 @@ class AcquireBoardLayout extends React.Component {
                     <AcquireSubHotelLayout  hotels={this.props.hotels} players={this.props.players}/>
                     {scoreRows}
                     <AcquireTileLayout/>
+                    <View style={{
+                        height: 4,
+                        width: 2.8,
+                        // backgroundColor:"lightblue",
+                        // opacity:.5,
+                        marginTop:.1,
+                        marginBottom:.1,
+                        layoutOrigin: [0, 0],
+                        flexDirection: 'column',
+                        alignItems: 'left',
+                        justifyContent: 'flex-start'
+                    }}>
+                        <Text
+                            style={{
+                                width: 2.8,
+                                height: .5,
+                                fontSize: .13,
+                                fontWeight:300,
+                                textAlign: 'left',
+                                marginLeft:1,
+                                justifyContent: 'start',
+                                color:"black"
 
-
+                            }}>
+                            {"log "}
+                        </Text>
+                    </View>
                 </View>
 
 
