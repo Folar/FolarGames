@@ -100,7 +100,7 @@ class AcquireChooseSurvivorLayout extends React.Component {
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'start',
-                    layoutOrigin: [-.077, .83],
+                    layoutOrigin: [-.077, 1.8],
                     backgroundColor:"lightblue",
                     transform: [
                         {translateX: 0},

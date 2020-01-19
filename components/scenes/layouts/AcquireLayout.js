@@ -127,7 +127,8 @@ var merger ={
     clickCount:0,
     sourceIndex:0,
     tempColor:"",
-    info:"uftudtjty \nkycjy",
+    info:"Choose the hotel that you want to switch",
+    //info:"Select either hotel to switch the order",
     //hotels:["Festival","Continental"],
     //hotelColors:["green","cyan"],
     hotels:["Festival","Continental","Luxor","Imperial"],
@@ -180,9 +181,11 @@ class AcquireLayout extends React.Component {
                         merger.tempColor = merger.hotelColors[cnt];
                         merger.hotelColors[cnt] ="black";
                         merger.sourceIndex =cnt;
+                        merger.info = "Choose the position where you want to place "+ merger.hotels[cnt];
                     } else {
                         merger.clickCount = 0;
                         if(cnt!=merger.sourceIndex) {
+                            merger.info = "Choose the hotel that you want to switch";
                             let tempHotel = merger.hotels[cnt];
                             let tempColor = merger.hotelColors[cnt];
                             merger.hotelColors[cnt] = merger.tempColor;
@@ -190,6 +193,7 @@ class AcquireLayout extends React.Component {
                             merger.hotels[merger.sourceIndex] = tempHotel;
                             merger.hotelColors[merger.sourceIndex] = tempColor;
                         }else{
+                            merger.info = "Choose the hotel that you want to switch";
                             merger.hotelColors[cnt] = merger.tempColor;
                         }
 
