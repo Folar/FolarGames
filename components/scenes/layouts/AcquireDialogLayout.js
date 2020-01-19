@@ -10,7 +10,7 @@ import {
 //import {Easing} from 'react-native';
 
 
- //import AcquireChooseSurviorLayout from './AcquireChooseSurviorLayout.js';
+import AcquireChooseSurvivorLayout from './AcquireChooseSurvivorLayout.js';
 import AcquireStockLayout from './AcquireStockLayout.js';
 
 //Layout
@@ -39,7 +39,7 @@ class AcquireDialogLayout extends React.Component {
                 ) : type == 2 ? (
                     <View>
 
-                        {/*<AcquireChooseSurviorLayoutr/>*/}
+                        {<AcquireChooseSurvivorLayout merger={this.props.merger} invoke={this.props.invoke} />}
 
                     </View>
 

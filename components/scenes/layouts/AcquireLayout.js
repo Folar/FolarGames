@@ -111,17 +111,27 @@ var stk = {
     swap: 0,
     sell: 0,
     total: 10,
-    label: "Swap",
     survivorColor: "yellow",
     defunctColor: "red",
-    survivorTotal: 4,
     defunctPrice:200,
     playerMoneyBase:6000,
     playerSurvivorBase:3,
     playerDefunctBase:10,
     hotelAvailDefunctBase:15,
     hotelAvailSurvivorBase:22,
-    info:"larry wins first and second bonos for 3000 \n ydtdytkk lfyulkfuk xxxxx 7dytdjtdj tsrsy  trtrse zRgree \nify,j d ydtdjh \ndsgfhSRd hfszh hrzrdey rzey "
+    info:"larry wins first and second bonu s for 3000 \n ydtdytkk lfyulkfuk xxxxx 7dytdjtdj tsrsy  trtrse zRgree \nify,j d ydtdjh \ndsgfhSRd hfszh hrzrdey rzey "
+}
+var merger ={
+
+    title: "Choose Survivor and order of defunct hotels",
+    clickCount:0,
+    sourceIndex:0,
+    tempColor:"",
+    info:"uftudtjty \nkycjy",
+    //hotels:["Festival","Continental"],
+    //hotelColors:["green","cyan"],
+    hotels:["Festival","Continental","Luxor","Imperial"],
+    hotelColors:["green","cyan","red","pink"]
 }
 
 //Layout
@@ -132,6 +142,7 @@ class AcquireLayout extends React.Component {
 
         this.state = {
             stk:stk,
+            merger:merger,
             hotels:hotels,
             players:players,
             zorder: this.props.zorder-1,
@@ -154,10 +165,38 @@ class AcquireLayout extends React.Component {
 
     invoke(type,cnt){
         switch (type) {
-            case "Swap":
-            case "Sell":
-                stk.label = type;
-                this.setState({stk:stk})
+            case "switchHotels":
+                if(merger.hotels.length == 2){
+                    let tempHotel = merger.hotels[0];
+                    let tempColor = merger.hotelColors[0];
+                    merger.hotels[0] = merger.hotels[1];
+                    merger.hotelColors[0]= merger.hotelColors[1];
+                    merger.hotels[1] = tempHotel;
+                    merger.hotelColors[1]= tempColor;
+
+                } else {
+                    if(merger.clickCount == 0){
+                        merger.clickCount = 1;
+                        merger.tempColor = merger.hotelColors[cnt];
+                        merger.hotelColors[cnt] ="black";
+                        merger.sourceIndex =cnt;
+                    } else {
+                        merger.clickCount = 0;
+                        if(cnt!=merger.sourceIndex) {
+                            let tempHotel = merger.hotels[cnt];
+                            let tempColor = merger.hotelColors[cnt];
+                            merger.hotelColors[cnt] = merger.tempColor;
+                            merger.hotels[cnt] = merger.hotels[merger.sourceIndex];
+                            merger.hotels[merger.sourceIndex] = tempHotel;
+                            merger.hotelColors[merger.sourceIndex] = tempColor;
+                        }else{
+                            merger.hotelColors[cnt] = merger.tempColor;
+                        }
+
+                    }
+
+                }
+                this.setState({merger:merger})
                 break;
             case "SwapV":
                 let idxS = this.index(stk.survivor);
@@ -342,7 +381,7 @@ class AcquireLayout extends React.Component {
                                 <AcquireHotelStats  hotels={hotels}/>
                                 <AcquirePlayerStats players={players}/>
                             </View>
-                            <AcquireDialogLayout type={1} stock={this.state.stk} invoke={this.invoke.bind(this)}/>
+                            <AcquireDialogLayout type={2} stock={this.state.stk}  merger={this.state.merger} invoke={this.invoke.bind(this)}/>
                         </View>
 
 
