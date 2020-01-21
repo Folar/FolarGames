@@ -70,6 +70,7 @@ class GamesLayout extends React.Component {
             diverData: {},
             acquireData:{
                 state:0,
+                currentIndex:1,
                 dlgType:1,
                 hotels :[
                     {

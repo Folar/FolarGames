@@ -24,6 +24,7 @@ class AcquirePlayerStats extends React.Component {
 
     }
     getRowColor(i){
+        if  (i == this.props.currentIndex) return "lightgray";
         return i%2 == 0 ?"white" :"lightblue"
     }
 
