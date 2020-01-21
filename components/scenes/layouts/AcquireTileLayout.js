@@ -65,6 +65,15 @@ class AcquireTileLayout extends React.Component {
         return false;
     }
 
+    getMoney(){
+        for(let i in this.props.players){
+            if (this.props.players[i].name == this.props.name)
+                return this.props.players[i].money;
+
+        }
+
+    }
+
     getDim(fw) {
         return {height: .18, width: .28, valueFont: .07, dieFont: .09, marginRight: .01,fontWeight:fw};
     }
@@ -95,12 +104,12 @@ class AcquireTileLayout extends React.Component {
                         {translateZ: 0}
                     ]
                 }}>
-                    <TileClickable value={"Larry"} dim={this.getDim(400)}  color={"black"}
+                    <TileClickable value={this.props.name} dim={this.getDim(400)}  color={"black"}
                                    backgroundColor={"white"}   key={422}
                                    clickable={false}
                                    chooseDicePair={this.props.chooseDicePair} />
                     {scoreBoxes}
-                    <TileClickable value={"6000"} dim={this.getDim(400)}  color={"black"}
+                    <TileClickable value={this.getMoney()} dim={this.getDim(400)}  color={"black"}
                                    backgroundColor={"lightgray"}   key={423}
                                    clickable={false}
                                    chooseDicePair={this.props.chooseDicePair} />

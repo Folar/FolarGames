@@ -12,129 +12,6 @@ import AcquireDialogLayout from './AcquireDialogLayout.js';
 
 
 
-
-var hotels =[
-    {
-        name: "Luxor",
-        color: "red",
-        available: 15,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "Tower",
-        color: "yellow",
-        available: 22,
-        size: 4,
-        price: 400
-    },
-    {
-        name: "American",
-        color: "#8787ff",
-        available: 25,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "Worldwide",
-        color: "#c3af91",
-        available: 25,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "Festival",
-        color: "green",
-        available: 25,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "Continental",
-        color: "cyan",
-        available: 25,
-        size: 0,
-        price: 0
-    },
-    {
-        name: "Imperial",
-        color: "pink",
-        available: 25,
-        size: 0,
-        price: 0
-    }
-
-
-
-
-];
-var players =[
-    {
-        name: "Larry",
-        hotels:[10,3 ,0,0,0,0,0],
-
-        money:3400
-    },
-    {
-        name: "dino",
-        hotels:[0,0 ,0,0,0,0,0],
-        money:4500
-    },
-    {
-        name: "jacob",
-        hotels:[0,0 ,0,0,0,0,0],
-        money:6000
-    },
-    {
-        name: "Peter",
-        hotels:[0,0 ,0,0,0,0,0],
-        money:6000
-    },
-    {
-        name: "joey",
-        hotels:[0,0 ,0,0,0,0,0],
-        money:4500
-    },
-    {
-        name: "trump",
-        hotels:[0,0 ,0,0,0,0,0],
-        money:700
-    }
-
-
-];
-var stk = {
-    title: "Tower takeover or Luxor",
-    survivor: "Tower",
-    defunct: "Luxor",
-    keep: 10,
-    swap: 0,
-    sell: 0,
-    total: 10,
-    survivorColor: "yellow",
-    defunctColor: "red",
-    defunctPrice:200,
-    playerMoneyBase:6000,
-    playerSurvivorBase:3,
-    playerDefunctBase:10,
-    hotelAvailDefunctBase:15,
-    hotelAvailSurvivorBase:22,
-    info:"larry wins first and second bonu s for 3000 \n ydtdytkk lfyulkfuk xxxxx 7dytdjtdj tsrsy  trtrse zRgree \nify,j d ydtdjh \ndsgfhSRd hfszh hrzrdey rzey "
-}
-var merger ={
-
-    title: "Choose Survivor and order of defunct hotels",
-    clickCount:0,
-    sourceIndex:0,
-    tempColor:"",
-    info:"Choose the hotel that you want to switch",
-    //info:"Select either hotel to switch the order",
-    //hotels:["Festival","Continental"],
-    //hotelColors:["green","cyan"],
-    hotels:["Festival","Continental","Luxor","Imperial"],
-    hotelColors:["green","cyan","red","pink"]
-}
-
 //Layout
 class AcquireLayout extends React.Component {
 
@@ -142,10 +19,10 @@ class AcquireLayout extends React.Component {
         super(props);
 
         this.state = {
-            stk:stk,
-            merger:merger,
-            hotels:hotels,
-            players:players,
+            stk:this.props.data.stk,
+            merger:this.props.data.merger,
+            hotels:this.props.data.hotels,
+            players:this.props.data.players,
             zorder: this.props.zorder-.8,
             di:0,
             qty:0
@@ -167,144 +44,100 @@ class AcquireLayout extends React.Component {
     invoke(type,cnt){
         switch (type) {
             case "switchHotels":
-                if(merger.hotels.length == 2){
-                    let tempHotel = merger.hotels[0];
-                    let tempColor = merger.hotelColors[0];
-                    merger.hotels[0] = merger.hotels[1];
-                    merger.hotelColors[0]= merger.hotelColors[1];
-                    merger.hotels[1] = tempHotel;
-                    merger.hotelColors[1]= tempColor;
+                if(this.state.merger.hotels.length == 2){
+                    let tempHotel = this.state.merger.hotels[0];
+                    let tempColor = this.state.merger.hotelColors[0];
+                    this.state.merger.hotels[0] = this.state.merger.hotels[1];
+                    this.state.merger.hotelColors[0]= this.state.merger.hotelColors[1];
+                    this.state.merger.hotels[1] = tempHotel;
+                    this.state.merger.hotelColors[1]= tempColor;
 
                 } else {
-                    if(merger.clickCount == 0){
-                        merger.clickCount = 1;
-                        merger.tempColor = merger.hotelColors[cnt];
-                        merger.hotelColors[cnt] ="black";
-                        merger.sourceIndex =cnt;
-                        merger.info = "Choose the position where you want to place "+ merger.hotels[cnt];
+                    if(this.state.merger.clickCount == 0){
+                        this.state.merger.clickCount = 1;
+                        this.state.merger.tempColor = this.state.merger.hotelColors[cnt];
+                        this.state.merger.hotelColors[cnt] ="black";
+                        this.state.merger.sourceIndex =cnt;
+                        this.state.merger.info = "Choose the position where you want to place "+ this.state.merger.hotels[cnt];
                     } else {
-                        merger.clickCount = 0;
-                        if(cnt!=merger.sourceIndex) {
-                            merger.info = "Choose the hotel that you want to switch";
-                            let tempHotel = merger.hotels[cnt];
-                            let tempColor = merger.hotelColors[cnt];
-                            merger.hotelColors[cnt] = merger.tempColor;
-                            merger.hotels[cnt] = merger.hotels[merger.sourceIndex];
-                            merger.hotels[merger.sourceIndex] = tempHotel;
-                            merger.hotelColors[merger.sourceIndex] = tempColor;
+                        this.state.merger.clickCount = 0;
+                        if(cnt!=this.state.merger.sourceIndex) {
+                            this.state.merger.info = "Choose the hotel that you want to switch";
+                            let tempHotel = this.state.merger.hotels[cnt];
+                            let tempColor = this.state.merger.hotelColors[cnt];
+                            this.state.merger.hotelColors[cnt] = this.state.merger.tempColor;
+                            this.state.merger.hotels[cnt] = this.state.merger.hotels[this.state.merger.sourceIndex];
+                            this.state.merger.hotels[this.state.merger.sourceIndex] = tempHotel;
+                            this.state.merger.hotelColors[this.state.merger.sourceIndex] = tempColor;
                         }else{
-                            merger.info = "Choose the hotel that you want to switch";
-                            merger.hotelColors[cnt] = merger.tempColor;
+                            this.state.merger.info = "Choose the hotel that you want to switch";
+                            this.state.merger.hotelColors[cnt] = this.state.merger.tempColor;
                         }
 
                     }
 
                 }
-                this.setState({merger:merger})
+                this.setState({merger:this.state.merger})
                 break;
             case "SwapV":
-                let idxS = this.index(stk.survivor);
-                let idxD = this.index(stk.defunct);
-                if (cnt < stk.swap){
-                    stk.keep += (stk.swap - cnt)
-                } else if (cnt > stk.swap) {
-                    if(cnt <= stk.keep+stk.swap)
-                        stk.keep = stk.keep +stk.swap -cnt;
+                let idxS = this.index(this.state.stk.survivor);
+                let idxD = this.index(this.state.stk.defunct);
+                if (cnt < this.state.stk.swap){
+                    this.state.stk.keep += (this.state.stk.swap - cnt)
+                } else if (cnt > this.state.stk.swap) {
+                    if(cnt <= this.state.stk.keep+this.state.stk.swap)
+                        this.state.stk.keep = this.state.stk.keep +this.state.stk.swap -cnt;
                     else{
-                        stk.sell = stk.total - cnt ;
-                        stk.keep = 0;
+                        this.state.stk.sell = this.state.stk.total - cnt ;
+                        this.state.stk.keep = 0;
                     }
 
                 }
-                stk.swap = cnt;
+                this.state.stk.swap = cnt;
 
-                players[0].money = stk.playerMoneyBase + stk.sell * stk.defunctPrice;
-                hotels[idxS].available = stk.hotelAvailSurvivorBase - stk.swap/2;
-                hotels[idxD].available = stk.hotelAvailDefunctBase +stk.swap;
-                players[0].hotels[idxD] = stk.playerDefunctBase - stk.swap;
-                players[0].hotels[idxS] = stk.playerSurvivorBase + stk.swap/2;;
-
-
+                this.state.players[0].money = this.state.stk.playerMoneyBase + this.state.stk.sell * this.state.stk.defunctPrice;
+                this.state.hotels[idxS].available = this.state.stk.hotelAvailSurvivorBase - this.state.stk.swap/2;
+                this.state.hotels[idxD].available = this.state.stk.hotelAvailDefunctBase +this.state.stk.swap + this.state.stk.sell ;
+                this.state.players[0].hotels[idxD] = this.state.stk.playerDefunctBase - this.state.stk.swap - this.state.stk.sell ;
+                this.state.players[0].hotels[idxS] = this.state.stk.playerSurvivorBase + this.state.stk.swap/2;
 
 
-                this.setState({stk:stk,hotels:hotels,players:players})
+
+
+                this.setState({stk:this.state.stk,hotels:this.state.hotels,players:this.state.players})
                 break;
 
             case "SellV":
-                idxS = this.index(stk.survivor);
-                idxD = this.index(stk.defunct);
+                idxS = this.index(this.state.stk.survivor);
+                idxD = this.index(this.state.stk.defunct);
 
-                if (cnt < stk.sell){
-                    stk.keep += (stk.sell - cnt)
-                } else if (cnt > stk.sell) {
-                    if(cnt <= stk.keep+stk.sell)
-                        stk.keep = stk.keep +stk.sell -cnt;
+                if (cnt < this.state.stk.sell){
+                    this.state.stk.keep += (this.state.stk.sell - cnt)
+                } else if (cnt > this.state.stk.sell) {
+                    if(cnt <= this.state.stk.keep+this.state.stk.sell)
+                        this.state.stk.keep = this.state.stk.keep +this.state.stk.sell -cnt;
                     else{
-                        let t = stk.keep;
+                        let t = this.state.stk.keep;
 
-                        stk.swap = stk.total - cnt;
-                        stk.keep = 0;
-                        if(stk.swap % 2 == 1){
-                            stk.keep  = 1;
-                            stk.swap--;
+                        this.state.stk.swap = this.state.stk.total - cnt;
+                        this.state.stk.keep = 0;
+                        if(this.state.stk.swap % 2 == 1){
+                            this.state.stk.keep  = 1;
+                            this.state.stk.swap--;
                         }
                     }
 
                 }
-                stk.sell = cnt;
-                players[0].money = stk.playerMoneyBase + stk.sell * stk.defunctPrice;
-                hotels[idxS].available = stk.hotelAvailSurvivorBase - stk.swap/2;
-                hotels[idxD].available = stk.hotelAvailDefunctBase +stk.swap + stk.sell;
+                this.state.stk.sell = cnt;
+                this.state.players[0].money = this.state.stk.playerMoneyBase + this.state.stk.sell * this.state.stk.defunctPrice;
+                this.state.hotels[idxS].available = this.state.stk.hotelAvailSurvivorBase - this.state.stk.swap/2;
+                this.state.hotels[idxD].available = this.state.stk.hotelAvailDefunctBase +this.state.stk.swap + this.state.stk.sell;
+                this.state.players[0].hotels[idxD] = this.state.stk.playerDefunctBase - this.state.stk.swap - this.state.stk.sell;
+                this.state.players[0].hotels[idxS] = this.state.stk.playerSurvivorBase + this.state.stk.swap/2 ;
 
 
-                switch(stk.defunct){
-                    case "Luxor":
-                        players[0].luxor = stk.playerDefunctBase - stk.swap - stk.sell;
-                        break;
-                    case "Tower":
-                        players[0].tower = stk.playerDefunctBase - stk.swap - stk.sell;
-                        break;
-                    case "American":
-                        players[0].american = stk.playerDefunctBase - stk.swap - stk.sell;
-                        break;
-                    case "Worldwide":
-                        players[0].worldwide = stk.playerDefunctBase - stk.swap - stk.sell;
-                        break;
-                    case "Festival":
-                        players[0].festival = stk.playerDefunctBase - stk.swap - stk.sell;
-                        break;
-                    case "Continental":
-                        players[0].continental = stk.playerDefunctBase - stk.swap - stk.sell;
-                        break;
-                    case "Imperial":
-                        players[0].imperial = stk.playerDefunctBase - stk.swap - stk.sell;
-                        break;
-                }
-                switch(stk.survivor){
-                    case "Luxor":
-                        players[0].luxor = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "Tower":
-                        players[0].tower = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "American":
-                        players[0].american = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "Worldwide":
-                        players[0].worldwide = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "Festival":
-                        players[0].festival = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "Continental":
-                        players[0].continental = sstk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                    case "Imperial":
-                        players[0].imperial = stk.playerSurvivorBase + stk.swap/2;;
-                        break;
-                }
 
-                this.setState({stk:stk,hotels:hotels,players:players})
+                this.setState({stk:this.state.stk,hotels:this.state.hotels,players:this.state.players})
                 break;
 
         }
@@ -363,7 +196,7 @@ class AcquireLayout extends React.Component {
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start'
                     }}>
-                        <AcquireBoardLayout  hotels={hotels}  players={players}/>
+                        <AcquireBoardLayout   name={this.props.name} hotels={this.state.hotels}  players={this.state.players}/>
                         <View style={{
                             flexDirection: 'column',
                             alignItems: 'flex-start',
@@ -382,10 +215,10 @@ class AcquireLayout extends React.Component {
                                     {translateX: 0},
                                     {translateZ: 0}]
                             }}>
-                                <AcquireHotelStats  hotels={hotels}/>
-                                <AcquirePlayerStats players={players}/>
+                                <AcquireHotelStats  hotels={this.state.hotels}/>
+                                <AcquirePlayerStats players={this.state.players}/>
                             </View>
-                            <AcquireDialogLayout type={1} stock={this.state.stk}  merger={this.state.merger} invoke={this.invoke.bind(this)}/>
+                            <AcquireDialogLayout type={this.props.data.dlgType} stock={this.state.stk}  merger={this.state.merger} invoke={this.invoke.bind(this)}/>
                         </View>
 
 

@@ -67,237 +67,108 @@ class GamesLayout extends React.Component {
             zoom:-3,
             dtX:-2,
             dtY:0,
-            diverData: {
-                            round:1,
-                            buttonText:"Start",
-                            buttonText2:"",
-                            oxygen:25,
-                            message:"",
-                            players:[],
-                            chips:[
-                               /* {name:"",
-                                    type:'C',
-                                    color:"#2dcded",
-                                    value:3,
-                                    subContents:"\n",
-                                    size:.5},
-                                {name:"",
-                                    type:'C',
-                                    color:"#2dcded",
-                                      subContents:"\n",
-                                    value:3,
-                                    size:.5},
-                                {name:"",
-                                    type:'C',
-                                    color:"#2dcded",
-                                    value:3,
-                                     subContents:"\n",
-                                    size:.5},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#2dcded",
-                                    value:3,
-                                    size:.5},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#2dcded",
-                                    value:3,
-                                    size:.5},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#2dcded",
-                                    value:3,
-                                    size:.5},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#2dcded",
-                                    value:3,
-                                    size:.5},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#2dcded",
-                                    value:3,
-                                    size:.5},
+            diverData: {},
+            acquireData:{
+                state:0,
+                dlgType:1,
+                hotels :[
+                    {
+                        name: "Luxor",
+                        color: "red",
+                        available: 15,
+                        size: 0,
+                        price: 0
+                    },
+                    {
+                        name: "Tower",
+                        color: "yellow",
+                        available: 22,
+                        size: 4,
+                        price: 400
+                    },
+                    {
+                        name: "American",
+                        color: "#8787ff",
+                        available: 25,
+                        size: 0,
+                        price: 0
+                    },
+                    {
+                        name: "Worldwide",
+                        color: "#c3af91",
+                        available: 25,
+                        size: 0,
+                        price: 0
+                    },
+                    {
+                        name: "Festival",
+                        color: "green",
+                        available: 25,
+                        size: 0,
+                        price: 0
+                    },
+                    {
+                        name: "Continental",
+                        color: "cyan",
+                        available: 25,
+                        size: 0,
+                        price: 0
+                    },
+                    {
+                        name: "Imperial",
+                        color: "pink",
+                        available: 25,
+                        size: 0,
+                        price: 0
+                    }
+                ],
+                players :[
+                    {
+                        name: "Larry",
+                        hotels:[10,3 ,0,0,0,0,0],
+                        money:3400
+                    },
+                    {
+                        name: "dino",
+                        hotels:[0,0 ,0,0,0,0,0],
+                        money:4500
+                    }
+                ],
+                stk : {
+                    title: "Tower takeover or Luxor",
+                    survivor: "Tower",
+                    defunct: "Luxor",
+                    keep: 10,
+                    swap: 0,
+                    sell: 0,
+                    total: 10,
+                    survivorColor: "yellow",
+                    defunctColor: "red",
+                    defunctPrice:200,
+                    playerMoneyBase:3400,
+                    playerSurvivorBase:3,
+                    playerDefunctBase:10,
+                    hotelAvailDefunctBase:15,
+                    hotelAvailSurvivorBase:22,
+                    info:"larry wins first and second bonu s for 3000 \n ydtdytkk lfyulkfuk xxxxx 7dytdjtdj tsrsy  trtrse zRgree \nify,j d ydtdjh \ndsgfhSRd hfszh hrzrdey rzey "
+                },
+                merger :{
 
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#40aed6",
-                                    value:3,
-                                    size:.6},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#40aed6",
-                                    value:3,
-                                    size:.6},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#40a3d6",
-                                    value:3,
-                                    size:.6},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#40aed6",
-                                    value:3,
-                                    size:.6},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#40aed6",
-                                    value:3,
-                                    size:.6},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#40aed6",
-                                    value:3,
-                                    size:.6},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#40aed6",
-                                    value:3,
-                                    size:.6},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#40aed6",
-                                    value:3,
-                                    size:.6},
-
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#3c7da3",
-                                    value:3,
-                                    size:.7},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#3c7da3",
-                                    value:3,
-                                    size:.7},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#3c7da3",
-                                    value:3,
-                                    size:.7},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#3c7da3",
-                                    value:3,
-                                    size:.7},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#3c7da3",
-                                    value:3,
-                                    size:.7},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#3c7da3",
-                                    value:3,
-                                    size:.7},
-                                {name:"",
-                                     subContents:"\n",
-                                    type:'C',
-                                    color:"#3c7da3",
-                                    value:3,
-                                    size:.7},
-                                {name:"",
-                                    type:'C',
-                                     subContents:"\n",
-                                    color:"#3c7da3",
-                                    value:3,
-                                    size:.7},
-
-                                {name:"",
-                                    type:'C',
-                                    color:"#406280",
-                                    value:3,
-                                     subContents:"\n",
-                                    size:.8},
-                                {name:"",
-                                    type:'C',
-                                    color:"#406280",
-                                    value:3,
-                                     subContents:"\n",
-                                    size:.8},
-                                {name:"",
-                                    type:'C',
-                                    color:"#406280",
-                                    value:3,
-                                     subContents:"\n",
-                                    size:.8},
-                                {name:"",
-                                    type:'C',
-                                    color:"#406280",
-                                    value:3,
-                                     subContents:"\n",
-                                    size:.8},
-                                {name:"",
-                                    type:'C',
-                                    color:"#406280",
-                                    value:3,
-                                     subContents:"\n",
-                                    size:.8},
-                                {name:"",
-                                    type:'C',
-                                    color:"#406280",
-                                    value:3,
-                                     subContents:"\n",
-                                    size:.8},
-                                {name:"",
-                                    type:'C',
-                                    color:"#406280",
-                                    value:3,
-                                     subContents:"\n",
-                                    size:.8},
-                                {name:"",
-                                    type:'C',
-                                    color:"#406280",
-                                    value:3,
-                                     subContents:"\n",
-                                    size:.8}*/
-                            ]
-                        },
+                    title: "Choose Survivor and order of defunct hotels",
+                    clickCount:0,
+                    sourceIndex:0,
+                    tempColor:"",
+                    info:"Choose the hotel that you want to switch",
+                    //info:"Select either hotel to switch the order",
+                    //hotels:["Festival","Continental"],
+                    //hotelColors:["green","cyan"],
+                    hotels:["Festival","Continental","Luxor","Imperial"],
+                    hotelColors:["green","cyan","red","pink"]
+                }
+            },
             choiceData: {},
             gameData: {},
-            bocaData: {
-                players: [
-                    {
-                        name: 'Larry',
-                        money: 0,
-                        diceLeft: 8
-                    }],
-                ofieldColors: ["yellow", "cyan", "pink", "green", "orange", "#b19cd9"],
-                fieldColors: ["yellow", "cyan", "pink", "green", "orange", "#b19cd9"],
-                money: mon.money,
-                ofieldPlayers: fp.players,
-                fieldPlayers: fp.players,
-                currentPlayer: "L",
-                currentIndex: 0,
-                round: 1,
-                buttonText:"Start",
-                buttonShow:true,
-                dice:[],
-                diceNum:8,
-                diceXNum:2,
-                totalDice:0,
-                selectedDice :0,
-                startIndex:0
-            },
+            bocaData: {},
             choiceShowButton: true,
             choiceButtonText: "Start",
             takeSixTranslate: [0, 0, 0],
@@ -341,10 +212,14 @@ class GamesLayout extends React.Component {
 
 
     }
-     playAgain5() {
-            this.client.close();
-            this.connectToServer(5);
-        }
+    playAgain6() {
+        this.client.close();
+        this.connectToServer(6);
+    }
+    playAgain5() {
+        this.client.close();
+        this.connectToServer(5);
+    }
     playAgain3() {
         this.client.close();
         this.connectToServer(3);
@@ -481,7 +356,9 @@ class GamesLayout extends React.Component {
               _this.setState({diverData: packet});
               _this.refs.dl.setData( packet);
 
-          }
+          } if (gt == 6) {
+               _this.setState({acquireData: packet});
+           }
 
 
 
@@ -507,7 +384,7 @@ class GamesLayout extends React.Component {
 
 
     render() {
-        const login =6; this.state.loginScene;
+        const login = this.state.loginScene;
         let adj = 2;
         if (login == 5 && this.state.zoom == -5)
             adj = 5;
@@ -572,12 +449,11 @@ class GamesLayout extends React.Component {
                ): (
                    <View>
                         <AcquireLayout zorder={this.state.zoom} showButton={true} text={"Play"}
-                                                           roll={this.roll.bind(this)}
-                                                           bocaData={this.state.bocaData}
-                                                           ref="acq"
-                                                           sendBocaMessage={this.sendBocaMessage.bind(this)}
-                                                           player={this.state.name}
-                                                           playAgain={this.playAgain4.bind(this)}/>
+                               data={this.state.acquireData}
+                               ref="acq"
+                               sendmessage={this.sendBocaMessage.bind(this)}
+                               name={this.state.name}
+                               playAgain={this.playAgain6.bind(this)}/>
                    </View>
                )
             }

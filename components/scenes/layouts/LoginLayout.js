@@ -68,6 +68,12 @@ class LoginLayout extends React.Component {
             n = n.substring(0,5);
         this.props.signon(this.capitalizeFirstLetter(n),5);
     }
+    invokeAcquire(){
+        let n = this.state.name;
+        if (n.length > 6)
+            n = n.substring(0,5);
+        this.props.signon(this.capitalizeFirstLetter(n),6);
+    }
     updateStage(input) {
 
         if (input == '<-') {
@@ -231,7 +237,7 @@ class LoginLayout extends React.Component {
                         <Button updateScene={this.invoke.bind(this)} showButton={this.state.showButton}
                                 text="6 nimmt!"
                                 style={{
-                                    fontSize: 0.2,
+                                    fontSize: .16,
                                     textAlign: 'center',
                                     color: "#000000",
                                     transform: [
@@ -241,7 +247,7 @@ class LoginLayout extends React.Component {
                         <Button updateScene={this.invoke2.bind(this)} showButton={this.state.showButton}
                                 text="Choice"
                                 style={{
-                                    fontSize: 0.2,
+                                    fontSize: .16,
                                     textAlign: 'center',
                                     color: "#000000",
                                     transform: [
@@ -251,7 +257,7 @@ class LoginLayout extends React.Component {
                         <Button updateScene={this.invokeBocaDice.bind(this)} showButton={this.state.showButton}
                                 text="Boca Dice"
                                 style={{
-                                    fontSize: 0.2,
+                                    fontSize: .16,
                                     textAlign: 'center',
                                     color: "#000000",
                                     transform: [
@@ -261,13 +267,24 @@ class LoginLayout extends React.Component {
                         <Button updateScene={this.invokeDiver.bind(this)} showButton={this.state.showButton}
                                 text="Greedy Diver"
                                 style={{
-                                    fontSize: 0.2,
+                                    fontSize: .16,
                                     textAlign: 'center',
                                     color: "#000000",
                                     transform: [
                                         {translateX: 0}
                                     ]
                                 }}/>
+                        <Button updateScene={this.invokeAcquire.bind(this)} showButton={this.state.showButton}
+                                text="Acquire"
+                                style={{
+                                    fontSize: .16,
+                                    textAlign: 'center',
+                                    color: "#000000",
+                                    transform: [
+                                        {translateX: 0}
+                                    ]
+                                }}/>
+
 
                     </View>
 
