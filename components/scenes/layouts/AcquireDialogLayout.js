@@ -13,6 +13,7 @@ import {
 import AcquireChooseSurvivorLayout from './AcquireChooseSurvivorLayout.js';
 import AcquireStockLayout from './AcquireStockLayout.js';
 import AcquireInstruction from './AcquireInstructionLayout.js';
+import AcquireBuyStockLayout from './AcquireBuyStockLayout.js';
 
 //Layout
 
@@ -35,7 +36,10 @@ class AcquireDialogLayout extends React.Component {
 
         return (
             <View>{
-                type == 1 ? (
+                type == 3 ?(
+                       <AcquireBuyStockLayout buy={this.props.buy} hotels={this.props.hotels}  player={this.props.player}
+                                              invoke={this.props.invoke}/>
+                ): type == 1 ? (
                     <AcquireStockLayout stock={this.props.stock} invoke={this.props.invoke}/>
                 ) : type == 2 ? (
                     <View>

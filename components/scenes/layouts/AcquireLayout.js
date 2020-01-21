@@ -23,6 +23,7 @@ class AcquireLayout extends React.Component {
             merger:this.props.data.merger,
             hotels:this.props.data.hotels,
             players:this.props.data.players,
+            buy: this.props.data.buy,
             zorder: this.props.zorder-.8,
             di:0,
             qty:0
@@ -43,6 +44,17 @@ class AcquireLayout extends React.Component {
 
     invoke(type,cnt){
         switch (type) {
+            case "increaseHotel":
+                let hotelIndex = this.index(this.state.buy.hotels[cnt]);
+                debugger;
+                if( this.state.buy.amt[cnt] == 3 ||
+                    this.state.buy.amt[cnt] == this.props.hotels[hotelIndex].available||
+                    (this.state.buy.amt[cnt] + 1)* this.props.hotels[hotelIndex].price > this.props.player.money) return;
+                break;
+            case "reduceHotel":
+                hotelIndex = this.index(this.state.buy.hotels[cnt]);
+                if (this.state.buy.amt[cnt]== 0) return;
+                break;
             case "switchHotels":
                 if(this.state.merger.hotels.length == 2){
                     let tempHotel = this.state.merger.hotels[0];
@@ -165,8 +177,14 @@ class AcquireLayout extends React.Component {
     }
 
 
-    compare(a, b) {
-        return (a.value - b.value) * -1;
+    getPlayerIndex(n){
+        for(let i in this.props.players){
+            if (this.props.players[i].name == n)
+                return i;
+
+        }
+        return 0;
+
     }
 
 
@@ -196,7 +214,8 @@ class AcquireLayout extends React.Component {
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start'
                     }}>
-                        <AcquireBoardLayout   name={this.props.name} hotels={this.state.hotels}  players={this.state.players}/>
+                        <AcquireBoardLayout   playerIndex={this.getPlayerIndex(this.props.name)} hotels={this.state.hotels}
+                                                    players={this.state.players}/>
                         <View style={{
                             flexDirection: 'column',
                             alignItems: 'flex-start',
@@ -218,7 +237,10 @@ class AcquireLayout extends React.Component {
                                 <AcquireHotelStats  hotels={this.state.hotels}/>
                                 <AcquirePlayerStats  currentIndex={this.props.data.currentIndex} players={this.state.players}/>
                             </View>
-                            <AcquireDialogLayout type={this.props.data.dlgType} stock={this.state.stk}  merger={this.state.merger} invoke={this.invoke.bind(this)}/>
+                            <AcquireDialogLayout type={this.props.data.dlgType} stock={this.state.stk} buy={this.state.buy}
+                                                 merger={this.state.merger} hotels={this.state.hotels}
+                                                 player={this.state.players[this.getPlayerIndex(this.props.name)]}
+                                                 invoke={this.invoke.bind(this)}/>
                         </View>
 
 

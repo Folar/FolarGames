@@ -71,7 +71,7 @@ class AcquireBoardLayout extends React.Component {
                     <AcquireHotelLayout/>
                     <AcquireSubHotelLayout  hotels={this.props.hotels} players={this.props.players}/>
                     {scoreRows}
-                    <AcquireTileLayout name={this.props.name} namex={"Larry"} players={this.props.players}/>
+                    <AcquireTileLayout player={this.props.players[this.props.playerIndex]}/>
                     <View style={{
                         height: 4,
                         width: 2.8,

@@ -70,8 +70,8 @@ class GamesLayout extends React.Component {
             diverData: {},
             acquireData:{
                 state:0,
-                currentIndex:1,
-                dlgType:1,
+                currentIndex:0,
+                dlgType:3,
                 hotels :[
                     {
                         name: "Luxor",
@@ -90,16 +90,16 @@ class GamesLayout extends React.Component {
                     {
                         name: "American",
                         color: "#8787ff",
-                        available: 25,
+                        available: 5,
                         size: 0,
-                        price: 0
+                        price: 600
                     },
                     {
                         name: "Worldwide",
                         color: "#c3af91",
-                        available: 25,
-                        size: 0,
-                        price: 0
+                        available: 12,
+                        size: 33,
+                        price: 1200
                     },
                     {
                         name: "Festival",
@@ -113,7 +113,7 @@ class GamesLayout extends React.Component {
                         color: "cyan",
                         available: 25,
                         size: 0,
-                        price: 0
+                        price: 400
                     },
                     {
                         name: "Imperial",
@@ -126,8 +126,8 @@ class GamesLayout extends React.Component {
                 players :[
                     {
                         name: "Larry",
-                        hotels:[10,3 ,0,0,0,0,0],
-                        money:3400
+                        hotels:[10,3 ,0,12,0,0,0],
+                        money:800
                     },
                     {
                         name: "dino",
@@ -165,6 +165,14 @@ class GamesLayout extends React.Component {
                     //hotelColors:["green","cyan"],
                     hotels:["Festival","Continental","Luxor","Imperial"],
                     hotelColors:["green","cyan","red","pink"]
+                },
+                buy : {
+                    hotels:["Luxor","Tower","American","Worldwide","Festival","Continental","Imperial"],
+                    amt:[0,0,1,0,0,1,0],
+                    title:"Buy up to three stocks",
+                    hotelColors:["red","yellow","#8787ff","#c3af91","green","cyan","pink"],
+                    playerBaseMoney:800,
+                    info:""
                 }
             },
             choiceData: {},
@@ -385,7 +393,7 @@ class GamesLayout extends React.Component {
 
 
     render() {
-        const login = this.state.loginScene;
+        const login = 6;//this.state.loginScene;
         let adj = 2;
         if (login == 5 && this.state.zoom == -5)
             adj = 5;
