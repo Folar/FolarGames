@@ -46,14 +46,43 @@ class AcquireLayout extends React.Component {
         switch (type) {
             case "increaseHotel":
                 let hotelIndex = this.index(this.state.buy.hotels[cnt]);
-                debugger;
+                let pi = this.getPlayerIndex(this.props.name);
+                let player = this.state.players[pi];
                 if( this.state.buy.amt[cnt] == 3 ||
-                    this.state.buy.amt[cnt] == this.props.hotels[hotelIndex].available||
-                    (this.state.buy.amt[cnt] + 1)* this.props.hotels[hotelIndex].price > this.props.player.money) return;
+                    this.state.buy.amt[cnt] == this.state.hotels[hotelIndex].available||
+                    (this.state.buy.amt[cnt] + 1)* this.state.hotels[hotelIndex].price > this.state.buy.playerBaseMoney) return;
+
+                this.state.buy.amt[cnt]++;
+                player.hotels[hotelIndex]++;
+                this.state.hotels[hotelIndex].available--;
+                player.money -= this.state.hotels[hotelIndex].price;
+
+                if(player.money  < 0){
+                    for (let j = 0;j<this.state.buy.hotels.length;j++){
+                        if (j == cnt ||  this.state.buy.amt[j] == 0) continue;
+                        let idx  = this.index(this.state.buy.hotels[j]);
+                        for(k = 0;k<this.state.buy.amt[j];k++){
+                            this.state.buy.amt[j]--;
+                            player.hotels[idx]--;
+                            this.state.hotels[idx].available++;
+                            player.money += this.state.hotels[idx].price;
+                            if(player.money >= 0) break;
+                        }
+                        if(player.money >= 0) break;
+                    }
+                }
+                this.setState({buy:this.state.buy,hotels:this.state.hotels,players:this.state.players})
                 break;
             case "reduceHotel":
                 hotelIndex = this.index(this.state.buy.hotels[cnt]);
+                pi = this.getPlayerIndex(this.props.name);
+                player = this.state.players[pi];
                 if (this.state.buy.amt[cnt]== 0) return;
+                this.state.buy.amt[cnt]--;
+                player.hotels[hotelIndex]--;
+                this.state.hotels[hotelIndex].available++;
+                player.money += this.state.hotels[hotelIndex].price;
+                this.setState({buy:this.state.buy,hotels:this.state.hotels,players:this.state.players})
                 break;
             case "switchHotels":
                 if(this.state.merger.hotels.length == 2){

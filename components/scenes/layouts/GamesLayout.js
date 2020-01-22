@@ -78,7 +78,7 @@ class GamesLayout extends React.Component {
                         color: "red",
                         available: 15,
                         size: 0,
-                        price: 0
+                        price: 200
                     },
                     {
                         name: "Tower",
@@ -105,14 +105,14 @@ class GamesLayout extends React.Component {
                         name: "Festival",
                         color: "green",
                         available: 25,
-                        size: 0,
-                        price: 0
+                        size: 2,
+                        price: 300
                     },
                     {
                         name: "Continental",
                         color: "cyan",
                         available: 25,
-                        size: 0,
+                        size: 2,
                         price: 400
                     },
                     {
@@ -127,7 +127,7 @@ class GamesLayout extends React.Component {
                     {
                         name: "Larry",
                         hotels:[10,3 ,0,12,0,0,0],
-                        money:800
+                        money:1100
                     },
                     {
                         name: "dino",
@@ -168,10 +168,11 @@ class GamesLayout extends React.Component {
                 },
                 buy : {
                     hotels:["Luxor","Tower","American","Worldwide","Festival","Continental","Imperial"],
-                    amt:[0,0,1,0,0,1,0],
+                    amt:[0,0,0,0,0,0,0],
                     title:"Buy up to three stocks",
                     hotelColors:["red","yellow","#8787ff","#c3af91","green","cyan","pink"],
-                    playerBaseMoney:800,
+                    playerBaseMoney:1100,
+                    total:0,
                     info:""
                 }
             },
