@@ -54,22 +54,22 @@ class AcquireBuyStockLayout extends React.Component {
         return ["Luxor","Tower","American","Worldwide","Festival","Continental","Imperial"].indexOf(str);
     }
     reduceLabel(index) {
-        return this.props.buy.amt[index] >0 ?"-":"";
+        return this.props.buy.amt[index] >0 ?"-":"-";
     }
     getOpacityR(index,item){
-        return this.props.buy.amt[index] >0 ?1:0;
+        return this.props.buy.amt[index] >0 ?1:.3;
     }
     getOpacityI(index,item) {
         let b =this.props.buy.amt[index] < 3 &&
             this.props.buy.amt[index]< this.props.hotels[this.index(item)].available &&
             (this.props.buy.amt[index] + 1)* this.props.hotels[this.index(item)].price <= this.props.buy.playerBaseMoney  ;
-        return b ?1:0;
+        return b ?1:.3;
     }
     increaseLabel(index,item) {
         let b =this.props.buy.amt[index] < 3 &&
             this.props.buy.amt[index]< this.props.hotels[this.index(item)].available &&
             (this.props.buy.amt[index] + 1)* this.props.hotels[this.index(item)].price <= this.props.buy.playerBaseMoney  ;
-        return b ?"+":"";
+        return b ?"+":"+";
     }
     render() {
 
@@ -192,9 +192,34 @@ class AcquireBuyStockLayout extends React.Component {
 
 
                     </View>
+                    <View style={{
+                        height: .05,
+                        width: 3,
+                        marginTop: .22,
+                        marginBottom:0,
+                        layoutOrigin: [-0.05, 0],
+                        flexDirection: 'column',
+                        alignItems: 'left',
+                        justifyContent: 'center'
+                    }}>
+                        <Text
+                            style={{
+                                width: 3,
+                                height: .5,
+                                fontSize: .13,
+                                fontWeight: 300,
+                                textAlign: 'left',
+                                marginLeft: 1,
+                                justifyContent: 'start',
+                                color: "black"
+
+                            }}>
+                            {this.props.buy.info}
+                        </Text>
+                    </View>
                     <View
                         style={{
-                            marginLeft: 0.4,
+                            marginLeft: 0.1,
                             paddingLeft: 0.2,
                             paddingRight: 0.2,
                             height: 0.15,
@@ -216,32 +241,6 @@ class AcquireBuyStockLayout extends React.Component {
                                 {"OK"}
                             </Text>
                         </VrButton>
-                    </View>
-
-                    <View style={{
-                        height: .4,
-                        width: 3,
-                        marginTop: .1,
-                        marginBottom: .1,
-                        layoutOrigin: [-0.15, 0],
-                        flexDirection: 'column',
-                        alignItems: 'left',
-                        justifyContent: 'center'
-                    }}>
-                        <Text
-                            style={{
-                                width: 3,
-                                height: .5,
-                                fontSize: .13,
-                                fontWeight: 300,
-                                textAlign: 'left',
-                                marginLeft: 1,
-                                justifyContent: 'start',
-                                color: "black"
-
-                            }}>
-                            {this.props.buy.info}
-                        </Text>
                     </View>
 
 

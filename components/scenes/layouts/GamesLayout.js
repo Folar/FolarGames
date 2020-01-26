@@ -173,7 +173,7 @@ class GamesLayout extends React.Component {
                     hotelColors:["red","yellow","#8787ff","#c3af91","green","cyan","pink"],
                     playerBaseMoney:1100,
                     total:0,
-                    info:""
+                    info:"Cost $0"
                 }
             },
             choiceData: {},
@@ -307,8 +307,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-        client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-       //client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+       // client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+       client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -394,7 +394,7 @@ class GamesLayout extends React.Component {
 
 
     render() {
-        const login = 6;//this.state.loginScene;
+        const login = this.state.loginScene;
         let adj = 2;
         if (login == 5 && this.state.zoom == -5)
             adj = 5;
