@@ -20,6 +20,7 @@ class AcquireLayout extends React.Component {
         super(props);
 
         this.state = {
+            acquireData:{},
             stk:this.props.data.stk,
             merger:this.props.data.merger,
             hotels:this.props.data.hotels,
@@ -33,7 +34,11 @@ class AcquireLayout extends React.Component {
         ;
 
     }
+    setData(d){
+        debugger;
+        this.setState({acquireData:d,stk:d.stk,merger:d.merger,buy:d.buy,players:d.players,hotels:d.hotels});
 
+    }
     componentDidMount() {
 
     }
@@ -217,10 +222,7 @@ class AcquireLayout extends React.Component {
 
 
 
-    setData(d){
-        this.setState({bocaData:d});
 
-    }
     canClick(){
         return true
     }
@@ -267,7 +269,7 @@ class AcquireLayout extends React.Component {
                         justifyContent: 'flex-start'
                     }}>
                         <AcquireBoardLayout   playerIndex={this.getPlayerIndex(this.props.name)} hotels={this.state.hotels}
-                                                    players={this.state.players}/>
+                                                    players={this.state.players} data={this.state.acquireData}/>
                         <View style={{
                             flexDirection: 'column',
                             alignItems: 'flex-start',
@@ -291,6 +293,7 @@ class AcquireLayout extends React.Component {
                             </View>
                             <AcquireDialogLayout type={this.props.data.dlgType} stock={this.state.stk} buy={this.state.buy}
                                                  merger={this.state.merger} hotels={this.state.hotels}
+                                                 acquireData = {this.state.acquireData}
                                                  player={this.state.players[this.getPlayerIndex(this.props.name)]}
                                                  invoke={this.invoke.bind(this)}/>
                         </View>

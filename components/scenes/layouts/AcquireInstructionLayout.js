@@ -26,10 +26,6 @@ class AcquireInstructionLayout extends React.Component {
     }
 
 
-
-
-
-
     render() {
 
 
@@ -78,7 +74,7 @@ class AcquireInstructionLayout extends React.Component {
                                 color:"black"
 
                             }}>
-                            {"hiuggfufu tdsry thstsrryh\n\nLuxor 1\nTower 1\n Festival 1"}
+                            {this.props.instructions}
                         </Text>
                     </View>
 

@@ -57,6 +57,7 @@ class AcquireSubHotelLayout extends React.Component {
     }
 
     getSummary(hotel,player){
+        if(!player || !player.hotels) return "";
         let amt = player.hotels[this.index(hotel.name)]
         return amt +"/" +  hotel.available + "/$" +  hotel.price;
     }

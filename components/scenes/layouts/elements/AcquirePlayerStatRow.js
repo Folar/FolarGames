@@ -46,7 +46,7 @@ class AcquirePlayerStatRow extends React.Component {
                         width: 0.55,
                         height: this.state.rowHeight,
                         fontSize: this.props.fontSize,
-                        fontWeight:300,
+                        fontWeight:"300",
                         textAlign: 'left',
                         backgroundColor: this.props.rc,
                         color:"black"

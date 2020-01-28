@@ -51,7 +51,7 @@ class AcquireDialogLayout extends React.Component {
                ): (
 
                    <View>
-                       <AcquireInstruction/>
+                       <AcquireInstruction instructions ={this.props.acquireData.instructions}/>
                    </View>
                )
             }

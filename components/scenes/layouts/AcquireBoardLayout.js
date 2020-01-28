@@ -27,17 +27,18 @@ class AcquireBoardLayout extends React.Component {
         this.state = {
             showButton: true
         }
+        this.msg = "***************************";
     }
 
     componentDidMount() {
 
     }
 
-    getValue(v){
-
-        return 5;
-
-
+    getMessages(){
+        debugger;
+        if(this.props.data.message && this.props.data.message.length!= 0)
+             this.msg = this.props.data.message +"\n" +this.msg;
+        return this.msg;
     }
     getScore(row){
 
@@ -96,7 +97,7 @@ class AcquireBoardLayout extends React.Component {
                                 color:"black"
 
                             }}>
-                            {"log "}
+                            {this.getMessages()}
                         </Text>
                     </View>
                 </View>

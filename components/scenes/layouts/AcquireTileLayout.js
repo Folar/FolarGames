@@ -71,10 +71,16 @@ class AcquireTileLayout extends React.Component {
         return {height: .18, width: .28, valueFont: .07, dieFont: .09, marginRight: .01,fontWeight:fw};
     }
 
+    getPlayer(){
+        if( this.props.player) return this.props.player;
+        return {money:0,name:""}
+
+    }
+
     render() {
 
         let scoreBoxes =
-            ["1-H", "4-C","6-C","12-E","10-B","4-A"].map((item, index) => {
+            ["", "","","","",""].map((item, index) => {
 
                 return <TileClickable value={this.getValue(item)} dim={this.getDim(700)}  color={this.getColor( item)}
                                      backgroundColor={this.getBackgroundColor( item)}   key={index}
@@ -97,12 +103,12 @@ class AcquireTileLayout extends React.Component {
                         {translateZ: 0}
                     ]
                 }}>
-                    <TileClickable value={this.props.player.name} dim={this.getDim(400)}  color={"black"}
+                    <TileClickable value={this.getPlayer().name} dim={this.getDim(400)}  color={"black"}
                                    backgroundColor={"white"}   key={422}
                                    clickable={false}
                                    chooseDicePair={this.props.chooseDicePair} />
                     {scoreBoxes}
-                    <TileClickable value={this.props.player.money} dim={this.getDim(400)}  color={"black"}
+                    <TileClickable value={this.getPlayer().money} dim={this.getDim(400)}  color={"black"}
                                    backgroundColor={"lightgray"}   key={423}
                                    clickable={false}
                                    chooseDicePair={this.props.chooseDicePair} />

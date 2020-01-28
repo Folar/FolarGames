@@ -72,6 +72,9 @@ class GamesLayout extends React.Component {
                 state:0,
                 currentIndex:0,
                 dlgType:3,
+                messages:"",
+                instructions:"",
+
                 hotels :[
                     {
                         name: "Luxor",
@@ -123,18 +126,7 @@ class GamesLayout extends React.Component {
                         price: 0
                     }
                 ],
-                players :[
-                    {
-                        name: "Larry",
-                        hotels:[10,3 ,0,12,0,0,0],
-                        money:1100
-                    },
-                    {
-                        name: "dino",
-                        hotels:[0,0 ,0,0,0,0,0],
-                        money:4500
-                    }
-                ],
+                players :[],
                 stk : {
                     title: "Tower takeover or Luxor",
                     survivor: "Tower",
@@ -368,6 +360,8 @@ class GamesLayout extends React.Component {
 
           } if (gt == 6) {
                _this.setState({acquireData: packet});
+                debugger;
+               _this.refs.acq.setData( packet);
            }
 
 
