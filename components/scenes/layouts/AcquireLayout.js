@@ -283,7 +283,7 @@ class AcquireLayout extends React.Component {
                                 flexDirection: 'row',
                                 alignItems: 'flex-start',
                                 justifyContent: 'flex-start',
-                                layoutOrigin: [0, 0],
+                                layoutOrigin: [-.06, 0],
                                 transform: [
                                     {translateX: 0},
                                     {translateZ: 0}]
