@@ -71,7 +71,7 @@ class GamesLayout extends React.Component {
             acquireData:{
                 state:0,
                 currentIndex:0,
-                dlgType:3,
+                dlgType:0,
                 messages:"",
                 instructions:"",
 
@@ -342,7 +342,6 @@ class GamesLayout extends React.Component {
                 if (packet.type === "rollDice") {
                     _this.refs.bl.setDice( packet.dice,packet.selectedDice,packet.diceX,packet.selectedDiceX);
                 }else if (packet.type === "passDice" || packet.type === "Restart") {
-                debugger;
                     _this.refs.bl.resetDice( packet.dice,packet.selectedDice);
                 }
                 _this.setState({bocaData: packet});
@@ -360,7 +359,6 @@ class GamesLayout extends React.Component {
 
           } if (gt == 6) {
                _this.setState({acquireData: packet});
-                debugger;
                _this.refs.acq.setData( packet);
            }
 

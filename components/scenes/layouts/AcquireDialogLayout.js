@@ -26,9 +26,13 @@ class AcquireDialogLayout extends React.Component {
 
 
     }
+    getInstr () {
+        if(!this.props.acquireData.instructions )    return "";
 
-
-
+         if(this.props.player.playing)
+            return this.props.acquireData.instructions;
+         return  "Welcome! Press the Start button when all the players have joined";
+    }
 
     render() {
         const type = this.props.type;
@@ -51,7 +55,7 @@ class AcquireDialogLayout extends React.Component {
                ): (
 
                    <View>
-                       <AcquireInstruction instructions ={this.props.acquireData.instructions}/>
+                       <AcquireInstruction instructions ={this.getInstr()} />
                    </View>
                )
             }

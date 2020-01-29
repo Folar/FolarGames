@@ -27,7 +27,8 @@ class AcquireBoardLayout extends React.Component {
         this.state = {
             showButton: true
         }
-        this.msg = "***************************";
+        this.msg = "";
+        this.lastMsg = "";
     }
 
     componentDidMount() {
@@ -35,9 +36,13 @@ class AcquireBoardLayout extends React.Component {
     }
 
     getMessages(){
-        debugger;
+
         if(this.props.data.message && this.props.data.message.length!= 0)
-             this.msg = this.props.data.message +"\n" +this.msg;
+             if (this.props.data.message  !=this.lastMsg) {
+                 this.lastMsg = this.props.data.message;
+                 this.msg = this.props.data.message + this.msg;
+             }
+        console.log("+++ " +this.msg +"+++ ");
         return this.msg;
     }
     getScore(row){

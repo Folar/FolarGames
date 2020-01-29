@@ -20,12 +20,14 @@ class AcquireLayout extends React.Component {
         super(props);
 
         this.state = {
-            acquireData:{},
+            acquireData:{dlgType:0},
+            name:"ff",
             stk:this.props.data.stk,
             merger:this.props.data.merger,
             hotels:this.props.data.hotels,
             players:this.props.data.players,
             buy: this.props.data.buy,
+            playerIndex:0,
             zorder: this.props.zorder-.8,
             di:0,
             qty:0
@@ -35,8 +37,8 @@ class AcquireLayout extends React.Component {
 
     }
     setData(d){
-        debugger;
-        this.setState({acquireData:d,stk:d.stk,merger:d.merger,buy:d.buy,players:d.players,hotels:d.hotels});
+        this.setState({acquireData:d,stk:d.stk,merger:d.merger,buy:d.buy,players:d.players,hotels:d.hotels,
+        name:this.props.name });
 
     }
     componentDidMount() {
@@ -108,7 +110,7 @@ class AcquireLayout extends React.Component {
                 this.state.hotels[hotelIndex].available++;
                 player.money += this.state.hotels[hotelIndex].price;
                 x = (this.state.buy.playerBaseMoney - player.money);
-                debugger;
+
                 this.state.buy.info = "Cost $"+ x;
                 this.setState({buy:this.state.buy,hotels:this.state.hotels,players:this.state.players})
                 break;
@@ -232,11 +234,13 @@ class AcquireLayout extends React.Component {
 
 
     getPlayerIndex(n){
-        for(let i in this.props.players){
-            if (this.props.players[i].name == n)
+        for(let i in this.state.players){
+            if (this.state.players[i].name == n) {
+                console.log("index="+i);
                 return i;
-
+            }
         }
+        console.log("index=");
         return 0;
 
     }
