@@ -71,6 +71,8 @@ class GamesLayout extends React.Component {
             acquireData:{
                 state:0,
                 currentIndex:0,
+                currentPlayer:0,
+                currentSwapPlayer:0,
                 dlgType:0,
                 messages:"",
                 instructions:"",
@@ -126,7 +128,7 @@ class GamesLayout extends React.Component {
                         price: 0
                     }
                 ],
-                players :[],
+                players :[{name:"",hotels:[],money:6000,playing:false}],
                 stk : {
                     title: "Tower takeover or Luxor",
                     survivor: "Tower",

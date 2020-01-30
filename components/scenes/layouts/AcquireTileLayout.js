@@ -72,13 +72,16 @@ class AcquireTileLayout extends React.Component {
     }
 
     getButtonText() {
-        if (this.props.buttonText) return this.props.buttonText;
-        return ""
+        if (this.props.buttonText) {
+            if (this.props.playing)
+                return "";
+        }
+        return "Start"
     }
 
     getPlayer(){
         if( this.props.player) return this.props.player;
-        return {money:0,name:""}
+        return {money:0,name:"",playing:false}
 
     }
     invokeServer(){

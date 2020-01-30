@@ -305,7 +305,7 @@ class AcquireLayout extends React.Component {
                                     {translateZ: 0}]
                             }}>
                                 <AcquireHotelStats  hotels={this.state.hotels}/>
-                                <AcquirePlayerStats  currentIndex={this.props.data.currentIndex} players={this.state.players}/>
+                                <AcquirePlayerStats  currentPlayer={this.props.data.currentPlayer} players={this.state.players}/>
                             </View>
                             <AcquireDialogLayout type={this.props.data.dlgType} stock={this.state.stk} buy={this.state.buy}
                                                  merger={this.state.merger} hotels={this.state.hotels}

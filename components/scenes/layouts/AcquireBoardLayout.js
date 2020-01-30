@@ -40,7 +40,7 @@ class AcquireBoardLayout extends React.Component {
         if(this.props.data.message && this.props.data.message.length!= 0)
              if (this.props.data.message  !=this.lastMsg) {
                  this.lastMsg = this.props.data.message;
-                 this.msg = this.props.data.message + this.msg;
+                 this.msg = this.props.data.message +"\n"+ this.msg;
              }
         console.log("+++ " +this.msg +"+++ ");
         return this.msg;
@@ -79,6 +79,7 @@ class AcquireBoardLayout extends React.Component {
                     <AcquireSubHotelLayout  hotels={this.props.hotels} players={this.props.players}/>
                     {scoreRows}
                     <AcquireTileLayout player={this.props.players[this.props.playerIndex]} buttonText={this.props.data.buttonText}
+                                       playing={this.props.players[this.props.playerIndex].playing}
                                        invokeServer={this.props.invokeServer}/>
                     <View style={{
                         height: 4,
