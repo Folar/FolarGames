@@ -71,10 +71,18 @@ class AcquireTileLayout extends React.Component {
         return {height: .18, width: .28, valueFont: .07, dieFont: .09, marginRight: .01,fontWeight:fw};
     }
 
+    getButtonText() {
+        if (this.props.buttonText) return this.props.buttonText;
+        return ""
+    }
+
     getPlayer(){
         if( this.props.player) return this.props.player;
         return {money:0,name:""}
 
+    }
+    invokeServer(){
+        this.props.invokeServer("Start");
     }
 
     render() {
@@ -112,10 +120,10 @@ class AcquireTileLayout extends React.Component {
                                    backgroundColor={"lightgray"}   key={423}
                                    clickable={false}
                                    chooseDicePair={this.props.chooseDicePair} />
-                    <TileClickable value={""} dim={this.getDim(400)}  color={"black"}
+                    <TileClickable value={this.getButtonText()} dim={this.getDim(400)}  color={"black"}
                                    backgroundColor={"lightgray"}   key={4223}
-                                   clickable={false}
-                                   chooseDicePair={this.props.chooseDicePair} />
+                                   clickable={true}
+                                   chooseDicePair={this.invokeServer.bind(this)} />
 
 
 

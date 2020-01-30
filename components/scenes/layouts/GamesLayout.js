@@ -252,8 +252,8 @@ class GamesLayout extends React.Component {
     }
 
     sendBocaMessage(d){
-        this.client.send(JSON.stringify(d));
 
+        this.client.send(JSON.stringify(d));
     }
 
     roll(dice) {

@@ -90,7 +90,6 @@ class BocaLayout extends React.Component {
     }
 
     setData(d){
-        debugger;
         this.setState({bocaData:d});
 
     }

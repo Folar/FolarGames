@@ -21,7 +21,7 @@ class AcquireLayout extends React.Component {
 
         this.state = {
             acquireData:{dlgType:0},
-            name:"ff",
+            name:"",
             stk:this.props.data.stk,
             merger:this.props.data.merger,
             hotels:this.props.data.hotels,
@@ -47,6 +47,17 @@ class AcquireLayout extends React.Component {
 
     index(str){
         return ["Luxor","Tower","American","Worldwide","Festival","Continental","Imperial"].indexOf(str);
+    }
+
+    invokeServer(cmd) {
+        switch(cmd) {
+            case "Start":
+                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 100});
+                break;
+
+        }
+
+
     }
 
 
@@ -273,7 +284,8 @@ class AcquireLayout extends React.Component {
                         justifyContent: 'flex-start'
                     }}>
                         <AcquireBoardLayout   playerIndex={this.getPlayerIndex(this.props.name)} hotels={this.state.hotels}
-                                                    players={this.state.players} data={this.state.acquireData}/>
+                                              name ={this.props.name} invokeServer={this.invokeServer.bind(this)}
+                                              players={this.state.players} data={this.state.acquireData}/>
                         <View style={{
                             flexDirection: 'column',
                             alignItems: 'flex-start',
@@ -299,7 +311,7 @@ class AcquireLayout extends React.Component {
                                                  merger={this.state.merger} hotels={this.state.hotels}
                                                  acquireData = {this.state.acquireData}
                                                  player={this.state.players[this.getPlayerIndex(this.props.name)]}
-                                                 invoke={this.invoke.bind(this)}/>
+                                                 invoke={this.invoke.bind(this)} invokeServer={this.invokeServer.bind(this)}/>
                         </View>
 
 
