@@ -76,7 +76,13 @@ class GamesLayout extends React.Component {
                 dlgType:0,
                 messages:"",
                 instructions:"",
-
+                rack:[{label:"1-A",ordinal:0, fg:"black",bg:"black"},
+                      {label:"1-A",ordinal:0, fg:"black",bg:"black"},
+                      {label:"1-A",ordinal:0, fg:"black",bg:"black"},
+                      {label:"1-A",ordinal:0, fg:"black",bg:"black"},
+                      {label:"1-A",ordinal:0, fg:"black",bg:"black"},
+                      {label:"2-A",ordinal:0, fg:"black",bg:"black"}
+                    ],
                 hotels :[
                     {
                         name: "Luxor",
@@ -360,6 +366,7 @@ class GamesLayout extends React.Component {
               _this.refs.dl.setData( packet);
 
           } if (gt == 6) {
+                debugger;
                _this.setState({acquireData: packet});
                _this.refs.acq.setData( packet);
            }

@@ -20,13 +20,14 @@ class AcquireLayout extends React.Component {
         super(props);
 
         this.state = {
-            acquireData:{dlgType:0},
+            acquireData:this.props.data,
             name:"",
             stk:this.props.data.stk,
             merger:this.props.data.merger,
             hotels:this.props.data.hotels,
             players:this.props.data.players,
             buy: this.props.data.buy,
+            buttonText:this.props.data.buttonText,
             playerIndex:0,
             zorder: this.props.zorder-.8,
             di:0,
@@ -38,7 +39,7 @@ class AcquireLayout extends React.Component {
     }
     setData(d){
         this.setState({acquireData:d,stk:d.stk,merger:d.merger,buy:d.buy,players:d.players,hotels:d.hotels,
-        name:this.props.name });
+        name:this.props.name,buttonText:d.buttonText });
 
     }
     componentDidMount() {
@@ -285,6 +286,7 @@ class AcquireLayout extends React.Component {
                     }}>
                         <AcquireBoardLayout   playerIndex={this.getPlayerIndex(this.props.name)} hotels={this.state.hotels}
                                               name ={this.props.name} invokeServer={this.invokeServer.bind(this)}
+                                              buttonText ={ this.state.acquireData.buttonText}
                                               players={this.state.players} data={this.state.acquireData}/>
                         <View style={{
                             flexDirection: 'column',

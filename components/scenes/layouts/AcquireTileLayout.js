@@ -57,7 +57,7 @@ class AcquireTileLayout extends React.Component {
         return "black";
     }
     getValue(item){
-        return item;
+        return item.label;
     }
 
     canClick(row, col) {
@@ -71,13 +71,7 @@ class AcquireTileLayout extends React.Component {
         return {height: .18, width: .28, valueFont: .07, dieFont: .09, marginRight: .01,fontWeight:fw};
     }
 
-    getButtonText() {
-        if (this.props.buttonText) {
-            if (this.props.playing)
-                return "";
-        }
-        return "Start"
-    }
+
 
     getPlayer(){
         if( this.props.player) return this.props.player;
@@ -89,12 +83,11 @@ class AcquireTileLayout extends React.Component {
     }
 
     render() {
-
         let scoreBoxes =
-            ["", "","","","",""].map((item, index) => {
+            this.props.rack.map((item, index) => {
 
-                return <TileClickable value={this.getValue(item)} dim={this.getDim(700)}  color={this.getColor( item)}
-                                     backgroundColor={this.getBackgroundColor( item)}   key={index}
+                return <TileClickable value={this.getValue(item)} dim={this.getDim(700)}  color={item.fg}
+                                     backgroundColor={item.bg}   key={index}
                                      clickable={this.canClick(this.props.rank, item)}
                                      chooseDicePair={this.props.chooseDicePair} />
             });
@@ -123,7 +116,7 @@ class AcquireTileLayout extends React.Component {
                                    backgroundColor={"lightgray"}   key={423}
                                    clickable={false}
                                    chooseDicePair={this.props.chooseDicePair} />
-                    <TileClickable value={this.getButtonText()} dim={this.getDim(400)}  color={"black"}
+                    <TileClickable value={this.props.buttonText} dim={this.getDim(400)}  color={"black"}
                                    backgroundColor={"lightgray"}   key={4223}
                                    clickable={true}
                                    chooseDicePair={this.invokeServer.bind(this)} />

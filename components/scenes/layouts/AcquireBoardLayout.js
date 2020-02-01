@@ -40,7 +40,7 @@ class AcquireBoardLayout extends React.Component {
         if(this.props.data.message && this.props.data.message.length!= 0)
              if (this.props.data.message  !=this.lastMsg) {
                  this.lastMsg = this.props.data.message;
-                 this.msg = this.props.data.message +"\n"+ this.msg;
+                 this.msg = this.msg.length>0?this.props.data.message +"\n"+ this.msg : this.props.data.message;
              }
         console.log("+++ " +this.msg +"+++ ");
         return this.msg;
@@ -50,8 +50,18 @@ class AcquireBoardLayout extends React.Component {
         return "0"
     }
 
+    getPlaying(){
+        console.log("cxgh "+this.props.players[parseInt(this.props.playerIndex)].playing)
+        return this.props.players[parseInt(this.props.playerIndex)].playing
+    }
+    getButtonText() {
 
 
+            if (this.getPlaying())
+                return "";
+
+        return "Start"
+    }
 
     render() {
 
@@ -78,8 +88,8 @@ class AcquireBoardLayout extends React.Component {
                     <AcquireHotelLayout/>
                     <AcquireSubHotelLayout  hotels={this.props.hotels} players={this.props.players}/>
                     {scoreRows}
-                    <AcquireTileLayout player={this.props.players[this.props.playerIndex]} buttonText={this.props.data.buttonText}
-                                       playing={this.props.players[this.props.playerIndex].playing}
+                    <AcquireTileLayout player={this.props.players[this.props.playerIndex]} buttonText={this.props.buttonText}
+                                       buttonText={this.getButtonText()} rack={this.props.data.rack}
                                        invokeServer={this.props.invokeServer}/>
                     <View style={{
                         height: 4,
@@ -96,7 +106,7 @@ class AcquireBoardLayout extends React.Component {
                         <Text
                             style={{
                                 width: 2.8,
-                                height: .5,
+                                height: 5,
                                 fontSize: .13,
                                 fontWeight:300,
                                 textAlign: 'left',
