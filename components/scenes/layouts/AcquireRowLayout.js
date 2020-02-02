@@ -50,6 +50,9 @@ class AcquireRowLayout extends React.Component {
         let t = this.props.tiles[row][col];;
         let c =["red","yellow","#8787ff","#c3af91","green","cyan","pink"];
 
+        if(t.inRack) {
+            return "lightgray";
+        }
         if(t.state < 8) return c[t.state];
         if(t.state == 9) {
 
