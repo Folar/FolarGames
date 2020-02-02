@@ -30,7 +30,7 @@ class DieClickable extends React.Component {
     }
 
     render() {
-
+        let fw = this.props.fw || 300;
         return (
             <View
                 style={{

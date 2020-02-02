@@ -67,8 +67,10 @@ class AcquireBoardLayout extends React.Component {
 
         let scoreRows =
             [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'].map((item, index) => {
-              return  <AcquireRowLayout style={{backgroundColor:"#0808008", opacity:1}} rank={item} value={item}
-                                        key={index} score={this.getScore(item)}/>
+                console.log("ind "+index)
+              return  <AcquireRowLayout style={{backgroundColor:"#0808008", opacity:1}}
+                                        rank={item} value={item} row={index}
+                                        key={index} tiles={this.props.data.tiles}/>
 
             });
         return (
@@ -88,7 +90,8 @@ class AcquireBoardLayout extends React.Component {
                     <AcquireHotelLayout/>
                     <AcquireSubHotelLayout  hotels={this.props.hotels} players={this.props.players}/>
                     {scoreRows}
-                    <AcquireTileLayout player={this.props.players[this.props.playerIndex]} buttonText={this.props.buttonText}
+                    <AcquireTileLayout player={this.props.players[this.props.playerIndex]}
+                                       buttonText={this.props.buttonText}
                                        buttonText={this.getButtonText()} rack={this.props.data.rack}
                                        invokeServer={this.props.invokeServer}/>
                     <View style={{

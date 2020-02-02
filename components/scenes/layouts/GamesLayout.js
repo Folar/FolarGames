@@ -134,7 +134,7 @@ class GamesLayout extends React.Component {
                         price: 0
                     }
                 ],
-                players :[{name:"",hotels:[],money:6000,playing:false}],
+                players :[{name:"",hotels:[0,0,0,0,0,0,0],money:6000,playing:false}],
                 stk : {
                     title: "Tower takeover or Luxor",
                     survivor: "Tower",
@@ -366,7 +366,6 @@ class GamesLayout extends React.Component {
               _this.refs.dl.setData( packet);
 
           } if (gt == 6) {
-                debugger;
                _this.setState({acquireData: packet});
                _this.refs.acq.setData( packet);
            }

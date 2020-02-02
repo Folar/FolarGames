@@ -37,7 +37,7 @@ class AcquirePlayerStatRow extends React.Component {
     render() {
 
 
-
+console.log("hgi  "+this.props.player.hotels[0]);
         return (
 
             <View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start' }}>
@@ -68,7 +68,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.hotels[0]}
+                    {this.props.player.hotels[0]+""}
                 </Text>
                 <Text
                     style={{
@@ -82,7 +82,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.hotels[1]}
+                    {this.props.player.hotels[1]+""}
                 </Text>
                 <Text
                     style={{
@@ -96,7 +96,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.hotels[2]}
+                    {this.props.player.hotels[2]+""}
                 </Text>
                 <Text
                     style={{
@@ -110,7 +110,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.hotels[3]}
+                    {this.props.player.hotels[3]+""}
                 </Text>
                 <Text
                     style={{
@@ -124,7 +124,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.hotels[4]}
+                    {this.props.player.hotels[4]+""}
                 </Text>
                 <Text
                     style={{
@@ -138,7 +138,7 @@ class AcquirePlayerStatRow extends React.Component {
                             {translateY: 0}
                         ]
                     }}>
-                    {this.props.player.hotels[5]}
+                    {this.props.player.hotels[5]+""}
                 </Text>
                 <Text
                     style={{

@@ -30,15 +30,31 @@ class AcquireRowLayout extends React.Component {
 
     }
 
-    getColor(row, col) {
+    getColor( col) {
+        if(!this.props.tiles) return "black";
 
-
+        let row = this.props.row;
+        let t = this.props.tiles[row][col];
+        if(t.state == 9) {
+            return "white";
+        }
         return "black";
     }
 
 
-    getBackgroundColor(row, col) {
+    getBackgroundColor( col) {
+        if(!this.props.tiles) return "#fdfcd8";
 
+        let row = this.props.row;
+       console.log("r="+row +" c="+col)
+        let t = this.props.tiles[row][col];;
+        let c =["red","yellow","#8787ff","#c3af91","green","cyan","pink"];
+
+        if(t.state < 8) return c[t.state];
+        if(t.state == 9) {
+
+            return "black";
+        }
 
         return "#fdfcd8";
     }
@@ -60,8 +76,9 @@ class AcquireRowLayout extends React.Component {
         let scoreBoxes =
             [1, 2,3,4,5,6,7,8,9,10,11,12].map((item, index) => {
 
-                return <DieClickable value={this.getValue(item)} dim={this.getDim(item)} rank={this.props.rank} color={this.getColor(this.props.rank, item)}
-                                     backgroundColor={this.getBackgroundColor(this.props.rank, item)} pos={item}  key={index}
+                return <DieClickable value={this.getValue(item)} dim={this.getDim(item)} rank={this.props.rank}
+                                     color={this.getColor( item-1)} fw ={"600"}
+                                     backgroundColor={this.getBackgroundColor(item -1)} pos={item}  key={index}
                                      clickable={this.canClick(this.props.rank, item)}
                                      chooseDicePair={this.props.chooseDicePair} gaitor={false}/>
             });
