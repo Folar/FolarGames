@@ -26,7 +26,7 @@ class TileClickable extends React.Component {
 
     invoke() {
         if (this.props.clickable)
-            this.props.chooseDicePair(this.props.rank, this.props.pos,this.props.gaitor);
+            this.props.chooseDicePair(this.props.row, this.props.column,this.props.gaitor);
     }
 
     render() {

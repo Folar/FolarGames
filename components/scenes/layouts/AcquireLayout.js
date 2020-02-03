@@ -50,12 +50,40 @@ class AcquireLayout extends React.Component {
         return ["Luxor","Tower","American","Worldwide","Festival","Continental","Imperial"].indexOf(str);
     }
 
-    invokeServer(cmd) {
+    invokeServer(cmd,args) {
         switch(cmd) {
             case "Start":
-                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 100});
+                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 100,args:""});
                 break;
 
+            case "PlaceTile":
+                debugger;
+                let d = this.props.data;
+                if(d.gameState != 101){
+                    d.instructions = "Can not click on this tile, it is not your turn";
+                    this.setState({acquireData:d});
+                    return;
+                }
+                let t = d.tiles[args.row][args.column];
+                if (!t.inRack){
+                    d.instructions = "the tile that you clicked is not in the rack";
+                    this.setState({acquireData:d});
+                    return;
+                }
+                if (!t.state =='n'){
+                    d.instructions = "the tile that you clicked can not be played  at this time";
+                    this.setState({acquireData:d});
+                    return;
+                }
+                if (!t.state =='d'){
+                    d.instructions = "the tile that you clicked is dead";
+                    this.setState({acquireData:d});
+                    return;
+                }
+                d.instructions = "";
+                this.setState({acquireData:d});
+                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 101,args:args});
+                break;
         }
 
 

@@ -8,13 +8,14 @@ import {Easing} from 'react-native';
 
 ;
 import Die from './elements/Die.js';
-import DieClickable from './elements/DieClickable.js';
+import TileClickable from './elements/TileClickable.js';
 ;
 import {
     VrButton,
     asset,
     VrSoundEffects
 } from 'react-vr';
+import AcquireTileLayout from "./AcquireTileLayout";
 let _this = null;
 //Layout
 class AcquireRowLayout extends React.Component {
@@ -73,17 +74,20 @@ class AcquireRowLayout extends React.Component {
     getDim(item) {
         return {height: .2, width: .2, valueFont: .06, dieFont: .08, marginRight: .015};
     }
-
+    invoke(i,j){
+        this.props.invokeServer("PlaceTile",{row:i,column:j})
+    }
     render() {
 
         let scoreBoxes =
             [1, 2,3,4,5,6,7,8,9,10,11,12].map((item, index) => {
 
-                return <DieClickable value={this.getValue(item)} dim={this.getDim(item)} rank={this.props.rank}
-                                     color={this.getColor( item-1)} fw ={"600"}
-                                     backgroundColor={this.getBackgroundColor(item -1)} pos={item}  key={index}
-                                     clickable={this.canClick(this.props.rank, item)}
-                                     chooseDicePair={this.props.chooseDicePair} gaitor={false}/>
+                return <TileClickable value={this.getValue(item)} dim={this.getDim(item)}
+                                      row={this.props.row} column={item -1}
+                                     color={this.getColor( item-1)}
+                                     backgroundColor={this.getBackgroundColor(item -1)}   key={index}
+                                     clickable={true}
+                                     chooseDicePair={this.invoke.bind(this)} gaitor={false}/>
             });
 
         return (

@@ -70,6 +70,7 @@ class AcquireBoardLayout extends React.Component {
                 console.log("ind "+index)
               return  <AcquireRowLayout style={{backgroundColor:"#0808008", opacity:1}}
                                         rank={item} value={item} row={index}
+                                        invokeServer={this.props.invokeServer}
                                         key={index} tiles={this.props.data.tiles}/>
 
             });
