@@ -60,7 +60,7 @@ class AcquireLayout extends React.Component {
                 debugger;
                 let d = this.props.data;
                 if(d.gameState != 101){
-                    d.instructions = "Can not click on this tile, it is not your turn";
+                    d.instructions = "Can not click on this tile, it is not your turn or not time to place a tile";
                     this.setState({acquireData:d});
                     return;
                 }
@@ -83,6 +83,20 @@ class AcquireLayout extends React.Component {
                 d.instructions = "";
                 this.setState({acquireData:d});
                 this.props.sendmessage({type:"ACQ",name: this.props.name, action: 101,args:args});
+                break;
+
+            case "StartHotel":
+                debugger;
+                d = this.props.data;
+                if(d.gameState != 103){
+                    d.instructions = "Can not click on hotel tiles, it is not your turn or not time to buy a hotel";
+                    this.setState({acquireData:d});
+                    return;
+                }
+
+                d.instructions = "";
+                this.setState({acquireData:d});
+                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 103,args:args});
                 break;
         }
 

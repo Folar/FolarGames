@@ -68,7 +68,7 @@ class AcquireTileLayout extends React.Component {
 
 
     getDim(fw) {
-        return {height: .18, width: .28, valueFont: .07, dieFont: .09, marginRight: .01,fontWeight:fw};
+        return {height: .18, width: .28, valueFont: .07, dieFont: .09, marginRight: .01,fontWeight:fw,opacity:1};
     }
 
 

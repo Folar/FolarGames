@@ -8,7 +8,7 @@ import {Easing} from 'react-native';
 
 ;
 import Die from './elements/Die.js';
-import DieClickable from './elements/DieClickable.js';
+import TileClickable from './elements/TileClickable.js';
 ;
 import {
     VrButton,
@@ -59,24 +59,30 @@ class AcquireHotelLayout extends React.Component {
         return item;
     }
 
-    canClick(row, col) {
+    canClick(index) {
 
-        return false;
+        return true;//this.props.hotels[index].name !="Luxor"  ? true:false;
     }
 
-    getDim(item) {
-        return {height: .1, width: .357, valueFont: .07, dieFont: .075, marginRight: .01};
+    getDim(op) {
+        return {height: .1, width: .357, valueFont: .07, dieFont: .075, marginRight: .01,fontWeight:500,opacity:op};
     }
-
+    getOpacity(index){
+        return 1;// this.props.hotels[index].name !="Luxor"  ?1:.25;
+    }
+    invoke(i,j){
+        this.props.invokeServer("StartHotel",{row:i})
+    }
     render() {
 
         let scoreBoxes =
             ["Luxor", "Tower","American","Worldwide","Festival","Continental","Imperial"].map((item, index) => {
 
-                return <DieClickable value={this.getValue(item)} dim={this.getDim(item)} rank={this.props.rank} color={this.getColor( item)}
-                                     backgroundColor={this.getBackgroundColor( item)} pos={item}  key={index}
+                return <TileClickable value={this.getValue(item)} dim={this.getDim(this.getOpacity( index))}
+                                     row={index}  column={0} color={this.getColor( item)}
+                                     backgroundColor={this.getBackgroundColor( item)}  key={index}
                                      clickable={this.canClick(this.props.rank, item)}
-                                     chooseDicePair={this.props.chooseDicePair} gaitor={false}/>
+                                     chooseDicePair={this.invoke.bind(this)} />
             });
 
         return (

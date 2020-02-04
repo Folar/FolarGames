@@ -71,7 +71,7 @@ class AcquireRowLayout extends React.Component {
     }
 
     getDim(fw) {
-        return {height: .2, width: .2, valueFont: .06, dieFont: .08, marginRight: .015,fontWeight:fw};
+        return {height: .2, width: .2, valueFont: .06, dieFont: .08, marginRight: .015,fontWeight:fw,opacity:1};
     }
     invoke(i,j){
         this.props.invokeServer("PlaceTile",{row:i,column:j})

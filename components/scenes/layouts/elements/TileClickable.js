@@ -42,6 +42,7 @@ class TileClickable extends React.Component {
                     borderWidth: this.state.borderWidth,
                     color: this.props.color,
                     borderColor: this.props.color,
+                    opacity:this.props.dim.opacity,
                     borderStyle: "solid"
                 }}
             >
@@ -50,7 +51,6 @@ class TileClickable extends React.Component {
 
                     <View style={{
                         margin: 0, flexDirection: 'row', alignItems: 'center',
-
                         justifyContent: 'center'
                     }}>
                         <Text
