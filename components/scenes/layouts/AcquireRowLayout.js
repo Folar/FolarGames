@@ -70,8 +70,8 @@ class AcquireRowLayout extends React.Component {
         return false;
     }
 
-    getDim(item) {
-        return {height: .2, width: .2, valueFont: .06, dieFont: .08, marginRight: .015};
+    getDim(fw) {
+        return {height: .2, width: .2, valueFont: .06, dieFont: .08, marginRight: .015,fontWeight:fw};
     }
     invoke(i,j){
         this.props.invokeServer("PlaceTile",{row:i,column:j})
@@ -81,7 +81,7 @@ class AcquireRowLayout extends React.Component {
         let scoreBoxes =
             [1, 2,3,4,5,6,7,8,9,10,11,12].map((item, index) => {
 
-                return <TileClickable value={this.getValue(item)} dim={this.getDim(item)}
+                return <TileClickable value={this.getValue(item)} dim={this.getDim(700)}
                                       row={this.props.row} column={item -1}
                                      color={this.getColor( item-1)}
                                      backgroundColor={this.getBackgroundColor(item -1)}   key={index}
