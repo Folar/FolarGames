@@ -42,7 +42,7 @@ class AcquireBoardLayout extends React.Component {
                  this.lastMsg = this.props.data.message;
                  this.msg = this.msg.length>0?this.props.data.message +"\n"+ this.msg : this.props.data.message;
              }
-        console.log("+++ " +this.msg +"+++ ");
+      //  console.log("+++ " +this.msg +"+++ ");
         return this.msg;
     }
     getScore(row){
@@ -51,7 +51,7 @@ class AcquireBoardLayout extends React.Component {
     }
 
     getPlaying(){
-        console.log("cxgh "+this.props.players[parseInt(this.props.playerIndex)].playing)
+        //console.log("cxgh "+this.props.players[parseInt(this.props.playerIndex)].playing)
         return this.props.players[parseInt(this.props.playerIndex)].playing
     }
     getButtonText() {

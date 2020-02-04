@@ -47,7 +47,6 @@ class AcquireRowLayout extends React.Component {
         if(!this.props.tiles) return "#fdfcd8";
 
         let row = this.props.row;
-       console.log("r="+row +" c="+col)
         let t = this.props.tiles[row][col];;
         let c =["red","yellow","#8787ff","#c3af91","green","cyan","pink"];
 
