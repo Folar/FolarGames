@@ -41,36 +41,44 @@ class AcquireBuyStockLayout extends React.Component {
     }
 
     OK() {
-        // this.props.invoke('swap',this.props.value)
+            this.props.invokeServer("BuyHotels",{amt:this.props.buy.amt,hotels:this.props.buy.hotels})
+
     }
 
     reduce(idx) {
         this.props.invoke("reduceHotel", idx);
     }
+
     increase(idx) {
         this.props.invoke("increaseHotel", idx);
     }
-    index(str){
-        return ["Luxor","Tower","American","Worldwide","Festival","Continental","Imperial"].indexOf(str);
+
+    index(str) {
+        return ["Luxor", "Tower", "American", "Worldwide", "Festival", "Continental", "Imperial"].indexOf(str);
     }
+
     reduceLabel(index) {
-        return this.props.buy.amt[index] >0 ?"-":"-";
+        return this.props.buy.amt[index] > 0 ? "-" : "-";
     }
-    getOpacityR(index,item){
-        return this.props.buy.amt[index] >0 ?1:.3;
+
+    getOpacityR(index, item) {
+        return this.props.buy.amt[index] > 0 ? 1 : .3;
     }
-    getOpacityI(index,item) {
-        let b =this.props.buy.amt[index] < 3 &&
-            this.props.buy.amt[index]< this.props.hotels[this.index(item)].available &&
-            (this.props.buy.amt[index] + 1)* this.props.hotels[this.index(item)].price <= this.props.buy.playerBaseMoney  ;
-        return b ?1:.3;
+
+    getOpacityI(index, item) {
+        let b = this.props.buy.amt[index] < 3 &&
+            this.props.buy.amt[index] < this.props.hotels[this.index(item)].available &&
+            (this.props.buy.amt[index] + 1) * this.props.hotels[this.index(item)].price <= this.props.buy.playerBaseMoney;
+        return b ? 1 : .3;
     }
-    increaseLabel(index,item) {
-        let b =this.props.buy.amt[index] < 3 &&
-            this.props.buy.amt[index]< this.props.hotels[this.index(item)].available &&
-            (this.props.buy.amt[index] + 1)* this.props.hotels[this.index(item)].price <= this.props.buy.playerBaseMoney  ;
-        return b ?"+":"+";
+
+    increaseLabel(index, item) {
+        let b = this.props.buy.amt[index] < 3 &&
+            this.props.buy.amt[index] < this.props.hotels[this.index(item)].available &&
+            (this.props.buy.amt[index] + 1) * this.props.hotels[this.index(item)].price <= this.props.buy.playerBaseMoney;
+        return b ? "+" : "+";
     }
+
     render() {
 
         let len = 5 / this.props.buy.hotels.length;
@@ -87,23 +95,23 @@ class AcquireBuyStockLayout extends React.Component {
                     justifyContent: 'center'
                 }}>
 
-                        <Text
-                            style={{
-                                width: w,
-                                height: .15,
-                                fontSize: .1,
-                                fontWeight: 400,
-                                textAlign: 'center',
-                                backgroundColor: this.props.buy.hotelColors[index],
-                                color: "black"
+                    <Text
+                        style={{
+                            width: w,
+                            height: .15,
+                            fontSize: .1,
+                            fontWeight: 400,
+                            textAlign: 'center',
+                            backgroundColor: this.props.buy.hotelColors[index],
+                            color: "black"
 
-                            }}>
-                            {item + " " + this.props.buy.amt[index]}
-                        </Text>
+                        }}>
+                        {item + " " + this.props.buy.amt[index]}
+                    </Text>
 
                     <View style={{
                         marginTop: 0.02, flexDirection: 'row', alignContent: 'flex-center',
-                        justifyContent: 'flex-end',width:w
+                        justifyContent: 'flex-end', width: w
                     }}>
 
                         <VrButton onClick={this.reduce.bind(this, index)}>
@@ -116,7 +124,7 @@ class AcquireBuyStockLayout extends React.Component {
                                     textAlign: 'center',
                                     backgroundColor: this.props.buy.hotelColors[index],
                                     color: "black",
-                                    opacity:this.getOpacityR( index,item)
+                                    opacity: this.getOpacityR(index, item)
 
                                 }}>
                                 {this.reduceLabel(index)}
@@ -135,10 +143,10 @@ class AcquireBuyStockLayout extends React.Component {
                                     backgroundColor: this.props.buy.hotelColors[index],
                                     marginLeft: .02,
                                     color: "black",
-                                    opacity:this.getOpacityI( index,item)
+                                    opacity: this.getOpacityI(index, item)
 
                                 }}>
-                                { this.increaseLabel(index,item)}
+                                {this.increaseLabel(index, item)}
                             </Text>
                         </VrButton>
                     </View>
@@ -154,12 +162,12 @@ class AcquireBuyStockLayout extends React.Component {
 
 
                 <View style={{
-                    height: 1,
+                    height: 1.6,
                     width: 5,
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'start',
-                    layoutOrigin: [-.077, 1.8],
+                    layoutOrigin: [-.077, .9],
                     backgroundColor: "lightblue",
                     transform: [
                         {translateX: 0},
@@ -181,7 +189,7 @@ class AcquireBuyStockLayout extends React.Component {
                     </Text>
 
                     <View style={{
-                        height: .4,
+                        height: .3,
                         width: 5,
                         layoutOrigin: [0, 0],
                         flexDirection: 'row',
@@ -193,11 +201,12 @@ class AcquireBuyStockLayout extends React.Component {
 
                     </View>
                     <View style={{
-                        height: .05,
+                        height: .6,
                         width: 3,
-                        marginTop: .22,
-                        marginBottom:0,
+                        marginTop: .18,
+                        marginBottom: 0,
                         layoutOrigin: [-0.05, 0],
+                        opacity: 1,
                         flexDirection: 'column',
                         alignItems: 'left',
                         justifyContent: 'center'
@@ -205,45 +214,61 @@ class AcquireBuyStockLayout extends React.Component {
                         <Text
                             style={{
                                 width: 3,
-                                height: .5,
+                                height: .3,
                                 fontSize: .13,
                                 fontWeight: 300,
                                 textAlign: 'left',
                                 marginLeft: 1,
+                                opacity: 1,
+                                justifyContent: 'start',
+                                color: "black"
+
+                            }}>
+                            {this.props.buy.error}
+                        </Text>
+                        <Text
+                            style={{
+                                width: 3,
+                                height: .15,
+                                fontSize: .13,
+                                fontWeight: 300,
+                                textAlign: 'left',
+                                marginLeft: 1,
+                                opacity: 1,
                                 justifyContent: 'start',
                                 color: "black"
 
                             }}>
                             {this.props.buy.info}
                         </Text>
-                    </View>
-                    <View
-                        style={{
-                            marginLeft: 0.1,
-                            paddingLeft: 0.2,
-                            paddingRight: 0.2,
-                            height: 0.15,
-                            backgroundColor: '#A482DF',
-                            borderRadius: 0.1,
-                            margin: 0.01,
-                            width: .7, flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                    >
-                        <VrButton onClick={this.OK.bind(this)}>
-                            <Text
-                                style={{
-                                    fontSize: 0.15,
-                                    textAlign: 'center',
-                                    color: "#FFFFFF"
-                                }}>
-                                {"OK"}
-                            </Text>
-                        </VrButton>
-                    </View>
 
+                        <View
+                            style={{
+                                marginLeft: 0.1,
+                                paddingLeft: 0.2,
+                                paddingRight: 0.2,
+                                height: 0.15,
+                                backgroundColor: '#A482DF',
+                                borderRadius: 0.1,
+                                margin: 0.01,
+                                width: .7, flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <VrButton onClick={this.OK.bind(this)}>
+                                <Text
+                                    style={{
+                                        fontSize: 0.15,
+                                        textAlign: 'center',
+                                        color: "#FFFFFF"
+                                    }}>
+                                    {"Buy"}
+                                </Text>
+                            </VrButton>
+                        </View>
 
+                    </View>
                 </View>
 
 

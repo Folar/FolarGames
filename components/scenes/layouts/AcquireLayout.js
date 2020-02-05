@@ -51,14 +51,35 @@ class AcquireLayout extends React.Component {
     }
 
     invokeServer(cmd,args) {
+        let hotels = ["Luxor", "Tower", "American", "Worldwide", "Festival", "Continental", "Imperial"];
         switch(cmd) {
             case "Start":
                 this.props.sendmessage({type:"ACQ",name: this.props.name, action: 100,args:""});
                 break;
 
             case "PlaceTile":
-                debugger;
+
                 let d = this.props.data;
+                if(d.gameState == 102){
+                    let t = d.tiles[args.row][args.column];
+                    if(t.state > 7){
+                        this.state.buy.error = "You must click on a board tile associated with a buyable hotel"
+
+                        this.setState({buy:this.state.buy})
+                        return;
+                    }
+                    let hn =["Luxor", "Tower", "American", "Worldwide", "Festival", "Continental", "Imperial"][t.state];
+                    let cnt = this.state.buy.hotels.indexOf(hn);
+
+                    if(cnt == -1){
+                        this.state.buy.error = "You can not buy hotel "+hn+ " right now"
+
+                        this.setState({buy:this.state.buy})
+                        return;
+                    }
+                    this.incrHotel(cnt);
+                    return;
+                }
                 if(d.gameState != 101){
                     d.instructions = "Can not click on this tile, it is not your turn or not time to place a tile";
                     this.setState({acquireData:d});
@@ -98,65 +119,75 @@ class AcquireLayout extends React.Component {
                 this.setState({acquireData:d});
                 this.props.sendmessage({type:"ACQ",name: this.props.name, action: 103,args:args});
                 break;
+            case "BuyHotels":
+                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 102,args:args});
+                break;
+
         }
 
 
     }
 
+    incrHotel(cnt){
+
+        this.state.buy.error = "";
+        let hotelIndex = this.index(this.state.buy.hotels[cnt]);
+        let pi = this.getPlayerIndex(this.props.name);
+        let player = this.state.players[pi];
+        if( this.state.buy.amt[cnt] == 3 ||
+            this.state.buy.amt[cnt] == this.state.hotels[hotelIndex].available||
+            (this.state.buy.amt[cnt] + 1)* this.state.hotels[hotelIndex].price > this.state.buy.playerBaseMoney) return;
+
+        let tot = 0;
+        for (let j = 0;j<this.state.buy.hotels.length;j++){
+            tot += this.state.buy.amt[j];
+        }
+        if(tot == 3){
+
+            for (let j = 0;j<this.state.buy.hotels.length;j++){
+                if (j == cnt ||  this.state.buy.amt[j] == 0) continue;
+                this.state.buy.amt[j]--;
+                let idx  = this.index(this.state.buy.hotels[j]);
+                player.hotels[idx]--;
+                this.state.hotels[idx].available++;
+                player.money += this.state.hotels[idx].price;
+            }
+        }
+        this.state.buy.amt[cnt]++;
+        player.hotels[hotelIndex]++;
+        this.state.hotels[hotelIndex].available--;
+        player.money -= this.state.hotels[hotelIndex].price;
+
+        if(player.money  < 0){
+            for (let j = 0;j<this.state.buy.hotels.length;j++){
+                if (j == cnt ||  this.state.buy.amt[j] == 0) continue;
+                let idx  = this.index(this.state.buy.hotels[j]);
+                for(k = 0;k<this.state.buy.amt[j];k++){
+                    this.state.buy.amt[j]--;
+                    player.hotels[idx]--;
+                    this.state.hotels[idx].available++;
+                    player.money += this.state.hotels[idx].price;
+                    if(player.money >= 0) break;
+                }
+                if(player.money >= 0) break;
+            }
+        }
+        let x = (this.state.buy.playerBaseMoney - player.money);
+        this.state.buy.info = "Cost $"+ x;
+
+        this.setState({buy:this.state.buy,hotels:this.state.hotels,players:this.state.players})
+    }
 
     invoke(type,cnt){
         switch (type) {
             case "increaseHotel":
+                this.incrHotel(cnt);
+                break;
+            case "reduceHotel":
+                this.state.buy.error = "";
                 let hotelIndex = this.index(this.state.buy.hotels[cnt]);
                 let pi = this.getPlayerIndex(this.props.name);
                 let player = this.state.players[pi];
-                if( this.state.buy.amt[cnt] == 3 ||
-                    this.state.buy.amt[cnt] == this.state.hotels[hotelIndex].available||
-                    (this.state.buy.amt[cnt] + 1)* this.state.hotels[hotelIndex].price > this.state.buy.playerBaseMoney) return;
-
-                let tot = 0;
-                for (let j = 0;j<this.state.buy.hotels.length;j++){
-                    tot += this.state.buy.amt[j];
-                }
-                if(tot == 3){
-
-                    for (let j = 0;j<this.state.buy.hotels.length;j++){
-                        if (j == cnt ||  this.state.buy.amt[j] == 0) continue;
-                        this.state.buy.amt[j]--;
-                        let idx  = this.index(this.state.buy.hotels[j]);
-                        player.hotels[idx]--;
-                        this.state.hotels[idx].available++;
-                        player.money += this.state.hotels[idx].price;
-                    }
-                }
-                this.state.buy.amt[cnt]++;
-                player.hotels[hotelIndex]++;
-                this.state.hotels[hotelIndex].available--;
-                player.money -= this.state.hotels[hotelIndex].price;
-
-                if(player.money  < 0){
-                    for (let j = 0;j<this.state.buy.hotels.length;j++){
-                        if (j == cnt ||  this.state.buy.amt[j] == 0) continue;
-                        let idx  = this.index(this.state.buy.hotels[j]);
-                        for(k = 0;k<this.state.buy.amt[j];k++){
-                            this.state.buy.amt[j]--;
-                            player.hotels[idx]--;
-                            this.state.hotels[idx].available++;
-                            player.money += this.state.hotels[idx].price;
-                            if(player.money >= 0) break;
-                        }
-                        if(player.money >= 0) break;
-                    }
-                }
-                let x = (this.state.buy.playerBaseMoney - player.money);
-                this.state.buy.info = "Cost $"+ x;
-
-                this.setState({buy:this.state.buy,hotels:this.state.hotels,players:this.state.players})
-                break;
-            case "reduceHotel":
-                hotelIndex = this.index(this.state.buy.hotels[cnt]);
-                pi = this.getPlayerIndex(this.props.name);
-                player = this.state.players[pi];
 
                 if (this.state.buy.amt[cnt]== 0) return;
                 this.state.buy.amt[cnt]--;

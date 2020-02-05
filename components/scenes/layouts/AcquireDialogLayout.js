@@ -41,7 +41,7 @@ class AcquireDialogLayout extends React.Component {
             <View>{
                 type == 3 ?(
                        <AcquireBuyStockLayout buy={this.props.buy} hotels={this.props.hotels}  player={this.props.player}
-                                              invoke={this.props.invoke}/>
+                                              invoke={this.props.invoke}  invokeServer={this.props.invokeServer}/>
                 ): type == 1 ? (
                     <AcquireStockLayout stock={this.props.stock} invoke={this.props.invoke}/>
                 ) : type == 2 ? (
