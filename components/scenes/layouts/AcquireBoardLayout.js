@@ -88,7 +88,7 @@ class AcquireBoardLayout extends React.Component {
                     justifyContent: 'flex-start'
 
                 }}>
-                    <AcquireHotelLayout hotels={this.props.hotels} invokeServer={this.props.invokeServer}/>
+                    <AcquireHotelLayout gameState={this.props.data.gameState} hotels={this.props.hotels} invokeServer={this.props.invokeServer}/>
                     <AcquireSubHotelLayout  hotels={this.props.hotels} players={this.props.players}/>
                     {scoreRows}
                     <AcquireTileLayout player={this.props.players[this.props.playerIndex]}

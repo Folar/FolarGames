@@ -68,7 +68,7 @@ class AcquireHotelLayout extends React.Component {
         return {height: .1, width: .357, valueFont: .07, dieFont: .075, marginRight: .01,fontWeight:500,opacity:op};
     }
     getOpacity(index){
-        return 1;// this.props.hotels[index].name !="Luxor"  ?1:.25;
+        return this.props.gameState != 103|| this.props.hotels[index].size ==0 ?1:.25;
     }
     invoke(i,j){
         this.props.invokeServer("StartHotel",{row:i})

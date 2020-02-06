@@ -107,10 +107,15 @@ class AcquireLayout extends React.Component {
                 break;
 
             case "StartHotel":
-                debugger;
+
                 d = this.props.data;
                 if(d.gameState != 103){
                     d.instructions = "Can not click on hotel tiles, it is not your turn or not time to buy a hotel";
+                    this.setState({acquireData:d});
+                    return;
+                }
+                if (d.hotels[args.row].size != 0) {
+                    d.instructions = "Can not click on this hotel tile, it is defunct";
                     this.setState({acquireData:d});
                     return;
                 }
