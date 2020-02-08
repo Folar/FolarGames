@@ -48,9 +48,21 @@ class AcquireChooseSurvivorLayout extends React.Component {
     }
 
     invoke(idx){
+        let f =   this.props.merger.hotelSizes.filter((h) => h == this.props.merger.hotelSizes[idx]);
+        if(f.length == 1) return;
         this.props.invoke("switchHotels",idx);
     }
 
+    getFG(i){
+
+        let f =   this.props.merger.hotelSizes.filter((h) => h == this.props.merger.hotelSizes[i]);
+        return f.length == 1 ?  this.props.merger.hotelColors[i]:"black";
+    }
+    getOpacity(i){
+        return 1;
+        // let f =   this.props.merger.hotelSizes.filter((h) => h == this.props.merger.hotelSizes[i]);
+        // return f.length == 1 ? .25:1;
+    }
     render() {
         let arrSurvivor= [];
         let len = 3/(this.props.merger.hotels.length + 1);
@@ -66,7 +78,7 @@ class AcquireChooseSurvivorLayout extends React.Component {
 
                     <View style={{
                         margin: 0, flexDirection: 'row', alignItems: 'center',
-
+                        height: .15,
                         justifyContent: 'center'
                     }}>
                         <Text
@@ -77,7 +89,7 @@ class AcquireChooseSurvivorLayout extends React.Component {
                                  fontWeight:400,
                                  textAlign: 'center',
                                  backgroundColor: this.props.merger.hotelColors[index],
-                                 color:"black"
+                                 color:this.getFG(index)
 
                              }}>
                              {item}
@@ -159,7 +171,7 @@ class AcquireChooseSurvivorLayout extends React.Component {
                     </View>
 
                     <View style={{
-                        height: .4,
+                        height: .3,
                         width: 3,
                         marginTop:.1,
                         marginBottom:.1,

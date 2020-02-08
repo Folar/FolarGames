@@ -205,13 +205,20 @@ class AcquireLayout extends React.Component {
                 this.setState({buy:this.state.buy,hotels:this.state.hotels,players:this.state.players})
                 break;
             case "switchHotels":
-                if(this.state.merger.hotels.length == 2){
-                    let tempHotel = this.state.merger.hotels[0];
-                    let tempColor = this.state.merger.hotelColors[0];
-                    this.state.merger.hotels[0] = this.state.merger.hotels[1];
-                    this.state.merger.hotelColors[0]= this.state.merger.hotelColors[1];
-                    this.state.merger.hotels[1] = tempHotel;
-                    this.state.merger.hotelColors[1]= tempColor;
+                debugger;
+                if(this.state.merger.oneTouch){
+                    let tempHotel = this.state.merger.hotels[cnt];
+                    let tempColor = this.state.merger.hotelColors[cnt];
+                    let idx = 0;
+                    for (let i = 0;i< this.state.merger.hotels.length;i++ )
+                        if (i != cnt &&
+                            this.state.merger.hotelSizes[i] == this.state.merger.hotelSizes[i]  ) {
+                            this.state.merger.hotels[cnt] = this.state.merger.hotels[i];
+                            this.state.merger.hotelColors[cnt] = this.state.merger.hotelColors[i];
+                            this.state.merger.hotels[i] = tempHotel;
+                            this.state.merger.hotelColors[i] = tempColor;
+                            break;
+                        }
 
                 } else {
                     if(this.state.merger.clickCount == 0){

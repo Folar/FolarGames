@@ -61,15 +61,15 @@ class AcquireBuyStockLayout extends React.Component {
         return this.props.buy.amt[index] > 0 ? "-" : "-";
     }
 
-    getOpacityR(index, item) {
-        return this.props.buy.amt[index] > 0 ? 1 : .3;
+    getForegroundR(index, item) {
+        return this.props.buy.amt[index] > 0 ? "black": this.props.buy.hotelColors[index];
     }
 
-    getOpacityI(index, item) {
+    getForegroundI(index, item) {
         let b = this.props.buy.amt[index] < 3 &&
             this.props.buy.amt[index] < this.props.hotels[this.index(item)].available &&
             (this.props.buy.amt[index] + 1) * this.props.hotels[this.index(item)].price <= this.props.buy.playerBaseMoney;
-        return b ? 1 : .3;
+        return b ?"black":this.props.buy.hotelColors[index];
     }
 
     increaseLabel(index, item) {
@@ -123,8 +123,8 @@ class AcquireBuyStockLayout extends React.Component {
                                     fontWeight: 600,
                                     textAlign: 'center',
                                     backgroundColor: this.props.buy.hotelColors[index],
-                                    color: "black",
-                                    opacity: this.getOpacityR(index, item)
+                                    color:  this.getForegroundR(index,item),
+                                    opacity: 1// this.getOpacityR(index, item)
 
                                 }}>
                                 {this.reduceLabel(index)}
@@ -142,8 +142,8 @@ class AcquireBuyStockLayout extends React.Component {
                                     textAlign: 'center',
                                     backgroundColor: this.props.buy.hotelColors[index],
                                     marginLeft: .02,
-                                    color: "black",
-                                    opacity: this.getOpacityI(index, item)
+                                    color: this.getForegroundI(index,item),
+                                    opacity: 1 //this.getOpacityI(index, item)
 
                                 }}>
                                 {this.increaseLabel(index, item)}
