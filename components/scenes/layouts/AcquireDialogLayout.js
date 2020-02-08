@@ -47,7 +47,8 @@ class AcquireDialogLayout extends React.Component {
                 ) : type == 2 ? (
                     <View>
 
-                        {<AcquireChooseSurvivorLayout merger={this.props.merger} invoke={this.props.invoke} />}
+                        {<AcquireChooseSurvivorLayout merger={this.props.merger} invoke={this.props.invoke}
+                                                      invokeServer={this.props.invokeServer}/>}
 
                     </View>
 

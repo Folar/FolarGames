@@ -127,7 +127,9 @@ class AcquireLayout extends React.Component {
             case "BuyHotels":
                 this.props.sendmessage({type:"ACQ",name: this.props.name, action: 102,args:args});
                 break;
-
+            case "ChooseOrder":
+                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 105,args:args});
+                break;
         }
 
 
@@ -205,14 +207,13 @@ class AcquireLayout extends React.Component {
                 this.setState({buy:this.state.buy,hotels:this.state.hotels,players:this.state.players})
                 break;
             case "switchHotels":
-                debugger;
                 if(this.state.merger.oneTouch){
                     let tempHotel = this.state.merger.hotels[cnt];
                     let tempColor = this.state.merger.hotelColors[cnt];
                     let idx = 0;
                     for (let i = 0;i< this.state.merger.hotels.length;i++ )
                         if (i != cnt &&
-                            this.state.merger.hotelSizes[i] == this.state.merger.hotelSizes[i]  ) {
+                            this.state.merger.hotelSizes[i] == this.state.merger.hotelSizes[cnt]  ) {
                             this.state.merger.hotels[cnt] = this.state.merger.hotels[i];
                             this.state.merger.hotelColors[cnt] = this.state.merger.hotelColors[i];
                             this.state.merger.hotels[i] = tempHotel;
