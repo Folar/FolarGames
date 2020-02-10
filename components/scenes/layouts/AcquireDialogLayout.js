@@ -36,7 +36,6 @@ class AcquireDialogLayout extends React.Component {
     render() {
         const type = this.props.type;
 
-
         return (
             <View>{
                 type == 3 ?(

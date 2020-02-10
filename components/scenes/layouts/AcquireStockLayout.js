@@ -79,7 +79,7 @@ class AcquireStockLayout extends React.Component {
             arrSwap.map((item, index) => {
 
                 return <ValueClickable value={item} dim={this.getDim(item)}  color={"black"}
-                                     backgroundColor={ idxSwap == item ?"white" :  this.state.stock.survivorColor}
+                                     backgroundColor={ idxSwap == item ?"white" :  this.props.stock.survivorColor}
                                      clickable={true} invoke={this.invokeSwap.bind(this)} />
             });
 
@@ -87,7 +87,7 @@ class AcquireStockLayout extends React.Component {
             arrSell.map((item, index) => {
 
                 return <ValueClickable value={item} dim={this.getDim(item)}  color={"black"}
-                                       backgroundColor={ idxSell == item ?"white" :  this.state.stock.defunctColor}
+                                       backgroundColor={ idxSell == item ?"white" :  this.props.stock.defunctColor}
                                        clickable={true} invoke={this.invokeSell.bind(this)} />
             });
 
@@ -96,12 +96,12 @@ class AcquireStockLayout extends React.Component {
 
 
                 <View style={{
-                    height: 2.2,
+                    height: 1.8,
                     width: 5,
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'start',
-                    layoutOrigin: [-.077, .83],
+                    layoutOrigin: [-.077, .7],
                     backgroundColor:"lightblue",
                     transform: [
                         {translateX: 0},
@@ -119,12 +119,13 @@ class AcquireStockLayout extends React.Component {
                             color:"black"
 
                         }}>
-                        {this.state.stock.title}
+                        {this.props.stock.title}
                     </Text>
 
                     <View style={{
-                        height: .3,
+                        height: .15,
                         width: 5,
+                        marginTop:.04,
                         layoutOrigin: [0, 0],
                         flexDirection: 'row',
                         alignItems: 'center',
@@ -137,11 +138,11 @@ class AcquireStockLayout extends React.Component {
                             fontSize: .1,
                             fontWeight:400,
                             textAlign: 'center',
-                            backgroundColor: this.state.stock.survivorColor,
+                            backgroundColor: this.props.stock.survivorColor,
                             color:"black"
 
                         }}>
-                        {this.state.stock.survivor}
+                        {this.props.stock.survivor}
                         </Text>
                             <Text
                                 style={{
@@ -150,11 +151,11 @@ class AcquireStockLayout extends React.Component {
                                     fontSize: .1,
                                     fontWeight:400,
                                     textAlign: 'center',
-                                    backgroundColor: this.state.stock.defunctColor,
+                                    backgroundColor: this.props.stock.defunctColor,
                                     color:"black"
 
                                 }}>
-                                {this.state.stock.defunct}
+                                {this.props.stock.defunct}
                         </Text>
                         <View
                             style={{
@@ -184,18 +185,18 @@ class AcquireStockLayout extends React.Component {
 
                     </View>
                     <View style={{
-                        height: .4,
+                        height: .35,
                         width: 3,
                         marginTop:.1,
                         marginBottom:.1,
-                        layoutOrigin: [-0.15, 0],
+                        layoutOrigin: [-0.65, 0],
                         flexDirection: 'column',
                         alignItems: 'left',
                         justifyContent: 'center'
                     }}>
                         <Text
                             style={{
-                                width: 3,
+                                width: 4.5,
                                 height: .5,
                                 fontSize: .13,
                                 fontWeight:300,
@@ -205,14 +206,14 @@ class AcquireStockLayout extends React.Component {
                                 color:"black"
 
                             }}>
-                            {this.state.stock.info}
+                            {this.props.stock.info}
                         </Text>
                     </View>
 
 
 
                     <View style={{
-                        height: .3,
+                        height: .25,
                         width: 5,
                         layoutOrigin: [0, 0],
                         flexDirection: 'row',
@@ -226,7 +227,7 @@ class AcquireStockLayout extends React.Component {
                                 paddingRight: 0.2,
                                 height: 0.15,
                                 opacity:1,
-                                backgroundColor: this.state.stock.defunctColor,
+                                backgroundColor: this.props.stock.defunctColor,
                                 borderRadius: 0.00,
                                 margin: 0.01,
                                 width: 1, flexDirection: 'row',
@@ -242,7 +243,7 @@ class AcquireStockLayout extends React.Component {
                                         textAlign: 'center',
                                         color: "black"
                                     }}>
-                                    {"Keep "+this.state.stock.keep}
+                                    {"Keep "+this.props.stock.keep}
                                 </Text>
                             </VrButton>
                         </View>
@@ -252,7 +253,7 @@ class AcquireStockLayout extends React.Component {
                                 paddingLeft: 0.2,
                                 paddingRight: 0.2,
                                 height: 0.15,
-                                backgroundColor: this.state.stock.survivorColor,
+                                backgroundColor: this.props.stock.survivorColor,
                                 borderRadius: 0.0,
                                 margin: 0.01,
                                 width: 1.2, flexDirection: 'row',
@@ -268,7 +269,7 @@ class AcquireStockLayout extends React.Component {
                                         textAlign: 'center',
                                         color: "black"
                                     }}>
-                                    {"Swap " +  this.state.stock.swap}
+                                    {"Swap " +  this.props.stock.swap}
                                 </Text>
                             </VrButton>
                         </View>
@@ -278,7 +279,7 @@ class AcquireStockLayout extends React.Component {
                                 paddingLeft: 0.2,
                                 paddingRight: 0.2,
                                 height: 0.15,
-                                backgroundColor: this.state.stock.defunctColor,
+                                backgroundColor: this.props.stock.defunctColor,
                                 borderRadius: 0.0,
                                 margin: 0.01,
                                 width: 1.2, flexDirection: 'row',
@@ -294,7 +295,7 @@ class AcquireStockLayout extends React.Component {
                                         fontWeight:500,
                                         color: "black"
                                     }}>
-                                    {"Sell "+ this.state.stock.sell }
+                                    {"Sell "+ this.props.stock.sell }
                                 </Text>
                             </VrButton>
                         </View>
@@ -302,7 +303,7 @@ class AcquireStockLayout extends React.Component {
                     <View style={{
                         height: .3,
                         width: 5,
-                        layoutOrigin: [-.05, 0],
+                        layoutOrigin: [-.088, 0],
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'flex-start'
@@ -314,7 +315,7 @@ class AcquireStockLayout extends React.Component {
                                 fontWeight:600,
                                 textAlign: 'left',
                                 marginRight:.05,
-                                backgroundColor:  this.state.stock.survivorColor,
+                                backgroundColor:  this.props.stock.survivorColor,
                                 color:"black"
 
                             }}>
@@ -326,7 +327,7 @@ class AcquireStockLayout extends React.Component {
                     <View style={{
                         height: .3,
                         width: 5,
-                        layoutOrigin: [-.05, .3],
+                        layoutOrigin: [-.088, .3],
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'flex-start'
@@ -338,7 +339,7 @@ class AcquireStockLayout extends React.Component {
                                 fontWeight:600,
                                 textAlign: 'left',
                                 marginRight:.05,
-                                backgroundColor:  this.state.stock.defunctColor,
+                                backgroundColor:  this.props.stock.defunctColor,
                                 color:"black"
 
                             }}>

@@ -38,6 +38,7 @@ class AcquireLayout extends React.Component {
 
     }
     setData(d){
+        debugger;
         this.setState({acquireData:d,stk:d.stk,merger:d.merger,buy:d.buy,players:d.players,hotels:d.hotels,
         name:this.props.name,buttonText:d.buttonText });
 
