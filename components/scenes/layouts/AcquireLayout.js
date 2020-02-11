@@ -38,7 +38,6 @@ class AcquireLayout extends React.Component {
 
     }
     setData(d){
-        debugger;
         this.setState({acquireData:d,stk:d.stk,merger:d.merger,buy:d.buy,players:d.players,hotels:d.hotels,
         name:this.props.name,buttonText:d.buttonText });
 
@@ -131,6 +130,10 @@ class AcquireLayout extends React.Component {
             case "ChooseOrder":
                 this.props.sendmessage({type:"ACQ",name: this.props.name, action: 105,args:args});
                 break;
+            case "Trade":
+                debugger;
+                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 104,
+                    args:args});
         }
 
 

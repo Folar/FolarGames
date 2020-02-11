@@ -45,7 +45,7 @@ class AcquireStockLayout extends React.Component {
         return {height: .13, width: .13, valueFont: .06, dieFont: .11, marginRight: .016};
     }
     OK(){
-       // this.props.invoke('swap',this.props.value)
+        this.props.invokeServer("Trade",this.props.stock)
     }
     sell(){
         this.props.invoke('Sell',0)
