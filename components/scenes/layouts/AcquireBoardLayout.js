@@ -57,10 +57,27 @@ class AcquireBoardLayout extends React.Component {
     getButtonText() {
 
 
-            if (this.getPlaying())
+            if (this.getPlaying()) {
+                if( this.props.data.canEnd)
+                    return "End";
+                if( this.props.data.over)
+                    return "Reload";
                 return "";
+            }
 
         return "Start"
+    }
+    actionServer(){
+        if (this.getPlaying()) {
+            if( this.props.data.canEnd)
+                this.props.invokeServer("End");
+            if( this.props.data.over)
+                this.props.invokeServer("Reload");
+            return;
+        }else
+            this.props.invokeServer("Start");
+
+
     }
 
     render() {
@@ -93,6 +110,7 @@ class AcquireBoardLayout extends React.Component {
                     {scoreRows}
                     <AcquireTileLayout player={this.props.players[this.props.playerIndex]}
                                        buttonText={this.getButtonText()} rack={this.props.data.rack}
+                                       actionServer={this.actionServer.bind(this)}
                                        invokeServer={this.props.invokeServer}/>
                     <View style={{
                         height: 4,

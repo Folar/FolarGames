@@ -51,12 +51,20 @@ class AcquireLayout extends React.Component {
     }
 
     invokeServer(cmd,args) {
+        console.log("command " + cmd);
         let hotels = ["Luxor", "Tower", "American", "Worldwide", "Festival", "Continental", "Imperial"];
         switch(cmd) {
             case "Start":
                 this.props.sendmessage({type:"ACQ",name: this.props.name, action: 100,args:""});
                 break;
-
+            case "End":
+                let b = {state:101};
+                debugger;
+                if(this.props.data.gameState == 102){
+                    b ={amt:this.state.acquireData.buy.amt,hotels:this.state.acquireData.buy.hotels,state:102};
+                }
+                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 108,args:b});
+                break;
             case "PlaceTile":
 
                 let d = this.props.data;
@@ -131,7 +139,6 @@ class AcquireLayout extends React.Component {
                 this.props.sendmessage({type:"ACQ",name: this.props.name, action: 105,args:args});
                 break;
             case "Trade":
-                debugger;
                 this.props.sendmessage({type:"ACQ",name: this.props.name, action: 104,
                     args:args});
         }

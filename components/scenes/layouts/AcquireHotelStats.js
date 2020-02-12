@@ -22,7 +22,8 @@ class AcquireHotelStats extends React.Component {
     componentDidMount() {
 
     }
-    getRowColor(i){
+    getRowColor(i,size){
+        if (size>3) return "orange";
         return i%2 == 0 ?"white" :"lightblue"
     }
 
@@ -34,7 +35,7 @@ class AcquireHotelStats extends React.Component {
             return  (
                 <View key={index} style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'
                     }}>
-                    <AcquireHotelStatRow  rc={this.getRowColor(index)} key={index} hotel={item} />
+                    <AcquireHotelStatRow  rc={this.getRowColor(index,item.size)} key={index} hotel={item} />
                 </View>
             );
         });

@@ -70,6 +70,7 @@ class GamesLayout extends React.Component {
             diverData: {},
             acquireData:{
                 state:0,
+                canEnd:false,
                 currentIndex:0,
                 currentPlayer:0,
                 currentSwapPlayer:0,
@@ -87,44 +88,44 @@ class GamesLayout extends React.Component {
                     {
                         name: "Luxor",
                         color: "red",
-                        available: 15,
+                        available: 25,
                         size: 0,
-                        price: 200
+                        price: 0
                     },
                     {
                         name: "Tower",
                         color: "yellow",
-                        available: 22,
-                        size: 4,
-                        price: 400
+                        available: 25,
+                        size: 0,
+                        price: 0
                     },
                     {
                         name: "American",
                         color: "#8787ff",
-                        available: 5,
+                        available: 25,
                         size: 0,
-                        price: 600
+                        price: 0
                     },
                     {
                         name: "Worldwide",
                         color: "#c3af91",
-                        available: 12,
-                        size: 33,
-                        price: 1200
+                        available: 25,
+                        size: 0,
+                        price: 0
                     },
                     {
                         name: "Festival",
                         color: "green",
                         available: 25,
-                        size: 2,
-                        price: 300
+                        size: 0,
+                        price: 0
                     },
                     {
                         name: "Continental",
                         color: "cyan",
                         available: 25,
-                        size: 2,
-                        price: 400
+                        size: 0,
+                        price: 0
                     },
                     {
                         name: "Imperial",

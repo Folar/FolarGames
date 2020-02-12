@@ -78,10 +78,8 @@ class AcquireTileLayout extends React.Component {
         return {money:0,name:"",playing:false}
 
     }
-    invokeServer(){
-        this.props.invokeServer("Start");
-    }
-    invokeServer2(i,j){
+
+    invokeServer(i,j){
         this.props.invokeServer("PlaceTile",{row:i,column:j})
     }
 
@@ -93,7 +91,7 @@ class AcquireTileLayout extends React.Component {
                                      backgroundColor={item.bg}   key={index}
                                       row={item.row}  column={item.column}
                                      clickable={true}
-                                     chooseDicePair={this.invokeServer2.bind(this)} />
+                                     chooseDicePair={this.invokeServer.bind(this)} />
             });
 
         return (
@@ -123,7 +121,7 @@ class AcquireTileLayout extends React.Component {
                     <TileClickable value={this.props.buttonText} dim={this.getDim(400)}  color={"black"}
                                    backgroundColor={"lightgray"}   key={4223}
                                    clickable={true}
-                                   chooseDicePair={this.invokeServer.bind(this)} />
+                                   chooseDicePair={this.props.actionServer.bind(this)} />
 
 
 
