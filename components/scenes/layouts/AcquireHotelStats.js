@@ -23,7 +23,7 @@ class AcquireHotelStats extends React.Component {
 
     }
     getRowColor(i,size){
-        if (size>3) return "orange";
+        if (size>10) return "orange";
         return i%2 == 0 ?"white" :"lightblue"
     }
 

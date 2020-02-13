@@ -261,7 +261,7 @@ class GamesLayout extends React.Component {
     }
 
     sendBocaMessage(d){
-
+debugger;
         this.client.send(JSON.stringify(d));
     }
 
@@ -301,7 +301,7 @@ class GamesLayout extends React.Component {
 
     connectToServer(gt) {
         let W3CWebSocket = require('websocket').w3cwebsocket;
-
+debugger;
         console.log("start of connect to server ");
         let name = this.state.name;
         this.setState({name: name});

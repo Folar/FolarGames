@@ -72,10 +72,13 @@ class AcquireBoardLayout extends React.Component {
             if( this.props.data.canEnd)
                 this.props.invokeServer("End");
             if( this.props.data.over)
-                this.props.invokeServer("Reload");
+                this.props.invokeServer("Reload")
             return;
-        }else
+        }else{
+            debugger;
             this.props.invokeServer("Start");
+        }
+
 
 
     }

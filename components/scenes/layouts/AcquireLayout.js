@@ -33,11 +33,12 @@ class AcquireLayout extends React.Component {
             di:0,
             qty:0
 
-        }
-        ;
+        };
+        this.ackWaiting = false;
 
     }
     setData(d){
+        this.ackWaiting = false;
         this.setState({acquireData:d,stk:d.stk,merger:d.merger,buy:d.buy,players:d.players,hotels:d.hotels,
         name:this.props.name,buttonText:d.buttonText });
 
@@ -53,13 +54,19 @@ class AcquireLayout extends React.Component {
     invokeServer(cmd,args) {
         console.log("command " + cmd);
         let hotels = ["Luxor", "Tower", "American", "Worldwide", "Festival", "Continental", "Imperial"];
+        if(this.ackWaiting) {
+            console.log("command " + cmd);
+            return;
+        }
+        this.ackWaiting = true;
         switch(cmd) {
+            case  "Reload":
+                this.props.playAgain();
             case "Start":
                 this.props.sendmessage({type:"ACQ",name: this.props.name, action: 100,args:""});
                 break;
             case "End":
                 let b = {state:101};
-                debugger;
                 if(this.props.data.gameState == 102){
                     b ={amt:this.state.acquireData.buy.amt,hotels:this.state.acquireData.buy.hotels,state:102};
                 }
