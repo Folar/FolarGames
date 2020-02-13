@@ -300,7 +300,7 @@ class GamesLayout extends React.Component {
 
     connectToServer(gt) {
         let W3CWebSocket = require('websocket').w3cwebsocket;
-debugger;
+
         console.log("start of connect to server ");
         let name = this.state.name;
         this.setState({name: name});
@@ -366,8 +366,12 @@ debugger;
               _this.refs.dl.setData( packet);
 
           } if (gt == 6) {
-               _this.setState({acquireData: packet});
-               _this.refs.acq.setData( packet);
+                if (packet.type != "ping"){
+                   _this.setState({acquireData: packet});
+                   _this.refs.acq.setData( packet);
+               }else {
+                    debugger;
+               }
            }
 
 
