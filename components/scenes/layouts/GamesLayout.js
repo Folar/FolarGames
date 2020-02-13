@@ -261,7 +261,6 @@ class GamesLayout extends React.Component {
     }
 
     sendBocaMessage(d){
-debugger;
         this.client.send(JSON.stringify(d));
     }
 
