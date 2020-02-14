@@ -55,7 +55,7 @@ class AcquireLayout extends React.Component {
         console.log("command " + cmd);
         let hotels = ["Luxor", "Tower", "American", "Worldwide", "Festival", "Continental", "Imperial"];
         if (this.lastCmd == cmd && this.lastArgs == JSON.stringify(args)) {
-            debugger;
+            //debugger;
             return;
         }
         this.lastCmd = cmd;
