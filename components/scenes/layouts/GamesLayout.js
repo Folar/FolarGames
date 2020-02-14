@@ -261,6 +261,7 @@ class GamesLayout extends React.Component {
     }
 
     sendBocaMessage(d){
+   console.log("in sendboca");
         this.client.send(JSON.stringify(d));
     }
 
@@ -307,7 +308,7 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-       // client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+      //  client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
        client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client

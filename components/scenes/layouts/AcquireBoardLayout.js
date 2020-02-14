@@ -67,6 +67,15 @@ class AcquireBoardLayout extends React.Component {
 
         return "Start"
     }
+    invokeTileServer(cmd,args){
+        if(this.props.data.gameState == 102) {
+          //  debugger;
+            this.props.invoke("buyHotel",args)
+        }
+        else
+            this.props.invokeServer("PlaceTile",args)
+
+    }
     actionServer(){
         if (this.getPlaying()) {
             if( this.props.data.canEnd)
@@ -89,10 +98,9 @@ class AcquireBoardLayout extends React.Component {
 
         let scoreRows =
             [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'].map((item, index) => {
-                console.log("ind "+index)
               return  <AcquireRowLayout style={{backgroundColor:"#0808008", opacity:1}}
                                         rank={item} value={item} row={index}
-                                        invokeServer={this.props.invokeServer}
+                                        invokeServer={this.invokeTileServer.bind(this)}
                                         key={index} tiles={this.props.data.tiles}/>
 
             });

@@ -34,11 +34,11 @@ class AcquireLayout extends React.Component {
             qty:0
 
         };
-        this.ackWaiting = false;
+        this.lastCmd = "";
+        this.lastArgs = "";
 
     }
     setData(d){
-        this.ackWaiting = false;
         this.setState({acquireData:d,stk:d.stk,merger:d.merger,buy:d.buy,players:d.players,hotels:d.hotels,
         name:this.props.name,buttonText:d.buttonText });
 
@@ -54,16 +54,17 @@ class AcquireLayout extends React.Component {
     invokeServer(cmd,args) {
         console.log("command " + cmd);
         let hotels = ["Luxor", "Tower", "American", "Worldwide", "Festival", "Continental", "Imperial"];
-        if(this.ackWaiting) {
-            console.log("command " + cmd);
+        if (this.lastCmd == cmd && this.lastArgs == JSON.stringify(args)) {
+            debugger;
             return;
         }
-        this.ackWaiting = true;
+        this.lastCmd = cmd;
+        this.lastArgs = JSON.stringify(args);
         switch(cmd) {
             case  "Reload":
                 this.props.playAgain();
             case "Start":
-                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 100,args:""});
+                this.props.sendmessage({type:"ACQ",name: this.props.name, action: 100,args:{dummy:1}});
                 break;
             case "End":
                 let b = {state:101};
@@ -75,26 +76,7 @@ class AcquireLayout extends React.Component {
             case "PlaceTile":
 
                 let d = this.props.data;
-                if(d.gameState == 102){
-                    let t = d.tiles[args.row][args.column];
-                    if(t.state > 7){
-                        this.state.buy.error = "You must click on a board tile associated with a buyable hotel"
 
-                        this.setState({buy:this.state.buy})
-                        return;
-                    }
-                    let hn =["Luxor", "Tower", "American", "Worldwide", "Festival", "Continental", "Imperial"][t.state];
-                    let cnt = this.state.buy.hotels.indexOf(hn);
-
-                    if(cnt == -1){
-                        this.state.buy.error = "You can not buy hotel "+hn+ " right now"
-
-                        this.setState({buy:this.state.buy})
-                        return;
-                    }
-                    this.incrHotel(cnt);
-                    return;
-                }
                 if(d.gameState != 101){
                     d.instructions = "Can not click on this tile, it is not your turn or not time to place a tile";
                     this.setState({acquireData:d});
@@ -205,6 +187,28 @@ class AcquireLayout extends React.Component {
 
     invoke(type,cnt){
         switch (type) {
+            case "buyHotel":
+                debugger;
+                let d = this.props.data;
+                let t = d.tiles[cnt.row][cnt.column];
+                if(t.state > 7){
+                    this.state.buy.error = "You must click on a board tile associated with a buyable hotel"
+
+                    this.setState({buy:this.state.buy})
+                    return;
+                }
+                let hn =["Luxor", "Tower", "American", "Worldwide", "Festival", "Continental", "Imperial"][t.state];
+                let hi = this.state.buy.hotels.indexOf(hn);
+
+                if(hi == -1){
+                    this.state.buy.error = "You can not buy hotel "+hn+ " right now"
+
+                    this.setState({buy:this.state.buy})
+                    return;
+                }
+                this.incrHotel(hi);
+                return;
+
             case "increaseHotel":
                 this.incrHotel(cnt);
                 break;
@@ -390,6 +394,7 @@ class AcquireLayout extends React.Component {
                     }}>
                         <AcquireBoardLayout   playerIndex={this.getPlayerIndex(this.props.name)} hotels={this.state.hotels}
                                               name ={this.props.name} invokeServer={this.invokeServer.bind(this)}
+                                              invoke={this.invoke.bind(this)}
                                               buttonText ={ this.state.acquireData.buttonText}
                                               players={this.state.players} data={this.state.acquireData}/>
                         <View style={{
