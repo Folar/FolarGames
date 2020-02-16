@@ -54,10 +54,7 @@ class AcquireLayout extends React.Component {
     invokeServer(cmd,args) {
         console.log("command " + cmd);
         let hotels = ["Luxor", "Tower", "American", "Worldwide", "Festival", "Continental", "Imperial"];
-        if (this.lastCmd == cmd && this.lastArgs == JSON.stringify(args)) {
-            debugger;
-            return;
-        }
+
         this.lastCmd = cmd;
         this.lastArgs = JSON.stringify(args);
         switch(cmd) {
