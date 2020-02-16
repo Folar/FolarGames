@@ -67,7 +67,12 @@ class AcquireStockLayout extends React.Component {
         var idxSwap = 0;
 
         idxSwap = this.props.stock.swap;
-        for(var i = 0;i<=this.props.stock.total; i= i+2)
+        let survivorAvail = this.props.stock.hotelAvailSurvivorBase;
+        let total = this.props.stock.total;
+        if (total/2 > survivorAvail ){
+            total = 2 * survivorAvail;
+        }
+        for(var i = 0;i<=total; i= i+2)
             arrSwap.push(i);
 
         idxSell = this.props.stock.sell;
