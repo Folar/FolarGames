@@ -51,6 +51,10 @@ class AcquireRowLayout extends React.Component {
         let c =["red","yellow","#8787ff","#c3af91","green","cyan","pink"];
 
         if(t.inRack) {
+            if (t.rackState ==  "n")
+                return "darkgray"
+            if (t.rackState ==  "d")
+                return "black"
             return "lightgray";
         }
         if(t.state < 8) return c[t.state];

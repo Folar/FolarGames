@@ -80,17 +80,20 @@ class AcquireLayout extends React.Component {
                     return;
                 }
                 let t = d.tiles[args.row][args.column];
+                console.log("tile state "+t.rackState);
+                if (t.rackState == 'n')
+                    debugger;
                 if (!t.inRack){
                     d.instructions = "the tile that you clicked is not in the rack";
                     this.setState({acquireData:d});
                     return;
                 }
-                if (!t.state =='n'){
+                if (t.rackState =='n'){
                     d.instructions = "the tile that you clicked can not be played  at this time";
                     this.setState({acquireData:d});
                     return;
                 }
-                if (!t.state =='d'){
+                if (t.rackState =='d'){
                     d.instructions = "the tile that you clicked is dead";
                     this.setState({acquireData:d});
                     return;
