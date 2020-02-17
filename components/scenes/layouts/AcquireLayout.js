@@ -317,11 +317,11 @@ class AcquireLayout extends React.Component {
 
                 }
                 this.state.stk.sell = cnt;
-                this.state.players[0].money = this.state.stk.playerMoneyBase + this.state.stk.sell * this.state.stk.defunctPrice;
+                this.state.players[this.state.stk.player].money = this.state.stk.playerMoneyBase + this.state.stk.sell * this.state.stk.defunctPrice;
                 this.state.hotels[idxS].available = this.state.stk.hotelAvailSurvivorBase - this.state.stk.swap/2;
                 this.state.hotels[idxD].available = this.state.stk.hotelAvailDefunctBase +this.state.stk.swap + this.state.stk.sell;
-                this.state.players[0].hotels[idxD] = this.state.stk.playerDefunctBase - this.state.stk.swap - this.state.stk.sell;
-                this.state.players[0].hotels[idxS] = this.state.stk.playerSurvivorBase + this.state.stk.swap/2 ;
+                this.state.players[this.state.stk.player].hotels[idxD] = this.state.stk.playerDefunctBase - this.state.stk.swap - this.state.stk.sell;
+                this.state.players[this.state.stk.player].hotels[idxS] = this.state.stk.playerSurvivorBase + this.state.stk.swap/2 ;
 
 
 
