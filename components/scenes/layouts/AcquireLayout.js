@@ -141,8 +141,9 @@ class AcquireLayout extends React.Component {
         let hotelIndex = this.index(this.state.buy.hotels[cnt]);
         let pi = this.getPlayerIndex(this.props.name);
         let player = this.state.players[pi];
+       // debugger;
         if( this.state.buy.amt[cnt] == 3 ||
-            this.state.buy.amt[cnt] == this.state.hotels[hotelIndex].available||
+             this.state.hotels[hotelIndex].available == 0 ||
             (this.state.buy.amt[cnt] + 1)* this.state.hotels[hotelIndex].price > this.state.buy.playerBaseMoney) return;
 
         let tot = 0;

@@ -67,16 +67,18 @@ class AcquireBuyStockLayout extends React.Component {
 
     getForegroundI(index, item) {
         let b = this.props.buy.amt[index] < 3 &&
-            this.props.buy.amt[index] < this.props.hotels[this.index(item)].available &&
+            ( this.props.buy.amt[index] -1) < this.props.hotels[this.index(item)].available &&
             (this.props.buy.amt[index] + 1) * this.props.hotels[this.index(item)].price <= this.props.buy.playerBaseMoney;
         return b ?"black":this.props.buy.hotelColors[index];
     }
 
     increaseLabel(index, item) {
-        let b = this.props.buy.amt[index] < 3 &&
-            this.props.buy.amt[index] < this.props.hotels[this.index(item)].available &&
-            (this.props.buy.amt[index] + 1) * this.props.hotels[this.index(item)].price <= this.props.buy.playerBaseMoney;
-        return b ? "+" : "+";
+        return "+";
+       // console.log("incrl "+(this.props.buy.amt[index] + 1) * this.props.hotels[this.index(item)].price )
+       //  let b = this.props.buy.amt[index] < 3 &&
+       //      (this.props.buy.amt[index] -1)  < this.props.hotels[this.index(item)].available &&
+       //      (this.props.buy.amt[index] + 1) * this.props.hotels[this.index(item)].price <= this.props.buy.playerBaseMoney;
+       //  return b ? "+" : "+";
     }
 
     render() {
