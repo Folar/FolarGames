@@ -37,13 +37,14 @@ class TileClickable extends React.Component {
                     marginRight: this.props.dim.marginRight,
                     height: this.props.dim.height,
                     width: this.props.dim.width,
-                    marginTop:.01,
                     backgroundColor: this.props.backgroundColor,
                     borderWidth: this.state.borderWidth,
                     color: this.props.color,
                     borderColor: this.props.color,
                     opacity:this.props.dim.opacity,
-                    borderStyle: "solid"
+                    borderStyle: "solid",
+                    flexDirection: 'column', alignItems: 'center',
+                    justifyContent: 'center'
                 }}
             >
                 <VrButton onClick={this.invoke.bind(this)}>
