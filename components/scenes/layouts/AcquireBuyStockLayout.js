@@ -93,7 +93,7 @@ class AcquireBuyStockLayout extends React.Component {
 
 
                 return <View style={{
-                    marginRight: 0.04, flexDirection: 'column', alignItems: 'center',
+                    marginRight: 0.04,flexDirection: 'column', alignItems: 'center',
                     justifyContent: 'center'
                 }}>
 
@@ -179,6 +179,7 @@ class AcquireBuyStockLayout extends React.Component {
                     <Text
                         style={{
                             width: 5,
+                            marginBottom:.03,
                             height: .15,
                             fontSize: .1,
                             fontWeight: 400,

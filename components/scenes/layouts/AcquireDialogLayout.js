@@ -37,7 +37,14 @@ class AcquireDialogLayout extends React.Component {
         const type = this.props.type;
 
         return (
-            <View>{
+            <View  style={{
+                height: 1.6,
+                width: 5,
+                layoutOrigin: [-0.01, .1],
+                transform: [
+                    {translateX: 0},
+                    {translateZ: 0}]
+            }}>{
                 type == 3 ?(
                        <AcquireBuyStockLayout buy={this.props.buy} hotels={this.props.hotels}  player={this.props.player}
                                               invoke={this.props.invoke}

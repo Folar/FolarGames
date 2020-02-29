@@ -107,14 +107,14 @@ class AcquireChooseSurvivorLayout extends React.Component {
             <View>
 
 
-                <View style={{
-                    height: 1,
+                <View  style={{
+                    height: 1.6,
                     width: 5,
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'start',
-                    layoutOrigin: [-.077, 1.8],
-                    backgroundColor:"lightblue",
+                    layoutOrigin: [-.077, .9],
+                    backgroundColor: "lightblue",
                     transform: [
                         {translateX: 0},
                         {translateZ: 0}]
@@ -127,6 +127,7 @@ class AcquireChooseSurvivorLayout extends React.Component {
                             fontSize: .1,
                             fontWeight:400,
                             textAlign: 'center',
+                            layoutOrigin: [0, .03],
                             backgroundColor: "lightgray",
                             color:"black"
 

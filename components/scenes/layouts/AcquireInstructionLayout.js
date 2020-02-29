@@ -38,13 +38,13 @@ class AcquireInstructionLayout extends React.Component {
 
 
                 <View style={{
-                    height: 1,
-                    width: 4,
+                    height: 1.6,
+                    width: 5,
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'start',
-                    layoutOrigin: [-.06, 1.8],
-                    backgroundColor:"lightblue",
+                    layoutOrigin: [-.077, .9],
+                    backgroundColor: "lightblue",
                     transform: [
                         {translateX: 0},
                         {translateZ: 0}]

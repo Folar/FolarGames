@@ -374,12 +374,12 @@ class AcquireLayout extends React.Component {
 
 
                 <View style={{
-                    height: 2,
+                    height: 4,
                     width: 3,
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    layoutOrigin: [1.3, 1],
+                    layoutOrigin: [1.3,.5],
                     transform: [
                         {translateX: 0},
                         {translateZ: this.state.zorder}]
@@ -402,7 +402,8 @@ class AcquireLayout extends React.Component {
                             flexDirection: 'column',
                             alignItems: 'flex-start',
                             justifyContent: 'flex-start',
-                            layoutOrigin: [0, 0],
+                            layoutOrigin: [.07, 0],
+                            width:5,height:4,
                             transform: [
                                 {translateX: 0},
                                 {translateZ: 0}]

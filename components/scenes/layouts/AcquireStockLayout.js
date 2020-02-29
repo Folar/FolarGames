@@ -101,13 +101,13 @@ class AcquireStockLayout extends React.Component {
 
 
                 <View style={{
-                    height: 1.8,
+                    height: 1.6,
                     width: 5,
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'start',
-                    layoutOrigin: [-.077, .7],
-                    backgroundColor:"lightblue",
+                    layoutOrigin: [-.077, .9],
+                    backgroundColor: "lightblue",
                     transform: [
                         {translateX: 0},
                         {translateZ: 0}]
