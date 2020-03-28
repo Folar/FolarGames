@@ -16,7 +16,8 @@ import ChoiceLayout from './ChoiceLayout.js';
 import BocaLayout from './BocaLayout.js';
 import DiverLayout from './DiverLayout.js';
 import ChoiceScore from './ChoiceScore.js'
-import AcquireLayout from './AcquireLayout.js'
+import AcquireLayout from './AcquireLayout.js';
+import PanLayout from './PanLayout.js'
 //Layout
 let key = 0;
 takeSixThis = null;
@@ -68,6 +69,153 @@ class GamesLayout extends React.Component {
             dtX:-2,
             dtY:0,
             diverData: {},
+            panData:{
+                type:0,
+                kitty:18,
+                players:[
+                 {
+                        name:"Elise",
+                                    total:98,
+                                    current:20,
+                                    cards:
+                                        [
+                                            [
+                                                {
+                                                    suit:'h',
+                                                    rank:5,
+                                                    ordinal:5
+                                                },
+                                                {
+                                                    suit:'h',
+                                                    rank:5,
+                                                    ordinal:5
+                                                },
+                                                {
+                                                    suit:'h',
+                                                    rank:5,
+                                                    ordinal:5
+                                                }
+
+                                            ],
+                                            [
+                                                {
+                                                    suit:'c',
+                                                    rank:1,
+                                                    ordinal:1
+                                                },
+                                                {
+                                                    suit:'c',
+                                                    rank:2,
+                                                    ordinal:2
+                                                },
+                                                {
+                                                    suit:'c',
+                                                    rank:3,
+                                                    ordinal:3
+                                                }
+                                            ]
+                                        ]
+                    },
+                    {
+                        name:"Judy",
+                                    total:98,
+                                    current:20,
+                                    cards:
+                                        [
+                                        ]
+                    },
+                    {
+                        name:"Belinda",
+                                    total:98,
+                                    current:20,
+                                    cards:
+                                        [
+                                            [
+                                                {
+                                                    suit:'c',
+                                                    rank:1,
+                                                    ordinal:1
+                                                },
+                                                {
+                                                    suit:'c',
+                                                    rank:2,
+                                                    ordinal:2
+                                                },
+                                                {
+                                                    suit:'c',
+                                                    rank:3,
+                                                    ordinal:3
+                                                }
+                                            ]
+                                        ]
+                    },
+                    {
+                        name:"Larry",
+                        total:98,
+                        current:20,
+                        cards:
+                            [
+                                [
+                                    {
+                                        suit:'c',
+                                        rank:5,
+                                        ordinal:5
+                                    },
+                                    {
+                                        suit:'c',
+                                        rank:5,
+                                        ordinal:5
+                                    },
+                                    {
+                                        suit:'c',
+                                        rank:5,
+                                        ordinal:5
+                                    },
+                                    {
+                                        suit:'c',
+                                        rank:5,
+                                        ordinal:5
+                                    }
+
+                                ],
+                                [
+                                    {
+                                        suit:'s',
+                                        rank:1,
+                                        ordinal:1
+                                    },
+                                    {
+                                        suit:'s',
+                                        rank:2,
+                                        ordinal:2
+                                    },
+                                    {
+                                        suit:'s',
+                                        rank:3,
+                                        ordinal:3
+                                    }
+                                ],
+                                [
+                                    {
+                                        suit:'s',
+                                        rank:1,
+                                        ordinal:1
+                                    },
+                                    {
+                                        suit:'s',
+                                        rank:2,
+                                        ordinal:2
+                                    },
+                                    {
+                                        suit:'s',
+                                        rank:3,
+                                        ordinal:3
+                                    }
+                                ]
+                            ]
+                    }
+                ]
+            },
             acquireData:{
                 state:0,
                 canEnd:false,
@@ -399,7 +547,7 @@ class GamesLayout extends React.Component {
 
 
     render() {
-        const login = this.state.loginScene;
+        const login = 7;//this.state.loginScene;
         let adj = 2;
         if (login == 5 && this.state.zoom == -5)
             adj = 5;
@@ -461,7 +609,7 @@ class GamesLayout extends React.Component {
                                    player={this.state.name}
                                    playAgain={this.playAgain5.bind(this)}/>
                    </View>
-               ): (
+               ): login == 6 ?(
                    <View>
                         <AcquireLayout zorder={this.state.zoom} showButton={true} text={"Play"}
                                data={this.state.acquireData}
@@ -470,7 +618,11 @@ class GamesLayout extends React.Component {
                                name={this.state.name}
                                playAgain={this.playAgain6.bind(this)}/>
                    </View>
-               )
+               ) :(
+                     <View>
+                          <PanLayout />
+                     </View>
+                 )
             }
 
             </View>
