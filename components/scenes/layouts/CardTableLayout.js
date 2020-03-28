@@ -56,7 +56,7 @@ class CardTableLayout extends React.Component {
                     {/*top row*/}
                     <View style={{
 
-                        backgroundColor: "blue",
+                        backgroundColor: "green",
                         marginTop: .04,
                         marginLeft: 0.045,
                         marginRight: .03,
@@ -114,7 +114,7 @@ class CardTableLayout extends React.Component {
                         marginLeft: .045,
                         width: 1.9,
                         height: h,
-                        backgroundColor: "red"
+                        backgroundColor: "green"
                     }}>
                         {/*2nd row : player left*/}
                         <View style={{
@@ -168,7 +168,7 @@ class CardTableLayout extends React.Component {
                         marginLeft: .045,
                         width: 1.9,
                         height: h,
-                        backgroundColor: "red"
+                        backgroundColor: "green"
                     }}>
                         {/*3rd row : player left*/}
                         <View style={{
@@ -220,7 +220,7 @@ class CardTableLayout extends React.Component {
                         marginLeft: .045,
                         width: 1.9,
                         height: h,
-                        backgroundColor: "pink"
+                        backgroundColor: "green"
                     }}>
                         {/*4th row : yourhand*/}
                         <View style={{
