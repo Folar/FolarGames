@@ -33,6 +33,8 @@ class CardTableLayout extends React.Component {
 
         let h = .22;
         let pw = .5;
+        let mw = .69;
+        let youw = 1.25;
 
 
         return (
@@ -56,13 +58,13 @@ class CardTableLayout extends React.Component {
 
                         backgroundColor: "blue",
                         marginTop: .04,
-                        marginLeft:0.045,
+                        marginLeft: 0.045,
                         marginRight: .03,
                         width: 1.9,
                         height: h,
                         flexDirection: 'row',
                     }}>
-                        {/*top row : player 1*/}
+                        {/*top row : player left*/}
                         <View style={{
 
                             flexDirection: 'column',
@@ -75,7 +77,7 @@ class CardTableLayout extends React.Component {
                             backgroundColor: "black"
                         }}>
                         </View>
-                        {/*top row : player 2*/}
+                        {/*top row : player center*/}
                         <View style={{
 
                             flexDirection: 'column',
@@ -88,7 +90,7 @@ class CardTableLayout extends React.Component {
                             backgroundColor: "black"
                         }}>
                         </View>
-                        {/*top row : player 3*/}
+                        {/*top row : player right*/}
                         <View style={{
 
                             flexDirection: 'column',
@@ -114,17 +116,46 @@ class CardTableLayout extends React.Component {
                         height: h,
                         backgroundColor: "red"
                     }}>
+                        {/*2nd row : player left*/}
                         <View style={{
 
                             flexDirection: 'column',
                             marginTop: 0,
-                            marginRight: .045,
+                            marginRight: 0,
                             marginLeft: .045,
-                            width: .6,
+                            width: pw,
                             height: h,
                             backgroundColor: "black"
                         }}>
                         </View>
+                        {/*2nd row : muck*/}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginTop: 0,
+                            marginLeft: .06,
+                            width: mw,
+                            height: h,
+                            backgroundColor: "black"
+                        }}>
+                        </View>
+                        {/*2nd row : player right*/}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            alignItems: 'flex_end',
+                            justifyContent: 'flex-end',
+                            marginTop: 0,
+                            marginLeft: .06,
+                            width: pw,
+                            height: h,
+                            backgroundColor: "black"
+                        }}>
+                        </View>
+
+
                     </View>
 
 
@@ -139,13 +170,51 @@ class CardTableLayout extends React.Component {
                         height: h,
                         backgroundColor: "red"
                     }}>
+                        {/*3rd row : player left*/}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            marginTop: 0,
+                            marginRight: 0,
+                            marginLeft: .045,
+                            width: pw,
+                            height: h,
+                            backgroundColor: "black"
+                        }}>
+                        </View>
+                        {/*3rd row : exposed hand*/}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginTop: 0,
+                            marginLeft: .06,
+                            width: mw,
+                            height: h,
+                            backgroundColor: "black"
+                        }}>
+                        </View>
+                        {/*3rd row : player right*/}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            alignItems: 'flex_end',
+                            justifyContent: 'flex-end',
+                            marginTop: 0,
+                            marginLeft: .06,
+                            width: pw,
+                            height: h,
+                            backgroundColor: "black"
+                        }}>
+                        </View>
                     </View>
 
 
                     {/*fourth row*/}
                     <View style={{
 
-                        flexDirection: 'column',
+                        flexDirection: 'row',
                         marginTop: .01,
                         marginRight: .045,
                         marginLeft: .045,
@@ -153,6 +222,33 @@ class CardTableLayout extends React.Component {
                         height: h,
                         backgroundColor: "pink"
                     }}>
+                        {/*4th row : yourhand*/}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            marginTop: 0,
+                            marginRight: 0,
+                            marginLeft: .045,
+                            width: youw,
+                            height: h,
+                            backgroundColor: "black"
+                        }}>
+                        </View>
+
+                        {/*4th row : player right*/}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            alignItems: 'flex_end',
+                            justifyContent: 'flex-end',
+                            marginTop: 0,
+                            marginLeft: .06,
+                            width: pw,
+                            height: h,
+                            backgroundColor: "black"
+                        }}>
+                        </View>
+
                     </View>
                 </View>
 
