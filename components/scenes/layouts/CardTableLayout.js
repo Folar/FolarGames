@@ -33,6 +33,8 @@ class CardTableLayout extends React.Component {
 
         let h = .22;
         let pw = .5;
+        let jw =.54;
+        let jh = 3;
         let mw = .69;
         let youw = 1.25;
 
@@ -222,28 +224,28 @@ class CardTableLayout extends React.Component {
                         height: h,
                         backgroundColor: "green"
                     }}>
-                        {/*4th row : yourhand*/}
+                        {/*4th row : journal*/}
                         <View style={{
 
                             flexDirection: 'column',
                             marginTop: 0,
                             marginRight: 0,
                             marginLeft: .045,
-                            width: youw,
-                            height: h,
+                            width: jw,
+                            height: jh,
                             backgroundColor: "black"
                         }}>
                         </View>
 
-                        {/*4th row : player right*/}
+                        {/*4th row : yourhand*/}
                         <View style={{
 
                             flexDirection: 'column',
                             alignItems: 'flex_end',
                             justifyContent: 'flex-end',
                             marginTop: 0,
-                            marginLeft: .06,
-                            width: pw,
+                            marginLeft: .02,
+                            width: youw,
                             height: h,
                             backgroundColor: "black"
                         }}>
