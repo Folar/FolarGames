@@ -37,6 +37,8 @@ class CardTableLayout extends React.Component {
         let jh = 3;
         let mw = .69;
         let youw = 1.25;
+       // let nplayers=  this.props.data.players.length;
+
 
 
         return (

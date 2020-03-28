@@ -10,7 +10,7 @@ import {
 import ButtonClickable from './ButtonClickable.js';
 
 //Layout
-class CardLabel extends React.Component {
+class SuitLabel extends React.Component {
 
     constructor(props) {
         super(props);
@@ -33,7 +33,7 @@ class CardLabel extends React.Component {
     render() {
 
 
-        let parms = {rank:this.props.rank,suit:this.props.suit, sz: this.props.sz, rotation: this.props.rotation};
+        let parms = {suit:this.props.suit, sz: this.props.sz};
         let color = parms.suit == 'c' ||  parms.suit == 's' ? 'black' :'red';
         let suit = "";
         switch (parms.suit) {
@@ -64,35 +64,23 @@ class CardLabel extends React.Component {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-
                     backgroundColor:"white",
-                    transform: [
 
-                        {rotateZ:parms.rotation}]
                 }}>
 
-                    <VrButton onClick={this.zoom.bind(this)}>
+                    <VrButton >
                         <View style={{
-
+                            offsetX:.2,
+                            //layoutOrigin: [.4, .4],
                             backgroundColor:"white",
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center'
                         }}>
-                            <Text
-                                style={{
-                                    fontSize: parms.sz,
-                                    textAlign: 'center',
-                                    color: color,
-                                    backgroundColor:"white"
-                                }}>
-                                {parms.rank}
-                            </Text>
                              <Image
                                 style={{
                                     width: parms.sz,
                                     height: parms.sz
-
                                 }}
                                 source={asset(suit)}
                             >
@@ -111,4 +99,4 @@ class CardLabel extends React.Component {
 }
 
 module
-    .exports = CardLabel;
+    .exports = SuitLabel;

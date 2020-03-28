@@ -7,7 +7,10 @@ import {
     VrButton
 } from 'react-vr';
 
+import PlayingCard from './elements/PlayingCard.js';
 import CardLabel from './elements/CardLabel.js';
+import CardTableLayout from './CardTableLayout.js';
+
 //Layout
 class PanLayout extends React.Component {
 
@@ -20,8 +23,8 @@ class PanLayout extends React.Component {
 
     }
 
-    zoom(){
-
+    zoom(e){
+debugger;
     }
     componentDidMount() {
 
@@ -32,23 +35,7 @@ class PanLayout extends React.Component {
     render() {
 
 
-        let parms = {suit:"h", sz: .03, rotation: 180};
-        let color = parms.suit == 'c' ||  parms.suit == 's' ? 'black' :'red';
-        let suit = "";
-        switch (parms.suit) {
-            case 's':
-                suit = 'spade.png'
-                break;
-            case 'h':
-                suit = 'heart.png'
-                break;
-            case 'd':
-                suit = 'diamond.jpeg'
-                break;
-            case 'c':
-                suit = 'club.png'
-                break;
-        }
+
 
 
         return (
@@ -59,17 +46,20 @@ class PanLayout extends React.Component {
                 }}>
 
                 <View style={{
-
-                    flexDirection: 'column',
+                    width:2,
+                    height:.8,
+                    flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    layoutOrigin: [.9, 0],
-                    backgroundColor:"white",
+                    layoutOrigin: [.5, .5],
+                    borderRadius: 0.1,
+                    backgroundColor:"green",
                     transform: [
                         {translateX: 0},
                         {translateZ: -1}]
                 }}>
-                    <CardLabel sz={.05} suit={'c'} rotation={180}/>
+
+                    <CardTableLayout/>
                 </View>
 
 
