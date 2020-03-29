@@ -59,7 +59,7 @@ debugger;
                         {translateZ: -1}]
                 }}>
 
-                    <CardTableLayout/>
+                    <CardTableLayout data={this.props.data}/>
                 </View>
 
 
