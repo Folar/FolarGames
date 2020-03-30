@@ -72,7 +72,7 @@ class GamesLayout extends React.Component {
             panData:{
                 type:0,
                 kitty:18,
-                playerId:3,
+                playerId:0,
                 players:[
                  {
                         name:"Elise",
@@ -234,18 +234,18 @@ class GamesLayout extends React.Component {
                                 [
                                     {
                                         suit:'s',
-                                        rank:1,
-                                        ordinal:1
+                                        rank:11,
+                                        ordinal:11
                                     },
                                     {
                                         suit:'s',
-                                        rank:2,
-                                        ordinal:2
+                                        rank:12,
+                                        ordinal:12
                                     },
                                     {
                                         suit:'s',
-                                        rank:3,
-                                        ordinal:3
+                                        rank:13,
+                                        ordinal:13
                                     }
                                 ]
                             ]

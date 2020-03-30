@@ -37,13 +37,13 @@ class PanPlayer extends React.Component {
         let g = null;
         for (let i in this.props.player.cards) {
             g = this.props.player.cards[i].map((item, index) => {
-
-                return <CardSuitRank  sz={.025} suit={item.suit} rank={item.rank} rotation={0}/>
+                return <PlayingCard  sz={.25} suit={item.suit} rank={item.rank} />
+               // return <CardSuitRank  sz={.025} suit={item.suit} rank={item.rank} rotation={0}/>
             });
             grps.push(g);
         }
         let cardGrps =
-            grps.map((item, index) => {
+            grps.slice(0,2).map((item, index) => {
 
                 return <View  style={{
                     marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
@@ -55,7 +55,18 @@ class PanPlayer extends React.Component {
 
             });
 
+        let cardGrps2 =
+            grps.slice(2).map((item, index) => {
 
+                return <View  style={{
+                    marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    {item}
+                </View>
+
+
+            });
         return (
             <View
                 style={{
@@ -146,11 +157,28 @@ class PanPlayer extends React.Component {
                             width: .45,
                             height: .07,
                             marginLeft: .01,
-                            flexDirection: 'row',
+                            flexDirection: 'column',
                             alignItems: 'flex-start',
                             justifyContent: 'flex-start'
                         }}>
-                            {cardGrps}
+                            <View style={{
+                                width: .45,
+                                height: .07,
+                                flexDirection: 'row',
+                                alignItems: 'flex-start',
+                                justifyContent: 'flex-start'
+                            }}>
+                                {cardGrps}
+                            </View>
+                            <View style={{
+                                width: .45,
+                                height: .07,
+                                flexDirection: 'row',
+                                alignItems: 'flex-start',
+                                justifyContent: 'flex-start'
+                            }}>
+                                {cardGrps2}
+                            </View>
                         </View>
                     </View>
                 ) : (

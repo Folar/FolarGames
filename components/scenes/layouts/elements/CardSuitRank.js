@@ -76,7 +76,8 @@ class CardSuitRank extends React.Component {
                 }}>
 
                 <View style={{
-
+                    width: parms.sz,
+                    height: parms.sz *2  + .01,
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -84,8 +85,10 @@ class CardSuitRank extends React.Component {
 
                 }}>
 
-                    <VrButton onClick={this.zoom.bind(this)}>
+
                         <View style={{
+                            width: parms.sz,
+                            height: parms.sz *2  + .01,
                             opacity:this.state.select,
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -96,10 +99,12 @@ class CardSuitRank extends React.Component {
                                     width:this.props.sz,
                                     fontSize: parms.sz,
                                     textAlign: 'center',
+                                    textAlignVertical: 'center',
                                     color: color,
+                                    paddingRight:.021,
                                     backgroundColor:"white"
                                 }}>
-                                {parms.rank+" "}
+                                {parms.rank}
                             </Text>
                             <Image
                                 style={{
@@ -111,7 +116,7 @@ class CardSuitRank extends React.Component {
                             >
                             </Image>
                         </View>
-                    </VrButton>
+
                 </View>
 
 
