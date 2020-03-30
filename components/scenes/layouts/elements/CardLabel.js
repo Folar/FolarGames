@@ -55,7 +55,9 @@ class CardLabel extends React.Component {
         return (
             <View
                 style={{
-                    opacity: 1
+                    opacity: 1,
+                    marginRight:.002,
+                    marginTop:.007
 
                 }}>
 
@@ -77,7 +79,9 @@ class CardLabel extends React.Component {
                             backgroundColor:"white",
                             flexDirection: 'column',
                             alignItems: 'center',
-                            justifyContent: 'center'
+                            justifyContent: 'center',
+                            width: parms.sz,
+                            height: parms.sz *2  + .01
                         }}>
                             <Text
                                 style={{

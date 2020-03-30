@@ -7,7 +7,7 @@ import {
     VrButton
 } from 'react-vr';
 
-
+import PanPlayer from './PanPlayer.js';
 //Layout
 class CardTableLayout extends React.Component {
 
@@ -38,9 +38,17 @@ class CardTableLayout extends React.Component {
         let mw = .69;
         let youw = 1.25;
 
+        let p =[];
+        let pid = this.props.data.playerId;
         let nplayers=  this.props.data.players.length;
-
-
+        for (let i =0;i<nplayers;i++){
+            p.push(this.props.data.players[pid]);
+            pid++;
+            if (pid == nplayers) pid = 0;
+        }
+        for (let i = nplayers;i<8;i++){
+            p.push({playing:false});
+        }
 
         return (
             <View
@@ -78,9 +86,9 @@ class CardTableLayout extends React.Component {
                             marginTop: 0,
                             marginLeft: .14,
                             width: pw,
-                            height: h,
-                            backgroundColor: "black"
+                            height: h
                         }}>
+                            <PanPlayer player={p[5]}/>
                         </View>
                         {/*top row : player center*/}
                         <View style={{
@@ -91,9 +99,9 @@ class CardTableLayout extends React.Component {
                             marginTop: 0,
                             marginLeft: .06,
                             width: pw,
-                            height: h,
-                            backgroundColor: "black"
+                            height: h
                         }}>
+                            <PanPlayer player={p[4]}/>
                         </View>
                         {/*top row : player right*/}
                         <View style={{
@@ -104,9 +112,9 @@ class CardTableLayout extends React.Component {
                             marginTop: 0,
                             marginLeft: .06,
                             width: pw,
-                            height: h,
-                            backgroundColor: "black"
+                            height: h
                         }}>
+                            <PanPlayer player={p[3]}/>
                         </View>
                     </View>
 
@@ -129,9 +137,9 @@ class CardTableLayout extends React.Component {
                             marginRight: 0,
                             marginLeft: .045,
                             width: pw,
-                            height: h,
-                            backgroundColor: "black"
+                            height: h
                         }}>
+                            <PanPlayer player={p[6]}/>
                         </View>
                         {/*2nd row : muck*/}
                         <View style={{
@@ -155,9 +163,9 @@ class CardTableLayout extends React.Component {
                             marginTop: 0,
                             marginLeft: .06,
                             width: pw,
-                            height: h,
-                            backgroundColor: "black"
+                            height: h
                         }}>
+                            <PanPlayer player={p[2]}/>
                         </View>
 
 
@@ -183,9 +191,9 @@ class CardTableLayout extends React.Component {
                             marginRight: 0,
                             marginLeft: .045,
                             width: pw,
-                            height: h,
-                            backgroundColor: "black"
+                            height: h
                         }}>
+                            <PanPlayer player={p[7]}/>
                         </View>
                         {/*3rd row : exposed hand*/}
                         <View style={{
@@ -209,9 +217,9 @@ class CardTableLayout extends React.Component {
                             marginTop: 0,
                             marginLeft: .06,
                             width: pw,
-                            height: h,
-                            backgroundColor: "black"
+                            height: h
                         }}>
+                            <PanPlayer player={p[1]}/>
                         </View>
                     </View>
 
