@@ -41,7 +41,8 @@ debugger;
         return (
             <View
                 style={{
-                    opacity: 1
+                    opacity: 1,
+                    backgroundColor:"green"
 
                 }}>
 

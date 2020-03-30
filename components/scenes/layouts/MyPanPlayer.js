@@ -7,11 +7,10 @@ import {
     VrButton
 } from 'react-vr';
 
-import CardSuitRank from './elements/CardSuitRank.js';
-import PlayingCard from './elements/PlayingCard.js';
+import PlayingCard from './elements/PlayingCard';
 
 //Layout
-class PanPlayer extends React.Component {
+class MyPanPlayer extends React.Component {
 
     constructor(props) {
         super(props);
@@ -38,7 +37,7 @@ class PanPlayer extends React.Component {
         for (let i in this.props.player.cards) {
             g = this.props.player.cards[i].map((item, index) => {
 
-                return <CardSuitRank  sz={.025} suit={item.suit} rank={item.rank} rotation={0}/>
+                return <PlayingCard  sz={.35} suit={item.suit} rank={item.rank} />
             });
             grps.push(g);
         }
@@ -63,7 +62,7 @@ class PanPlayer extends React.Component {
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    width: .5,
+                    width: 1.25,
                     height: .22,
                     backgroundColor: "blue"
 
@@ -73,7 +72,7 @@ class PanPlayer extends React.Component {
 
 
                     <View style={{
-                        width: .5,
+                        width: 1.25,
                         height: .22,
                         marginLeft: .01,
                         flexDirection: 'column',
@@ -143,12 +142,13 @@ class PanPlayer extends React.Component {
                             </Text>
                         </View>
                         <View style={{
-                            width: .45,
-                            height: .07,
+                            width: 1.2,
+                            height: .1,
                             marginLeft: .01,
                             flexDirection: 'row',
                             alignItems: 'flex-start',
-                            justifyContent: 'flex-start'
+                            justifyContent: 'flex-start',
+                            backgroundColor:"red"
                         }}>
                             {cardGrps}
                         </View>
@@ -173,4 +173,4 @@ class PanPlayer extends React.Component {
 }
 
 module
-    .exports = PanPlayer;
+    .exports = MyPanPlayer;

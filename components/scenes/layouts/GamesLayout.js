@@ -95,18 +95,18 @@ class GamesLayout extends React.Component {
                             [
                                 [
                                     {
-                                        suit:'c',
+                                        suit:'d',
                                         rank:1,
                                         ordinal:1
                                     },
                                     {
-                                        suit:'c',
+                                        suit:'d',
                                         rank:2,
                                         ordinal:2
                                     },
                                     {
-                                        suit:'c',
-                                        rank:4,
+                                        suit:'d',
+                                        rank:3,
                                         ordinal:3
                                     }
                                 ],
@@ -258,6 +258,23 @@ class GamesLayout extends React.Component {
                         current:30,
                         cards:
                             [
+                                 [
+                                    {
+                                        suit:'c',
+                                        rank:11,
+                                        ordinal:8
+                                    },
+                                    {
+                                        suit:'c',
+                                        rank:12,
+                                        ordinal:9
+                                    },
+                                    {
+                                        suit:'c',
+                                        rank:13,
+                                        ordinal:10
+                                    }
+                                ]
                             ]
                     }
                 ]

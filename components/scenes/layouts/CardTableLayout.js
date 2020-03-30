@@ -8,6 +8,7 @@ import {
 } from 'react-vr';
 
 import PanPlayer from './PanPlayer.js';
+import MyPanPlayer from './MyPanPlayer.js';
 //Layout
 class CardTableLayout extends React.Component {
 
@@ -88,7 +89,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer player={p[5]}/>
+                            <PanPlayer key={5} player={p[5]}/>
                         </View>
                         {/*top row : player center*/}
                         <View style={{
@@ -101,7 +102,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer player={p[4]}/>
+                            <PanPlayer  key={4} player={p[4]}/>
                         </View>
                         {/*top row : player right*/}
                         <View style={{
@@ -114,7 +115,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer player={p[3]}/>
+                            <PanPlayer key={3} player={p[3]}/>
                         </View>
                     </View>
 
@@ -139,7 +140,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer player={p[6]}/>
+                            <PanPlayer   key={6} player={p[6]}/>
                         </View>
                         {/*2nd row : muck*/}
                         <View style={{
@@ -165,7 +166,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer player={p[2]}/>
+                            <PanPlayer key={2} player={p[2]}/>
                         </View>
 
 
@@ -193,7 +194,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer player={p[7]}/>
+                            <PanPlayer key={7} player={p[7]}/>
                         </View>
                         {/*3rd row : exposed hand*/}
                         <View style={{
@@ -219,7 +220,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer player={p[1]}/>
+                            <PanPlayer key={1} player={p[1]}/>
                         </View>
                     </View>
 
@@ -260,6 +261,7 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
+                            <MyPanPlayer  key={0} player={p[0]}/>
                         </View>
 
                     </View>

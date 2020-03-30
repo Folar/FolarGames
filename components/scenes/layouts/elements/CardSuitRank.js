@@ -10,19 +10,18 @@ import {
 import ButtonClickable from './ButtonClickable.js';
 
 //Layout
-class CardLabel extends React.Component {
+class CardSuitRank extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            zoom:3.8
+            select:1
 
         };
 
     }
 
-    zoom(){
-
+    zoom(e){
     }
     componentDidMount() {
 
@@ -33,7 +32,7 @@ class CardLabel extends React.Component {
     render() {
 
 
-        let parms = {rank:this.props.rank,suit:this.props.suit, sz: this.props.sz, rotation: this.props.rotation};
+        let parms = {rank:this.props.rank,suit:this.props.suit, sz: this.props.sz};
         let color = parms.suit == 'c' ||  parms.suit == 's' ? 'black' :'red';
         let suit = "";
         switch (parms.suit) {
@@ -50,7 +49,21 @@ class CardLabel extends React.Component {
                 suit = 'club.png'
                 break;
         }
+        switch (this.props.rank) {
+            case 1:
+                parms.rank = 'A';
+                break;
 
+            case 11:
+                parms.rank = 'J';
+                break;
+            case 12:
+                parms.rank = 'Q';
+                break;
+            case 13:
+                parms.rank = 'K';
+                break;
+        }
 
         return (
             <View
@@ -60,7 +73,6 @@ class CardLabel extends React.Component {
                     marginTop:.007,
                     width: parms.sz,
                     height: parms.sz *2  + .01
-
                 }}>
 
                 <View style={{
@@ -68,36 +80,31 @@ class CardLabel extends React.Component {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    backgroundColor:"white"
 
-                    backgroundColor:"white",
-                    transform: [
-
-                        {rotateZ:parms.rotation}]
                 }}>
 
                     <VrButton onClick={this.zoom.bind(this)}>
                         <View style={{
-
-                            backgroundColor:"white",
+                            opacity:this.state.select,
                             flexDirection: 'column',
                             alignItems: 'center',
-                            justifyContent: 'center',
-                            width: parms.sz,
-                            height: parms.sz *2  + .01
+                            justifyContent: 'center'
                         }}>
                             <Text
                                 style={{
+                                    width:this.props.sz,
                                     fontSize: parms.sz,
                                     textAlign: 'center',
                                     color: color,
                                     backgroundColor:"white"
                                 }}>
-                                {parms.rank}
+                                {parms.rank+" "}
                             </Text>
-                             <Image
+                            <Image
                                 style={{
-                                    width: parms.sz,
-                                    height: parms.sz
+                                    width: this.props.sz,
+                                    height: this.props.sz
 
                                 }}
                                 source={asset(suit)}
@@ -117,4 +124,4 @@ class CardLabel extends React.Component {
 }
 
 module
-    .exports = CardLabel;
+    .exports = CardSuitRank ;
