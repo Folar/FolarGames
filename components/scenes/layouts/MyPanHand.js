@@ -36,7 +36,7 @@ class MyPanHand extends React.Component {
         let g = null;
 
             g = this.props.hand.map((item, index) => {
-                return <PlayingCard  sz={.35} suit={item.suit} rank={item.rank} />
+                return <PlayingCard  sz={.35} suit={item.suit} rank={item.rank} canClick={true}/>
             });
 
 

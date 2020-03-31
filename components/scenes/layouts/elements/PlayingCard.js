@@ -22,6 +22,7 @@ class PlayingCard extends React.Component {
     }
 
     zoom(e){
+        if(!this.props.canClick) return;
         if(this.state.select == 1)
             this.setState({select:.5})
         else
@@ -55,7 +56,9 @@ class PlayingCard extends React.Component {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor:"gray"
+                    backgroundColor:"gray",
+                    width: .194 * this.props.sz,
+                    height: .264 * this.props.sz
 
                 }}>
 

@@ -88,6 +88,26 @@ class GamesLayout extends React.Component {
                         suit:'d',
                         rank:3,
                         ordinal:3
+                    },
+                    {
+                        suit:'d',
+                        rank:11,
+                        ordinal:8
+                    },
+                    {
+                        suit:'d',
+                        rank:3,
+                        ordinal:3
+                    },
+                    {
+                        suit:'d',
+                        rank:4,
+                        ordinal:4
+                    },
+                    {
+                        suit:'h',
+                        rank:3,
+                        ordinal:3
                     }
 
                 ],
@@ -112,28 +132,7 @@ class GamesLayout extends React.Component {
                         cards:
                             [
                                 [
-                                    {
-                                        suit:'d',
-                                        rank:1,
-                                        ordinal:1
-                                    },
-                                    {
-                                        suit:'d',
-                                        rank:2,
-                                        ordinal:2
-                                    },
-                                    {
-                                        suit:'d',
-                                        rank:3,
-                                        ordinal:3
-                                    }
-                                ],
-                                [
-                                    {
-                                        suit:'h',
-                                        rank:1,
-                                        ordinal:1
-                                    },
+
                                     {
                                         suit:'h',
                                         rank:1,
