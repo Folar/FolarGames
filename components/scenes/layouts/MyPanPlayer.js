@@ -7,7 +7,8 @@ import {
     VrButton
 } from 'react-vr';
 
-import PlayingCard from './elements/PlayingCard';
+import CardSuitRank from './elements/CardSuitRank.js';
+import PlayingCard from './elements/PlayingCard.js';
 
 //Layout
 class MyPanPlayer extends React.Component {
@@ -16,7 +17,6 @@ class MyPanPlayer extends React.Component {
         super(props);
         this.state = {
             zoom: 3.8
-
         };
 
     }
@@ -36,13 +36,13 @@ class MyPanPlayer extends React.Component {
         let g = null;
         for (let i in this.props.player.cards) {
             g = this.props.player.cards[i].map((item, index) => {
-
-                return <PlayingCard  sz={.35} suit={item.suit} rank={item.rank} />
+                return <PlayingCard  sz={.25} suit={item.suit} rank={item.rank} />
+                // return <CardSuitRank  sz={.025} suit={item.suit} rank={item.rank} rotation={0}/>
             });
             grps.push(g);
         }
         let cardGrps =
-            grps.map((item, index) => {
+            grps.slice(0,2).map((item, index) => {
 
                 return <View  style={{
                     marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
@@ -54,17 +54,30 @@ class MyPanPlayer extends React.Component {
 
             });
 
+        let cardGrps2 =
+            grps.slice(2).map((item, index) => {
 
+                return <View  style={{
+                    marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    {item}
+                </View>
+
+
+            });
+        let mw = .69;
         return (
+
             <View
                 style={{
                     opacity: 1,
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    width: 1.25,
+                    width: mw,
                     height: .22,
-                    backgroundColor: "blue"
+                    backgroundColor: this.props.bgColor
 
                 }}>
 
@@ -72,16 +85,16 @@ class MyPanPlayer extends React.Component {
 
 
                     <View style={{
-                        width: 1.25,
+                        width: mw,
                         height: .22,
-                        marginLeft: .01,
+                        marginLeft:.02,
                         flexDirection: 'column',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start'
                     }}>
 
                         <View style={{
-                            width: .5,
+                            width: mw,
                             height: .05,
                             marginLeft: .005,
                             flexDirection: 'row',
@@ -93,7 +106,7 @@ class MyPanPlayer extends React.Component {
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
-                                    color: "white",
+                                    color: this.props.color,
                                     marginRight: .02
                                 }}>
                                 {this.props.player.name}
@@ -103,7 +116,7 @@ class MyPanPlayer extends React.Component {
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
-                                    color: "white",
+                                    color: this.props.color,
                                     marginRight: .002
                                 }}>
                                 {"round:"}
@@ -113,7 +126,7 @@ class MyPanPlayer extends React.Component {
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
-                                    color: "white",
+                                    color: this.props.color,
                                     marginRight: .02
 
                                 }}>
@@ -124,7 +137,7 @@ class MyPanPlayer extends React.Component {
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
-                                    color: "white",
+                                    color: this.props.color,
                                     marginRight: .002
                                 }}>
                                 {"total:"}
@@ -134,7 +147,7 @@ class MyPanPlayer extends React.Component {
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
-                                    color: "white",
+                                    color: this.props.color,
                                     marginRight: 0
 
                                 }}>
@@ -142,15 +155,31 @@ class MyPanPlayer extends React.Component {
                             </Text>
                         </View>
                         <View style={{
-                            width: 1.2,
-                            height: .1,
+                            width: .45,
+                            height: .07,
                             marginLeft: .01,
-                            flexDirection: 'row',
+                            flexDirection: 'column',
                             alignItems: 'flex-start',
-                            justifyContent: 'flex-start',
-                            backgroundColor:"red"
+                            justifyContent: 'flex-start'
                         }}>
-                            {cardGrps}
+                            <View style={{
+                                width: .45,
+                                height: .07,
+                                flexDirection: 'row',
+                                alignItems: 'flex-start',
+                                justifyContent: 'flex-start'
+                            }}>
+                                {cardGrps}
+                            </View>
+                            <View style={{
+                                width: .45,
+                                height: .07,
+                                flexDirection: 'row',
+                                alignItems: 'flex-start',
+                                justifyContent: 'flex-start'
+                            }}>
+                                {cardGrps2}
+                            </View>
                         </View>
                     </View>
                 ) : (
@@ -159,7 +188,7 @@ class MyPanPlayer extends React.Component {
                         flexDirection: 'column',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
-                        width: .5,
+                        width: mw,
                         height: .22,
                         backgroundColor: "green"
                     }}>

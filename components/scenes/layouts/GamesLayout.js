@@ -72,7 +72,25 @@ class GamesLayout extends React.Component {
             panData:{
                 type:0,
                 kitty:18,
-                playerId:0,
+                playerId:1,
+                hand : [
+                    {
+                        suit:'d',
+                        rank:5,
+                        ordinal:5
+                    },
+                    {
+                        suit:'c',
+                        rank:7,
+                        ordinal:7
+                    },
+                    {
+                        suit:'d',
+                        rank:3,
+                        ordinal:3
+                    }
+
+                ],
                 players:[
                  {
                         name:"Elise",
@@ -86,7 +104,7 @@ class GamesLayout extends React.Component {
                             ]
                     },
                     {
-                        name:"Judy",
+                        name:"Wai",
                         playing:true,
                         roundTotal:12,
                         total:98,

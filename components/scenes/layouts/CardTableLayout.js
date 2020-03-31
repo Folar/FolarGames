@@ -9,6 +9,8 @@ import {
 
 import PanPlayer from './PanPlayer.js';
 import MyPanPlayer from './MyPanPlayer.js';
+import MyPanHand from './MyPanHand.js'
+
 //Layout
 class CardTableLayout extends React.Component {
 
@@ -34,21 +36,21 @@ class CardTableLayout extends React.Component {
 
         let h = .22;
         let pw = .5;
-        let jw =.54;
+        let jw = .54;
         let jh = 3;
         let mw = .69;
         let youw = 1.25;
 
-        let p =[];
+        let p = [];
         let pid = this.props.data.playerId;
-        let nplayers=  this.props.data.players.length;
-        for (let i =0;i<nplayers;i++){
+        let nplayers = this.props.data.players.length;
+        for (let i = 0; i < nplayers; i++) {
             p.push(this.props.data.players[pid]);
             pid++;
             if (pid == nplayers) pid = 0;
         }
-        for (let i = nplayers;i<8;i++){
-            p.push({playing:false});
+        for (let i = nplayers; i < 8; i++) {
+            p.push({playing: false});
         }
 
         return (
@@ -89,7 +91,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer key={5} player={p[5]}/>
+                            <PanPlayer bgColor={"green"} color={"black"} key={5} player={p[5]}/>
                         </View>
                         {/*top row : player center*/}
                         <View style={{
@@ -102,7 +104,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer  key={4} player={p[4]}/>
+                            <PanPlayer bgColor={"green"} color={"black"} key={4} player={p[4]}/>
                         </View>
                         {/*top row : player right*/}
                         <View style={{
@@ -115,7 +117,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer key={3} player={p[3]}/>
+                            <PanPlayer bgColor={"green"} color={"black"} key={3} player={p[3]}/>
                         </View>
                     </View>
 
@@ -140,7 +142,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer   key={6} player={p[6]}/>
+                            <PanPlayer bgColor={"green"} color={"black"} key={6} player={p[6]}/>
                         </View>
                         {/*2nd row : muck*/}
                         <View style={{
@@ -166,7 +168,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer key={2} player={p[2]}/>
+                            <PanPlayer bgColor={"green"} color={"black"} key={2} player={p[2]}/>
                         </View>
 
 
@@ -194,7 +196,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer key={7} player={p[7]}/>
+                            <PanPlayer bgColor={"green"} color={"black"} key={7} player={p[7]}/>
                         </View>
                         {/*3rd row : exposed hand*/}
                         <View style={{
@@ -208,6 +210,7 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
+                            <MyPanPlayer bgColor={"green"} color={"black"} key={8} player={p[0]}/>
                         </View>
                         {/*3rd row : player right*/}
                         <View style={{
@@ -220,7 +223,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer key={1} player={p[1]}/>
+                            <PanPlayer bgColor={"green"} color={"black"}  key={1} player={p[1]}/>
                         </View>
                     </View>
 
@@ -261,7 +264,7 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
-                            <MyPanPlayer  key={0} player={p[0]}/>
+                            <MyPanHand bgColor={"#eba117"} color={"black"} key={10} hand={this.props.data.hand}/>
                         </View>
 
                     </View>

@@ -76,7 +76,7 @@ class PanPlayer extends React.Component {
                     justifyContent: 'flex-start',
                     width: .5,
                     height: .22,
-                    backgroundColor: "blue"
+                    backgroundColor: this.props.bgColor
 
                 }}>
 
@@ -105,7 +105,7 @@ class PanPlayer extends React.Component {
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
-                                    color: "white",
+                                    color: this.props.color,
                                     marginRight: .02
                                 }}>
                                 {this.props.player.name}
@@ -115,7 +115,7 @@ class PanPlayer extends React.Component {
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
-                                    color: "white",
+                                    color: this.props.color,
                                     marginRight: .002
                                 }}>
                                 {"round:"}
@@ -125,7 +125,7 @@ class PanPlayer extends React.Component {
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
-                                    color: "white",
+                                    color: this.props.color,
                                     marginRight: .02
 
                                 }}>
@@ -136,7 +136,7 @@ class PanPlayer extends React.Component {
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
-                                    color: "white",
+                                    color: this.props.color,
                                     marginRight: .002
                                 }}>
                                 {"total:"}
@@ -146,7 +146,7 @@ class PanPlayer extends React.Component {
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
-                                    color: "white",
+                                    color: this.props.color,
                                     marginRight: 0
 
                                 }}>
