@@ -7,7 +7,7 @@ import {
     VrButton
 } from 'react-vr';
 
-import ButtonClickable from './ButtonClickable.js';
+
 
 //Layout
 class PlayingCard extends React.Component {
@@ -15,18 +15,18 @@ class PlayingCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            select:1
-
+            select: this.props.select ? .5:1
         };
 
     }
 
     zoom(e){
         if(!this.props.canClick) return;
-        if(this.state.select == 1)
-            this.setState({select:.5})
-        else
-            this.setState({select:1})
+        // if(this.state.select == 1)
+        //     this.setState({select:.5})
+        // else
+        //     this.setState({select:1})
+        this.props.selector(this.props.index);
     }
     componentDidMount() {
 
@@ -64,7 +64,7 @@ class PlayingCard extends React.Component {
 
                     <VrButton onClick={this.zoom.bind(this)}>
                         <View style={{
-                            opacity:this.state.select,
+                            opacity:this.props.select?.5:1,
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center'

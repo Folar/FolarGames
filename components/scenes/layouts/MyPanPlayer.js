@@ -39,7 +39,7 @@ class MyPanPlayer extends React.Component {
         let g = null;
         for (let i in this.props.player.cards) {
             g = this.props.player.cards[i].map((item, index) => {
-                return <PlayingCard  sz={.25} suit={item.suit} rank={item.rank} canClick={this.canClick()}/>
+                return <PlayingCard group={i} index={index} sz={.25} suit={item.suit} rank={item.rank} canClick={this.canClick()}/>
             });
             grps.push(g);
         }
