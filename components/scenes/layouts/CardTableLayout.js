@@ -17,8 +17,8 @@ class CardTableLayout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            zoom: 3.8
-
+            zoom: 3.8,
+            data: this.props.data
         };
 
     }
@@ -31,6 +31,11 @@ class CardTableLayout extends React.Component {
 
     }
 
+    setMyHand(hand){
+        debugger;
+        this.state.data.hand = hand;
+        this.setState({data:this.state.data})
+    }
 
     render() {
 
@@ -264,7 +269,8 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
-                            <MyPanHand bgColor={"#eba117"} color={"black"} key={10} hand={this.props.data.hand}/>
+                            <MyPanHand bgColor={"#eba117"} color={"black"} key={10}
+                                       setHand={this.setMyHand.bind(this)}  hand={this.state.data.hand}/>
                         </View>
 
                     </View>

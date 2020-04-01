@@ -74,41 +74,69 @@ class GamesLayout extends React.Component {
                 kitty:18,
                 playerId:1,
                 hand : [
+                  {
+                       suit:'h',
+                       rank:1,
+                       ordinal:1,
+                       rankOrdinal:1
+                    },
                     {
                         suit:'d',
                         rank:5,
-                        ordinal:5
+                        ordinal:22,
+                        rankOrdinal:5
                     },
                     {
                         suit:'c',
                         rank:7,
-                        ordinal:7
+                        ordinal:27,
+                        rankOrdinal:7
                     },
                     {
                         suit:'d',
                         rank:3,
-                        ordinal:3
+                        ordinal:10,
+                        rankOrdinal:3
                     },
                     {
                         suit:'d',
                         rank:11,
-                        ordinal:8
+                        ordinal:30,
+                        rankOrdinal:8
                     },
                     {
                         suit:'d',
                         rank:3,
-                        ordinal:3
+                        ordinal:10,
+                        rankOrdinal:3
                     },
                     {
                         suit:'d',
                         rank:4,
-                        ordinal:4
+                        ordinal:14,
+                        rankOrdinal:4
                     },
                     {
                         suit:'h',
                         rank:3,
-                        ordinal:3
+                        ordinal:9,
+                        rankOrdinal:3
+                    },
+
+                    {
+                       suit:'h',
+                       rank:1,
+                       ordinal:1,
+                       rankOrdinal:1,
+
+                    },
+                    {
+                       suit:'h',
+                       rank:1,
+                       ordinal:1,
+                       rankOrdinal:1
                     }
+
 
                 ],
                 players:[
@@ -131,24 +159,7 @@ class GamesLayout extends React.Component {
                         current:205,
                         cards:
                             [
-                                [
 
-                                    {
-                                        suit:'h',
-                                        rank:1,
-                                        ordinal:1
-                                    },
-                                    {
-                                        suit:'h',
-                                        rank:1,
-                                        ordinal:1
-                                    },
-                                    {
-                                        suit:'h',
-                                        rank:1,
-                                        ordinal:1
-                                    }
-                                ]
                             ]
                     },
                     {
