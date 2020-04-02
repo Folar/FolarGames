@@ -8,7 +8,7 @@ import {
 } from 'react-vr';
 
 import PanPlayer from './PanPlayer.js';
-import MyPanPlayer from './MyPanPlayer.js';
+import PanMuck from './PanMuck.js';
 import MyPanHand from './MyPanHand.js'
 
 //Layout
@@ -40,10 +40,10 @@ class CardTableLayout extends React.Component {
 
         let h = .22;
         let pw = .6;
-        let jw = .54;
+        let jw = .65;
         let jh = 3;
         let mw = .65;
-        let youw = 1.25;
+        let youw = 1.29;
         let tw = this.props.w;
         let p = [];
         let pid = this.props.data.playerId;
@@ -163,7 +163,7 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
-                            {/*<MyPanPlayer  h={h} w={mw} bgColor={"green"} color={"black"} key={8} player={p[0]}/>*/}
+                            <PanMuck  h={h} w={mw} bgColor={"green"} color={"black"} key={86} />
                         </View>
                         {/* row 2: player 2*/}
                         <View style={{
@@ -251,7 +251,7 @@ class CardTableLayout extends React.Component {
                             marginTop: 0,
                             marginRight: 0,
                             marginLeft: .025,
-                            width: pw,
+                            width:  jw,
                             height: jh,
                             backgroundColor: "black"
                         }}>
@@ -269,7 +269,7 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
-                            <MyPanHand bgColor={"#eba117"} color={"black"} key={10}
+                            <MyPanHand bgColor={"#eba117"} color={"black"} key={10} w={youw} h={h}
                                        setHand={this.setMyHand.bind(this)}  hand={this.state.data.hand}/>
                         </View>
 

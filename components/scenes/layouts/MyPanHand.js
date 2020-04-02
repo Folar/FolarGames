@@ -84,7 +84,7 @@ class MyPanHand extends React.Component {
         });
 
 
-        let mw = 1.25;
+        let mw = this.props.w;
         let mv = false;
         let dieDim = {height: .07, width: .2, valueFont: .1, dieFont: .05, marginRight: .02};
         return (
@@ -103,7 +103,9 @@ class MyPanHand extends React.Component {
                 <View style={{
                     width: .45,
                     height: .07,
-                    margin: .02,
+                    marginTop: .02,
+                    marginLeft: .03,
+                    marginBottom:.02,
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start'
