@@ -32,7 +32,6 @@ class CardTableLayout extends React.Component {
     }
 
     setMyHand(hand){
-        debugger;
         this.state.data.hand = hand;
         this.setState({data:this.state.data})
     }
@@ -40,12 +39,12 @@ class CardTableLayout extends React.Component {
     render() {
 
         let h = .22;
-        let pw = .5;
+        let pw = .6;
         let jw = .54;
         let jh = 3;
-        let mw = .69;
+        let mw = .65;
         let youw = 1.25;
-
+        let tw = this.props.w;
         let p = [];
         let pid = this.props.data.playerId;
         let nplayers = this.props.data.players.length;
@@ -68,76 +67,25 @@ class CardTableLayout extends React.Component {
                 <View style={{
 
                     flexDirection: 'column',
-                    width: 2,
+                    width: tw,
                     height: 1,
                     borderRadius: 0.1,
                     backgroundColor: "green"
                 }}>
 
-                    {/*top row*/}
+
+                    {/* row 1*/}
                     <View style={{
 
-                        backgroundColor: "green",
+                        flexDirection: 'row',
                         marginTop: .04,
-                        marginLeft: 0.045,
-                        marginRight: .03,
-                        width: 1.9,
-                        height: h,
-                        flexDirection: 'row',
-                    }}>
-                        {/*top row : player left*/}
-                        <View style={{
-
-                            flexDirection: 'column',
-                            alignItems: 'flex-start',
-                            justifyContent: 'flex-start',
-                            marginTop: 0,
-                            marginLeft: .14,
-                            width: pw,
-                            height: h
-                        }}>
-                            <PanPlayer bgColor={"green"} color={"black"} key={5} player={p[5]}/>
-                        </View>
-                        {/*top row : player center*/}
-                        <View style={{
-
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            marginTop: 0,
-                            marginLeft: .06,
-                            width: pw,
-                            height: h
-                        }}>
-                            <PanPlayer bgColor={"green"} color={"black"} key={4} player={p[4]}/>
-                        </View>
-                        {/*top row : player right*/}
-                        <View style={{
-
-                            flexDirection: 'column',
-                            alignItems: 'flex_end',
-                            justifyContent: 'flex-end',
-                            marginTop: 0,
-                            marginLeft: .06,
-                            width: pw,
-                            height: h
-                        }}>
-                            <PanPlayer bgColor={"green"} color={"black"} key={3} player={p[3]}/>
-                        </View>
-                    </View>
-
-                    {/*2nd row*/}
-                    <View style={{
-
-                        flexDirection: 'row',
-                        marginTop: .01,
                         marginRight: .045,
-                        marginLeft: .045,
-                        width: 1.9,
+                        marginLeft: .025,
+                        width: tw-.1,
                         height: h,
                         backgroundColor: "green"
                     }}>
-                        {/*2nd row : player left*/}
+                        {/* row 1: player 3*/}
                         <View style={{
 
                             flexDirection: 'column',
@@ -147,9 +95,9 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer bgColor={"green"} color={"black"} key={6} player={p[6]}/>
+                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={7} player={p[5]}/>
                         </View>
-                        {/*2nd row : muck*/}
+                        {/* row 1: player 4*/}
                         <View style={{
 
                             flexDirection: 'column',
@@ -161,8 +109,9 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
+                            <PanPlayer  h={h} w={mw} bgColor={"green"} color={"black"} key={8} player={p[4]}/>
                         </View>
-                        {/*2nd row : player right*/}
+                        {/* row 1: player 3*/}
                         <View style={{
 
                             flexDirection: 'column',
@@ -173,25 +122,24 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer bgColor={"green"} color={"black"} key={2} player={p[2]}/>
+                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={44} player={p[3]}/>
                         </View>
-
-
                     </View>
 
 
-                    {/*third row*/}
+
+                    {/* row 2*/}
                     <View style={{
 
                         flexDirection: 'row',
                         marginTop: .01,
                         marginRight: .045,
-                        marginLeft: .045,
-                        width: 1.9,
+                        marginLeft: .025,
+                        width: tw-.1,
                         height: h,
                         backgroundColor: "green"
                     }}>
-                        {/*3rd row : player left*/}
+                        {/* row 2: player 6*/}
                         <View style={{
 
                             flexDirection: 'column',
@@ -201,7 +149,59 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer bgColor={"green"} color={"black"} key={7} player={p[7]}/>
+                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={7} player={p[6]}/>
+                        </View>
+                        {/* row 2: muck*/}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginTop: 0,
+                            marginLeft: .06,
+                            width: mw,
+                            height: h,
+                            backgroundColor: "black"
+                        }}>
+                            {/*<MyPanPlayer  h={h} w={mw} bgColor={"green"} color={"black"} key={8} player={p[0]}/>*/}
+                        </View>
+                        {/* row 2: player 2*/}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            alignItems: 'flex_end',
+                            justifyContent: 'flex-end',
+                            marginTop: 0,
+                            marginLeft: .06,
+                            width: pw,
+                            height: h
+                        }}>
+                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={144} player={p[2]}/>
+                        </View>
+                    </View>
+
+                    {/*third row*/}
+                    <View style={{
+
+                        flexDirection: 'row',
+                        marginTop: .01,
+                        marginRight: .045,
+                        marginLeft: .025,
+                        width: tw-.1,
+                        height: h,
+                        backgroundColor: "green"
+                    }}>
+                        {/*3rd row : player 7*/}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            marginTop: 0,
+                            marginRight: 0,
+                            marginLeft: .045,
+                            width: pw,
+                            height: h
+                        }}>
+                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={7} player={p[7]}/>
                         </View>
                         {/*3rd row : exposed hand*/}
                         <View style={{
@@ -215,9 +215,9 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
-                            <MyPanPlayer bgColor={"green"} color={"black"} key={8} player={p[0]}/>
+                            <MyPanPlayer  h={h} w={mw} bgColor={"green"} color={"black"} key={8} player={p[0]}/>
                         </View>
-                        {/*3rd row : player right*/}
+                        {/*3rd row : player 1*/}
                         <View style={{
 
                             flexDirection: 'column',
@@ -228,7 +228,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer bgColor={"green"} color={"black"}  key={1} player={p[1]}/>
+                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={44} player={p[1]}/>
                         </View>
                     </View>
 
@@ -240,7 +240,7 @@ class CardTableLayout extends React.Component {
                         marginTop: .01,
                         marginRight: .045,
                         marginLeft: .045,
-                        width: 1.9,
+                        width: tw-.1,
                         height: h,
                         backgroundColor: "green"
                     }}>
@@ -250,8 +250,8 @@ class CardTableLayout extends React.Component {
                             flexDirection: 'column',
                             marginTop: 0,
                             marginRight: 0,
-                            marginLeft: .045,
-                            width: jw,
+                            marginLeft: .025,
+                            width: pw,
                             height: jh,
                             backgroundColor: "black"
                         }}>

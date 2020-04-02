@@ -43,7 +43,7 @@ class PanPlayer extends React.Component {
             grps.push(g);
         }
         let cardGrps =
-            grps.slice(0,2).map((item, index) => {
+            grps.slice(0,3).map((item, index) => {
 
                 return <View  style={{
                     marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
@@ -56,7 +56,7 @@ class PanPlayer extends React.Component {
             });
 
         let cardGrps2 =
-            grps.slice(2).map((item, index) => {
+            grps.slice(3).map((item, index) => {
 
                 return <View  style={{
                     marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
@@ -74,8 +74,8 @@ class PanPlayer extends React.Component {
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    width: .5,
-                    height: .22,
+                    width: this.props.w,
+                    height: this.props.h,
                     backgroundColor: this.props.bgColor
 
                 }}>
@@ -84,8 +84,8 @@ class PanPlayer extends React.Component {
 
 
                     <View style={{
-                        width: .5,
-                        height: .22,
+                        width: this.props.w,
+                        height: this.props.h,
                         marginLeft: .01,
                         flexDirection: 'column',
                         alignItems: 'flex-start',
@@ -93,20 +93,23 @@ class PanPlayer extends React.Component {
                     }}>
 
                         <View style={{
-                            width: .5,
-                            height: .05,
+                            width: this.props.w -.04,
+                            height: .07,
                             marginLeft: .005,
                             flexDirection: 'row',
                             alignItems: 'flex-start',
                             justifyContent: 'flex-start',
-                            marginBottom:.01
+                            marginBottom:.01,
+                            backgroundColor: this.props.bgColor
+
                         }}>
                             <Text
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
                                     color: this.props.color,
-                                    marginRight: .02
+                                    marginRight: .02,
+                                    marginLeft: .02
                                 }}>
                                 {this.props.player.name}
                             </Text>
@@ -156,7 +159,7 @@ class PanPlayer extends React.Component {
                         <View style={{
                             width: .45,
                             height: .07,
-                            marginLeft: .01,
+                            marginLeft: .02,
                             flexDirection: 'column',
                             alignItems: 'flex-start',
                             justifyContent: 'flex-start'
@@ -187,8 +190,8 @@ class PanPlayer extends React.Component {
                         flexDirection: 'column',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
-                        width: .5,
-                        height: .22,
+                        width: this.props.w,
+                        height: this.props.h,
                         backgroundColor: "green"
                     }}>
                     </View>)}

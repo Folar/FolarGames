@@ -37,7 +37,8 @@ debugger;
 
 
 
-
+        let w = 2.1;
+        let h = 1.2;
         return (
             <View
                 style={{
@@ -47,8 +48,8 @@ debugger;
                 }}>
 
                 <View style={{
-                    width:2,
-                    height:.8,
+                    width:2.1,
+                    height:.9,
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -60,7 +61,7 @@ debugger;
                         {translateZ: -1}]
                 }}>
 
-                    <CardTableLayout data={this.props.data}/>
+                    <CardTableLayout h={h} w={w} data={this.props.data}/>
                 </View>
 
 

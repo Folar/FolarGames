@@ -68,7 +68,7 @@ class MyPanPlayer extends React.Component {
 
 
             });
-        let mw = .69;
+
         return (
 
             <View
@@ -77,8 +77,8 @@ class MyPanPlayer extends React.Component {
                     flexDirection: 'column',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
-                    width: mw,
-                    height: .22,
+                    width: this.props.w,
+                    height: this.props.h,
                     backgroundColor: this.props.bgColor
 
                 }}>
@@ -87,8 +87,8 @@ class MyPanPlayer extends React.Component {
 
 
                     <View style={{
-                        width: mw,
-                        height: .22,
+                        width: this.props.w,
+                        height: this.props.h,
                         marginLeft:.02,
                         flexDirection: 'column',
                         alignItems: 'flex-start',
@@ -96,20 +96,22 @@ class MyPanPlayer extends React.Component {
                     }}>
 
                         <View style={{
-                            width: mw,
-                            height: .05,
+                            width: this.props.w -.04,
+                            height: .07,
                             marginLeft: .005,
                             flexDirection: 'row',
                             alignItems: 'flex-start',
                             justifyContent: 'flex-start',
-                            marginBottom:.01
+                            marginBottom:.01,
+                            backgroundColor: this.props.bgColor
                         }}>
                             <Text
                                 style={{
                                     fontSize: .04,
                                     textAlign: 'center',
                                     color: this.props.color,
-                                    marginRight: .02
+                                    marginRight: .02,
+                                    marginLeft:.02
                                 }}>
                                 {this.props.player.name}
                             </Text>
@@ -190,8 +192,8 @@ class MyPanPlayer extends React.Component {
                         flexDirection: 'column',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
-                        width: mw,
-                        height: .22,
+                        width: this.props.w,
+                        height: this.props.h,
                         backgroundColor: "green"
                     }}>
                     </View>)}
