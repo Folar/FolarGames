@@ -159,6 +159,23 @@ class GamesLayout extends React.Component {
                         current:205,
                         cards:
                             [
+                                [
+                                     {
+                                         suit:'s',
+                                         rank:11,
+                                         ordinal:11
+                                     },
+                                     {
+                                         suit:'s',
+                                         rank:12,
+                                         ordinal:12
+                                     },
+                                     {
+                                         suit:'s',
+                                         rank:13,
+                                         ordinal:13
+                                     }
+                                 ]
 
                             ]
                     },

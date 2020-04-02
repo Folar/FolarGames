@@ -95,7 +95,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={7} player={p[5]}/>
+                            <PanPlayer  h={h} w={pw} ctrlType={0} bgColor={"green"} color={"black"} key={7} player={p[5]}/>
                         </View>
                         {/* row 1: player 4*/}
                         <View style={{
@@ -109,7 +109,7 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
-                            <PanPlayer  h={h} w={mw} bgColor={"green"} color={"black"} key={8} player={p[4]}/>
+                            <PanPlayer  h={h} w={mw} ctrlType={0} bgColor={"green"} color={"black"} key={8} player={p[4]}/>
                         </View>
                         {/* row 1: player 3*/}
                         <View style={{
@@ -122,7 +122,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={44} player={p[3]}/>
+                            <PanPlayer  h={h} w={pw} ctrlType={0} bgColor={"green"} color={"black"} key={44} player={p[3]}/>
                         </View>
                     </View>
 
@@ -149,7 +149,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={7} player={p[6]}/>
+                            <PanPlayer  h={h} w={pw} ctrlType={0} bgColor={"green"} color={"black"} key={7} player={p[6]}/>
                         </View>
                         {/* row 2: muck*/}
                         <View style={{
@@ -176,7 +176,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={144} player={p[2]}/>
+                            <PanPlayer  h={h} w={pw} ctrlType={0} bgColor={"green"} color={"black"} key={144} player={p[2]}/>
                         </View>
                     </View>
 
@@ -201,7 +201,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={7} player={p[7]}/>
+                            <PanPlayer  h={h} w={pw}  ctrlType={0} bgColor={"green"} color={"black"} key={7} player={p[7]}/>
                         </View>
                         {/*3rd row : exposed hand*/}
                         <View style={{
@@ -215,7 +215,7 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
-                            <MyPanPlayer  h={h} w={mw} bgColor={"green"} color={"black"} key={8} player={p[0]}/>
+                            <PanPlayer  h={h} w={mw} ctrlType={1} bgColor={"green"} color={"black"} key={8} player={p[0]}/>
                         </View>
                         {/*3rd row : player 1*/}
                         <View style={{
@@ -228,7 +228,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer  h={h} w={pw} bgColor={"green"} color={"black"} key={44} player={p[1]}/>
+                            <PanPlayer  h={h} w={pw}  ctrlType={2} bgColor={"green"} color={"black"} key={44} player={p[1]}/>
                         </View>
                     </View>
 
