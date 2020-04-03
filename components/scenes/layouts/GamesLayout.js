@@ -71,8 +71,18 @@ class GamesLayout extends React.Component {
             diverData: {},
             panData:{
                 type:0,
-                kitty:18,
                 playerId:1,
+                currentPlayer:2,
+                state:0,
+                otherState:2,
+                kitty:18,
+                passCard: {
+                               suit:'c',
+                               rank:2,
+                               ordinal:11,
+                               rankOrdinal:2
+                           },
+
                 hand : [
                   {
                        suit:'h',
@@ -142,6 +152,7 @@ class GamesLayout extends React.Component {
                 players:[
                  {
                         name:"Elise",
+                        playerId:0,
                         playing:true,
                         roundTotal:12,
                         total:98,
@@ -153,6 +164,7 @@ class GamesLayout extends React.Component {
                     },
                     {
                         name:"Wai",
+                        playerId:1,
                         playing:true,
                         roundTotal:12,
                         total:98,
@@ -181,6 +193,7 @@ class GamesLayout extends React.Component {
                     },
                     {
                         name:"Belinda",
+                        playerId:2,
                         playing:true,
                         roundTotal:2,
                         total:98,
@@ -230,6 +243,7 @@ class GamesLayout extends React.Component {
                     },
                     {
                         name:"Larry",
+                        playerId:3,
                         playing:true,
                         roundTotal:12,
                         total:98,
@@ -314,6 +328,7 @@ class GamesLayout extends React.Component {
                     },
                     {
                         name:"Lucia",
+                        playerId:4,
                         playing:true,
                         roundTotal:22,
                         total:108,
@@ -335,6 +350,13 @@ class GamesLayout extends React.Component {
                                         suit:'c',
                                         rank:13,
                                         ordinal:10
+                                    }
+                                ],
+                                [
+                                    {
+                                        suit:'',
+                                        rank:'',
+                                        ordinal:8
                                     }
                                 ]
                             ]

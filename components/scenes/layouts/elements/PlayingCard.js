@@ -41,8 +41,31 @@ class PlayingCard extends React.Component {
 
 
 
-        let suit ="5h.jpg";
-        suit =this.props.rank + this.props.suit+".jpg";
+        let face ;
+        if( this.props.suit.length == 0){
+            face = <View style={{
+
+                flexDirection: 'column',
+                backgroundColor:"brown",
+                width: .194 * this.props.sz,
+                height: .264 * this.props.sz
+
+            }}/>
+
+        } else {
+            let suit = "";
+
+            suit = this.props.rank + this.props.suit + ".jpg";
+            face = <Image
+                style={{
+                    width: .194 * this.props.sz,
+                    height: .264 * this.props.sz
+
+                }}
+                source={asset(suit)}
+            >
+            </Image>
+        }
         return (
             <View
                 style={{
@@ -69,16 +92,7 @@ class PlayingCard extends React.Component {
                             alignItems: 'center',
                             justifyContent: 'center'
                         }}>
-
-                            <Image
-                                style={{
-                                    width: .194 * this.props.sz,
-                                    height: .264 * this.props.sz
-
-                                }}
-                                source={asset(suit)}
-                            >
-                            </Image>
+                            {face}
                         </View>
                     </VrButton>
                 </View>

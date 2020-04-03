@@ -147,7 +147,7 @@ class PanMuck extends React.Component {
                                 color:"black",
                                 backgroundColor:"white"
                             }}>
-                            {"96"}
+                            {this.props.data.kitty}
                         </Text>
 
                     </View>

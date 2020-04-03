@@ -29,31 +29,7 @@ class PanPlayer extends React.Component {
     componentDidMount() {
 
     }
-
-
-    render() {
-
-        let grps = [];
-        let g = null;
-        for (let i in this.props.player.cards) {
-            g = this.props.player.cards[i].map((item, index) => {
-                return <PlayingCard group={i} index={index} sz={.25} suit={item.suit} rank={item.rank}/>
-                // return <CardSuitRank  sz={.025} suit={item.suit} rank={item.rank} rotation={0}/>
-            });
-            grps.push(g);
-        }
-        let cardGrps =
-            grps.slice(0, 3).map((item, index) => {
-
-                return <View style={{
-                    marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    {item}
-                </View>
-
-
-            });
+    getTab(){
 
         let pick = <View
             style={{
@@ -74,7 +50,8 @@ class PanPlayer extends React.Component {
                     height: .264 * .25
                 }}>
 
-                <PlayingCard index={133} sz={.25} suit={'s'} rank={6}/>
+                <PlayingCard index={133} sz={.25}
+                             suit={this.props.data.passCard.suit} rank={this.props.data.passCard.rank}/>
             </View>
 
             <VrButton onClick={this.click.bind(this)} key={0}>
@@ -103,17 +80,18 @@ class PanPlayer extends React.Component {
                 height: .264 * .25
             }}>
 
-                <View
-                    style={{
-                        opacity: 1,
-                        marginLeft: 0,
+            <View
+                style={{
+                    opacity: 1,
+                    marginLeft: 0,
 
-                        width: .194 * .25,
-                        height: .264 * .25
-                    }}>
+                    width: .194 * .25,
+                    height: .264 * .25
+                }}>
 
-                    <PlayingCard index={133} sz={.25} suit={'s'} rank={6}/>
-                </View>
+                <PlayingCard index={133} sz={.25}
+                             suit={this.props.data.passCard.suit} rank={this.props.data.passCard.rank}/>
+            </View>
 
         </View>
         let eView = <View
@@ -126,14 +104,45 @@ class PanPlayer extends React.Component {
 
         </View>
         let tab = eView;
-        switch (this.props.ctrlType) {
-            case 1:
-                tab = pick;
-                break;
 
-            case 2:
-                tab = pass;
+        let ctrlType = 0;
+        let data = this.props.data;
+        if (data.currentPlayer == data.playerId && data.state == 2 &&
+            data.playerId == this.props.player.playerId){
+            tab = pick;
+        } else if (data.currentPlayer != data.playerId && data.otherState == 2 &&
+                   data.currentPlayer == this.props.player.playerId ){
+            tab = pass;
         }
+
+        return tab;
+    }
+
+
+    render() {
+
+        let grps = [];
+        let g = null;
+        for (let i in this.props.player.cards) {
+            g = this.props.player.cards[i].map((item, index) => {
+                return <PlayingCard group={i} index={index} sz={.25} suit={item.suit} rank={item.rank}/>
+                // return <CardSuitRank  sz={.025} suit={item.suit} rank={item.rank} rotation={0}/>
+            });
+            grps.push(g);
+        }
+        let cardGrps =
+            grps.slice(0, 3).map((item, index) => {
+
+                return <View style={{
+                    marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    {item}
+                </View>
+
+
+            });
+
 
 
         let cardGrps2 =
@@ -148,6 +157,8 @@ class PanPlayer extends React.Component {
 
 
             });
+
+        let tab = this.getTab();
         return (
             <View
                 style={{
