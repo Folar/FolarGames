@@ -68,7 +68,7 @@ class PanMuck extends React.Component {
                          marginLeft:.02
 
                         }}>
-                            <PlayingCard index={133} sz={.52} suit={'s'} rank={6}/>
+                            <PlayingCard index={133} sz={.52} suit={'card_back'} rank={""}/>
                         </View>
                         <View style={{
                             alignItems: 'flex-start',

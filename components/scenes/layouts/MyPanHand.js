@@ -122,6 +122,7 @@ class MyPanHand extends React.Component {
                 }}>
                     <View style={{
                         width: .45,
+                        opacity: this.state.displayMove,
                         height: .07,
                         marginLeft: .1,
                         flexDirection: 'row',

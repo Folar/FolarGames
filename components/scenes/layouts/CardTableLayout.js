@@ -260,7 +260,7 @@ class CardTableLayout extends React.Component {
                             marginLeft: .025,
                             width:  jw,
                             height: jh,
-                            backgroundColor: "#6b8e23"
+                            backgroundColor: "green"
                         }}>
                         </View>
 
