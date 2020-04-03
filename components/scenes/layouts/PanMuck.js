@@ -52,7 +52,7 @@ class PanMuck extends React.Component {
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'flex-start',
-                    backgroundColor: "green",
+                    backgroundColor: "#6b8e23",
 
                 }}>
                     <View style={{
@@ -65,7 +65,7 @@ class PanMuck extends React.Component {
                     }}>
 
                         <View style={{
-                         marginLeft:0
+                         marginLeft:.02
 
                         }}>
                             <PlayingCard index={133} sz={.52} suit={'s'} rank={6}/>
@@ -99,7 +99,7 @@ class PanMuck extends React.Component {
                                             marginLeft: .015,
                                             color:"black"
                                         }}>
-                                        {"Pass"}
+                                        {"Pickup"}
                                     </Text>
                                 </VrButton>
                             </View>
@@ -124,7 +124,7 @@ class PanMuck extends React.Component {
                                             marginLeft: .015,
                                             color:"black"
                                         }}>
-                                        {"Pickup"}
+                                        {"Pass"}
                                     </Text>
                                 </VrButton>
                             </View>
@@ -132,15 +132,23 @@ class PanMuck extends React.Component {
                         </View>
                     </View>
                     <View style={{
-                        width: this.props.w/2,
+                        width: this.props.w/4,
                         height: this.props.h,
                         flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: "orange",
+                        justifyContent: 'center'
 
                     }}>
-
+                        <Text
+                            style={{
+                                fontSize: .08,
+                                textAlign: 'left',
+                                margin: .025,
+                                color:"black",
+                                backgroundColor:"white"
+                            }}>
+                            {"96"}
+                        </Text>
 
                     </View>
 
