@@ -159,6 +159,31 @@ class GamesLayout extends React.Component {
                         current:20,
                         cards:
                             [
+ {
+                                     money:1,
+                                     cards:[
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            }
+                                        ]
+                                }
 
                             ]
                     },
@@ -171,23 +196,6 @@ class GamesLayout extends React.Component {
                         current:205,
                         cards:
                             [
-                                [
-                                     {
-                                         suit:'s',
-                                         rank:11,
-                                         ordinal:11
-                                     },
-                                     {
-                                         suit:'s',
-                                         rank:12,
-                                         ordinal:12
-                                     },
-                                     {
-                                         suit:'s',
-                                         rank:13,
-                                         ordinal:13
-                                     }
-                                 ]
 
                             ]
                     },
@@ -200,45 +208,52 @@ class GamesLayout extends React.Component {
                         current:30,
                         cards:
                             [
-                                [
-                                    {
-                                        suit:'c',
-                                        rank:1,
-                                        ordinal:1
-                                    },
-                                    {
-                                        suit:'c',
-                                        rank:2,
-                                        ordinal:2
-                                    },
-                                    {
-                                        suit:'c',
-                                        rank:4,
-                                        ordinal:3
-                                    }
-                                ],
-                                [
-                                    {
-                                        suit:'h',
-                                        rank:1,
-                                        ordinal:1
-                                    },
-                                    {
-                                        suit:'h',
-                                        rank:1,
-                                        ordinal:1
-                                    },
-                                    {
-                                        suit:'h',
-                                        rank:1,
-                                        ordinal:1
-                                    },
-                                    {
-                                        suit:'h',
-                                        rank:1,
-                                        ordinal:1
-                                    }
-                                ]
+                                {
+                                        money:1,
+                                        cards:[
+                                            {
+                                                suit:'c',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'c',
+                                                rank:2,
+                                                ordinal:2
+                                            },
+                                            {
+                                                suit:'c',
+                                                rank:4,
+                                                ordinal:3
+                                            }
+                                        ]
+                                }
+                               ,
+                                {
+                                     money:1,
+                                     cards:[
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            }
+                                        ]
+                                }
                             ]
                     },
                     {
@@ -250,81 +265,75 @@ class GamesLayout extends React.Component {
                         current:20,
                         cards:
                             [
-                                [
-                                    {
-                                        suit:'c',
-                                        rank:5,
-                                        ordinal:5
-                                    },
-                                    {
-                                        suit:'c',
-                                        rank:5,
-                                        ordinal:5
-                                    },
-                                    {
-                                        suit:'c',
-                                        rank:5,
-                                        ordinal:5
-                                    },
-                                    {
-                                        suit:'c',
-                                        rank:5,
-                                        ordinal:5
-                                    }
+                                {
+                                    money:1,
+                                    cards: [
+                                         {
+                                             suit:'s',
+                                             rank:7,
+                                             ordinal:7
+                                         },
+                                         {
+                                             suit:'s',
+                                             rank:7,
+                                             ordinal:7
+                                         },
+                                         {
+                                             suit:'s',
+                                             rank:7,
+                                             ordinal:7
+                                         }
+                                    ]
+                                },
+                                {
+                                        money:1,
+                                        cards:[
+                                            {
+                                                suit:'c',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'c',
+                                                rank:2,
+                                                ordinal:2
+                                            },
+                                            {
+                                                suit:'c',
+                                                rank:4,
+                                                ordinal:3
+                                            }
+                                        ]
+                                }
+                               ,
+                                {
+                                     money:1,
+                                     cards:[
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            },
+                                            {
+                                                suit:'h',
+                                                rank:1,
+                                                ordinal:1
+                                            }
+                                        ]
+                                }
 
-                                ],
-                                [
-                                    {
-                                        suit:'s',
-                                        rank:1,
-                                        ordinal:1
-                                    },
-                                    {
-                                        suit:'s',
-                                        rank:2,
-                                        ordinal:2
-                                    },
-                                    {
-                                        suit:'s',
-                                        rank:3,
-                                        ordinal:3
-                                    }
-                                ],
-                                [
-                                    {
-                                        suit:'s',
-                                        rank:11,
-                                        ordinal:11
-                                    },
-                                    {
-                                        suit:'s',
-                                        rank:12,
-                                        ordinal:12
-                                    },
-                                    {
-                                        suit:'s',
-                                        rank:13,
-                                        ordinal:13
-                                    }
-                                ],
-                                                                 [
-                                                                     {
-                                                                         suit:'s',
-                                                                         rank:11,
-                                                                         ordinal:11
-                                                                     },
-                                                                     {
-                                                                         suit:'s',
-                                                                         rank:12,
-                                                                         ordinal:12
-                                                                     },
-                                                                     {
-                                                                         suit:'s',
-                                                                         rank:13,
-                                                                         ordinal:13
-                                                                     }
-                                                                 ]
                             ]
+
                     },
                     {
                         name:"Lucia",
@@ -335,30 +344,6 @@ class GamesLayout extends React.Component {
                         current:30,
                         cards:
                             [
-                                 [
-                                    {
-                                        suit:'c',
-                                        rank:11,
-                                        ordinal:8
-                                    },
-                                    {
-                                        suit:'c',
-                                        rank:12,
-                                        ordinal:9
-                                    },
-                                    {
-                                        suit:'c',
-                                        rank:13,
-                                        ordinal:10
-                                    }
-                                ],
-                                [
-                                    {
-                                        suit:'',
-                                        rank:'',
-                                        ordinal:8
-                                    }
-                                ]
                             ]
                     }
                 ]

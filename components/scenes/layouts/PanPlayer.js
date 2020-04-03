@@ -123,8 +123,11 @@ class PanPlayer extends React.Component {
 
         let grps = [];
         let g = null;
+        debugger;
+
         for (let i in this.props.player.cards) {
-            g = this.props.player.cards[i].map((item, index) => {
+
+            g = this.props.player.cards[i].cards.map((item, index) => {
                 return <PlayingCard group={i} index={index} sz={.25} suit={item.suit} rank={item.rank}/>
                 // return <CardSuitRank  sz={.025} suit={item.suit} rank={item.rank} rotation={0}/>
             });
