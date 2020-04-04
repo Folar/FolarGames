@@ -17,7 +17,8 @@ class MyPanHand extends React.Component {
         super(props);
         this.state = {
             sels: [false, false, false, false, false, false, false, false, false, false],
-            displayMove: 0
+            displayMove: 0,
+            displayPlay:this.props.data.state == 4?1:0
         };
 
     }
@@ -100,22 +101,11 @@ class MyPanHand extends React.Component {
                     backgroundColor: this.props.bgColor
 
                 }}>
+
                 <View style={{
                     width: .45,
                     height: .07,
-                    marginTop: .02,
-                    marginLeft: .03,
-                    marginBottom:.02,
-                    flexDirection: 'row',
-                    alignItems: 'flex-start',
-                    justifyContent: 'flex-start'
-                }}>
-                    {g}
-                </View>
-                <View style={{
-                    width: .45,
-                    height: .07,
-                    margin: .015,
+                    margin: .01,
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start'
@@ -124,7 +114,7 @@ class MyPanHand extends React.Component {
                         width: .45,
                         opacity: this.state.displayMove,
                         height: .07,
-                        marginLeft: .1,
+                        marginLeft: .02,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start'
@@ -140,7 +130,7 @@ class MyPanHand extends React.Component {
                         width: .45,
                         height: .07,
                         opacity: this.state.displayMove,
-                        marginLeft: -.14,
+                        marginLeft: -.215,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start'
@@ -151,6 +141,34 @@ class MyPanHand extends React.Component {
                         </VrButton>
 
                     </View>
+
+                    <View style={{
+                        width: .45,
+                        height: .07,
+                        opacity: this.state.displayPlay,
+                        marginLeft: -.215,
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        justifyContent: 'flex-start'
+                    }}>
+                        <VrButton onClick={this.move.bind(this)} key={0}>
+                            <Die value={"Play"} key={0} dim={dieDim} color={"black"}
+                                 backgroundColor={"brown"}/>
+                        </VrButton>
+
+                    </View>
+                </View>
+                <View style={{
+                    width: .45,
+                    height: .07,
+                    marginTop: .02,
+                    marginLeft: .03,
+                    marginBottom:.02,
+                    flexDirection: 'row',
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-start'
+                }}>
+                    {g}
                 </View>
             </View>
         )
