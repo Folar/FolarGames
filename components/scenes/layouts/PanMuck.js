@@ -28,7 +28,7 @@ class PanMuck extends React.Component {
     }
 
 
-    reveal() {
+    draw() {
 
     }
 
@@ -40,6 +40,42 @@ class PanMuck extends React.Component {
 
     }
 
+    getText1(){
+        let data = this.props.data;
+        if (data.currentPlayer == data.playerId && (data.state == 1 ||data.state == 2  )){
+            return "Draw";
+        }
+        if (data.currentPlayer == data.playerId && data.state == 3){
+            return "Pick";
+        }
+        return "";
+
+    }
+    getText2(){
+        let data = this.props.data;
+        if (data.currentPlayer == data.playerId && data.state == 3 ){
+            return "Pass";
+        }
+        return "";
+
+    }
+    showButton1(){
+        let data = this.props.data;
+        if (data.currentPlayer == data.playerId && (data.state == 1 ||data.state == 2 || data.state == 3 )){
+            return 1;
+        }
+       return 0;
+
+    }
+
+    showButton2(){
+        let data = this.props.data;
+        if (data.currentPlayer == data.playerId &&  data.state == 3 ){
+            return 1;
+        }
+        return 0;
+
+    }
     render() {
 
 
@@ -79,7 +115,7 @@ class PanMuck extends React.Component {
                         }}>
                             <View
                                 style={{
-                                    opacity: 1,
+                                    opacity: this.showButton1(),
                                     marginLeft: 0,
                                     marginRight:.02,
                                     marginBottom:.005,
@@ -99,13 +135,13 @@ class PanMuck extends React.Component {
                                             marginLeft: .015,
                                             color:"black"
                                         }}>
-                                        {"Pickup"}
+                                        {this.getText1()}
                                     </Text>
                                 </VrButton>
                             </View>
                             <View
                                 style={{
-                                    opacity: 1,
+                                    opacity:  this.showButton2(),
                                     marginLeft: 0,
                                     marginRight:.02,
                                     flexDirection: 'row',
@@ -124,7 +160,7 @@ class PanMuck extends React.Component {
                                             marginLeft: .015,
                                             color:"black"
                                         }}>
-                                        {"Pass"}
+                                        {this.getText2()}
                                     </Text>
                                 </VrButton>
                             </View>

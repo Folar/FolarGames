@@ -72,9 +72,9 @@ class GamesLayout extends React.Component {
             panData:{
                 type:0,
                 playerId:1,
-                currentPlayer:2,
-                state:0,
-                otherState:2,
+                currentPlayer:1,
+                state:5,
+                otherState:5,
                 kitty:18,
                 passCard: {
                                suit:'c',
@@ -193,7 +193,7 @@ class GamesLayout extends React.Component {
                         playing:true,
                         roundTotal:12,
                         total:98,
-                        current:205,
+                        current:20,
                         cards:
                             [
 

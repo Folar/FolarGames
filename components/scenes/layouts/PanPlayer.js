@@ -31,6 +31,7 @@ class PanPlayer extends React.Component {
     }
     getTab(){
 
+
         let pick = <View
             style={{
                 opacity: 1,
@@ -103,14 +104,53 @@ class PanPlayer extends React.Component {
             }}>
 
         </View>
+        let confirm = <View
+            style={{
+                opacity: 1,
+                marginLeft: 0,
+                flexDirection: 'row',
+                backgroundColor: "brown",
+                marginRight:.02,
+                width: .12,
+                height: .264 * .25
+            }}>
+
+            <View
+                style={{
+                    opacity: 1,
+                    marginLeft: 0,
+
+
+                }}>
+
+                <VrButton onClick={this.click.bind(this)} key={0}>
+                    <Text
+                        style={{
+                            fontSize: .03,
+                            textAlign: 'left',
+                            marginTop: .007,
+                            marginLeft: .015,
+
+                            color:"black"
+                        }}>
+                        {"Confirm"}
+                    </Text>
+                </VrButton>
+            </View>
+
+        </View>
         let tab = eView;
 
         let ctrlType = 0;
         let data = this.props.data;
-        if (data.currentPlayer == data.playerId && data.state == 2 &&
+        if (data.currentPlayer == data.playerId && data.state == 4 &&
+            data.playerId == this.props.player.playerId){
+            tab = confirm;
+        }
+        else if (data.currentPlayer == data.playerId && data.state == 5 &&
             data.playerId == this.props.player.playerId){
             tab = pick;
-        } else if (data.currentPlayer != data.playerId && data.otherState == 2 &&
+        } else if (data.currentPlayer != data.playerId && data.otherState == 5 &&
                    data.currentPlayer == this.props.player.playerId ){
             tab = pass;
         }
