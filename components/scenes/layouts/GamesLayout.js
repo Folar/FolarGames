@@ -73,7 +73,7 @@ class GamesLayout extends React.Component {
                 type:0,
                 playerId:1,
                 currentPlayer:1,
-                state:2,
+                state:1,
                 otherState:5,
                 kitty:18,
                 passCard: {
