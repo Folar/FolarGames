@@ -73,15 +73,21 @@ class GamesLayout extends React.Component {
                 type:0,
                 playerId:1,
                 currentPlayer:1,
-                state:1,
+                state:2,
                 otherState:5,
                 kitty:18,
-                passCard: {
-                               suit:'c',
-                               rank:2,
+                currentCard: {
+                               suit:'',
+                               rank:"card_back",
                                ordinal:11,
                                rankOrdinal:2
                            },
+                passCard: {
+                                   suit:'',
+                                   rank:"card_back",
+                                   ordinal:11,
+                                   rankOrdinal:2
+                               },
 
                 hand : [
                   {
@@ -752,7 +758,7 @@ class GamesLayout extends React.Component {
                    </View>
                ) :(
                      <View>
-                          <PanLayout zorder={this.state.zoom} data={this.state.panData}
+                          <PanLayout zorder={this.state.zoom } data={this.state.panData}
                              ref="pan"
                              sendmessage={this.sendBocaMessage.bind(this)}
                              name={this.state.name}

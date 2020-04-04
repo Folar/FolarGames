@@ -28,21 +28,18 @@ class PanMuck extends React.Component {
     }
 
 
-    draw() {
 
+    click1(){
+        this.props.action(1);
     }
-
-    pick() {
-
-    }
-
-    pass() {
-
+    click2(){
+        this.props.action(2);
     }
 
     getText1(){
         let data = this.props.data;
-        if (data.currentPlayer == data.playerId && (data.state == 1 ||data.state == 2  )){
+        if (data.currentPlayer == data.playerId &&
+            (data.state == 1 ||data.state == 2 || data.state == 5 || data.state == 6)){
             return "Draw";
         }
         if (data.currentPlayer == data.playerId && data.state == 3){
@@ -53,15 +50,22 @@ class PanMuck extends React.Component {
     }
     getText2(){
         let data = this.props.data;
+        console.log( " text state ="+ data.state);
         if (data.currentPlayer == data.playerId && data.state == 3 ){
             return "Pass";
+        }
+        if (data.currentPlayer == data.playerId && data.state == 6 ){
+            debugger;
+            return "Pick";
         }
         return "";
 
     }
     showButton1(){
         let data = this.props.data;
-        if (data.currentPlayer == data.playerId && (data.state == 1 ||data.state == 2 || data.state == 3 )){
+        if (data.currentPlayer == data.playerId &&
+               (data.state == 1 ||data.state == 2 || data.state == 3
+                   || data.state == 5 ||data.state == 6  )){
             return 1;
         }
        return 0;
@@ -70,7 +74,8 @@ class PanMuck extends React.Component {
 
     showButton2(){
         let data = this.props.data;
-        if (data.currentPlayer == data.playerId &&  data.state == 3 ){
+        console.log( " show state ="+ data.state);
+        if (data.currentPlayer == data.playerId &&  (data.state == 3 || data.state == 6 )){
             return 1;
         }
         return 0;
@@ -104,7 +109,9 @@ class PanMuck extends React.Component {
                          marginLeft:.02
 
                         }}>
-                            <PlayingCard index={133} sz={.52} suit={'card_back'} rank={""}/>
+                            <PlayingCard index={133} sz={.52}
+                                         suit={this.props.suit}
+                                         rank={this.props.rank}/>
                         </View>
                         <View style={{
                             alignItems: 'flex-start',
@@ -126,7 +133,7 @@ class PanMuck extends React.Component {
                                 }}>
 
 
-                                <VrButton onClick={this.pick(this)} key={0}>
+                                <VrButton onClick={this.click1.bind(this)} key={0}>
                                     <Text
                                         style={{
                                             fontSize: .03,
@@ -151,7 +158,7 @@ class PanMuck extends React.Component {
                                 }}>
 
 
-                                <VrButton onClick={this.pick(this)} key={0}>
+                                <VrButton onClick={this.click2.bind(this)} key={0}>
                                     <Text
                                         style={{
                                             fontSize: .03,

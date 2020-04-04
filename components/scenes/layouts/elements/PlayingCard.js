@@ -42,7 +42,7 @@ class PlayingCard extends React.Component {
 
 
         let face ;
-        if( this.props.suit.length == 0){
+        if( this.props.rank == "empty"){
             face = <View style={{
 
                 flexDirection: 'column',

@@ -58,7 +58,7 @@ debugger;
                     backgroundColor:"green",
                     transform: [
                         {translateX: 0},
-                        {translateZ: -1}]
+                        {translateZ: -.91}]
                 }}>
 
                     <CardTableLayout h={h} w={w} data={this.props.data}/>

@@ -23,7 +23,44 @@ class CardTableLayout extends React.Component {
 
     }
 
-    zoom() {
+    action(a) {
+        let s = this.state.data.state;
+        //debugger;
+        switch (a) {
+            case 1:
+                if (s == 1) {
+                    s =  6;
+                    this.state.data.currentCard.suit='h';
+                    this.state.data.currentCard.rank='4';
+                } else if (s == 2) {
+                    s = 3;
+                    this.state.data.currentCard.suit='h';
+                    this.state.data.currentCard.rank='4';
+                } else if (s == 6) {
+                    s = 3;
+                    this.state.data.currentCard.suit='h';
+                    this.state.data.currentCard.rank='11';
+                } else if (s == 5) {
+                    s = 3;
+                    this.state.data.currentCard.suit='h';
+                    this.state.data.currentCard.rank='3';
+                }
+                break;
+            case 2:
+                if (s == 3) {
+                    s = 5;
+                    this.state.data.passCard.suit=this.state.data.currentCard.suit;
+                    this.state.data.passCard.rank=this.state.data.currentCard.rank;
+                    this.state.data.currentCard.suit='';
+                    this.state.data.currentCard.rank='card_back';
+                    //this.state.data.currentPlayer = 2;
+                }
+                break;
+            case 3:
+                break;
+        }
+        this.state.data.state = s;
+        this.setState({data:this.state.data})
 
     }
 
@@ -124,7 +161,7 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer  h={h} w={pw} ctrlType={0} bgColor={"#6b8e23"} color={"black"} key={44}
+                            <PanPlayer  h={h} w={pw}  bgColor={"#6b8e23"} color={"black"} key={44}
                                         player={p[3]} data={this.props.data}/>
                         </View>
                     </View>
@@ -168,7 +205,9 @@ class CardTableLayout extends React.Component {
                             backgroundColor: "black"
                         }}>
                             <PanMuck  h={h} w={mw} bgColor={"#6b8e23"} color={"black"} key={86}
-                                      data={this.props.data}  />
+                                      suit={this.props.data.currentCard.suit}
+                                      rank={this.props.data.currentCard.rank}
+                                      action={this.action.bind(this)}  data={this.props.data}  />
                         </View>
                         {/* row 2: player 2*/}
                         <View style={{
@@ -222,8 +261,8 @@ class CardTableLayout extends React.Component {
                             height: h,
                             backgroundColor: "black"
                         }}>
-                            <PanPlayer  h={h} w={mw} ctrlType={1} bgColor={"#6b8e23"} color={"black"} key={8}
-                                        data={this.props.data} player={p[0]}/>
+                            <PanPlayer  h={h} w={mw}  bgColor={"#6b8e23"} color={"black"} key={8}
+                                        action={this.action.bind(this)}  data={this.props.data} player={p[0]}/>
                         </View>
                         {/*3rd row : player 1*/}
                         <View style={{
@@ -236,8 +275,9 @@ class CardTableLayout extends React.Component {
                             width: pw,
                             height: h
                         }}>
-                            <PanPlayer  h={h} w={pw}  ctrlType={0} bgColor={"#6b8e23"} color={"black"} key={44}
+                            <PanPlayer  h={h} w={pw}   bgColor={"#6b8e23"} color={"black"} key={44}
                                         data={this.props.data} player={p[1]}/>
+
                         </View>
                     </View>
 

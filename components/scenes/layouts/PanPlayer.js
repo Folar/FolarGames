@@ -23,6 +23,7 @@ class PanPlayer extends React.Component {
     }
 
     click() {
+        this.props.action(3)
 
     }
 
@@ -163,7 +164,6 @@ class PanPlayer extends React.Component {
 
         let grps = [];
         let g = null;
-        debugger;
 
         for (let i in this.props.player.cards) {
 
