@@ -28,35 +28,51 @@ class CardTableLayout extends React.Component {
         //debugger;
         switch (a) {
             case 1:
-                if (s == 1) {
+                if (s == 1) { // draw
                     s =  6;
                     this.state.data.currentCard.suit='h';
                     this.state.data.currentCard.rank='4';
-                } else if (s == 2) {
-                    s = 3;
-                    this.state.data.currentCard.suit='h';
-                    this.state.data.currentCard.rank='4';
-                } else if (s == 6) {
+
+                } else if (s==2 || s == 6 ||  s == 7 ) { // draw
                     s = 3;
                     this.state.data.currentCard.suit='h';
                     this.state.data.currentCard.rank='11';
-                } else if (s == 5) {
+                } else if (s == 5) { // pickup
                     s = 3;
+                    this.state.data.currentCard.suit='h';
+                    this.state.data.currentCard.rank='3';
+                } else if (s == 3) { // pickup
+                    s = 4;
                     this.state.data.currentCard.suit='h';
                     this.state.data.currentCard.rank='3';
                 }
                 break;
             case 2:
-                if (s == 3) {
+                if (s == 3) {  // pass
                     s = 5;
                     this.state.data.passCard.suit=this.state.data.currentCard.suit;
                     this.state.data.passCard.rank=this.state.data.currentCard.rank;
                     this.state.data.currentCard.suit='';
                     this.state.data.currentCard.rank='card_back';
+
                     //this.state.data.currentPlayer = 2;
+                } else if (s == 6) { // pickup
+                    s = 4;
+                    this.state.data.currentCard.suit='h';
+                    this.state.data.currentCard.rank='13';
                 }
                 break;
             case 3:
+                if (s == 5) { // pickup
+                    s = 4;
+                    this.state.data.currentCard.suit=this.state.data.passCard.suit;
+                    this.state.data.currentCard.rank=this.state.data.passCard.rank;
+
+                } else if (s == 4) { // confirm
+                    s = 7;
+                    this.state.data.currentCard.suit='';
+                    this.state.data.currentCard.rank='card_back';
+                }
                 break;
         }
         this.state.data.state = s;

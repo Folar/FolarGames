@@ -101,7 +101,18 @@ class MyPanHand extends React.Component {
                     backgroundColor: this.props.bgColor
 
                 }}>
-
+                <View style={{
+                    width: .45,
+                    height: .07,
+                    marginTop: .02,
+                    marginLeft: .03,
+                    marginBottom:.02,
+                    flexDirection: 'row',
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-start'
+                }}>
+                    {g}
+                </View>
                 <View style={{
                     width: .45,
                     height: .07,
@@ -145,7 +156,7 @@ class MyPanHand extends React.Component {
                     <View style={{
                         width: .45,
                         height: .07,
-                        opacity: this.state.displayPlay,
+                        opacity: 0,
                         marginLeft: -.215,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
@@ -158,18 +169,7 @@ class MyPanHand extends React.Component {
 
                     </View>
                 </View>
-                <View style={{
-                    width: .45,
-                    height: .07,
-                    marginTop: .02,
-                    marginLeft: .03,
-                    marginBottom:.02,
-                    flexDirection: 'row',
-                    alignItems: 'flex-start',
-                    justifyContent: 'flex-start'
-                }}>
-                    {g}
-                </View>
+
             </View>
         )
 

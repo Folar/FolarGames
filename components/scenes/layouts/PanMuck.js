@@ -39,11 +39,11 @@ class PanMuck extends React.Component {
     getText1(){
         let data = this.props.data;
         if (data.currentPlayer == data.playerId &&
-            (data.state == 1 ||data.state == 2 || data.state == 5 || data.state == 6)){
+            (data.state == 1 ||data.state == 2 || data.state == 5 || data.state == 6  || data.state == 7)){
             return "Draw";
         }
         if (data.currentPlayer == data.playerId && data.state == 3){
-            return "Pick";
+            return "Pickup";
         }
         return "";
 
@@ -56,7 +56,7 @@ class PanMuck extends React.Component {
         }
         if (data.currentPlayer == data.playerId && data.state == 6 ){
             debugger;
-            return "Pick";
+            return "Pickup";
         }
         return "";
 
@@ -65,7 +65,7 @@ class PanMuck extends React.Component {
         let data = this.props.data;
         if (data.currentPlayer == data.playerId &&
                (data.state == 1 ||data.state == 2 || data.state == 3
-                   || data.state == 5 ||data.state == 6  )){
+                   || data.state == 5 ||data.state == 6 || data.state == 7  )){
             return 1;
         }
        return 0;
