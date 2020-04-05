@@ -22,60 +22,112 @@ class CardTableLayout extends React.Component {
         };
 
     }
+    createDropSpot(){
+        let cards = this.state.data.players[this.state.data.currentPlayer].cards;
+        if(cards.length>0 && cards[cards.length-1].money == -1)
+            return;
+        cards.push({
+            money:-1,
+            cards:[
+                {
+                    rank:"empty"
+                }
+
+            ]
+
+        });
+    }
+
+    removeDropSpot(){
+        let cards = this.state.data.players[this.state.data.playerId].cards;
+        cards.pop();
+    }
+    transfer(target, source){
+        target.suit=source.suit;
+        target.rank= source.rank;
+        target.ordinal = source.ordinal;
+        target.rankOrdinal= source.rankOrdinal
+    }
+    pickup(){
+        let cards = this.state.data.players[this.state.data.playerId].cards;
+        cards[cards.length-1].money = 0;
+        let c = cards[cards.length-1].cards[0];
+        let cc =  this.state.data.currentCard;
+        c.group = cards.length-1;
+        this.transfer(c,cc);
+        this.createEmptyCard();
+    }
+    createEmptyCard(){
+        this.state.data.currentCard.suit='';
+        this.state.data.currentCard.rank='card_back';
+        this.state.data.currentCard.rankOrdinal= -1;
+        this.state.data.currentCard.ordinal = -1;
+    }
+
+    draw(){
+        this.state.data.currentCard.suit='c';
+        this.state.data.currentCard.rank=6;
+        this.state.data.currentCard.rankOrdinal= 6;
+        this.state.data.currentCard.ordinal = 23;
+
+    }
 
     action(a) {
         let s = this.state.data.state;
+        console.log("start action="+a+ " state="+s);
         //debugger;
         switch (a) {
             case 1:
                 if (s == 1) { // draw
                     s =  6;
-                    this.state.data.currentCard.suit='h';
-                    this.state.data.currentCard.rank='4';
-
+                    this.draw();
+                    this.createDropSpot();
                 } else if (s==2 || s == 6 ||  s == 7 ) { // draw
                     s = 3;
-                    this.state.data.currentCard.suit='h';
-                    this.state.data.currentCard.rank='11';
-                } else if (s == 5) { // pickup
+                    this.draw();
+                    this.createDropSpot();
+                } else if (s == 5) { // draw
+                    //debugger;
                     s = 3;
-                    this.state.data.currentCard.suit='h';
-                    this.state.data.currentCard.rank='3';
+                    this.draw();
+
                 } else if (s == 3) { // pickup
+                    this.pickup();
                     s = 4;
-                    this.state.data.currentCard.suit='h';
-                    this.state.data.currentCard.rank='3';
+
                 }
                 break;
             case 2:
                 if (s == 3) {  // pass
+                    this.removeDropSpot()
                     s = 5;
-                    this.state.data.passCard.suit=this.state.data.currentCard.suit;
-                    this.state.data.passCard.rank=this.state.data.currentCard.rank;
-                    this.state.data.currentCard.suit='';
-                    this.state.data.currentCard.rank='card_back';
+                    this.transfer(this.state.data.passCard,this.state.data.currentCard);
+                    this.createEmptyCard();
 
                     //this.state.data.currentPlayer = 2;
+                    this.createDropSpot();
                 } else if (s == 6) { // pickup
+
                     s = 4;
-                    this.state.data.currentCard.suit='h';
-                    this.state.data.currentCard.rank='13';
+                   // this.transfer(this.state.data.currentCard,this.state.data.passCard);
+                    this.pickup();
                 }
                 break;
             case 3:
                 if (s == 5) { // pickup
                     s = 4;
-                    this.state.data.currentCard.suit=this.state.data.passCard.suit;
-                    this.state.data.currentCard.rank=this.state.data.passCard.rank;
-
+                    this.transfer(this.state.data.currentCard,this.state.data.passCard);
+                    this.pickup();
                 } else if (s == 4) { // confirm
+                    this.removeDropSpot();
                     s = 7;
-                    this.state.data.currentCard.suit='';
-                    this.state.data.currentCard.rank='card_back';
+                    this.createEmptyCard();
+
                 }
                 break;
         }
         this.state.data.state = s;
+        console.log("end  state="+s);
         this.setState({data:this.state.data})
 
     }

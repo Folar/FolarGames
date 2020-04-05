@@ -40,13 +40,13 @@ class PlayingCard extends React.Component {
         let parms = {rank:this.props.rank,suit:this.props.suit, sz: this.props.sz};
 
 
-
+        let emptyColor =  this.props.rank == "empty" ? "black":"brown";
         let face ;
-        if( this.props.rank == "empty"){
+        if( this.props.rank == "empty" || this.props.rank == "emptyButton"){
             face = <View style={{
 
                 flexDirection: 'column',
-                backgroundColor:"brown",
+                backgroundColor:emptyColor,
                 width: .194 * this.props.sz,
                 height: .264 * this.props.sz
 

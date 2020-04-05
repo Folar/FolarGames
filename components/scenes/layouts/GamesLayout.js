@@ -91,48 +91,56 @@ class GamesLayout extends React.Component {
 
                 hand : [
                   {
-                       suit:'h',
-                       rank:1,
-                       ordinal:1,
-                       rankOrdinal:1
+                        group:-1,
+                        suit:'h',
+                        rank:1,
+                        ordinal:1,
+                        rankOrdinal:1
                     },
                     {
+                        group:-1,
                         suit:'d',
                         rank:5,
                         ordinal:22,
                         rankOrdinal:5
                     },
                     {
+                        group:-1,
                         suit:'c',
                         rank:7,
                         ordinal:27,
                         rankOrdinal:7
                     },
                     {
+                        group:-1,
                         suit:'d',
                         rank:3,
                         ordinal:10,
                         rankOrdinal:3
                     },
                     {
+                        group:-1,
                         suit:'d',
                         rank:11,
                         ordinal:30,
                         rankOrdinal:8
                     },
                     {
+                        group:-1,
                         suit:'d',
                         rank:3,
                         ordinal:10,
                         rankOrdinal:3
                     },
                     {
+                        group:-1,
                         suit:'d',
                         rank:4,
                         ordinal:14,
                         rankOrdinal:4
                     },
                     {
+                        group:-1,
                         suit:'h',
                         rank:3,
                         ordinal:9,
@@ -140,6 +148,7 @@ class GamesLayout extends React.Component {
                     },
 
                     {
+                       group:-1,
                        suit:'h',
                        rank:1,
                        ordinal:1,
@@ -147,6 +156,7 @@ class GamesLayout extends React.Component {
 
                     },
                     {
+                       group:-1,
                        suit:'h',
                        rank:1,
                        ordinal:1,

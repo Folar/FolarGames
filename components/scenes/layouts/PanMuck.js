@@ -55,7 +55,6 @@ class PanMuck extends React.Component {
             return "Pass";
         }
         if (data.currentPlayer == data.playerId && data.state == 6 ){
-            debugger;
             return "Pickup";
         }
         return "";
