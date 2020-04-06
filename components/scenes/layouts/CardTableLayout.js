@@ -27,6 +27,8 @@ class CardTableLayout extends React.Component {
         if(cards.length>0 && cards[cards.length-1].money == -1)
             return;
         cards.push({
+            group:cards.length,
+            sels:[false, false, false, false, false, false, false, false, false, false],
             money:-1,
             cards:[
                 {
@@ -67,6 +69,7 @@ class CardTableLayout extends React.Component {
     }
 
     draw(){
+
         let r =Math.floor( Math.random()*40) ;
         let s= 's';
         switch (r%4){
@@ -79,7 +82,7 @@ class CardTableLayout extends React.Component {
             case 3:
                 s= 'c';
         }
-        debugger;
+
         this.state.data.currentCard.ordinal = r;
         this.state.data.currentCard.suit= s;
         r =Math.floor(r/4);
@@ -112,7 +115,6 @@ class CardTableLayout extends React.Component {
                     this.draw();
                     this.createDropSpot();
                 } else if (s == 5) { // draw
-                    //debugger;
                     s = 3;
                     this.draw();
 
@@ -124,7 +126,6 @@ class CardTableLayout extends React.Component {
                 break;
             case 2:
                 if (s == 3) {  // pass
-                   //debugger;
                     this.removeDropSpot()
                     s = 5;
                     this.transfer(this.state.data.passCard,this.state.data.currentCard);
@@ -416,7 +417,7 @@ class CardTableLayout extends React.Component {
                             backgroundColor: "black"
                         }}>
                             <MyPanHand bgColor={"#eba117"} color={"black"} key={10} w={youw} h={h}
-                                       data={this.props.data}
+                                       ref="hand" data={this.props.data}
                                        setHand={this.setMyHand.bind(this)}  hand={this.state.data.hand}/>
                         </View>
 

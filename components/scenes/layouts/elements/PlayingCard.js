@@ -20,13 +20,9 @@ class PlayingCard extends React.Component {
 
     }
 
-    zoom(e){
+    click(e){
         if(!this.props.canClick) return;
-        // if(this.state.select == 1)
-        //     this.setState({select:.5})
-        // else
-        //     this.setState({select:1})
-        this.props.selector(this.props.index);
+        this.props.selector(this.props.index,this.props.group);
     }
     componentDidMount() {
 
@@ -85,7 +81,7 @@ class PlayingCard extends React.Component {
 
                 }}>
 
-                    <VrButton onClick={this.zoom.bind(this)}>
+                    <VrButton onClick={this.click.bind(this)}>
                         <View style={{
                             opacity:this.props.select?.5:1,
                             flexDirection: 'column',

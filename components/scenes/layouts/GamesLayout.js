@@ -77,12 +77,13 @@ class GamesLayout extends React.Component {
                 otherState:5,
                 kitty:18,
                 currentCard: {
+                               group:-1,
                                suit:'',
                                rank:"card_back",
                                ordinal:11,
                                rankOrdinal:2
                            },
-                passCard: {
+                passCard: {        group:-1,
                                    suit:'',
                                    rank:"card_back",
                                    ordinal:11,
@@ -175,7 +176,7 @@ class GamesLayout extends React.Component {
                         current:20,
                         cards:
                             [
- {
+ {                                  sels:[false, false, false, false, false, false, false, false, false, false],
                                      money:1,
                                      cards:[
                                             {
@@ -225,6 +226,7 @@ class GamesLayout extends React.Component {
                         cards:
                             [
                                 {
+                                        sels:[false, false, false, false, false, false, false, false, false, false],
                                         money:1,
                                         cards:[
                                             {
@@ -246,6 +248,7 @@ class GamesLayout extends React.Component {
                                 }
                                ,
                                 {
+                                     sels:[false, false, false, false, false, false, false, false, false, false],
                                      money:1,
                                      cards:[
                                             {
@@ -282,6 +285,7 @@ class GamesLayout extends React.Component {
                         cards:
                             [
                                 {
+                                    sels:[false, false, false, false, false, false, false, false, false, false],
                                     money:1,
                                     cards: [
                                          {
@@ -302,6 +306,7 @@ class GamesLayout extends React.Component {
                                     ]
                                 },
                                 {
+                                        sels:[false, false, false, false, false, false, false, false, false, false],
                                         money:1,
                                         cards:[
                                             {
@@ -323,6 +328,7 @@ class GamesLayout extends React.Component {
                                 }
                                ,
                                 {
+                                    sels:[false, false, false, false, false, false, false, false, false, false],
                                      money:1,
                                      cards:[
                                             {

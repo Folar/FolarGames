@@ -22,10 +22,25 @@ class PanPlayer extends React.Component {
 
     }
 
-    click() {
+    clickAction() {
         this.props.action(3)
 
     }
+    canClickCard() {
+        let data = this.props.data;
+        if (data.currentPlayer == data.playerId && data.state == 4 &&
+            data.playerId == this.props.player.playerId) {
+            return true;
+        }
+        return false;
+    }
+    clickCard(i,g){
+        let data = this.props.data;
+        let cards= data.players[data.playerId].cards;
+        cards[g].sels[i]  = ! cards[g].sels[i];
+    }
+
+
 
     componentDidMount() {
 
@@ -52,11 +67,11 @@ class PanPlayer extends React.Component {
                     height: .264 * .25
                 }}>
 
-                <PlayingCard index={133} sz={.25}
+                <PlayingCard index={133} sz={.25} canClick={false}
                              suit={this.props.data.passCard.suit} rank={this.props.data.passCard.rank}/>
             </View>
 
-            <VrButton onClick={this.click.bind(this)} key={0}>
+            <VrButton onClick={this.clickAction.bind(this)} key={0}>
                 <Text
                     style={{
                         fontSize: .03,
@@ -91,7 +106,7 @@ class PanPlayer extends React.Component {
                     height: .264 * .25
                 }}>
 
-                <PlayingCard index={133} sz={.25}
+                <PlayingCard index={133} sz={.25} canClick={false}
                              suit={this.props.data.passCard.suit} rank={this.props.data.passCard.rank}/>
             </View>
 
@@ -124,7 +139,7 @@ class PanPlayer extends React.Component {
 
                 }}>
 
-                <VrButton onClick={this.click.bind(this)} key={0}>
+                <VrButton onClick={this.clickAction.bind(this)} key={0}>
                     <Text
                         style={{
                             fontSize: .03,
@@ -160,6 +175,7 @@ class PanPlayer extends React.Component {
     }
 
 
+
     render() {
 
         let grps = [];
@@ -167,9 +183,15 @@ class PanPlayer extends React.Component {
 
         for (let i in this.props.player.cards) {
 
+
             g = this.props.player.cards[i].cards.map((item, index) => {
-                return <PlayingCard group={i} index={index} sz={.25} suit={item.suit} rank={item.rank}/>
-                // return <CardSuitRank  sz={.025} suit={item.suit} rank={item.rank} rotation={0}/>
+                debugger;
+                let selected = this.props.player.cards[i].sels[index];
+                return <PlayingCard group={i} index={index} sz={.25}
+                                    canClick={this.canClickCard()}
+                                    select={selected}  selector={this.clickCard.bind(this)}
+                                    suit={item.suit} rank={item.rank}/>
+
             });
             grps.push(g);
         }

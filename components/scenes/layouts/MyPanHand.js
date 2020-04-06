@@ -38,7 +38,14 @@ class MyPanHand extends React.Component {
             displayMove: 0
         });
     }
-
+    count(){
+        let cnt = 0;
+        for(let i in this.state.sels) {
+            if (this.state.sels[i])
+                cnt++;
+        }
+        return cnt;
+    }
     selector(i) {
         this.state.sels[i] = !this.state.sels[i];
         // debugger;
@@ -79,8 +86,7 @@ class MyPanHand extends React.Component {
         let g = null;
         console.log(this.state.sels[0])
         g = this.props.hand.map((item, index) => {
-            return <PlayingCard selector={this.selector.bind(this)} clear={this.clear.bind(this)}
-                                move={this.move.bind(this)} select={this.state.sels[index]}
+            return <PlayingCard selector={this.selector.bind(this)}  select={this.state.sels[index]}
                                 index={index} sz={.35} suit={item.suit} rank={item.rank} canClick={true}/>
         });
 
