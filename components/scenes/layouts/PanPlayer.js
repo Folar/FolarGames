@@ -16,7 +16,7 @@ class PanPlayer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            zoom: 3.8
+            cards:this.props.player.cards
 
         };
 
@@ -38,6 +38,7 @@ class PanPlayer extends React.Component {
         let data = this.props.data;
         let cards= data.players[data.playerId].cards;
         cards[g].sels[i]  = ! cards[g].sels[i];
+        this.setState({cards:cards});
     }
 
 
