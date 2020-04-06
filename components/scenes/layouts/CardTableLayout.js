@@ -146,6 +146,7 @@ class CardTableLayout extends React.Component {
                     this.pickup();
                 } else if (s == 4) { // confirm
                     this.removeDropSpot();
+                     this.refs.myCards.clear();
                     //this.state.data.currentPlayer = 2;
                     s = 7;
                     this.createEmptyCard();
@@ -358,7 +359,7 @@ class CardTableLayout extends React.Component {
                             backgroundColor: "black"
                         }}>
                             <PanPlayer  h={h} w={mw}  bgColor={this.getBackgroundColor(p[0])}
-                                        color={"black"} key={8}
+                                        color={"black"} key={8} ref={"myCards"}
                                         action={this.action.bind(this)}  data={this.props.data} player={p[0]}/>
                         </View>
                         {/*3rd row : player 1*/}

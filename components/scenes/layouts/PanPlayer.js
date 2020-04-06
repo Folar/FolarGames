@@ -41,6 +41,19 @@ class PanPlayer extends React.Component {
         this.setState({cards:cards});
     }
 
+    clear() {
+        let data = this.props.data;
+        debugger;
+        let cards= data.players[data.currentPlayer].cards;
+        for (let i in cards){
+            for (let j in cards[i].sels) {
+                cards[i].sels[j] = false;
+            }
+        }
+        this.setState({cards:cards});
+
+    }
+
 
 
     componentDidMount() {
@@ -186,7 +199,6 @@ class PanPlayer extends React.Component {
 
 
             g = this.props.player.cards[i].cards.map((item, index) => {
-                debugger;
                 let selected = this.props.player.cards[i].sels[index];
                 return <PlayingCard group={i} index={index} sz={.25}
                                     canClick={this.canClickCard()}
