@@ -47,6 +47,9 @@ class MyPanHand extends React.Component {
         return cnt;
     }
     selector(i) {
+        if(this.props.data.state == 4){
+            this.props.clearMyHand();
+        }
         this.state.sels[i] = !this.state.sels[i];
         // debugger;
         if (this.state.sels.includes(true))

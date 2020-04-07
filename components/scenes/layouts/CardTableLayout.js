@@ -168,6 +168,9 @@ class CardTableLayout extends React.Component {
         this.state.data.hand = hand;
         this.setState({data:this.state.data})
     }
+    clearMyHand (){
+        this.refs.myCards.clear();
+    }
 
     render() {
 
@@ -418,7 +421,7 @@ class CardTableLayout extends React.Component {
                             backgroundColor: "black"
                         }}>
                             <MyPanHand bgColor={"#eba117"} color={"black"} key={10} w={youw} h={h}
-                                       ref="hand" data={this.props.data}
+                                       ref="hand" data={this.props.data} clearMyHand={this.clearMyHand.bind(this)}
                                        setHand={this.setMyHand.bind(this)}  hand={this.state.data.hand}/>
                         </View>
 
