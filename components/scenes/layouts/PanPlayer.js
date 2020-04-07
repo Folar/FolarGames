@@ -16,7 +16,6 @@ class PanPlayer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            cards:this.props.player.cards
 
         };
 
@@ -34,12 +33,7 @@ class PanPlayer extends React.Component {
         }
         return false;
     }
-    clickCard(i,g){
-        let data = this.props.data;
-        let cards= data.players[data.playerId].cards;
-        cards[g].sels[i]  = ! cards[g].sels[i];
-        this.setState({cards:cards});
-    }
+
 
     clear() {
         let data = this.props.data;
@@ -202,7 +196,7 @@ class PanPlayer extends React.Component {
                 let selected = this.props.player.cards[i].sels[index];
                 return <PlayingCard group={i} index={index} sz={.25}
                                     canClick={this.canClickCard()}
-                                    select={selected}  selector={this.clickCard.bind(this)}
+                                    select={selected}  selector={this.props.clickMyTableCard}
                                     suit={item.suit} rank={item.rank}/>
 
             });

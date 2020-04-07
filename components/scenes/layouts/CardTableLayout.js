@@ -160,6 +160,13 @@ class CardTableLayout extends React.Component {
 
     }
 
+    clickMyTableCard(i,g){
+        let data = this.props.data;
+        let cards= data.players[data.playerId].cards;
+        cards[g].sels[i]  = ! cards[g].sels[i];
+        this.setState({data:this.props.data});
+
+    }
     componentDidMount() {
 
     }
@@ -363,6 +370,7 @@ class CardTableLayout extends React.Component {
                         }}>
                             <PanPlayer  h={h} w={mw}  bgColor={this.getBackgroundColor(p[0])}
                                         color={"black"} key={8} ref={"myCards"}
+                                        clickMyTableCard={this.clickMyTableCard.bind(this)}
                                         action={this.action.bind(this)}  data={this.props.data} player={p[0]}/>
                         </View>
                         {/*3rd row : player 1*/}
