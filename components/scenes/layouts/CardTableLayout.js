@@ -162,10 +162,17 @@ class CardTableLayout extends React.Component {
 
     clickMyTableCard(i,g){
         let data = this.props.data;
-        let cards= data.players[data.playerId].cards;
-        cards[g].sels[i]  = ! cards[g].sels[i];
-        this.setState({data:this.props.data});
-
+        let cards = data.players[data.playerId].cards;
+        if(this.refs.hand.count()){
+            let cardsFromHand = this.refs.hand.getSelectedCards();
+            for(let j in  cardsFromHand){
+                cardsFromHand[j].group = g;
+                cards[g].cards.push(cardsFromHand[j]);
+            }
+        }else {
+            cards[g].sels[i] = !cards[g].sels[i];
+        }
+        this.setState({data: this.props.data});
     }
     componentDidMount() {
 

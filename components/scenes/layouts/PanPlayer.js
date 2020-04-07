@@ -37,7 +37,6 @@ class PanPlayer extends React.Component {
 
     clear() {
         let data = this.props.data;
-        debugger;
         let cards= data.players[data.currentPlayer].cards;
         for (let i in cards){
             for (let j in cards[i].sels) {
@@ -324,13 +323,13 @@ class PanPlayer extends React.Component {
                         <View style={{
                             width: .45,
                             height: .07,
-                            marginLeft: .02,
+                            marginLeft: .005,
                             flexDirection: 'column',
                             alignItems: 'flex-start',
                             justifyContent: 'flex-start'
                         }}>
                             <View style={{
-                                width: .45,
+                                width: .57,
                                 height: .07,
                                 flexDirection: 'row',
                                 alignItems: 'flex-start',
@@ -339,7 +338,7 @@ class PanPlayer extends React.Component {
                                 {cardGrps}
                             </View>
                             <View style={{
-                                width: .45,
+                                width: .57,
                                 height: .07,
                                 flexDirection: 'row',
                                 alignItems: 'flex-start',

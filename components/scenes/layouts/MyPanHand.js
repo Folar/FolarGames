@@ -46,6 +46,19 @@ class MyPanHand extends React.Component {
         }
         return cnt;
     }
+
+    getSelectedCards(){
+        let cards = [];
+        for(let i = this.props.data.hand.length-1; i>=0;i--) {
+            if (this.state.sels[i]) {
+                cards.push(this.props.data.hand[i])
+                this.props.data.hand.splice(i,1);
+            }
+        }
+        this.state.sels = [false, false, false, false, false, false, false, false, false, false];
+        return cards;
+    }
+
     selector(i) {
         if(this.props.data.state == 4){
             this.props.clearMyHand();
