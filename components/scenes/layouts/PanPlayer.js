@@ -93,6 +93,44 @@ class PanPlayer extends React.Component {
             </VrButton>
         </View>
 
+        let discard = <View
+            style={{
+                opacity: 1,
+                marginLeft: 0,
+                marginRight:.02,
+                flexDirection: 'row',
+                backgroundColor: "brown",
+                width: .194 * .25 +.1,
+                height: .264 * .25
+            }}>
+
+            <View
+                style={{
+                    opacity: 1,
+                    marginLeft: 0,
+                    width: .194 * .25,
+                    height: .264 * .25
+                }}>
+
+                <PlayingCard index={133} sz={.25} canClick={false}
+                             suit={this.props.data.discardCard.suit} rank={this.props.data.discardCard.rank}/>
+            </View>
+
+            <VrButton onClick={this.clickAction.bind(this)} key={0}>
+                <Text
+                    style={{
+                        fontSize: .03,
+                        textAlign: 'left',
+                        marginTop: .007,
+                        marginLeft: .015,
+
+                        color:"black"
+                    }}>
+                    {"Muck"}
+                </Text>
+            </VrButton>
+        </View>
+
         let pass = <View
             style={{
                 opacity: 1,
@@ -127,48 +165,16 @@ class PanPlayer extends React.Component {
             }}>
 
         </View>
-        let confirm = <View
-            style={{
-                opacity: 1,
-                marginLeft: 0,
-                flexDirection: 'row',
-                backgroundColor: "brown",
-                marginRight:.02,
-                width: .12,
-                height: .264 * .25
-            }}>
-
-            <View
-                style={{
-                    opacity: 1,
-                    marginLeft: 0,
 
 
-                }}>
 
-                <VrButton onClick={this.clickAction.bind(this)} key={0}>
-                    <Text
-                        style={{
-                            fontSize: .03,
-                            textAlign: 'left',
-                            marginTop: .007,
-                            marginLeft: .015,
-
-                            color:"black"
-                        }}>
-                        {"Confirm"}
-                    </Text>
-                </VrButton>
-            </View>
-
-        </View>
         let tab = eView;
 
-        let ctrlType = 0;
+
         let data = this.props.data;
         if (data.currentPlayer == data.playerId && data.state == 4 &&
-            data.playerId == this.props.player.playerId){
-            tab = confirm;
+            data.playerId == this.props.player.playerId && this.props.selectedCardCount==1){
+            tab = discard;
         }
         else if (data.currentPlayer == data.playerId && data.state == 5 &&
             data.playerId == this.props.player.playerId){

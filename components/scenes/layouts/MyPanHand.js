@@ -33,55 +33,65 @@ class MyPanHand extends React.Component {
     }
 
     clear() {
-        this.setState({
-            sels: [false, false, false, false, false, false, false, false, false, false],
-            displayMove: 0
-        });
+
+        for(let i in this.props.sels) {
+            this.props.sels[i]= false;
+        }
+        this.setState({ displayMove: 0});
+        this.props.notifySelect();
     }
     count(){
         let cnt = 0;
-        for(let i in this.state.sels) {
-            if (this.state.sels[i])
+        for(let i in this.props.sels) {
+            if (this.props.sels[i])
                 cnt++;
         }
         return cnt;
     }
 
-    getSelectedCards(){
+    getSelectedCards(remove ){
         let cards = [];
         for(let i = this.props.data.hand.length-1; i>=0;i--) {
-            if (this.state.sels[i]) {
+            if (this.props.sels[i]) {
                 cards.push(this.props.data.hand[i])
-                this.props.data.hand.splice(i,1);
+                if(remove) {
+                    this.props.data.hand.splice(i, 1);
+                    this.props.sels[i]=false;
+                }
             }
         }
-        this.state.sels = [false, false, false, false, false, false, false, false, false, false];
+        if (remove)
+            this.setState({ displayMove: 0});
+
         return cards;
     }
 
     selector(i) {
-        if(this.props.data.state == 4){
-            this.props.clearMyHand();
-        }
-        this.state.sels[i] = !this.state.sels[i];
-        // debugger;
-        if (this.state.sels.includes(true))
-            this.setState({sels: this.state.sels, displayMove: 1});
-        else
-            this.setState({sels: this.state.sels, displayMove: 0});
 
+
+
+        this.props.sels[i] = !this.props.sels[i];
+        if (this.props.sels.includes(true))
+            this.setState({ displayMove: 1});
+        else
+            this.setState({ displayMove: 0});
+
+        // debugger;
+        this.props.notifySelect();
     }
     compare(a, b) {
         return (a.ordinal - b.ordinal) ;
     }
 
     move() {
+        debugger;
         let selected = [];
         let newHand = [];
-        for (let i in this.state.sels){
-            if(this.state.sels[i])
+        for (let i in this.props.hand){
+            if(this.props.sels[i]) {
                 selected.push(this.props.hand[i]);
-            else
+                this.props.sels[i] = false;
+            }else
                 newHand.push(this.props.hand[i]);
         }
         selected.sort(this.compare);
@@ -89,20 +99,18 @@ class MyPanHand extends React.Component {
             newHand.push(selected[i]);
         }
         this.props.setHand( newHand);
-
-        this.setState({
-            sels: [false, false, false, false, false, false, false, false, false, false],
-            displayMove: 0
-        });
+        this.setState({ displayMove: 0});
+        this.props.notifySelect();
     }
 
     render() {
 
 
         let g = null;
-        console.log(this.state.sels[0])
+
         g = this.props.hand.map((item, index) => {
-            return <PlayingCard selector={this.selector.bind(this)}  select={this.state.sels[index]}
+            console.log("XXXr="+item.rank + " s="+item.suit)
+            return <PlayingCard selector={this.selector.bind(this)}  select={this.props.sels[index]}
                                 index={index} sz={.35} suit={item.suit} rank={item.rank} canClick={true}/>
         });
 

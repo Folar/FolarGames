@@ -80,16 +80,22 @@ class GamesLayout extends React.Component {
                                group:-1,
                                suit:'',
                                rank:"card_back",
-                               ordinal:11,
-                               rankOrdinal:2
+                               ordinal:0,
+                               rankOrdinal:0
                            },
-                passCard: {        group:-1,
+                passCard:  {   group:-1,
+                               suit:'',
+                               rank:"card_back",
+                               ordinal:0,
+                               rankOrdinal:0
+                           },
+                discardCard:  {
+                                   group:-1,
                                    suit:'',
                                    rank:"card_back",
-                                   ordinal:11,
-                                   rankOrdinal:2
+                                   ordinal:0,
+                                   rankOrdinal:0
                                },
-
                 hand : [
                   {
                         group:-1,

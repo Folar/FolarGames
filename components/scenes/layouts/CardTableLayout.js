@@ -18,10 +18,12 @@ class CardTableLayout extends React.Component {
         super(props);
         this.state = {
             zoom: 3.8,
-            data: this.props.data
+            data: this.props.data,
+            selectedCardCount:0,
+            sels: [false, false, false, false, false, false, false, false, false, false]
         };
-
     }
+
     createDropSpot(){
         let cards = this.state.data.players[this.state.data.currentPlayer].cards;
         if(cards.length>0 && cards[cards.length-1].money == -1)
@@ -144,12 +146,14 @@ class CardTableLayout extends React.Component {
                     s = 4;
                     this.transfer(this.state.data.currentCard,this.state.data.passCard);
                     this.pickup();
-                } else if (s == 4) { // confirm
+                } else if (s == 4) { // muck
                     this.removeDropSpot();
-                     this.refs.myCards.clear();
+                    this.refs.hand.getSelectedCards(true);
+                    this.refs.myCards.clear();
                     //this.state.data.currentPlayer = 2;
                     s = 7;
                     this.createEmptyCard();
+                    this.setState({data: this.props.data,sels:this.state.sels})
 
                 }
                 break;
@@ -164,7 +168,7 @@ class CardTableLayout extends React.Component {
         let data = this.props.data;
         let cards = data.players[data.playerId].cards;
         if(this.refs.hand.count()){
-            let cardsFromHand = this.refs.hand.getSelectedCards();
+            let cardsFromHand = this.refs.hand.getSelectedCards(true);
             for(let j in  cardsFromHand){
                 cardsFromHand[j].group = g;
                 cards[g].cards.push(cardsFromHand[j]);
@@ -172,7 +176,7 @@ class CardTableLayout extends React.Component {
         }else {
             cards[g].sels[i] = !cards[g].sels[i];
         }
-        this.setState({data: this.props.data});
+        this.setState({data: this.props.data,sels:this.state.sels});
     }
     componentDidMount() {
 
@@ -182,8 +186,16 @@ class CardTableLayout extends React.Component {
         this.state.data.hand = hand;
         this.setState({data:this.state.data})
     }
-    clearMyHand (){
+    notifySelect (){
         this.refs.myCards.clear();
+
+        let cnt = this.refs.hand.count();
+
+        if(cnt == 1){
+            this.state.data.discardCard = this.refs.hand.getSelectedCards(false)[0];
+        }
+        this.setState({selectedCardCount:cnt,sels:this.state.sels});
+
     }
 
     render() {
@@ -378,6 +390,7 @@ class CardTableLayout extends React.Component {
                             <PanPlayer  h={h} w={mw}  bgColor={this.getBackgroundColor(p[0])}
                                         color={"black"} key={8} ref={"myCards"}
                                         clickMyTableCard={this.clickMyTableCard.bind(this)}
+                                        selectedCardCount={this.state.selectedCardCount}
                                         action={this.action.bind(this)}  data={this.props.data} player={p[0]}/>
                         </View>
                         {/*3rd row : player 1*/}
@@ -436,7 +449,9 @@ class CardTableLayout extends React.Component {
                             backgroundColor: "black"
                         }}>
                             <MyPanHand bgColor={"#eba117"} color={"black"} key={10} w={youw} h={h}
-                                       ref="hand" data={this.props.data} clearMyHand={this.clearMyHand.bind(this)}
+                                       ref="hand" data={this.props.data}
+                                       sels={this.state.sels}
+                                       notifySelect={this.notifySelect.bind(this)}
                                        setHand={this.setMyHand.bind(this)}  hand={this.state.data.hand}/>
                         </View>
 
