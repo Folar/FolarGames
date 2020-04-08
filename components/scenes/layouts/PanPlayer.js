@@ -34,7 +34,16 @@ class PanPlayer extends React.Component {
         return false;
     }
 
-
+    count(){
+        let data = this.props.data;
+        let cards= data.players[data.currentPlayer].cards;
+        let cnt = 0;
+        for (let i in cards){
+            if(cards[i].money == -1) continue;
+            cnt += cards[i].cards.length;
+        }
+        return cnt;
+    }
     clear() {
         let data = this.props.data;
         let cards= data.players[data.currentPlayer].cards;
@@ -56,6 +65,10 @@ class PanPlayer extends React.Component {
 
     getTab(){
 
+        let muckOrPan = "Muck";
+        if (this.count() == 11){
+            muckOrPan = "Pan!";
+        }
 
         let pick = <View
             style={{
@@ -128,7 +141,7 @@ class PanPlayer extends React.Component {
 
                         color:"black"
                     }}>
-                    {"Muck"}
+                    {muckOrPan}
                 </Text>
             </VrButton>
         </View>
@@ -212,7 +225,7 @@ class PanPlayer extends React.Component {
         let cardGrps =
             grps.slice(0, 3).map((item, index) => {
 
-                return <View style={{
+                return <View key={Math.random()}  style={{
                     marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
                     justifyContent: 'center'
                 }}>

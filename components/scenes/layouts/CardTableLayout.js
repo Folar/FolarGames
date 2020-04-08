@@ -19,9 +19,8 @@ class CardTableLayout extends React.Component {
         this.state = {
             zoom: 3.8,
             data: this.props.data,
-            selectedCardCount:0,
             sels: [false, false, false, false, false, false, false, false, false, false],
-            widths:[.194]
+
         };
     }
 
@@ -37,12 +36,27 @@ class CardTableLayout extends React.Component {
                 {
                     rank:"empty"
                 }
-            ],
-            widths:[],
+            ]
 
         });
     }
 
+    createDropSpotButton(){
+        let cards = this.state.data.players[this.state.data.currentPlayer].cards;
+        if(cards.length>0 && cards[cards.length-1].money == -1)
+            return;
+        cards.push({
+            group:cards.length,
+            sels:[false, false, false, false, false, false, false, false, false, false],
+            money:-1,
+            cards:[
+                {
+                    rank:"emptyButton"
+                }
+            ]
+
+        });
+    }
     removeDropSpot(){
 
         let cards = this.state.data.players[this.state.data.playerId].cards;
@@ -180,21 +194,12 @@ class CardTableLayout extends React.Component {
                 cards[g].cards.push(cardsFromHand[j]);
             }
             cards[g].cards.sort(this.compare);
-            this.setState({widths:this.adjWidths(data.players[data.playerId])});
         }else {
             cards[g].sels[i] = !cards[g].sels[i];
         }
         this.setState({data: this.props.data,sels:this.state.sels});
     }
-    adjWidths(p) {
-        let w = [];
-        let data = this.props.data;
-        let cards = p.cards;
-        for (let i in  cards)
-            w.push(.194 * .25 * cards[i].cards.length);
 
-        return w;
-    }
 
 
     componentDidMount() {
@@ -203,10 +208,15 @@ class CardTableLayout extends React.Component {
 
 
     canMuck(){
+        if(this.refs.myCards == undefined) return false;
+        debugger;
+
+        if(this.refs.myCards.count() == 11)
+            return  true;
         if( this.count()!=1){
             return  false;
         }
-        debugger;
+
         let data = this.props.data;
         let cards= data.players[data.currentPlayer].cards;
         for (let i in cards){
@@ -229,7 +239,7 @@ class CardTableLayout extends React.Component {
         if(cnt == 1){
             this.state.data.discardCard = this.refs.hand.getSelectedCards(false)[0];
         }
-        this.setState({selectedCardCount:cnt,sels:this.state.sels});
+        this.setState({sels:this.state.sels});
 
     }
     count(){
@@ -301,7 +311,7 @@ class CardTableLayout extends React.Component {
                         }}>
                             <PanPlayer  h={h} w={pw} ctrlType={0} bgColor={this.getBackgroundColor(p[5])}
                                         color={"black"} key={7}
-                                        data={this.props.data} player={p[5] } widths={this.adjWidths(p[5])}/>
+                                        data={this.props.data} player={p[5] }/>
                         </View>
                         {/* row 1: player 4*/}
                         <View style={{
@@ -316,7 +326,7 @@ class CardTableLayout extends React.Component {
                             backgroundColor: "black"
                         }}>
                             <PanPlayer  h={h} w={mw} ctrlType={0} bgColor={this.getBackgroundColor(p[4])}
-                                        color={"black"} key={83} widths={this.adjWidths(p[4])}
+                                        color={"black"} key={83}
                                         data={this.props.data} player={p[4]}   data={this.props.data}/>
                         </View>
                         {/* row 1: player 3*/}
@@ -331,7 +341,7 @@ class CardTableLayout extends React.Component {
                             height: h
                         }}>
                             <PanPlayer  h={h} w={pw}  bgColor={this.getBackgroundColor(p[3])}
-                                        color={"black"} key={44} widths={this.adjWidths(p[3])}
+                                        color={"black"} key={44}
                                         player={p[3]} data={this.props.data}/>
                         </View>
                     </View>
@@ -360,7 +370,7 @@ class CardTableLayout extends React.Component {
                             height: h
                         }}>
                             <PanPlayer  h={h} w={pw} ctrlType={0} bgColor={this.getBackgroundColor(p[6])}
-                                        color={"black"} key={7}  widths={this.adjWidths(p[6])}
+                                        color={"black"} key={7}
                                         data={this.props.data} player={p[6]}/>
                         </View>
                         {/* row 2: muck*/}
@@ -392,7 +402,6 @@ class CardTableLayout extends React.Component {
                             height: h
                         }}>
                             <PanPlayer  h={h} w={pw}  bgColor={this.getBackgroundColor(p[2])}
-                                        widths={this.adjWidths(p[2])}
                                         color={"black"} key={144} data={this.props.data} player={p[2]}/>
                         </View>
                     </View>
@@ -419,7 +428,7 @@ class CardTableLayout extends React.Component {
                             height: h
                         }}>
                             <PanPlayer  h={h} w={pw}   bgColor={this.getBackgroundColor(p[7])}
-                                        color={"black"} key={7} widths={this.adjWidths(p[7])}
+                                        color={"black"} key={7}
                                         data={this.props.data} player={p[7]}/>
                         </View>
                         {/*3rd row : exposed hand*/}
@@ -437,7 +446,7 @@ class CardTableLayout extends React.Component {
                             <PanPlayer  h={h} w={mw}  bgColor={this.getBackgroundColor(p[0])}
                                         color={"black"} key={8} ref={"myCards"}
                                         clickMyTableCard={this.clickMyTableCard.bind(this)}
-                                        canMuck={this.canMuck()} widths={this.state.widths}
+                                        canMuck={this.canMuck()}
                                         action={this.action.bind(this)}  data={this.props.data} player={p[0]}/>
                         </View>
                         {/*3rd row : player 1*/}
@@ -452,7 +461,7 @@ class CardTableLayout extends React.Component {
                             height: h
                         }}>
                             <PanPlayer  h={h} w={pw}   bgColor={this.getBackgroundColor(p[1])} color={"black"}
-                                        key={44} widths={this.adjWidths(p[1])}
+                                        key={44}
                                         data={this.props.data} player={p[1]}/>
 
                         </View>
