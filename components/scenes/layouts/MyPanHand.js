@@ -40,14 +40,7 @@ class MyPanHand extends React.Component {
         this.setState({ displayMove: 0});
         this.props.notifySelect();
     }
-    count(){
-        let cnt = 0;
-        for(let i in this.props.sels) {
-            if (this.props.sels[i])
-                cnt++;
-        }
-        return cnt;
-    }
+
 
     getSelectedCards(remove ){
         let cards = [];

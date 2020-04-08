@@ -52,6 +52,8 @@ class PanPlayer extends React.Component {
     componentDidMount() {
 
     }
+
+
     getTab(){
 
 
@@ -173,7 +175,7 @@ class PanPlayer extends React.Component {
 
         let data = this.props.data;
         if (data.currentPlayer == data.playerId && data.state == 4 &&
-            data.playerId == this.props.player.playerId && this.props.selectedCardCount==1){
+            data.playerId == this.props.player.playerId && this.props.canMuck){
             tab = discard;
         }
         else if (data.currentPlayer == data.playerId && data.state == 5 &&
