@@ -220,13 +220,17 @@ class CardTableLayout extends React.Component {
             cards[g].cards.sort(this.compare);
             if (cards.length<3) {
                 let all3 = true;
+                let one4 = false;
                 for(let i in cards){
                     if(cards[i].cards.length<3){
                         all3 = false;
                         break;
                     }
+                    if(cards[i].cards.length>3){
+                        one4 = true;
+                    }
                 }
-                if(all3)
+                if(all3 && one4)
                     this.createDropSpotButton();
             }
 

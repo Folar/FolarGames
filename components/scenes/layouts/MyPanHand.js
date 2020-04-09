@@ -46,7 +46,7 @@ class MyPanHand extends React.Component {
         let cards = [];
         for(let i = this.props.data.hand.length-1; i>=0;i--) {
             if (this.props.sels[i]) {
-                cards.push(this.props.data.hand[i])
+                cards.push(this.props.data.hand[i]);
                 if(remove) {
                     this.props.data.hand.splice(i, 1);
                     this.props.sels[i]=false;
