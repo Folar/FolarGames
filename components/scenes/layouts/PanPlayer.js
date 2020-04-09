@@ -38,7 +38,7 @@ class PanPlayer extends React.Component {
         let data = this.props.data;
         let cards= data.players[data.currentPlayer].cards;
         let cnt = 0;
-        for (let i in cards){
+        for (let i =0;i<cards.length;i++){
             if(cards[i].money == -1) continue;
             cnt += cards[i].cards.length;
         }
@@ -208,10 +208,12 @@ class PanPlayer extends React.Component {
 
         let grps = [];
         let g = null;
+        let k=[];
+        debugger;
 
         for (let i in this.props.player.cards) {
 
-
+            k.push(i+"_"+this.props.player.cards[i].cards.length);
             g = this.props.player.cards[i].cards.map((item, index) => {
                 let selected = this.props.player.cards[i].sels[index];
                 return <PlayingCard group={i} index={index} sz={.25}
@@ -225,7 +227,7 @@ class PanPlayer extends React.Component {
         let cardGrps =
             grps.slice(0, 3).map((item, index) => {
 
-                return <View key={Math.random()}  style={{
+                return <View key={k[index]}  style={{
                     marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
                     justifyContent: 'center'
                 }}>
@@ -240,7 +242,7 @@ class PanPlayer extends React.Component {
         let cardGrps2 =
             grps.slice(3).map((item, index) => {
 
-                return <View style={{
+                return <View  key={k[3+index]} style={{
                     marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
                     justifyContent: 'center'
                 }}>

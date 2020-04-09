@@ -204,14 +204,33 @@ class CardTableLayout extends React.Component {
         let data = this.props.data;
         let cards = data.players[data.playerId].cards;
         if(this.count()){
+            debugger;
             let cardsFromHand = this.refs.hand.getSelectedCards(true);
+            if(cards[g].money == -1 )
+                cards.cards=[];
             for(let j in  cardsFromHand){
                 cardsFromHand[j].group = g;
-                if(cards[g].money == -1 )
+                if(cards[g].money == -1 ) {
                     cards[g].money = 0;
+                    cards[g].cards= [];
+                }
+
                 cards[g].cards.push(cardsFromHand[j]);
             }
             cards[g].cards.sort(this.compare);
+            if (cards.length<3) {
+                let all3 = true;
+                for(let i in cards){
+                    if(cards[i].cards.length<3){
+                        all3 = false;
+                        break;
+                    }
+                }
+                if(all3)
+                    this.createDropSpotButton();
+            }
+
+
         }else {
             let cnt = 0;
             if(this.state.lastGroup == null ||  this.state.lastGroup == g ) {
@@ -241,17 +260,18 @@ class CardTableLayout extends React.Component {
                         cards[src].cards.splice(j,1);
                     }
                 }
-                debugger;
+
                 cards[trg].cards.sort(this.compare)
                 let newMoney = this.moneyCardGroup(src);
                 if(newMoney != oldMoney){
                     return;
                 }
                 if (cards[src].cards.length == 0){
-                    debugger;
                     cards.splice(src,1);
-                    this.createDropSpotButton();
+                    if(cards.length < 3)
+                        this.createDropSpotButton();
                 }
+
 
                 this.state.lastGroup = null;
             }
