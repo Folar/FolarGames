@@ -16,7 +16,8 @@ class PanPlayer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            fooSel:[],
+            fooGrp:0
         };
 
     }
@@ -25,6 +26,7 @@ class PanPlayer extends React.Component {
         this.props.action(3)
 
     }
+
     canClickCard() {
         let data = this.props.data;
         if (data.currentPlayer == data.playerId && data.state == 4 &&
@@ -34,28 +36,28 @@ class PanPlayer extends React.Component {
         return false;
     }
 
-    count(){
+    count() {
         let data = this.props.data;
-        let cards= data.players[data.currentPlayer].cards;
+        let cards = data.players[data.currentPlayer].cards;
         let cnt = 0;
-        for (let i =0;i<cards.length;i++){
-            if(cards[i].money == -1) continue;
+        for (let i = 0; i < cards.length; i++) {
+            if (cards[i].money == -1) continue;
             cnt += cards[i].cards.length;
         }
         return cnt;
     }
+
     clear() {
         let data = this.props.data;
-        let cards= data.players[data.currentPlayer].cards;
-        for (let i in cards){
+        let cards = data.players[data.currentPlayer].cards;
+        for (let i in cards) {
             for (let j in cards[i].sels) {
                 cards[i].sels[j] = false;
             }
         }
-        this.setState({cards:cards});
+        this.setState({cards: cards});
 
     }
-
 
 
     componentDidMount() {
@@ -63,10 +65,10 @@ class PanPlayer extends React.Component {
     }
 
 
-    getTab(){
+    getTab() {
 
         let muckOrPan = "Muck";
-        if (this.count() == 11){
+        if (this.count() == 11) {
             muckOrPan = "Pan!";
         }
 
@@ -74,10 +76,10 @@ class PanPlayer extends React.Component {
             style={{
                 opacity: 1,
                 marginLeft: 0,
-                marginRight:.02,
+                marginRight: .02,
                 flexDirection: 'row',
                 backgroundColor: "brown",
-                width: .194 * .25 +.1,
+                width: .194 * .25 + .1,
                 height: .264 * .25
             }}>
 
@@ -101,7 +103,7 @@ class PanPlayer extends React.Component {
                         marginTop: .007,
                         marginLeft: .015,
 
-                        color:"black"
+                        color: "black"
                     }}>
                     {"Pickup"}
                 </Text>
@@ -112,10 +114,10 @@ class PanPlayer extends React.Component {
             style={{
                 opacity: 1,
                 marginLeft: 0,
-                marginRight:.02,
+                marginRight: .02,
                 flexDirection: 'row',
                 backgroundColor: "brown",
-                width: .194 * .25 +.1,
+                width: .194 * .25 + .1,
                 height: .264 * .25
             }}>
 
@@ -139,7 +141,7 @@ class PanPlayer extends React.Component {
                         marginTop: .007,
                         marginLeft: .015,
 
-                        color:"black"
+                        color: "black"
                     }}>
                     {muckOrPan}
                 </Text>
@@ -152,8 +154,8 @@ class PanPlayer extends React.Component {
                 marginLeft: 0,
                 flexDirection: 'row',
                 backgroundColor: "green",
-                marginRight:.02,
-                width: .194 * .25 ,
+                marginRight: .02,
+                width: .194 * .25,
                 height: .264 * .25
             }}>
 
@@ -174,7 +176,7 @@ class PanPlayer extends React.Component {
         let eView = <View
             style={{
                 marginLeft: 0,
-                width: .194 * .25 ,
+                width: .194 * .25,
                 height: .264 * .25
 
             }}>
@@ -182,77 +184,84 @@ class PanPlayer extends React.Component {
         </View>
 
 
-
         let tab = eView;
 
 
         let data = this.props.data;
         if (data.currentPlayer == data.playerId && data.state == 4 &&
-            data.playerId == this.props.player.playerId && this.props.canMuck){
+            data.playerId == this.props.player.playerId && this.props.canMuck) {
             tab = discard;
-        }
-        else if (data.currentPlayer == data.playerId && data.state == 5 &&
-            data.playerId == this.props.player.playerId){
+        } else if (data.currentPlayer == data.playerId && data.state == 5 &&
+            data.playerId == this.props.player.playerId) {
             tab = pick;
         } else if (data.currentPlayer != data.playerId && data.otherState == 5 &&
-                   data.currentPlayer == this.props.player.playerId ){
+            data.currentPlayer == this.props.player.playerId) {
             tab = pass;
         }
 
         return tab;
     }
 
+    foo(item, index,aa,bb) {
 
+        let selected = this.state.fooSel[index];
+        return <PlayingCard group={this.state.fooGrp} index={index} sz={.25}
+                            canClick={this.canClickCard()}
+                            select={selected} selector={this.props.clickMyTableCard}
+                            suit={item.suit} rank={item.rank}/>
+
+    }
 
     render() {
 
+
         let grps = [];
         let g = null;
-        let k=[];
-        debugger;
+        let k = [];
+        let tab = null;
+        let cardGrps;
+        let cardGrps2;
+        if (this.props.player.playing) {
+            let ccc = this.props.player.cards;
 
-        for (let i in this.props.player.cards) {
+            for (let i=0; i < this.props.player.cards.length;i++) {
+                this.state.fooGrp = i;
+                this.state.fooSel = this.props.player.cards[i].sels;
+                debugger;
+                k.push(i + "_" + this.props.player.cards[i].cards.length);
+                g = this.props.player.cards[i].cards.map(this.foo,this);
+                grps.push(g);
+            }
+            cardGrps =
+                grps.slice(0, 3).map((item, index) => {
 
-            k.push(i+"_"+this.props.player.cards[i].cards.length);
-            g = this.props.player.cards[i].cards.map((item, index) => {
-                let selected = this.props.player.cards[i].sels[index];
-                return <PlayingCard group={i} index={index} sz={.25}
-                                    canClick={this.canClickCard()}
-                                    select={selected}  selector={this.props.clickMyTableCard}
-                                    suit={item.suit} rank={item.rank}/>
+                    return <View key={k[index]} style={{
+                        marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        {item}
+                    </View>
 
-            });
-            grps.push(g);
+
+                });
+
+
+            cardGrps2 =
+                grps.slice(3).map((item, index) => {
+
+                    return <View key={k[3 + index]} style={{
+                        marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        {item}
+                    </View>
+
+
+                });
+
+            tab = this.getTab();
         }
-        let cardGrps =
-            grps.slice(0, 3).map((item, index) => {
 
-                return <View key={k[index]}  style={{
-                    marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    {item}
-                </View>
-
-
-            });
-
-
-
-        let cardGrps2 =
-            grps.slice(3).map((item, index) => {
-
-                return <View  key={k[3+index]} style={{
-                    marginRight: 0.02, flexDirection: 'row', alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    {item}
-                </View>
-
-
-            });
-
-        let tab = this.getTab();
         return (
             <View
                 style={{

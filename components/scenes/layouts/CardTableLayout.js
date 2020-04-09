@@ -280,6 +280,9 @@ class CardTableLayout extends React.Component {
                 this.state.lastGroup = null;
             }
         }
+        for (let i=0; i < cards.length;i++) {
+
+        }
         this.setState({data: this.props.data,sels:this.state.sels});
     }
 
