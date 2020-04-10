@@ -20,6 +20,8 @@ class CardTableLayout extends React.Component {
             zoom: 3.8,
             data: this.props.data,
             lastGroup:null,
+            border:false,
+            borderGroup:-1,
             sels: [false, false, false, false, false, false, false, false, false, false],
 
         };
@@ -205,7 +207,21 @@ class CardTableLayout extends React.Component {
         debugger;
         this.setState({data: this.props.data,sels:this.state.sels});
     }
+
+    reportError (msg,src){
+        this.state.data.instructions = msg;
+        this.state.data.instructionColor = "red";
+        this.setState({border:true,borderGroup:src,data:this.state.data});
+    }
+
+    clearError (msg){
+        this.state.data.instructions = msg;
+        this.state.data.instructionColor = "black";
+        this.setState({border:false,borderGroup:-1,data:this.state.data});
+    }
+
     clickMyTableCard(i,g){
+        this.clearError("");
         let data = this.props.data;
         let cards = data.players[data.playerId].cards;
         if(this.count()){
@@ -225,7 +241,7 @@ class CardTableLayout extends React.Component {
                 cards[g].cards.push(cardsFromHand[j]);
             }
             cards[g].cards.sort(this.compare);
-            debugger;
+
             if (cards.length<3) {
                 let all3 = true;
 
@@ -257,10 +273,26 @@ class CardTableLayout extends React.Component {
                 let src = this.state.lastGroup;
                 let trg = g;
 
+
+                cnt = 0;
+                for (let j =  cards[src].cards.length -1;j>=0;j--) {
+                    if (cards[src].sels[j]) {
+                        cnt++
+                    }
+                }
+                if (cards[src].cards.length>2 && (cards[src].cards.length -cnt)<3) {
+                    this.reportError(
+                        "Illegal to move a card from a card group when the number of cards in that group will be less then 3 ",
+                        src);
+                    return;
+                }
+
+
                 if (cards[trg].money == -1){
                     cards[trg].cards.splice(0,1);
                     cards[trg].money = 0;
                 }
+
                 let oldMoney = this.moneyCardGroup(src);
                 for (let j =  cards[src].cards.length -1;j>=0;j--) {
                     if (cards[src].sels[j] ) {
@@ -270,17 +302,28 @@ class CardTableLayout extends React.Component {
                         cards[src].cards.splice(j,1);
                     }
                 }
+                if(cards[src].cards.length == 0 ){
+                    cards.splice(src,1);
+                    debugger;
+                }
 
                 cards[trg].cards.sort(this.compare)
                 let newMoney = this.moneyCardGroup(src);
-                if(newMoney != oldMoney){
-                    return;
-                }
-                if (cards[src].cards.length == 0){
-                    cards.splice(src,1);
-                    if(cards.length < 3)
+
+                if (cards.length<3) {
+                    let all3 = true;
+
+                    for (let i = 0; i < cards.length; i++) {
+                        if (cards[i].cards.length < 3) {
+                            all3 = false;
+                            break;
+                        }
+
+                    }
+                    if (all3)
                         this.createDropSpotButton();
                 }
+
 
 
                 this.state.lastGroup = null;
@@ -288,7 +331,6 @@ class CardTableLayout extends React.Component {
         }
 
         this.setState({data: this.props.data,sels:this.state.sels});
-       // setTimeout(this.foo.bind(this), 300);
     }
 
     moneyCardGroup(grp){
@@ -325,6 +367,7 @@ class CardTableLayout extends React.Component {
         this.setState({data:this.state.data})
     }
     notifySelect (){
+        this.clearError("");
         this.refs.myCards.clear();
         this.state.lastGroup = null;
         let cnt = this.count();
@@ -371,7 +414,7 @@ class CardTableLayout extends React.Component {
                         textAlign: 'left',
                         marginTop: .008,
                         marginLeft: .02,
-                        color:"black"
+                        color:this.state.data.instructionColor
                     }}>
                     {this.state.data.instructions}
                 </Text>
@@ -631,7 +674,7 @@ class CardTableLayout extends React.Component {
                                         color={"black"} key={8} ref={"myCards"}
                                         clickMyTableCard={this.clickMyTableCard.bind(this)}
                                         canMuck={this.canMuck()}
-                                        border={true} borderGroup={1}
+                                        border={this.state.border} borderGroup={this.state.borderGroup}
                                         action={this.action.bind(this)}  data={this.props.data} player={p[0]}/>
                         </View>
                         {/*3rd row : player 1*/}
