@@ -187,10 +187,10 @@ class GamesLayout extends React.Component {
                             ]
                     },
                     {
-                        name:"Elise",
-                        playerId:0,
+                        name:"Larry",
+                        playerId:1,
                         playing:true,
-                        roundTotal:12,
+                        roundTotal:2,
                         total:98,
                         current:20,
                         cards:

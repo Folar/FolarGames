@@ -167,7 +167,7 @@ class CardTableLayout extends React.Component {
                     s = 5;
                     this.transfer(this.state.data.passCard,this.state.data.currentCard);
                     this.createEmptyCard();
-                   // this.state.data.currentPlayer = 2;
+                   this.state.data.currentPlayer = 1;
                     this.createDropSpot();
                 } else if (s == 6) { // pickup
 
@@ -185,7 +185,7 @@ class CardTableLayout extends React.Component {
                     this.removeDropSpot();
                     this.refs.hand.getSelectedCards(true);
                     this.refs.myCards.clear();
-                    //this.state.data.currentPlayer = 2;
+                    //this.state.data.currentPlayer = 1;
                     s = 7;
                     this.createEmptyCard();
                     this.setState({data: this.props.data,sels:this.state.sels})
@@ -228,18 +228,15 @@ class CardTableLayout extends React.Component {
             debugger;
             if (cards.length<3) {
                 let all3 = true;
-                let one4 = false;
+
                 for(let i=0; i< cards.length;i++){
                     if(cards[i].cards.length<3){
                         all3 = false;
                         break;
                     }
-                    if(cards[i].cards.length>3){
 
-                        one4 = true;
-                    }
                 }
-                if(all3 && one4)
+                if(all3)
                     this.createDropSpotButton();
             }
 
