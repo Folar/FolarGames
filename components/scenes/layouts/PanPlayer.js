@@ -202,7 +202,7 @@ class PanPlayer extends React.Component {
         return tab;
     }
 
-    foo(item, index,aa,bb) {
+    foo(item, index,arr) {
 
         let selected = this.state.fooSel[index];
         return <PlayingCard group={this.state.fooGrp} index={index} sz={.25}
@@ -227,7 +227,6 @@ class PanPlayer extends React.Component {
             for (let i=0; i < this.props.player.cards.length;i++) {
                 this.state.fooGrp = i;
                 this.state.fooSel = this.props.player.cards[i].sels;
-                debugger;
                 k.push(i + "_" + this.props.player.cards[i].cards.length);
                 g = this.props.player.cards[i].cards.map(this.foo,this);
                 grps.push(g);

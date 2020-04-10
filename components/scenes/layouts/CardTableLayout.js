@@ -44,6 +44,7 @@ class CardTableLayout extends React.Component {
 
     createDropSpotError(){
         let cards = this.state.data.players[this.state.data.currentPlayer].cards;
+        debugger;
         if(cards.length>0 && cards[cards.length-1].money == -1)
             return;
         cards.push({
@@ -200,11 +201,15 @@ class CardTableLayout extends React.Component {
     compare(a, b) {
         return (a.ordinal - b.ordinal) ;
     }
+    foo(){
+        debugger;
+        this.setState({data: this.props.data,sels:this.state.sels});
+    }
     clickMyTableCard(i,g){
         let data = this.props.data;
         let cards = data.players[data.playerId].cards;
         if(this.count()){
-            debugger;
+
             let cardsFromHand = this.refs.hand.getSelectedCards(true);
             if(cards[g].money == -1 )
                 cards.cards=[];
@@ -213,20 +218,24 @@ class CardTableLayout extends React.Component {
                 if(cards[g].money == -1 ) {
                     cards[g].money = 0;
                     cards[g].cards= [];
+
+
                 }
 
                 cards[g].cards.push(cardsFromHand[j]);
             }
             cards[g].cards.sort(this.compare);
+            debugger;
             if (cards.length<3) {
                 let all3 = true;
                 let one4 = false;
-                for(let i in cards){
+                for(let i=0; i< cards.length;i++){
                     if(cards[i].cards.length<3){
                         all3 = false;
                         break;
                     }
                     if(cards[i].cards.length>3){
+
                         one4 = true;
                     }
                 }
@@ -280,10 +289,9 @@ class CardTableLayout extends React.Component {
                 this.state.lastGroup = null;
             }
         }
-        for (let i=0; i < cards.length;i++) {
 
-        }
         this.setState({data: this.props.data,sels:this.state.sels});
+       // setTimeout(this.foo.bind(this), 300);
     }
 
     moneyCardGroup(grp){

@@ -96,16 +96,16 @@ class MyPanHand extends React.Component {
         this.props.notifySelect();
     }
 
+    foo(item, index,arr) {
+        return <PlayingCard selector={this.selector.bind(this)}  select={this.props.sels[index]}
+                            index={index} sz={.35} suit={item.suit} rank={item.rank} canClick={true}/>
+    }
     render() {
 
 
         let g = null;
 
-        g = this.props.hand.map((item, index) => {
-            console.log("XXXr="+item.rank + " s="+item.suit)
-            return <PlayingCard selector={this.selector.bind(this)}  select={this.props.sels[index]}
-                                index={index} sz={.35} suit={item.suit} rank={item.rank} canClick={true}/>
-        });
+        g = this.props.hand.map(this.foo,this);
 
 
         let mw = this.props.w;

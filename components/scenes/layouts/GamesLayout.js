@@ -173,7 +173,7 @@ class GamesLayout extends React.Component {
 
                 ],
                 players:[
-                 {
+                   {
                         name:"Elise",
                         playerId:0,
                         playing:true,
@@ -185,7 +185,77 @@ class GamesLayout extends React.Component {
 
 
                             ]
+                    },
+                    {
+                        name:"Elise",
+                        playerId:0,
+                        playing:true,
+                        roundTotal:12,
+                        total:98,
+                        current:20,
+                        cards:
+                            [
+                                 {
+                                     sels:[false, false, false, false, false, false, false, false, false, false],
+                                     money:1,
+                                     cards:[
+                                        {
+                                            group:0,
+                                            suit:'h',
+                                            rank:3,
+                                            ordinal:9,
+                                            rankOrdinal:3
+                                        },
+
+                                        {
+                                           group:0,
+                                           suit:'h',
+                                           rank:1,
+                                           ordinal:1,
+                                           rankOrdinal:1,
+
+                                        },
+                                        {
+                                           group:0,
+                                           suit:'h',
+                                           rank:1,
+                                           ordinal:1,
+                                           rankOrdinal:1
+                                        }
+                                     ]
+                                 },
+                                  {
+                                                                      sels:[false, false, false, false, false, false, false, false, false, false],
+                                                                      money:1,
+                                                                      cards:[
+                                                                         {
+                                                                             group:0,
+                                                                             suit:'h',
+                                                                             rank:3,
+                                                                             ordinal:9,
+                                                                             rankOrdinal:3
+                                                                         },
+
+                                                                         {
+                                                                            group:0,
+                                                                            suit:'h',
+                                                                            rank:1,
+                                                                            ordinal:1,
+                                                                            rankOrdinal:1,
+
+                                                                         },
+                                                                         {
+                                                                            group:0,
+                                                                            suit:'h',
+                                                                            rank:1,
+                                                                            ordinal:1,
+                                                                            rankOrdinal:1
+                                                                         }
+                                                                      ]
+                                                                  }
+                            ]
                     }
+
 
                 ]
             },
