@@ -60,11 +60,14 @@ class MyPanHand extends React.Component {
     }
 
     selector(i) {
-
-
-
+        if(this.props.hand.length  <2){
+            this.setState({ displayMove: 0});
+        }
         this.props.sels[i] = !this.props.sels[i];
-        if (this.props.sels.includes(true))
+
+        if(this.props.hand.length  <2){
+            this.setState({ displayMove: 0});
+        } else if (this.props.sels.includes(true))
             this.setState({ displayMove: 1});
         else
             this.setState({ displayMove: 0});
@@ -77,7 +80,6 @@ class MyPanHand extends React.Component {
     }
 
     move() {
-        debugger;
         let selected = [];
         let newHand = [];
         for (let i in this.props.hand){
@@ -111,12 +113,107 @@ class MyPanHand extends React.Component {
         let mw = this.props.w;
         let mv = false;
         let dieDim = {height: .07, width: .2, valueFont: .1, dieFont: .05, marginRight: .02};
+        let line2 =    <View style={{
+            width: .45,
+            height: .07,
+            margin: .01,
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start'
+        }}>
+            <View style={{
+                width: .45,
+                opacity: this.state.displayMove,
+                height: .07,
+                marginLeft: .02,
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start'
+            }}>
+                <VrButton onClick={this.clear.bind(this)} key={0}>
+                    <Die value={"Clear"} key={0} dim={dieDim} color={"black"}
+                         backgroundColor={"brown"}/>
+                </VrButton>
+
+            </View>
+
+            <View style={{
+                width: .45,
+                height: .07,
+                opacity: this.state.displayMove,
+                marginLeft: -.215,
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start'
+            }}>
+                <VrButton onClick={this.move.bind(this)} key={0}>
+                    <Die value={"Move"} key={0} dim={dieDim} color={"black"}
+                         backgroundColor={"brown"}/>
+                </VrButton>
+
+            </View>
+
+
+        </View>
+
+        let rightText = <View
+            style={{
+                opacity: 1,
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                width: .50,
+                height: .22
+
+            }}>
+            <Text
+                style={{
+                    fontSize: .03,
+                    textAlign: 'left',
+                    marginTop: .008,
+                    marginLeft: .015,
+                    color:"black"
+                }}>
+                {"Clicking the Move button with transfer all the selected cards to right-hand side in rank order"}
+            </Text>
+        </View>
+
+
+
+        if( this.props.hand.length  <2 ){
+            rightText = <View/>;
+        } else if(!this.state.displayMove  && this.props.hand.length  >1 ){
+            rightText = <View/>;
+            line2 =    <View style={{
+                width: .7,
+                height: .07,
+                margin: .01,
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start'
+            }}>
+                    <Text
+                        style={{
+                            fontSize: .03,
+                            textAlign: 'left',
+                            marginTop: .008,
+                            marginLeft: .015,
+                            color:"black"
+                        }}>
+                        {"Anytime you can select 1 or more cards and then click the Move button to group the cards together"}
+                    </Text>
+
+            </View>
+
+        }
+
         return (
+
 
             <View
                 style={{
                     opacity: 1,
-                    flexDirection: 'column',
+                    flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
                     width: mw,
@@ -124,75 +221,33 @@ class MyPanHand extends React.Component {
                     backgroundColor: this.props.bgColor
 
                 }}>
-                <View style={{
-                    width: .45,
-                    height: .07,
-                    marginTop: .02,
-                    marginLeft: .03,
-                    marginBottom:.02,
-                    flexDirection: 'row',
-                    alignItems: 'flex-start',
-                    justifyContent: 'flex-start'
-                }}>
-                    {g}
+
+                <View
+                    style={{
+                        opacity: 1,
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        justifyContent: 'flex-start',
+                        width: .77,
+                        height: .22,
+                        backgroundColor: this.props.bgColor
+
+                    }}>
+                    <View style={{
+                        width: .7,
+                        height: .07,
+                        marginTop: .02,
+                        marginLeft: .03,
+                        marginBottom:.02,
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        justifyContent: 'flex-start'
+                    }}>
+                        {g}
+                    </View>
+                    {line2}
                 </View>
-                <View style={{
-                    width: .45,
-                    height: .07,
-                    margin: .01,
-                    flexDirection: 'row',
-                    alignItems: 'flex-start',
-                    justifyContent: 'flex-start'
-                }}>
-                    <View style={{
-                        width: .45,
-                        opacity: this.state.displayMove,
-                        height: .07,
-                        marginLeft: .02,
-                        flexDirection: 'row',
-                        alignItems: 'flex-start',
-                        justifyContent: 'flex-start'
-                    }}>
-                        <VrButton onClick={this.clear.bind(this)} key={0}>
-                            <Die value={"Clear"} key={0} dim={dieDim} color={"black"}
-                                 backgroundColor={"brown"}/>
-                        </VrButton>
-
-                    </View>
-
-                    <View style={{
-                        width: .45,
-                        height: .07,
-                        opacity: this.state.displayMove,
-                        marginLeft: -.215,
-                        flexDirection: 'row',
-                        alignItems: 'flex-start',
-                        justifyContent: 'flex-start'
-                    }}>
-                        <VrButton onClick={this.move.bind(this)} key={0}>
-                            <Die value={"Move"} key={0} dim={dieDim} color={"black"}
-                                 backgroundColor={"brown"}/>
-                        </VrButton>
-
-                    </View>
-
-                    <View style={{
-                        width: .45,
-                        height: .07,
-                        opacity: 0,
-                        marginLeft: -.215,
-                        flexDirection: 'row',
-                        alignItems: 'flex-start',
-                        justifyContent: 'flex-start'
-                    }}>
-                        <VrButton onClick={this.move.bind(this)} key={0}>
-                            <Die value={"Play"} key={0} dim={dieDim} color={"black"}
-                                 backgroundColor={"brown"}/>
-                        </VrButton>
-
-                    </View>
-                </View>
-
+                {rightText}
             </View>
         )
 

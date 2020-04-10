@@ -76,6 +76,8 @@ class GamesLayout extends React.Component {
                 state:1,
                 otherState:5,
                 kitty:18,
+                instructions:"You can now draw a card. ",
+                journal:"Welcome to Panguingue",
                 currentCard: {
                                group:-1,
                                suit:'',

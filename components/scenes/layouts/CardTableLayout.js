@@ -167,7 +167,7 @@ class CardTableLayout extends React.Component {
                     s = 5;
                     this.transfer(this.state.data.passCard,this.state.data.currentCard);
                     this.createEmptyCard();
-                   this.state.data.currentPlayer = 1;
+                   this.state.data.currentPlayer = 0;
                     this.createDropSpot();
                 } else if (s == 6) { // pickup
 
@@ -343,12 +343,103 @@ class CardTableLayout extends React.Component {
         }
         return cnt;
     }
+    getVerbage(){
+        let jw = .63;
+        let jh = 3;
+        let instructions =   <View style={{
+
+            flexDirection: 'column',
+            marginTop: 0,
+            marginRight: 0.02,
+            marginLeft: .02,
+            width:  jw,
+            height: jh,
+            backgroundColor: "green"
+        }}>
+            <View style={{
+
+                flexDirection: 'column',
+                marginTop: 0,
+                marginRight: 0,
+                width:  jw,
+                height: .25,
+                backgroundColor: "lightgray"
+            }}>
+                <Text
+                    style={{
+                        fontSize: .04,
+                        textAlign: 'left',
+                        marginTop: .008,
+                        marginLeft: .02,
+                        color:"black"
+                    }}>
+                    {this.state.data.instructions}
+                </Text>
+            </View>
+            <View style={{
+
+                flexDirection: 'column',
+                marginTop: 0,
+                marginRight: 0,
+                width:  jw,
+                height: jh-.27,
+                backgroundColor: "green"
+            }}>
+                <Text
+                    style={{
+                        fontSize: .04,
+                        textAlign: 'left',
+                        marginTop: .008,
+                        marginLeft: .02,
+                        color:"black"
+                    }}>
+                    {this.state.data.journal}
+                </Text>
+            </View>
+        </View>
+
+        let journal =   <View style={{
+
+            flexDirection: 'column',
+            marginTop: 0,
+            marginRight: 0.02,
+            marginLeft: .02,
+            width:  jw,
+            height: jh,
+            backgroundColor: "green"
+        }}>
+
+            <View style={{
+
+                flexDirection: 'column',
+                marginTop: 0,
+                marginRight: 0,
+                marginLeft: .02,
+                width:  jw,
+                height: jh-.27,
+                backgroundColor: "green"
+            }}>
+                <Text
+                    style={{
+                        fontSize: .05,
+                        textAlign: 'left',
+                        marginTop: .008,
+                        marginLeft: .015,
+                        color:"black"
+                    }}>
+                    {this.state.data.journal}
+                </Text>
+            </View>
+        </View>
+        if(this.state.data.playerId == this.state.data.currentPlayer){
+            return instructions;
+        }
+        return journal;
+    }
     render() {
 
         let h = .22;
         let pw = .6;
-        let jw = .65;
-        let jh = 3;
         let mw = .65;
         let youw = 1.29;
         let tw = this.props.w;
@@ -540,6 +631,7 @@ class CardTableLayout extends React.Component {
                                         color={"black"} key={8} ref={"myCards"}
                                         clickMyTableCard={this.clickMyTableCard.bind(this)}
                                         canMuck={this.canMuck()}
+                                        border={true} borderGroup={1}
                                         action={this.action.bind(this)}  data={this.props.data} player={p[0]}/>
                         </View>
                         {/*3rd row : player 1*/}
@@ -573,17 +665,7 @@ class CardTableLayout extends React.Component {
                         backgroundColor: "green"
                     }}>
                         {/*4th row : journal*/}
-                        <View style={{
-
-                            flexDirection: 'column',
-                            marginTop: 0,
-                            marginRight: 0,
-                            marginLeft: .025,
-                            width:  jw,
-                            height: jh,
-                            backgroundColor: "green"
-                        }}>
-                        </View>
+                        {this.getVerbage()}
 
                         {/*4th row : yourhand*/}
                         <View style={{
