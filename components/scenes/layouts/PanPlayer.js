@@ -238,7 +238,7 @@ class PanPlayer extends React.Component {
             cardGrps =
                 grps.slice(0, 3).map((item, index) => {
                     if(this.props.border){
-                        if(index == this.props.borderGroup){
+                        if(this.props.borderGroup.includes(index)){
                             bw = .01;
                         }else{
                             bw = 0;

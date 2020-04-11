@@ -174,7 +174,7 @@ class MyPanHand extends React.Component {
                     marginLeft: .015,
                     color:"black"
                 }}>
-                {"Clicking the Move button with transfer all the selected cards to right-hand side in rank order"}
+                {"Clicking the Move button will transfer all the selected cards to right-hand side in rank order"}
             </Text>
         </View>
 
@@ -200,7 +200,7 @@ class MyPanHand extends React.Component {
                             marginLeft: .015,
                             color:"black"
                         }}>
-                        {"Anytime you can select 1 or more cards and then click the Move button to group the cards together"}
+                        {"At anytime you can select 1 or more cards and then click the Move button to group the cards together"}
                     </Text>
 
             </View>

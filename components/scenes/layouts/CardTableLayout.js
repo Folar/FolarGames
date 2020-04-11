@@ -21,7 +21,7 @@ class CardTableLayout extends React.Component {
             data: this.props.data,
             lastGroup:null,
             border:false,
-            borderGroup:-1,
+            borderGroup:[],
             sels: [false, false, false, false, false, false, false, false, false, false],
 
         };
@@ -217,7 +217,7 @@ class CardTableLayout extends React.Component {
     clearError (msg){
         this.state.data.instructions = msg;
         this.state.data.instructionColor = "black";
-        this.setState({border:false,borderGroup:-1,data:this.state.data});
+        this.setState({border:false,borderGroup:[],data:this.state.data});
     }
 
     clickMyTableCard(i,g){
@@ -283,7 +283,7 @@ class CardTableLayout extends React.Component {
                 if (cards[src].cards.length>2 && (cards[src].cards.length -cnt)<3) {
                     this.reportError(
                         "Illegal to move a card from a card group when the number of cards in that group will be less then 3 ",
-                        src);
+                        [src]);
                     return;
                 }
 
@@ -304,7 +304,6 @@ class CardTableLayout extends React.Component {
                 }
                 if(cards[src].cards.length == 0 ){
                     cards.splice(src,1);
-                    debugger;
                 }
 
                 cards[trg].cards.sort(this.compare)
