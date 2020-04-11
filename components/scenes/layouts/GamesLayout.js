@@ -145,9 +145,9 @@ class GamesLayout extends React.Component {
                     {
                         group:-1,
                         suit:'d',
-                        rank:4,
-                        ordinal:14,
-                        rankOrdinal:4
+                        rank:1,
+                        ordinal:3,
+                        rankOrdinal:1
                     },
                     {
                         group:-1,
