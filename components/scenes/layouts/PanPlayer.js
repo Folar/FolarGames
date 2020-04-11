@@ -36,6 +36,10 @@ class PanPlayer extends React.Component {
         return false;
     }
 
+    cardGroupCount(){
+        let data = this.props.data;
+        return  data.players[data.currentPlayer].cards.length;
+    }
     count() {
         let data = this.props.data;
         let cards = data.players[data.currentPlayer].cards;

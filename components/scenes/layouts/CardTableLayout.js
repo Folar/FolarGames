@@ -345,7 +345,7 @@ class CardTableLayout extends React.Component {
     canMuck(){
         if(this.refs.myCards == undefined) return false;
 
-        if(this.refs.myCards.count() == 11)
+        if(this.refs.myCards.count() == 11 && this.refs.myCards.cardGroupCount() <4 )
             return  true;
         if( this.count()!=1){
             return  false;
