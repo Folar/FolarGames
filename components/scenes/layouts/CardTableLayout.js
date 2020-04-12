@@ -209,10 +209,7 @@ class CardTableLayout extends React.Component {
         return (a.ordinal - b.ordinal);
     }
 
-    foo() {
-        debugger;
-        this.setState({data: this.props.data, sels: this.state.sels});
-    }
+
 
     reportError(msg, src) {
         this.state.data.instructions = msg;
@@ -337,9 +334,7 @@ class CardTableLayout extends React.Component {
         this.setState({data: this.props.data, sels: this.state.sels});
     }
 
-    moneyCardGroup(grp) {
-        return 0;
-    }
+
 
 
     componentDidMount() {
@@ -354,8 +349,11 @@ class CardTableLayout extends React.Component {
             suit: "",
             anchor: false,
             sameSuit: false,
-            valle: false
+            valle: false,
+            double:1,
+            size:0
         };
+        result.size = h.length;
         if (h[0].rankOrdinal == h[1].rankOrdinal) {
             result.type = "rank";
             for (let i = 0; i < h.length - 1; i++) {
@@ -389,6 +387,9 @@ class CardTableLayout extends React.Component {
                 if (tot == 1) {
                     result.sameSuit = true;
                     result.suit = h[0].suit;
+                    if(result.suit == 's' ){
+                        result.double = 2;
+                    }
                 }
 
                 if (h[0].rankOrdinal == 1 || h[0].rankOrdinal == 10)
@@ -412,20 +413,49 @@ class CardTableLayout extends React.Component {
                 }
             }
             result.suit = h[0].suit;
+            if(result.suit == 's' ){
+                result.double = 2;
+            }
             if (h[0].rankOrdinal == 1 || h[h.length - 1].rankOrdinal == 10) {
                 result.anchor = true;
             }
 
 
         }
-        debugger;
+
         return result;
     }
+    getMoney(r) {
+        debugger;
+        let money = 0;
+        if(r.type == "rank"){
+            if (r.valle){
+                if (r.sameSuit){
+                    money = 2 * r.double;
+                } else {
+                    money = 1;
+                }
 
+            } else {
+                if (r.sameSuit) {
+                    money = r.double + (r.size - 3);
+                }
+            }
+
+        } else {
+            if (r.anchor)
+                money = r.double;
+        }
+
+        return money;
+    }
     test() {
         let h = this.refs.hand.getSelectedCards(false);
         h.sort(this.compare);
-        this.getMeld(h);
+        let r = this.getMeld(h);
+        if(r.valid){
+            let m = this.getMoney(r);
+        }
     }
 
     canMuck() {

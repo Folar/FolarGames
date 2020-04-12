@@ -102,31 +102,31 @@ class GamesLayout extends React.Component {
                 hand : [
                   {
                         group:-1,
-                        suit:'h',
-                        rank:1,
-                        ordinal:1,
-                        rankOrdinal:1
+                        suit:'s',
+                        rank:13,
+                        ordinal:36,
+                        rankOrdinal:10
+                    },
+                    {
+                          group:-1,
+                          suit:'s',
+                          rank:12,
+                          ordinal:32,
+                          rankOrdinal:9
                     },
                     {
                         group:-1,
-                        suit:'d',
-                        rank:5,
-                        ordinal:22,
-                        rankOrdinal:5
+                        suit:'s',
+                        rank:11,
+                        ordinal:28,
+                        rankOrdinal:8
                     },
                     {
-                        group:-1,
-                        suit:'c',
-                        rank:7,
-                        ordinal:27,
-                        rankOrdinal:7
-                    },
-                    {
-                        group:-1,
-                        suit:'d',
-                        rank:3,
-                        ordinal:10,
-                        rankOrdinal:3
+                         group:-1,
+                                                suit:'h',
+                                                rank:13,
+                                                ordinal:37,
+                                                rankOrdinal:10
                     },
                     {
                         group:-1,
@@ -143,34 +143,34 @@ class GamesLayout extends React.Component {
                         rankOrdinal:3
                     },
                     {
-                        group:-1,
-                        suit:'d',
-                        rank:1,
-                        ordinal:3,
-                        rankOrdinal:1
+                         group:-1,
+                                               suit:'s',
+                                               rank:3,
+                                               ordinal:8,
+                                               rankOrdinal:3
                     },
                     {
                         group:-1,
-                        suit:'h',
-                        rank:3,
-                        ordinal:9,
-                        rankOrdinal:3
+                                              suit:'s',
+                                              rank:4,
+                                              ordinal:12,
+                                              rankOrdinal:4
                     },
 
                     {
-                       group:-1,
-                       suit:'h',
-                       rank:1,
-                       ordinal:1,
-                       rankOrdinal:1,
+                      group:-1,
+                                            suit:'s',
+                                            rank:5,
+                                            ordinal:16,
+                                            rankOrdinal:5
 
                     },
                     {
                        group:-1,
-                       suit:'h',
-                       rank:1,
-                       ordinal:1,
-                       rankOrdinal:1
+                       suit:'s',
+                       rank:3,
+                       ordinal:8,
+                       rankOrdinal:3
                     }
 
 
