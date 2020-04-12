@@ -22,6 +22,8 @@ class CardTableLayout extends React.Component {
             lastGroup: null,
             border: false,
             borderGroup: [],
+            pickup:false,
+            instructionColor:"black",
             sels: [false, false, false, false, false, false, false, false, false, false],
 
         };
@@ -32,6 +34,7 @@ class CardTableLayout extends React.Component {
         if (cards.length > 0 && cards[cards.length - 1].money == -1)
             return;
         cards.push({
+            str:"",
             group: cards.length,
             sels: [false, false, false, false, false, false, false, false, false, false],
             money: -1,
@@ -51,6 +54,7 @@ class CardTableLayout extends React.Component {
         if (cards.length > 0 && cards[cards.length - 1].money == -1)
             return;
         cards.push({
+            str:"",
             group: cards.length,
             sels: [false, false, false, false, false, false, false, false, false, false],
             money: -1,
@@ -85,6 +89,7 @@ class CardTableLayout extends React.Component {
         let cc = this.state.data.currentCard;
         c.group = cards.length - 1;
         this.transfer(c, cc);
+        this.state.pickup = true;
         this.createEmptyCard();
     }
 
@@ -129,6 +134,8 @@ class CardTableLayout extends React.Component {
 
     action(a) {
         let s = this.state.data.state;
+        let data = this.state.data;
+        let str = "";
         console.log("start action=" + a + " state=" + s);
         //debugger;
         switch (a) {
@@ -136,18 +143,29 @@ class CardTableLayout extends React.Component {
                 if (s == 1) { // draw
                     s = 6;
                     this.draw();
+                        str = " Because your the first player this round, you can draw another card or "+
+                        " pickup the " + this.getCardString(data.currentCard);
+                    this.setInstructions(str);
                     this.createDropSpot();
                 } else if (s == 2 || s == 6 || s == 7) { // draw
                     s = 3;
                     this.draw();
+                    str =  "Pickup the " + this.getCardString(data.currentCard) + " or pass the card to the next player" ;
+                    this.setInstructions(str);
                     this.createDropSpot();
                 } else if (s == 5) { // draw
                     s = 3;
                     this.draw();
+                    str =  "Pickup the " + this.getCardString(data.currentCard) + " or pass the card to the next player" ;
+                    this.setInstructions(str);
 
                 } else if (s == 3) { // pickup
                     this.pickup();
                     s = 4;
+                    str =  "Select one or more cards in your hand and then click on a card group inorder to transfer " +
+                     "the selected cards to the card group or \n" +
+                     " select one or more cards in a card group and then click another card to move between groups";
+                    this.setInstructions(str);
 
                 }
                 break;
@@ -158,11 +176,16 @@ class CardTableLayout extends React.Component {
                     this.transfer(this.state.data.passCard, this.state.data.currentCard);
                     this.createEmptyCard();
                     this.state.data.currentPlayer = 0;
+                    str =  "Pickup the " + this.getCardString(data.passCard) + " or draw a card from the deck" ;
+                    this.setInstructions(str);
                     this.createDropSpot();
                 } else if (s == 6) { // pickup
 
                     s = 4;
-                    // this.transfer(this.state.data.currentCard,this.state.data.passCard);
+                    str =  "Select one or more cards in your hand and then click on a card group inorder to transfer the " +
+                        "selected cards to the card group or \n" +
+                        " select one or more cards in a card group and then click another card to move between groups";
+                    this.setInstructions(str);
                     this.pickup();
                 }
                 break;
@@ -170,6 +193,10 @@ class CardTableLayout extends React.Component {
                 if (s == 5) { // pickup
                     s = 4;
                     this.transfer(this.state.data.currentCard, this.state.data.passCard);
+                    str =  "Select one or more cards in your hand and then click on a card group inorder to transfer " +
+                        "the selected cards to the card group or \n" +
+                        " select one or more cards in a card group and then click another card to move between groups";
+                    this.setInstructions(str);
                     this.pickup();
                 } else if (s == 4) { // muck
                     this.removeDropSpot();
@@ -177,6 +204,8 @@ class CardTableLayout extends React.Component {
                     this.refs.myCards.clear();
                     //this.state.data.currentPlayer = 1;
                     s = 7;
+                    str =  "Draw a card from the deck" ;
+                    this.setInstructions(str);
                     this.createEmptyCard();
                     this.setState({data: this.props.data, sels: this.state.sels})
 
@@ -195,16 +224,25 @@ class CardTableLayout extends React.Component {
 
 
 
-    reportError(msg, src) {
-        this.state.data.instructions = msg;
-        this.state.data.instructionColor = "red";
-        this.setState({border: true, borderGroup: src, data: this.state.data});
-    }
-
-    clearError(msg) {
+    setInstructions(msg){
         this.state.data.instructions = msg;
         this.state.data.instructionColor = "black";
-        this.setState({border: false, borderGroup: [], data: this.state.data});
+        this.setState({ data: this.state.data,instructionColor:this.state.data.instructionColor});
+    }
+
+    reportError(msg, src) {
+        this.state.data.oldInstructions = this.state.data.instructions;
+        this.state.data.instructions = msg;
+        this.state.data.instructionColor = "red";
+        this.setState({border: true, borderGroup: src, data: this.state.data,instructionColor:this.state.data.instructionColor});
+    }
+
+    clearError() {
+        if(this.state.data.instructionColor == "black") return;
+        this.state.data.instructions = this.state.data.oldInstructions;
+        this.state.data.instructionColor = "black";
+        this.setState({border: false, borderGroup: [], data: this.state.data,
+                                  instructionColor:this.state.data.instructionColor});
     }
 
     clickMyTableCard(i, g) {
@@ -213,16 +251,29 @@ class CardTableLayout extends React.Component {
         let cards = data.players[data.playerId].cards;
         if (this.count()) {
 
-            let cardsFromHand = this.refs.hand.getSelectedCards(true);
+            let cardsFromHand = this.refs.hand.getSelectedCards(false);
+            if( this.state.pickup ){
+                if (g != cards.length -1){
+                    this.reportError(
+                        "The card that you just picked up, must be used first to form a meld",
+                        [g]);
+                    return;
+                }
+                if(cards[g].cards.length + cardsFromHand.length > 2 ){
+                    this.state.pickup = false;
+                }
+
+            }
+
+            cardsFromHand = this.refs.hand.getSelectedCards(true);
             if (cards[g].money == -1)
                 cards.cards = [];
+
             for (let j in  cardsFromHand) {
                 cardsFromHand[j].group = g;
                 if (cards[g].money == -1) {
                     cards[g].money = 0;
                     cards[g].cards = [];
-
-
                 }
 
                 cards[g].cards.push(cardsFromHand[j]);
@@ -247,6 +298,7 @@ class CardTableLayout extends React.Component {
         } else {
             let cnt = 0;
             if (this.state.lastGroup == null || this.state.lastGroup == g) {
+
                 cards[g].sels[i] = !cards[g].sels[i];
                 for (let j = 0; j < cards[g].cards.length; j++) {
                     if (cards[g].sels[j])
@@ -260,6 +312,17 @@ class CardTableLayout extends React.Component {
                 let src = this.state.lastGroup;
                 let trg = g;
 
+                if( this.state.pickup ){
+                    if (src != cards.length -1){
+                        this.reportError(
+                            "The card that you just picked up, must be used first to form a meld",
+                            [src]);
+                        return;
+                    }
+
+                    this.state.pickup = false;
+
+                }
 
                 cnt = 0;
                 for (let j = cards[src].cards.length - 1; j >= 0; j--) {
@@ -267,7 +330,7 @@ class CardTableLayout extends React.Component {
                         cnt++
                     }
                 }
-                if (cards[src].cards.length > 2 && (cards[src].cards.length - cnt) < 3) {
+                if (cards[src].cards.length > 1 && (cards[src].cards.length - cnt) < 3) {
                     this.reportError(
                         "Illegal to move a card from a card group when the number of cards in that group will be less then 3 ",
                         [src]);
@@ -280,7 +343,7 @@ class CardTableLayout extends React.Component {
                     cards[trg].money = 0;
                 }
 
-                let oldMoney = this.moneyCardGroup(src);
+                //let oldMoney = this.moneyCardGroup(src);
                 for (let j = cards[src].cards.length - 1; j >= 0; j--) {
                     if (cards[src].sels[j]) {
                         cards[src].sels[j] = false;
@@ -324,43 +387,47 @@ class CardTableLayout extends React.Component {
 
     }
 
+    getCardString(c){
+        let suit ="";
+        let rank = "";
+
+        switch (c.suit) {
+            case 's':
+                suit = "Spades";
+                break;
+            case 'h':
+                suit = "Hearts";
+                break;
+            case 'd':
+                suit = "Diamonds";
+                break;
+            case 'c':
+                suit = "Clubs";
+                break;
+        }
+        rank = c.rank;
+        switch (c.rank) {
+            case 1:
+                rank = "Ace";
+                break;
+            case 11:
+                rank = "Jack";
+                break;
+            case 12:
+                rank = "Queen";
+                break;
+            case 13:
+                rank = "King";
+                break;
+        }
+        return rank + " of " + suit;
+    }
     cardGroupString(h){
         debugger;
         let str = "";
         for (let i = 0; i < h.length ; i++) {
-            let suit ="";
-            let rank = "";
+            str += this.getCardString(h[i])
 
-            switch (h[i].suit) {
-                case 's':
-                    suit = "Spade";
-                    break;
-                case 'h':
-                    suit = "Heart";
-                    break;
-                case 'd':
-                    suit = "Diamond";
-                    break;
-                case 'c':
-                    suit = "Club";
-                    break;
-            }
-            rank = h[i].rank;
-            switch (h[i].rank) {
-                case 1:
-                    rank = "Ace";
-                    break;
-                case 11:
-                    rank = "Jack";
-                    break;
-                case 12:
-                    rank = "Queen";
-                    break;
-                case 13:
-                    rank = "King";
-                    break;
-            }
-            str += rank + " of " + suit
             if ( i == h.length -2){
                 str += " and "
             } else if (i< h.length -2) {
@@ -561,11 +628,11 @@ class CardTableLayout extends React.Component {
             }}>
                 <Text
                     style={{
-                        fontSize: .04,
+                        fontSize: .03,
                         textAlign: 'left',
                         marginTop: .008,
                         marginLeft: .02,
-                        color: this.state.data.instructionColor
+                        color: this.state.instructionColor
                     }}>
                     {this.state.data.instructions}
                 </Text>
