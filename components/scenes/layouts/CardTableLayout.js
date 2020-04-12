@@ -44,23 +44,7 @@ class CardTableLayout extends React.Component {
         });
     }
 
-    createDropSpotError() {
-        let cards = this.state.data.players[this.state.data.currentPlayer].cards;
-        debugger;
-        if (cards.length > 0 && cards[cards.length - 1].money == -1)
-            return;
-        cards.push({
-            group: cards.length,
-            sels: [false, false, false, false, false, false, false, false, false, false],
-            money: -1,
-            cards: [
-                {
-                    rank: "error"
-                }
-            ]
 
-        });
-    }
 
     createDropSpotButton() {
         let cards = this.state.data.players[this.state.data.currentPlayer].cards;
@@ -309,8 +293,7 @@ class CardTableLayout extends React.Component {
                     cards.splice(src, 1);
                 }
 
-                cards[trg].cards.sort(this.compare)
-                let newMoney = this.moneyCardGroup(src);
+                cards[trg].cards.sort(this.compare);
 
                 if (cards.length < 3) {
                     let all3 = true;
@@ -339,6 +322,54 @@ class CardTableLayout extends React.Component {
 
     componentDidMount() {
 
+    }
+
+    cardGroupString(h){
+        debugger;
+        let str = "";
+        for (let i = 0; i < h.length ; i++) {
+            let suit ="";
+            let rank = "";
+
+            switch (h[i].suit) {
+                case 's':
+                    suit = "Spade";
+                    break;
+                case 'h':
+                    suit = "Heart";
+                    break;
+                case 'd':
+                    suit = "Diamond";
+                    break;
+                case 'c':
+                    suit = "Club";
+                    break;
+            }
+            rank = h[i].rank;
+            switch (h[i].rank) {
+                case 1:
+                    rank = "Ace";
+                    break;
+                case 11:
+                    rank = "Jack";
+                    break;
+                case 12:
+                    rank = "Queen";
+                    break;
+                case 13:
+                    rank = "King";
+                    break;
+            }
+            str += rank + " of " + suit
+            if ( i == h.length -2){
+                str += " and "
+            } else if (i< h.length -2) {
+                str += ", "
+            }
+
+        }
+        debugger;
+        return str;
     }
 
     getMeld(h) {
@@ -452,6 +483,7 @@ class CardTableLayout extends React.Component {
     test() {
         let h = this.refs.hand.getSelectedCards(false);
         h.sort(this.compare);
+        let str = this.cardGroupString(h);
         let r = this.getMeld(h);
         if(r.valid){
             let m = this.getMoney(r);
