@@ -124,54 +124,54 @@ class GamesLayout extends React.Component {
                     },
                     {
                          group:-1,
-                                                suit:'h',
-                                                rank:13,
-                                                ordinal:37,
-                                                rankOrdinal:10
+                         suit:'c',
+                         rank:7,
+                         ordinal:27,
+                         rankOrdinal:7
                     },
                     {
                         group:-1,
-                        suit:'d',
+                        suit:'c',
                         rank:11,
-                        ordinal:30,
+                        ordinal:31,
                         rankOrdinal:8
                     },
                     {
                         group:-1,
-                        suit:'d',
-                        rank:3,
-                        ordinal:10,
-                        rankOrdinal:3
+                        suit:'c',
+                        rank:12,
+                        ordinal:35,
+                        rankOrdinal:9
                     },
                     {
-                         group:-1,
-                                               suit:'s',
-                                               rank:3,
-                                               ordinal:8,
-                                               rankOrdinal:3
+                     group:-1,
+                                           suit:'c',
+                                           rank:2,
+                                           ordinal:7,
+                                           rankOrdinal:2
                     },
                     {
                         group:-1,
-                                              suit:'s',
-                                              rank:4,
-                                              ordinal:12,
-                                              rankOrdinal:4
+                                              suit:'c',
+                                              rank:2,
+                                              ordinal:7,
+                                              rankOrdinal:2
                     },
 
                     {
-                      group:-1,
-                                            suit:'s',
-                                            rank:5,
-                                            ordinal:16,
-                                            rankOrdinal:5
+                     group:-1,
+                                           suit:'c',
+                                           rank:2,
+                                           ordinal:7,
+                                           rankOrdinal:2
 
                     },
                     {
                        group:-1,
-                       suit:'s',
-                       rank:3,
-                       ordinal:8,
-                       rankOrdinal:3
+                       suit:'c',
+                       rank:2,
+                       ordinal:7,
+                       rankOrdinal:2
                     }
 
 

@@ -24,6 +24,7 @@ class CardTableLayout extends React.Component {
             borderGroup: [],
             pickup:false,
             instructionColor:"black",
+            instructions: this.props.data.instructions,
             sels: [false, false, false, false, false, false, false, false, false, false],
 
         };
@@ -200,9 +201,22 @@ class CardTableLayout extends React.Component {
                     this.pickup();
                 } else if (s == 4) { // muck
                     this.removeDropSpot();
-                    this.refs.hand.getSelectedCards(true);
+
+
+
+                    let success = true;
+                    let results = this.checkForValidity();
+                    for (let i=0;i<results.length;i++){
+                        if (!results[i].valid || results.meldChangeForLess) {
+                            this.processMeldErrors(results);
+                            return;
+                        }
+
+                    }
+                    this.processValidMelds(results);
                     this.refs.myCards.clear();
                     //this.state.data.currentPlayer = 1;
+                    this.refs.hand.getSelectedCards(true);
                     s = 7;
                     str =  "Draw a card from the deck" ;
                     this.setInstructions(str);
@@ -227,14 +241,15 @@ class CardTableLayout extends React.Component {
     setInstructions(msg){
         this.state.data.instructions = msg;
         this.state.data.instructionColor = "black";
-        this.setState({ data: this.state.data,instructionColor:this.state.data.instructionColor});
+        this.setState({ data: this.state.data,instructionColor:"black", instructions:msg});
     }
 
     reportError(msg, src) {
         this.state.data.oldInstructions = this.state.data.instructions;
         this.state.data.instructions = msg;
         this.state.data.instructionColor = "red";
-        this.setState({border: true, borderGroup: src, data: this.state.data,instructionColor:this.state.data.instructionColor});
+        this.setState({border: true, borderGroup: src, data: this.state.data,
+            instructionColor:"red", instructions:msg});
     }
 
     clearError() {
@@ -242,7 +257,7 @@ class CardTableLayout extends React.Component {
         this.state.data.instructions = this.state.data.oldInstructions;
         this.state.data.instructionColor = "black";
         this.setState({border: false, borderGroup: [], data: this.state.data,
-                                  instructionColor:this.state.data.instructionColor});
+                                instructionColor:"black", instructions:msg});
     }
 
     clickMyTableCard(i, g) {
@@ -422,9 +437,9 @@ class CardTableLayout extends React.Component {
         }
         return rank + " of " + suit;
     }
-    cardGroupString(h){
-        debugger;
+    getCardGroupString(h){
         let str = "";
+
         for (let i = 0; i < h.length ; i++) {
             str += this.getCardString(h[i])
 
@@ -435,12 +450,81 @@ class CardTableLayout extends React.Component {
             }
 
         }
-        debugger;
         return str;
     }
 
-    getMeld(h) {
+
+    processValidMelds(results){
+        let data = this.props.data;
+        let txt = "";
+        let cards = data.players[data.playerId].cards;
+        for (let i=0;i<results.length;i++){
+            let str =  cards[i].str;
+            if(str.length == 0){
+                cards[i].str = results[i].str;
+                cards[i].money = results[i].money;
+                txt += "The new meld "+  cards[i].str +" is worth " +  cards[i].money;
+            }else if ( cards[i].str != results[i].str ){
+                cards[i].str = results[i].str;
+                txt += "The changed meld "+  cards[i].str + " worth has changed by " +  ( results[i].money -cards[i].money);
+                cards[i].money = results[i].money;
+            }
+            if(txt.length > 0)
+                txt += ". ";
+
+        }
+        this.state.data.journal = txt;
+    }
+    processMeldErrors(results){
+        let errGrps = [];
+        let err= "";
+        for (let i=0;i<results.length;i++){
+            if (!results[i].valid || results.meldChangeForLess) {
+                if (!results[i].valid){
+                    err += "The meld " +results[i].str ;
+                    err += " is illegal";
+
+                }else{
+                    err += "The new meld " + results[i].str + " has resulted in less money. The old meld was"+
+                            results.oldStr ;
+                }
+                errGrps.push(i);
+                err +=". ";
+            }
+
+        }
+        this.reportError(err, errGrps);
+    }
+
+    checkForValidity(){
         debugger;
+        let data = this.props.data;
+        let cards = data.players[data.currentPlayer].cards;
+        let melds = [];
+        for (let i = 0;i<cards.length;i++){
+            let money = 0;
+            let result = this.getMeld(cards[i].cards);
+            let r = {
+                valid:false,
+                money:0,
+                str:this.getCardGroupString(cards[i].cards),
+                meldChangeForLess:false,
+                oldStr: cards[i].str
+            }
+            if (result.valid){
+                r = {
+                    valid:true,
+                    money:this.getMoney(result),
+                    str:this.getCardGroupString(cards[i].cards),
+                    meldChangeForLess:cards[i].money <  this.getMoney(result)
+                }
+            }
+            melds.push(r);
+        }
+        return melds;
+    }
+
+    getMeld(h) {
         let result = {
             valid: true,
             type: "",
@@ -524,7 +608,6 @@ class CardTableLayout extends React.Component {
         return result;
     }
     getMoney(r) {
-        debugger;
         let money = 0;
         if(r.type == "rank"){
             if (r.valle){
@@ -550,7 +633,7 @@ class CardTableLayout extends React.Component {
     test() {
         let h = this.refs.hand.getSelectedCards(false);
         h.sort(this.compare);
-        let str = this.cardGroupString(h);
+        let str = this.getCardGroupString(h);
         let r = this.getMeld(h);
         if(r.valid){
             let m = this.getMoney(r);
@@ -624,7 +707,8 @@ class CardTableLayout extends React.Component {
                 marginRight: 0,
                 width: jw,
                 height: .25,
-                backgroundColor: "lightgray"
+                backgroundColor: "#eba117"
+
             }}>
                 <Text
                     style={{
@@ -632,9 +716,10 @@ class CardTableLayout extends React.Component {
                         textAlign: 'left',
                         marginTop: .008,
                         marginLeft: .02,
+                        weight:600,
                         color: this.state.instructionColor
                     }}>
-                    {this.state.data.instructions}
+                    {this.state.instructions}
                 </Text>
             </View>
             <View style={{
@@ -717,6 +802,7 @@ class CardTableLayout extends React.Component {
             p.push({playing: false});
         }
 
+        let verbage = this.getVerbage();
         return (
             <View
                 style={{
@@ -926,7 +1012,7 @@ class CardTableLayout extends React.Component {
                         backgroundColor: "green"
                     }}>
                         {/*4th row : journal*/}
-                        {this.getVerbage()}
+                        {verbage}
 
                         {/*4th row : yourhand*/}
                         <View style={{
