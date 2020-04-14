@@ -253,11 +253,11 @@ class CardTableLayout extends React.Component {
     }
 
     clearError() {
-        if(this.state.data.instructionColor == "black") return;
+        if(this.state.instructionColor == "black") return;
         this.state.data.instructions = this.state.data.oldInstructions;
         this.state.data.instructionColor = "black";
         this.setState({border: false, borderGroup: [], data: this.state.data,
-                                instructionColor:"black", instructions:msg});
+                                instructionColor:"black", instructions:this.state.data.oldInstructions});
     }
 
     clickMyTableCard(i, g) {
