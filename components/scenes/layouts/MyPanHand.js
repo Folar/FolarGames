@@ -111,6 +111,9 @@ class MyPanHand extends React.Component {
 
         g = this.props.hand.map(this.foo,this);
 
+        let rit = "Clicking the Move button will transfer all the selected cards to right-hand side in rank order";
+        if(this.props.data.state != 0)
+            rit = this.props.text;
 
         let mw = this.props.w;
         let mv = false;
@@ -165,7 +168,8 @@ class MyPanHand extends React.Component {
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start',
                 width: .50,
-                height: .22
+                backgroundColor:this.props.instructionColor,
+                height: this.props.h
 
             }}>
             <Text
@@ -174,18 +178,20 @@ class MyPanHand extends React.Component {
                     textAlign: 'left',
                     marginTop: .008,
                     marginLeft: .015,
-                    color:"black"
+                    color:"black",
+                    backgroundColor:this.props.instructionColor
                 }}>
-                {"Clicking the Move button will transfer all the selected cards to right-hand side in rank order"}
+                {rit}
             </Text>
         </View>
 
 
 
-        if( this.props.hand.length  <2 ){
+        if( this.props.hand.length  <2 && this.props.data.state == 0){
             rightText = <View/>;
         } else if(!this.state.displayMove  && this.props.hand.length  >1 ){
-            rightText = <View/>;
+            if (this.props.data.state == 0)
+                rightText = <View/>;
             line2 =    <View style={{
                 width: .7,
                 height: .07,
@@ -219,7 +225,7 @@ class MyPanHand extends React.Component {
                     alignItems: 'flex-start',
                     justifyContent: 'flex-start',
                     width: mw,
-                    height: .22,
+                    height: this.props.h,
                     backgroundColor: this.props.bgColor
 
                 }}>
@@ -231,7 +237,7 @@ class MyPanHand extends React.Component {
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
                         width: .77,
-                        height: .22,
+                        height: this.props.h,
                         backgroundColor: this.props.bgColor
 
                     }}>

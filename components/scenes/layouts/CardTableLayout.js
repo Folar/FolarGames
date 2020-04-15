@@ -23,7 +23,7 @@ class CardTableLayout extends React.Component {
             border: false,
             borderGroup: [],
             pickup:false,
-            instructionColor:"black",
+            instructionColor:"#eba117",
             instructions: this.props.data.instructions,
             sels: [false, false, false, false, false, false, false, false, false, false],
 
@@ -137,6 +137,10 @@ class CardTableLayout extends React.Component {
         let s = this.state.data.state;
         let data = this.state.data;
         let str = "";
+        let instr = "Select one or more cards in your hand and then click on a card group inorder to transfer " +
+            "the selected cards to the card group or\n" +
+            "Select one or more cards in a card group and "+
+            "then click another card group to move the cards between the groups";
         console.log("start action=" + a + " state=" + s);
         //debugger;
         switch (a) {
@@ -163,9 +167,7 @@ class CardTableLayout extends React.Component {
                 } else if (s == 3) { // pickup
                     this.pickup();
                     s = 4;
-                    str =  "Select one or more cards in your hand and then click on a card group inorder to transfer " +
-                     "the selected cards to the card group or \n" +
-                     " select one or more cards in a card group and then click another card to move between groups";
+                    str = instr;
                     this.setInstructions(str);
 
                 }
@@ -183,9 +185,7 @@ class CardTableLayout extends React.Component {
                 } else if (s == 6) { // pickup
 
                     s = 4;
-                    str =  "Select one or more cards in your hand and then click on a card group inorder to transfer the " +
-                        "selected cards to the card group or \n" +
-                        " select one or more cards in a card group and then click another card to move between groups";
+                    str =  instr;
                     this.setInstructions(str);
                     this.pickup();
                 }
@@ -194,9 +194,7 @@ class CardTableLayout extends React.Component {
                 if (s == 5) { // pickup
                     s = 4;
                     this.transfer(this.state.data.currentCard, this.state.data.passCard);
-                    str =  "Select one or more cards in your hand and then click on a card group inorder to transfer " +
-                        "the selected cards to the card group or \n" +
-                        " select one or more cards in a card group and then click another card to move between groups";
+                    str =  instr;
                     this.setInstructions(str);
                     this.pickup();
                 } else if (s == 4) { // muck
@@ -239,25 +237,23 @@ class CardTableLayout extends React.Component {
 
 
     setInstructions(msg){
-        this.state.data.instructions = msg;
-        this.state.data.instructionColor = "black";
-        this.setState({ data: this.state.data,instructionColor:"black", instructions:msg});
+        this.state.instructions = msg;
+        this.state.instructionColor = "#eba117";
+        this.setState({ data: this.state.data,instructionColor:"#eba117", instructions:msg});
     }
 
     reportError(msg, src) {
-        this.state.data.oldInstructions = this.state.data.instructions;
-        this.state.data.instructions = msg;
-        this.state.data.instructionColor = "red";
-        this.setState({border: true, borderGroup: src, data: this.state.data,
+        this.state.oldInstructions = this.state.instructions;
+        this.state.instructionColor = "#eba117";
+        this.setState({border: true, borderGroup: src,
             instructionColor:"red", instructions:msg});
     }
 
     clearError() {
-        if(this.state.instructionColor == "black") return;
-        this.state.data.instructions = this.state.data.oldInstructions;
-        this.state.data.instructionColor = "black";
-        this.setState({border: false, borderGroup: [], data: this.state.data,
-                                instructionColor:"black", instructions:this.state.data.oldInstructions});
+        if(this.state.instructionColor == "#eba117") return;
+        this.state.instructions = this.state.oldInstructions;
+        this.setState({border: false, borderGroup: [],
+                                instructionColor:"#eba117", instructions:this.state.oldInstructions});
     }
 
     clickMyTableCard(i, g) {
@@ -690,59 +686,7 @@ class CardTableLayout extends React.Component {
     getVerbage() {
         let jw = .63;
         let jh = 3;
-        let instructions = <View style={{
 
-            flexDirection: 'column',
-            marginTop: 0,
-            marginRight: 0.02,
-            marginLeft: .02,
-            width: jw,
-            height: jh,
-            backgroundColor: "green"
-        }}>
-            <View style={{
-
-                flexDirection: 'column',
-                marginTop: 0,
-                marginRight: 0,
-                width: jw,
-                height: .25,
-                backgroundColor: "#eba117"
-
-            }}>
-                <Text
-                    style={{
-                        fontSize: .03,
-                        textAlign: 'left',
-                        marginTop: .008,
-                        marginLeft: .02,
-                        weight:600,
-                        color: this.state.instructionColor
-                    }}>
-                    {this.state.instructions}
-                </Text>
-            </View>
-            <View style={{
-
-                flexDirection: 'column',
-                marginTop: 0,
-                marginRight: 0,
-                width: jw,
-                height: jh - .27,
-                backgroundColor: "green"
-            }}>
-                <Text
-                    style={{
-                        fontSize: .04,
-                        textAlign: 'left',
-                        marginTop: .008,
-                        marginLeft: .02,
-                        color: "black"
-                    }}>
-                    {this.state.data.journal}
-                </Text>
-            </View>
-        </View>
 
         let journal = <View style={{
 
@@ -755,19 +699,9 @@ class CardTableLayout extends React.Component {
             backgroundColor: "green"
         }}>
 
-            <View style={{
-
-                flexDirection: 'column',
-                marginTop: 0,
-                marginRight: 0,
-                marginLeft: .02,
-                width: jw,
-                height: jh - .27,
-                backgroundColor: "green"
-            }}>
                 <Text
                     style={{
-                        fontSize: .05,
+                        fontSize: .03,
                         textAlign: 'left',
                         marginTop: .008,
                         marginLeft: .015,
@@ -775,17 +709,16 @@ class CardTableLayout extends React.Component {
                     }}>
                     {this.state.data.journal}
                 </Text>
-            </View>
+
         </View>
-        if (this.state.data.playerId == this.state.data.currentPlayer) {
-            return instructions;
-        }
+
         return journal;
     }
 
     render() {
 
         let h = .22;
+        let yh = .265;
         let pw = .6;
         let mw = .65;
         let youw = 1.29;
@@ -1008,7 +941,7 @@ class CardTableLayout extends React.Component {
                         marginRight: .045,
                         marginLeft: .045,
                         width: tw - .1,
-                        height: h,
+                        height: yh,
                         backgroundColor: "green"
                     }}>
                         {/*4th row : journal*/}
@@ -1023,14 +956,16 @@ class CardTableLayout extends React.Component {
                             marginTop: 0,
                             marginLeft: .02,
                             width: youw,
-                            height: h,
-                            backgroundColor: "black"
+                            height: yh,
+                            backgroundColor: "pink"
                         }}>
-                            <MyPanHand bgColor={"#eba117"} color={"black"} key={10} w={youw} h={h}
+                            <MyPanHand bgColor={"#eba117"} color={"black"} key={10} w={youw} h={yh}
                                        ref="hand" data={this.props.data}
                                        sels={this.state.sels}
                                        notifySelect={this.notifySelect.bind(this)}
                                        test={this.test.bind(this)}
+                                       text ={this.state.instructions}
+                                       instruction={this.state.instructionColor}
                                        setHand={this.setMyHand.bind(this)} hand={this.state.data.hand}/>
                         </View>
 
