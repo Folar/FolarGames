@@ -167,7 +167,8 @@ class MyPanHand extends React.Component {
                 flexDirection: 'column',
                 alignItems: 'flex-start',
                 justifyContent: 'flex-start',
-                width: .50,
+                width: .535,
+                paddingRight:.01,
                 backgroundColor:this.props.instructionColor,
                 height: this.props.h
 

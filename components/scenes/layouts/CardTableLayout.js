@@ -454,19 +454,24 @@ class CardTableLayout extends React.Component {
         let data = this.props.data;
         let txt = "";
         let cards = data.players[data.playerId].cards;
+        let nwm = false;
         for (let i=0;i<results.length;i++){
             let str =  cards[i].str;
             if(str.length == 0){
+                nwm = true;
                 cards[i].str = results[i].str;
                 cards[i].money = results[i].money;
                 txt += "The new meld "+  cards[i].str +" is worth " +  cards[i].money;
             }else if ( cards[i].str != results[i].str ){
                 cards[i].str = results[i].str;
+                nwm = true;
                 txt += "The changed meld "+  cards[i].str + " worth has changed by " +  ( results[i].money -cards[i].money);
                 cards[i].money = results[i].money;
             }
-            if(txt.length > 0)
+            if(nwm ) {
                 txt += ". ";
+                nwm = false;
+            }
 
         }
         this.state.data.journal = txt;
@@ -721,7 +726,7 @@ class CardTableLayout extends React.Component {
         let yh = .265;
         let pw = .6;
         let mw = .65;
-        let youw = 1.29;
+        let youw = 1.305;
         let tw = this.props.w;
         let p = [];
         let pid = this.props.data.playerId;
@@ -965,7 +970,7 @@ class CardTableLayout extends React.Component {
                                        notifySelect={this.notifySelect.bind(this)}
                                        test={this.test.bind(this)}
                                        text ={this.state.instructions}
-                                       instruction={this.state.instructionColor}
+                                       instructionColor={this.state.instructionColor}
                                        setHand={this.setMyHand.bind(this)} hand={this.state.data.hand}/>
                         </View>
 
