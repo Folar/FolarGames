@@ -126,9 +126,13 @@ class CardTableLayout extends React.Component {
     }
 
     getBackgroundColor(p) {
+        if (p.forfeit) {
+            return "red";
+        }
         if (this.state.data.currentPlayer == p.playerId) {
             return "blue";
         }
+
         return "#6b8e23";
 
     }
@@ -145,6 +149,7 @@ class CardTableLayout extends React.Component {
         //debugger;
         switch (a) {
             case 1:
+
                 if (s == 1) { // draw
                     s = 6;
                     this.draw();
@@ -152,19 +157,13 @@ class CardTableLayout extends React.Component {
                         " pickup the " + this.getCardString(data.currentCard);
                     this.setInstructions(str);
                     this.createDropSpot();
-                } else if (s == 2 || s == 6 || s == 7) { // draw
+                } else if (s == 2 || s == 6 || s == 7 || s == 5) { // draw
                     s = 3;
                     this.draw();
                     str =  "Pickup the " + this.getCardString(data.currentCard) + " or pass the card to the next player" ;
                     this.setInstructions(str);
                     this.createDropSpot();
-                } else if (s == 5) { // draw
-                    s = 3;
-                    this.draw();
-                    str =  "Pickup the " + this.getCardString(data.currentCard) + " or pass the card to the next player" ;
-                    this.setInstructions(str);
-
-                } else if (s == 3) { // pickup
+                }  else if (s == 3) { // pickup
                     this.pickup();
                     s = 4;
                     str = instr;
@@ -215,12 +214,26 @@ class CardTableLayout extends React.Component {
                     this.refs.myCards.clear();
                     //this.state.data.currentPlayer = 1;
                     this.refs.hand.getSelectedCards(true);
+                    this.refs.myCards.clear();
+                    //this.state.data.currentPlayer = 1;
+                    if(this.refs.myCards.count()== 11){
+                        debbugger;
+                    }
                     s = 7;
                     str =  "Draw a card from the deck" ;
                     this.setInstructions(str);
                     this.createEmptyCard();
                     this.setState({data: this.props.data, sels: this.state.sels})
 
+                }else if (s == 8) {
+                    data.players[data.playerId].forfeit = true;
+                    debugger;
+                    this.state.data.journal = this.state.instructions + data.players[data.playerId].name +
+                    "  has to refund each player " +
+                        data.players[data.playerId].current/(data.players.length - 1) ;
+                    str =  "Draw a card from the deck" ;
+                    this.setInstructions(str);
+                    s = 7;
                 }
                 break;
         }
@@ -239,13 +252,13 @@ class CardTableLayout extends React.Component {
     setInstructions(msg){
         this.state.instructions = msg;
         this.state.instructionColor = "#eba117";
-        this.setState({ data: this.state.data,instructionColor:"#eba117", instructions:msg});
+        this.setState({ data: this.state.data,instructionColor:"#eba117", instructions:msg,border:false});
     }
 
     reportError(msg, src) {
         this.state.oldInstructions = this.state.instructions;
         this.state.instructionColor = "#eba117";
-        this.setState({border: true, borderGroup: src,
+        this.setState({border: true, borderGroup: src,data:this.state.data,
             instructionColor:"red", instructions:msg});
     }
 
@@ -455,16 +468,19 @@ class CardTableLayout extends React.Component {
         let txt = "";
         let cards = data.players[data.playerId].cards;
         let nwm = false;
+        let money = 0;
         for (let i=0;i<results.length;i++){
             let str =  cards[i].str;
             if(str.length == 0){
                 nwm = true;
                 cards[i].str = results[i].str;
                 cards[i].money = results[i].money;
+                money += cards[i].money;
                 txt += "The new meld "+  cards[i].str +" is worth " +  cards[i].money;
             }else if ( cards[i].str != results[i].str ){
                 cards[i].str = results[i].str;
                 nwm = true;
+                money += ( results[i].money -cards[i].money);
                 txt += "The changed meld "+  cards[i].str + " worth has changed by " +  ( results[i].money -cards[i].money);
                 cards[i].money = results[i].money;
             }
@@ -474,11 +490,12 @@ class CardTableLayout extends React.Component {
             }
 
         }
-        this.state.data.journal = txt;
+        this.state.data.journal = txt+" everyone should pay " +data.players[data.playerId].name +" "+ money;
     }
     processMeldErrors(results){
         let errGrps = [];
         let err= "";
+        this.state.data.state=8;
         for (let i=0;i<results.length;i++){
             if (!results[i].valid || results.meldChangeForLess) {
                 if (!results[i].valid){

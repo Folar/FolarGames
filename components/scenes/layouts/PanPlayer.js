@@ -77,10 +77,65 @@ class PanPlayer extends React.Component {
 
     getTab() {
 
-        let muckOrPan = "Muck";
-        if (this.count() == 11) {
-            muckOrPan = "Pan!";
+        let forfeitOrPan = "Forfeit";
+        if(this.props.data.state != 8){
+            forfeitOrPan = "Pan!";
         }
+        let pan = <View
+            style={{
+                opacity: 1,
+                marginLeft: 0,
+                marginRight: .02,
+                flexDirection: 'row',
+                backgroundColor: "brown",
+                width: .194 * .25 + .1,
+                height: .264 * .25
+            }}>
+
+
+
+            <VrButton onClick={this.clickAction.bind(this)} key={0}>
+                <Text
+                    style={{
+                        fontSize: .03,
+                        textAlign: 'left',
+                        marginTop: .007,
+                        marginLeft: .015,
+
+                        color: "black"
+                    }}>
+                    {"Pan"}
+                </Text>
+            </VrButton>
+        </View>
+
+        let forfeit = <View
+            style={{
+                opacity: 1,
+                marginLeft: 0,
+                marginRight: .02,
+                flexDirection: 'row',
+                backgroundColor: "red",
+                width: .194 * .25 + .1,
+                height: .264 * .25
+            }}>
+
+
+
+            <VrButton onClick={this.clickAction.bind(this)} key={0}>
+                <Text
+                    style={{
+                        fontSize: .03,
+                        textAlign: 'left',
+                        marginTop: .007,
+                        marginLeft: .015,
+
+                        color: "black"
+                    }}>
+                    {"Forfeit"}
+                </Text>
+            </VrButton>
+        </View>
 
         let pick = <View
             style={{
@@ -153,7 +208,7 @@ class PanPlayer extends React.Component {
 
                         color: "black"
                     }}>
-                    {muckOrPan}
+                    {"Muck"}
                 </Text>
             </VrButton>
         </View>
@@ -198,8 +253,15 @@ class PanPlayer extends React.Component {
 
 
         let data = this.props.data;
-        if (data.currentPlayer == data.playerId && data.state == 4 &&
-            data.playerId == this.props.player.playerId && this.props.canMuck) {
+        if(this.props.data.state == 8 && data.currentPlayer == data.playerId &&
+                        data.currentPlayer == this.props.player.playerId ){
+            tab = forfeit;
+        } else if (data.currentPlayer == data.playerId && data.state == 4 &&
+            data.playerId == this.props.player.playerId && this.props.canMuck && this.count() == 11) {
+            tab = pan;
+        }
+        else if (data.currentPlayer == data.playerId && data.state == 4 &&
+            data.playerId == this.props.player.playerId && this.props.canMuck && this.count() != 11) {
             tab = discard;
         } else if (data.currentPlayer == data.playerId && data.state == 5 &&
             data.playerId == this.props.player.playerId) {

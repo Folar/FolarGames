@@ -80,8 +80,8 @@ class MyPanHand extends React.Component {
     }
 
     move() {
-        this.props.test();
-        return;
+        // this.props.test();
+        // return;
         let selected = [];
         let newHand = [];
         for (let i in this.props.hand){

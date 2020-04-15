@@ -181,6 +181,8 @@ class GamesLayout extends React.Component {
                         name:"Elise",
                         playerId:0,
                         playing:true,
+                        forfeit:false,
+                        sitOut:false,
                         roundTotal:12,
                         total:98,
                         current:20,
@@ -194,9 +196,11 @@ class GamesLayout extends React.Component {
                         name:"Larry",
                         playerId:1,
                         playing:true,
+                        forfeit:false,
+                        sitOut:false,
                         roundTotal:2,
                         total:98,
-                        current:20,
+                        current:2,
                         cards:
                             [
                                  {
