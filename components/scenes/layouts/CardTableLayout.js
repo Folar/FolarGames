@@ -157,7 +157,7 @@ class CardTableLayout extends React.Component {
                         " pickup the " + this.getCardString(data.currentCard);
                     this.setInstructions(str);
                     this.createDropSpot();
-                } else if (s == 2 || s == 6 || s == 7 || s == 5) { // draw
+                } else if (s == 2 || s == 6  || s == 5) { // draw
                     s = 3;
                     this.draw();
                     str =  "Pickup the " + this.getCardString(data.currentCard) + " or pass the card to the next player" ;
