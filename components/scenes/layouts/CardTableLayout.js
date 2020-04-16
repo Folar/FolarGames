@@ -219,7 +219,7 @@ class CardTableLayout extends React.Component {
                     if(this.refs.myCards.count()== 11){
                         debbugger;
                     }
-                    s = 7;
+                    s = 2;
                     str =  "Draw a card from the deck" ;
                     this.setInstructions(str);
                     this.createEmptyCard();
