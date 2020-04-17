@@ -77,10 +77,7 @@ class PanPlayer extends React.Component {
 
     getTab() {
 
-        let forfeitOrPan = "Forfeit";
-        if(this.props.data.state != 8){
-            forfeitOrPan = "Pan!";
-        }
+
         let pan = <View
             style={{
                 opacity: 1,
@@ -88,7 +85,7 @@ class PanPlayer extends React.Component {
                 marginRight: .02,
                 flexDirection: 'row',
                 backgroundColor: "brown",
-                width: .194 * .25 + .1,
+                width:  .08,
                 height: .264 * .25
             }}>
 
@@ -116,7 +113,7 @@ class PanPlayer extends React.Component {
                 marginRight: .02,
                 flexDirection: 'row',
                 backgroundColor: "red",
-                width: .194 * .25 + .1,
+                width: .1,
                 height: .264 * .25
             }}>
 
@@ -133,6 +130,34 @@ class PanPlayer extends React.Component {
                         color: "black"
                     }}>
                     {"Forfeit"}
+                </Text>
+            </VrButton>
+        </View>
+
+        let  start = <View
+            style={{
+                opacity: 1,
+                marginLeft: 0,
+                marginRight: .02,
+                flexDirection: 'row',
+                backgroundColor: "purple",
+                width:  .1,
+                height: .264 * .25
+            }}>
+
+
+
+            <VrButton onClick={this.clickAction.bind(this)} key={0}>
+                <Text
+                    style={{
+                        fontSize: .03,
+                        textAlign: 'left',
+                        marginTop: .007,
+                        marginLeft: .015,
+
+                        color: "black"
+                    }}>
+                    {"Start"}
                 </Text>
             </VrButton>
         </View>
@@ -253,7 +278,10 @@ class PanPlayer extends React.Component {
 
 
         let data = this.props.data;
-        if(this.props.data.state == 8 && data.currentPlayer == data.playerId &&
+        if(this.props.data.state == 100){
+            tab = start;
+
+        } else if(this.props.data.state == 8 && data.currentPlayer == data.playerId &&
                         data.currentPlayer == this.props.player.playerId ){
             tab = forfeit;
         } else if (data.currentPlayer == data.playerId && data.state == 4 &&

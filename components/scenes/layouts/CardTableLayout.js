@@ -126,6 +126,10 @@ class CardTableLayout extends React.Component {
     }
 
     getBackgroundColor(p) {
+
+        if (this.state.data.state == 100 ) {
+            return "#6b8e23";
+        }
         if (p.forfeit) {
             return "red";
         }

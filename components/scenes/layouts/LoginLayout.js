@@ -287,6 +287,27 @@ class LoginLayout extends React.Component {
 
 
                     </View>
+                    <View
+                        style={{
+                            margin: 0.01,
+                            width: 5, flexDirection: 'row',
+                            alignItems: 'center',
+                            layoutOrigin: [0, 0],
+                            justifyContent: 'center'
+                        }}
+                    >
+
+                        <Button updateScene={this.invoke.bind(this)} showButton={this.state.showButton}
+                                text="Panguingue"
+                                style={{
+                                    fontSize: .16,
+                                    textAlign: 'center',
+                                    color: "#000000",
+                                    transform: [
+                                        {translateX: 0}
+                                    ]
+                                }}/>
+                    </View>
 
 
                 </View>
