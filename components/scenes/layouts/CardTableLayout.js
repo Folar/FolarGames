@@ -24,7 +24,7 @@ class CardTableLayout extends React.Component {
             borderGroup: [],
             pickup:false,
             instructionColor:"#eba117",
-            instructions: this.props.data.instructions,
+            instructions: "Press the start button after all then pan players have joined. ",
             sels: [false, false, false, false, false, false, false, false, false, false],
 
         };
@@ -733,7 +733,7 @@ class CardTableLayout extends React.Component {
                         marginLeft: .015,
                         color: "black"
                     }}>
-                    {this.state.data.journal}
+                    {this.props.data.journal}
                 </Text>
 
         </View>
