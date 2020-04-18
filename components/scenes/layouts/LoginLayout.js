@@ -70,9 +70,15 @@ class LoginLayout extends React.Component {
     }
     invokeAcquire(){
         let n = this.state.name;
-        if (n.length > 6)
+        if (n.length > 5)
             n = n.substring(0,5);
         this.props.signon(this.capitalizeFirstLetter(n),6);
+    }
+    invokePan(){
+        let n = this.state.name;
+        if (n.length > 5)
+            n = n.substring(0,5);
+        this.props.signon(this.capitalizeFirstLetter(n),7);
     }
     updateStage(input) {
 
@@ -129,6 +135,7 @@ class LoginLayout extends React.Component {
                 <View
                     style={{
                         width: 3,
+                        height:1.5,
                         flexDirection: 'column',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
@@ -297,7 +304,7 @@ class LoginLayout extends React.Component {
                         }}
                     >
 
-                        <Button updateScene={this.invoke.bind(this)} showButton={this.state.showButton}
+                        <Button updateScene={this.invokePan.bind(this)} showButton={this.state.showButton}
                                 text="Panguingue"
                                 style={{
                                     fontSize: .16,

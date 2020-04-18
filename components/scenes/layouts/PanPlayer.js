@@ -325,7 +325,7 @@ class PanPlayer extends React.Component {
         let bm = 0;
         let mr = .02;
         let gw = 0;
-        if (this.props.player.playing) {
+        if (this.props.player.atTable) {
 
 
             for (let i=0; i < this.props.player.cards.length;i++) {
@@ -385,7 +385,7 @@ class PanPlayer extends React.Component {
 
                 }}>
 
-                {this.props.player.playing ? (
+                {this.props.player.atTable ? (
 
 
                     <View style={{

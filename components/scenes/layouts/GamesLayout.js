@@ -186,6 +186,7 @@ class GamesLayout extends React.Component {
                         roundTotal:12,
                         total:98,
                         current:20,
+                        atTable:true,
                         cards:
                             [
 
@@ -197,70 +198,14 @@ class GamesLayout extends React.Component {
                         playerId:1,
                         playing:true,
                         forfeit:false,
+                        atTable:true,
                         sitOut:false,
                         roundTotal:2,
                         total:98,
                         current:2,
                         cards:
                             [
-                                 {
-                                     sels:[false, false, false, false, false, false, false, false, false, false],
-                                     money:1,
-                                     cards:[
-                                        {
-                                            group:0,
-                                            suit:'h',
-                                            rank:3,
-                                            ordinal:9,
-                                            rankOrdinal:3
-                                        },
 
-                                        {
-                                           group:0,
-                                           suit:'h',
-                                           rank:1,
-                                           ordinal:1,
-                                           rankOrdinal:1,
-
-                                        },
-                                        {
-                                           group:0,
-                                           suit:'h',
-                                           rank:1,
-                                           ordinal:1,
-                                           rankOrdinal:1
-                                        }
-                                     ]
-                                 },
-                                  {
-                                                                      sels:[false, false, false, false, false, false, false, false, false, false],
-                                                                      money:1,
-                                                                      cards:[
-                                                                         {
-                                                                             group:0,
-                                                                             suit:'h',
-                                                                             rank:3,
-                                                                             ordinal:9,
-                                                                             rankOrdinal:3
-                                                                         },
-
-                                                                         {
-                                                                            group:0,
-                                                                            suit:'h',
-                                                                            rank:1,
-                                                                            ordinal:1,
-                                                                            rankOrdinal:1,
-
-                                                                         },
-                                                                         {
-                                                                            group:0,
-                                                                            suit:'h',
-                                                                            rank:1,
-                                                                            ordinal:1,
-                                                                            rankOrdinal:1
-                                                                         }
-                                                                      ]
-                                                                  }
                             ]
                     }
 
@@ -565,14 +510,23 @@ class GamesLayout extends React.Component {
               _this.setState({diverData: packet});
               _this.refs.dl.setData( packet);
 
-          } if (gt == 6) {
+          } else if (gt == 6) {
                 if (packet.type != "ping"){
                    _this.setState({acquireData: packet});
                    _this.refs.acq.setData( packet);
                }else {
                     debugger;
                }
-           }
+          }
+          else if (gt == 7) {
+               if (packet.type != "ping"){
+                  _this.setState({panData: packet});
+                  debugger;
+                 // _this.refs.pan.setData( packet);
+              }else {
+                   debugger;
+              }
+          }
 
 
 
@@ -598,7 +552,7 @@ class GamesLayout extends React.Component {
 
 
     render() {
-        const login = 7;//this.state.loginScene;
+        const login = this.state.loginScene;
         let adj = 2;
         if (login == 5 && this.state.zoom == -5)
             adj = 5;

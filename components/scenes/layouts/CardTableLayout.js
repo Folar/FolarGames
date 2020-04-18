@@ -758,7 +758,7 @@ class CardTableLayout extends React.Component {
             if (pid == nplayers) pid = 0;
         }
         for (let i = nplayers; i < 8; i++) {
-            p.push({playing: false});
+            p.push({atTable: false});
         }
 
         let verbage = this.getVerbage();
@@ -992,7 +992,7 @@ class CardTableLayout extends React.Component {
                                        test={this.test.bind(this)}
                                        text ={this.state.instructions}
                                        instructionColor={this.state.instructionColor}
-                                       setHand={this.setMyHand.bind(this)} hand={this.state.data.hand}/>
+                                       setHand={this.setMyHand.bind(this)} hand={this.props.data.hand}/>
                         </View>
 
                     </View>
