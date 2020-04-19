@@ -709,40 +709,13 @@ class CardTableLayout extends React.Component {
         return cnt;
     }
 
-    getVerbage() {
-        let jw = .63;
-        let jh = 3;
-
-
-        let journal = <View style={{
-
-            flexDirection: 'column',
-            marginTop: 0,
-            marginRight: 0.02,
-            marginLeft: .02,
-            width: jw,
-            height: jh,
-            backgroundColor: "green"
-        }}>
-
-                <Text
-                    style={{
-                        fontSize: .03,
-                        textAlign: 'left',
-                        marginTop: .008,
-                        marginLeft: .015,
-                        color: "black"
-                    }}>
-                    {this.props.data.journal}
-                </Text>
-
-        </View>
-
-        return journal;
+    getJournal() {
+        return this.props.data.journal  ;
     }
 
     render() {
-
+        let jw = .63;
+        let jh = 3;
         let h = .22;
         let yh = .265;
         let pw = .6;
@@ -761,7 +734,6 @@ class CardTableLayout extends React.Component {
             p.push({atTable: false});
         }
 
-        let verbage = this.getVerbage();
         return (
             <View
                 style={{
@@ -971,7 +943,29 @@ class CardTableLayout extends React.Component {
                         backgroundColor: "green"
                     }}>
                         {/*4th row : journal*/}
-                        {verbage}
+                        <View style={{
+
+                            flexDirection: 'column',
+                            marginTop: 0,
+                            marginRight: 0.02,
+                            marginLeft: .02,
+                            width: jw,
+                            height: jh,
+                            backgroundColor: "green"
+                        }}>
+
+                            <Text
+                                style={{
+                                    fontSize: .03,
+                                    textAlign: 'left',
+                                    marginTop: .008,
+                                    marginLeft: .015,
+                                    color: "black"
+                                }}>
+                                {this.getJournal()}
+                            </Text>
+
+                        </View>
 
                         {/*4th row : yourhand*/}
                         <View style={{
