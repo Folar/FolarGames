@@ -27,22 +27,24 @@ class PanMuck extends React.Component {
 
     }
 
-
-
     click1(){
-        this.props.action(1);
+        if(this.props.data.currentPlayer == this.props.data.playerId)
+            this.props.action(1);
     }
     click2(){
-        this.props.action(2);
+        if(this.props.data.currentPlayer == this.props.data.playerId)
+            this.props.action(2);
     }
 
     getText1(){
+
         let data = this.props.data;
-        if (data.currentPlayer == data.playerId &&
-            (data.state == 1 ||data.state == 2 || data.state == 5 || data.state == 6  || data.state == 7)){
+        let state = data.players[data.currentPlayer].state;
+        console.log( " text state ="+state);
+        if (state == 1 || state == 2 || state == 5 || state == 6  || state == 7){
             return "Draw";
         }
-        if (data.currentPlayer == data.playerId && data.state == 3){
+        if ( state == 3){
             return "Pickup";
         }
         return "";
@@ -50,36 +52,41 @@ class PanMuck extends React.Component {
     }
     getText2(){
         let data = this.props.data;
-        console.log( " text state ="+ data.state);
-        if (data.currentPlayer == data.playerId && data.state == 3 ){
+        let state = data.players[data.currentPlayer].state;
+        console.log( " text state ="+state);
+        if ( state == 3 ){
             return "Pass";
         }
-        if (data.currentPlayer == data.playerId && data.state == 6 ){
+        if ( state == 6 ){
             return "Pickup";
         }
         return "";
 
     }
     showButton1(){
-        let data = this.props.data;
-        if (data.currentPlayer == data.playerId &&
-               (data.state == 1 ||data.state == 2 || data.state == 3
-                   || data.state == 5 ||data.state == 6 || data.state == 7  )){
-            return 1;
-        }
-       return 0;
 
-    }
-
-    showButton2(){
         let data = this.props.data;
-        console.log( " show state ="+ data.state);
-        if (data.currentPlayer == data.playerId &&  (data.state == 3 || data.state == 6 )){
+        let state = data.players[data.currentPlayer].state;
+        if ( state == 1 || state == 2 || state == 3
+            || state == 5 || state == 6 || state == 7  ){
             return 1;
         }
         return 0;
 
     }
+
+    showButton2(){
+        let data = this.props.data;
+        let state = data.players[data.currentPlayer].state;
+        console.log( " show state ="+ state);
+        if ( state == 3 || state == 6 ){
+            return 1;
+        }
+        return 0;
+
+    }
+
+
     render() {
 
 
@@ -126,7 +133,7 @@ class PanMuck extends React.Component {
                                     marginRight:.02,
                                     marginBottom:.005,
                                     flexDirection: 'row',
-                                    backgroundColor: "brown",
+                                    backgroundColor:  this.props.data.currentPlayer == this.props.data.playerId?"brown":"gray",
                                     width: .194 * .52,
                                     height: .264 * .25
                                 }}>
@@ -151,7 +158,7 @@ class PanMuck extends React.Component {
                                     marginLeft: 0,
                                     marginRight:.02,
                                     flexDirection: 'row',
-                                    backgroundColor: "brown",
+                                    backgroundColor:  this.props.data.currentPlayer == this.props.data.playerId?"brown":"gray",
                                     width: .194 * .52,
                                     height: .264 * .25
                                 }}>
