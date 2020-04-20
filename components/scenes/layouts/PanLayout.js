@@ -61,7 +61,9 @@ debugger;
                         {translateZ: -.91}]
                 }}>
 
-                    <CardTableLayout h={h} w={w} data={this.props.data}/>
+                    <CardTableLayout h={h} w={w} data={this.props.data}
+                                     sendmessage={this.props.sendmessage}
+                                     name={this.props.name}/>
                 </View>
 
 

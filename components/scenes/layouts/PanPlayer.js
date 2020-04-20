@@ -23,7 +23,8 @@ class PanPlayer extends React.Component {
     }
 
     clickAction() {
-        this.props.action(3)
+        if (this.props.player.playerId == this.props.data.playerId)
+            this.props.action(3)
 
     }
 
@@ -140,7 +141,7 @@ class PanPlayer extends React.Component {
                 marginLeft: 0,
                 marginRight: .02,
                 flexDirection: 'row',
-                backgroundColor: "purple",
+                backgroundColor: this.props.player.playerId == this.props.data.playerId ? "brown" : "gray",
                 width:  .1,
                 height: .264 * .25
             }}>
@@ -275,27 +276,25 @@ class PanPlayer extends React.Component {
 
 
         let tab = eView;
+        debugger;
 
 
         let data = this.props.data;
-        if(this.props.data.state == 100){
+        if(this.props.player.state == 100){
             tab = start;
 
-        } else if(this.props.data.state == 8 && data.currentPlayer == data.playerId &&
-                        data.currentPlayer == this.props.player.playerId ){
+        } else if(this.props.player.state == 8  && data.currentPlayer == data.playerId ){
             tab = forfeit;
-        } else if (data.currentPlayer == data.playerId && data.state == 4 &&
-            data.playerId == this.props.player.playerId && this.props.canMuck && this.count() == 11) {
+        } else if (data.currentPlayer == data.playerId && this.props.player.state == 4 &&
+                    this.props.canMuck && this.count() == 11) {
             tab = pan;
         }
-        else if (data.currentPlayer == data.playerId && data.state == 4 &&
-            data.playerId == this.props.player.playerId && this.props.canMuck && this.count() != 11) {
+        else if (data.currentPlayer == data.playerId && this.props.player.state == 4 &&
+                  this.props.canMuck && this.count() != 11) {
             tab = discard;
-        } else if (data.currentPlayer == data.playerId && data.state == 5 &&
-            data.playerId == this.props.player.playerId) {
+        } else if (data.currentPlayer == data.playerId && this.props.player.state == 5 ) {
             tab = pick;
-        } else if (data.currentPlayer != data.playerId && data.otherState == 5 &&
-            data.currentPlayer == this.props.player.playerId) {
+        } else if (data.currentPlayer != data.playerId && this.props.player.state == 5 ) {
             tab = pass;
         }
 

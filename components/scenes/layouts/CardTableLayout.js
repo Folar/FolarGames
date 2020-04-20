@@ -127,7 +127,7 @@ class CardTableLayout extends React.Component {
 
     getBackgroundColor(p) {
 
-        if (this.state.data.state == 100 ) {
+        if (this.state.data.state == 100 || this.state.data.state == 0 ) {
             return "#6b8e23";
         }
         if (p.forfeit) {
@@ -142,13 +142,13 @@ class CardTableLayout extends React.Component {
     }
 
     action(a) {
-        let s = this.state.data.state;
-        let data = this.state.data;
+        let s = this.props.data.state;
+        let data = this.props.data;
         let str = "";
-        let instr = "Select one or more cards in your hand and then click on a card group inorder to transfer " +
-            "the selected cards to the card group or\n" +
-            "Select one or more cards in a card group and "+
-            "then click another card group to move the cards between the groups";
+        let instr = "Select one or more cards in your hand and then click on a meld inorder to transfer " +
+            "the selected cards to the meld or\n" +
+            "Select one or more cards in a meld and "+
+            "then click another meld to move the cards between melds";
         console.log("start action=" + a + " state=" + s);
         //debugger;
         switch (a) {
@@ -179,7 +179,7 @@ class CardTableLayout extends React.Component {
                 if (s == 3) {  // pass
                     this.removeDropSpot()
                     s = 5;
-                    this.transfer(this.state.data.passCard, this.state.data.currentCard);
+                    this.transfer(this.props.data.passCard, this.props.data.currentCard);
                     this.createEmptyCard();
                     this.state.data.currentPlayer = 0;
                     str =  "Pickup the " + this.getCardString(data.passCard) + " or draw a card from the deck" ;
@@ -194,9 +194,11 @@ class CardTableLayout extends React.Component {
                 }
                 break;
             case 3:
-                if (s == 5) { // pickup
+                if (s == 100){
+                    this.props.sendmessage({type:"PAN",name: this.props.name, action: 100,args:{dummy:1}});
+                } else if (s == 5) { // pickup
                     s = 4;
-                    this.transfer(this.state.data.currentCard, this.state.data.passCard);
+                    this.transfer(this.props.data.currentCard, this.props.data.passCard);
                     str =  instr;
                     this.setInstructions(str);
                     this.pickup();
@@ -216,10 +218,10 @@ class CardTableLayout extends React.Component {
                     }
                     this.processValidMelds(results);
                     this.refs.myCards.clear();
-                    //this.state.data.currentPlayer = 1;
+                    //this.props.data.currentPlayer = 1;
                     this.refs.hand.getSelectedCards(true);
                     this.refs.myCards.clear();
-                    //this.state.data.currentPlayer = 1;
+                    //this.props.data.currentPlayer = 1;
                     if(this.refs.myCards.count()== 11){
                         debbugger;
                     }
@@ -231,8 +233,8 @@ class CardTableLayout extends React.Component {
 
                 }else if (s == 8) {
                     data.players[data.playerId].forfeit = true;
-                    debugger;
-                    this.state.data.journal = this.state.instructions + data.players[data.playerId].name +
+                   // debugger;
+                    this.props.data.journal = this.state.instructions + data.players[data.playerId].name +
                     "  has to refund each player " +
                         data.players[data.playerId].current/(data.players.length - 1) ;
                     str =  "Draw a card from the deck" ;
@@ -241,9 +243,9 @@ class CardTableLayout extends React.Component {
                 }
                 break;
         }
-        this.state.data.state = s;
+        this.props.data.state = s;
         console.log("end  state=" + s);
-        this.setState({data: this.state.data})
+        this.setState({data: this.props.data})
 
     }
 
@@ -256,13 +258,13 @@ class CardTableLayout extends React.Component {
     setInstructions(msg){
         this.state.instructions = msg;
         this.state.instructionColor = "#eba117";
-        this.setState({ data: this.state.data,instructionColor:"#eba117", instructions:msg,border:false});
+        this.setState({ data: this.props.data,instructionColor:"#eba117", instructions:msg,border:false});
     }
 
     reportError(msg, src) {
         this.state.oldInstructions = this.state.instructions;
         this.state.instructionColor = "#eba117";
-        this.setState({border: true, borderGroup: src,data:this.state.data,
+        this.setState({border: true, borderGroup: src,data:this.props.data,
             instructionColor:"red", instructions:msg});
     }
 
@@ -494,12 +496,12 @@ class CardTableLayout extends React.Component {
             }
 
         }
-        this.state.data.journal = txt+" everyone should pay " +data.players[data.playerId].name +" "+ money;
+        this.props.data.journal = txt+" everyone should pay " +data.players[data.playerId].name +" "+ money;
     }
     processMeldErrors(results){
         let errGrps = [];
         let err= "";
-        this.state.data.state=8;
+        this.props.data.state=8;
         for (let i=0;i<results.length;i++){
             if (!results[i].valid || results.meldChangeForLess) {
                 if (!results[i].valid){
@@ -519,7 +521,7 @@ class CardTableLayout extends React.Component {
     }
 
     checkForValidity(){
-        debugger;
+       // debugger;
         let data = this.props.data;
         let cards = data.players[data.currentPlayer].cards;
         let melds = [];
@@ -683,8 +685,8 @@ class CardTableLayout extends React.Component {
     }
 
     setMyHand(hand) {
-        this.state.data.hand = hand;
-        this.setState({data: this.state.data})
+        this.props.data.hand = hand;
+        this.setState({data: this.props.data})
     }
 
     notifySelect() {
@@ -694,7 +696,7 @@ class CardTableLayout extends React.Component {
         let cnt = this.count();
 
         if (cnt == 1) {
-            this.state.data.discardCard = this.refs.hand.getSelectedCards(false)[0];
+            this.props.data.discardCard = this.refs.hand.getSelectedCards(false)[0];
         }
         this.setState({sels: this.state.sels});
 
