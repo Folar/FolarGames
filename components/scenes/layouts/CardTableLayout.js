@@ -31,7 +31,7 @@ class CardTableLayout extends React.Component {
     }
 
     createDropSpot() {
-        let cards = this.state.data.players[this.state.data.currentPlayer].cards;
+        let cards = this.props.data.players[this.props.data.currentPlayer].cards;
         if (cards.length > 0 && cards[cards.length - 1].money == -1)
             return;
         cards.push({
@@ -51,7 +51,7 @@ class CardTableLayout extends React.Component {
 
 
     createDropSpotButton() {
-        let cards = this.state.data.players[this.state.data.currentPlayer].cards;
+        let cards = this.props.data.players[this.props.data.currentPlayer].cards;
         if (cards.length > 0 && cards[cards.length - 1].money == -1)
             return;
         cards.push({
@@ -70,7 +70,7 @@ class CardTableLayout extends React.Component {
 
     removeDropSpot() {
 
-        let cards = this.state.data.players[this.state.data.playerId].cards;
+        let cards = this.props.data.players[this.props.data.playerId].cards;
         if (cards[cards.length - 1].money == -1)
             cards.pop();
     }
@@ -83,57 +83,45 @@ class CardTableLayout extends React.Component {
     }
 
     pickup() {
-        let cards = this.state.data.players[this.state.data.playerId].cards;
+        let cards = this.props.data.players[this.props.data.playerId].cards;
         if (cards[cards.length - 1].money == -1)
             cards[cards.length - 1].money = 0;
         let c = cards[cards.length - 1].cards[0];
-        let cc = this.state.data.currentCard;
+        let cc = this.props.data.currentCard;
         c.group = cards.length - 1;
         this.transfer(c, cc);
         this.state.pickup = true;
-        this.createEmptyCard();
+        //this.createEmptyCard();
+        this.props.sendmessage({type:"PAN",name: this.props.name, action: 3,
+            args:{newState:4,hand:this.props.data.hand,cards:cards}});
     }
 
     createEmptyCard() {
-        this.state.data.currentCard.suit = '';
-        this.state.data.currentCard.rank = 'card_back';
-        this.state.data.currentCard.rankOrdinal = -1;
-        this.state.data.currentCard.ordinal = -1;
+        this.props.data.currentCard.suit = '';
+        this.props.data.currentCard.rank = 'card_back';
+        this.props.data.currentCard.rankOrdinal = -1;
+        this.props.data.currentCard.ordinal = -1;
     }
 
-    draw() {
+    draw(s) {
+        let data = this.props.data;
+        let cards = data.players[data.playerId].cards;
+        this.props.sendmessage({type:"PAN",name: this.props.name, action: 2,
+                                args:{newState:s,hand:this.props.data.hand,cards:cards}});
 
-        let r = Math.floor(Math.random() * 40);
-        let s = 's';
-        switch (r % 4) {
-            case 1:
-                s = 'h';
-                break;
-            case 2:
-                s = 'd';
-                break;
-            case 3:
-                s = 'c';
-        }
-
-        this.state.data.currentCard.ordinal = r;
-        this.state.data.currentCard.suit = s;
-        r = Math.floor(r / 4);
-        r++;
-        this.state.data.currentCard.rankOrdinal = r;
-        this.state.data.currentCard.rank = r > 7 ? r + 3 : r;
 
     }
+
 
     getBackgroundColor(p) {
 
-        if (this.state.data.state == 100 || this.state.data.state == 0 ) {
+        if (this.props.data.state == 100 || this.props.data.state == 0 ) {
             return "#6b8e23";
         }
         if (p.forfeit) {
             return "red";
         }
-        if (this.state.data.currentPlayer == p.playerId) {
+        if (this.props.data.currentPlayer == p.playerId) {
             return "blue";
         }
 
@@ -155,18 +143,18 @@ class CardTableLayout extends React.Component {
             case 1:
 
                 if (s == 1) { // draw
-                    s = 6;
-                    this.draw();
+                    this.createDropSpot();
+                    this.draw(6);
                         str = " Because your the first player this round, you can draw another card or "+
                         " pickup the " + this.getCardString(data.currentCard);
                     this.setInstructions(str);
-                    this.createDropSpot();
+
                 } else if (s == 2 || s == 6  || s == 5) { // draw
-                    s = 3;
-                    this.draw();
+                    this.createDropSpot();
+                    this.draw(3);
                     str =  "Pickup the " + this.getCardString(data.currentCard) + " or pass the card to the next player" ;
                     this.setInstructions(str);
-                    this.createDropSpot();
+
                 }  else if (s == 3) { // pickup
                     this.pickup();
                     s = 4;
@@ -181,7 +169,7 @@ class CardTableLayout extends React.Component {
                     s = 5;
                     this.transfer(this.props.data.passCard, this.props.data.currentCard);
                     this.createEmptyCard();
-                    this.state.data.currentPlayer = 0;
+
                     str =  "Pickup the " + this.getCardString(data.passCard) + " or draw a card from the deck" ;
                     this.setInstructions(str);
                     this.createDropSpot();
@@ -243,9 +231,9 @@ class CardTableLayout extends React.Component {
                 }
                 break;
         }
-        this.props.data.state = s;
-        console.log("end  state=" + s);
-        this.setState({data: this.props.data})
+        //this.props.data.state = s;
+        //console.log("end  state=" + s);
+        //this.setState({data: this.props.data})
 
     }
 

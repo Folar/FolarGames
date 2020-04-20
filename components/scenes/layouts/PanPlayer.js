@@ -276,7 +276,6 @@ class PanPlayer extends React.Component {
 
 
         let tab = eView;
-        debugger;
 
 
         let data = this.props.data;
