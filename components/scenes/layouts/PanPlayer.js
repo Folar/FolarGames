@@ -22,6 +22,13 @@ class PanPlayer extends React.Component {
 
     }
 
+
+    clickAction2() {
+        if (this.props.data.currentPlayer == this.props.data.playerId)
+            this.props.action(3)
+
+    }
+
     clickAction() {
         if (this.props.player.playerId == this.props.data.playerId)
             this.props.action(3)
@@ -79,7 +86,7 @@ class PanPlayer extends React.Component {
     getTab() {
 
 
-        let pan = <View
+        let pan = <View  key={"pan"}
             style={{
                 opacity: 1,
                 marginLeft: 0,
@@ -107,7 +114,7 @@ class PanPlayer extends React.Component {
             </VrButton>
         </View>
 
-        let forfeit = <View
+        let forfeit = <View  key={"f"}
             style={{
                 opacity: 1,
                 marginLeft: 0,
@@ -135,7 +142,7 @@ class PanPlayer extends React.Component {
             </VrButton>
         </View>
 
-        let  start = <View
+        let  start = <View  key={"s"}
             style={{
                 opacity: 1,
                 marginLeft: 0,
@@ -163,14 +170,14 @@ class PanPlayer extends React.Component {
             </VrButton>
         </View>
 
-        let pick = <View
+        let pick = <View key={"p"}
             style={{
                 opacity: 1,
                 marginLeft: 0,
                 marginRight: .02,
                 flexDirection: 'row',
-                backgroundColor: "brown",
-                width: .194 * .25 + .1,
+                backgroundColor:  this.props.data.currentPlayer == this.props.data.playerId ? "brown" : "gray",
+                width: .194 * .25 + .11,
                 height: .264 * .25
             }}>
 
@@ -186,7 +193,7 @@ class PanPlayer extends React.Component {
                              suit={this.props.data.passCard.suit} rank={this.props.data.passCard.rank}/>
             </View>
 
-            <VrButton onClick={this.clickAction.bind(this)} key={0}>
+            <VrButton onClick={this.clickAction2.bind(this)} key={0}>
                 <Text
                     style={{
                         fontSize: .03,
@@ -239,7 +246,7 @@ class PanPlayer extends React.Component {
             </VrButton>
         </View>
 
-        let pass = <View
+        let pass = <View  key={"pass"}
             style={{
                 opacity: 1,
                 marginLeft: 0,
@@ -264,7 +271,7 @@ class PanPlayer extends React.Component {
             </View>
 
         </View>
-        let eView = <View
+        let eView = <View  key={"def"}
             style={{
                 marginLeft: 0,
                 width: .194 * .25,
@@ -291,10 +298,8 @@ class PanPlayer extends React.Component {
         else if (data.currentPlayer == data.playerId && this.props.player.state == 4 &&
                   this.props.canMuck && this.count() != 11) {
             tab = discard;
-        } else if (data.currentPlayer == data.playerId && this.props.player.state == 5 ) {
+        } else if ( this.props.player.state == 5 ) {
             tab = pick;
-        } else if (data.currentPlayer != data.playerId && this.props.player.state == 5 ) {
-            tab = pass;
         }
 
         return tab;

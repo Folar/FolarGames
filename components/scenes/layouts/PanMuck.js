@@ -93,7 +93,7 @@ class PanMuck extends React.Component {
         return (
 
 
-                <View style={{
+                <View key={this.props.data.currentCard.suit+this.props.data.currentCard.rank} style={{
                     width: this.props.w,
                     height: this.props.h,
                     flexDirection: 'row',
@@ -116,8 +116,8 @@ class PanMuck extends React.Component {
 
                         }}>
                             <PlayingCard index={133} sz={.52}
-                                         suit={this.props.suit}
-                                         rank={this.props.rank}/>
+                                         suit={this.props.data.currentCard.suit}
+                                         rank={this.props.data.currentCard.rank}/>
                         </View>
                         <View style={{
                             alignItems: 'flex-start',

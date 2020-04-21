@@ -111,17 +111,25 @@ class CardTableLayout extends React.Component {
 
 
     }
+    pass(){
+        let data = this.props.data;
+        let cards = data.players[data.playerId].cards;
+        this.props.sendmessage({type:"PAN",name: this.props.name, action: 7,
+            args:{newState:5,hand:this.props.data.hand,cards:cards}});
+
+    }
 
 
     getBackgroundColor(p) {
 
-        if (this.props.data.state == 100 || this.props.data.state == 0 ) {
+        if (this.props.data.state == 100 ) {
             return "#6b8e23";
         }
         if (p.forfeit) {
             return "red";
         }
-        if (this.props.data.currentPlayer == p.playerId) {
+        if (this.props.data.currentPlayer == p.playerId && this.props.data.state !=10) {
+            debugger;
             return "blue";
         }
 
@@ -165,14 +173,15 @@ class CardTableLayout extends React.Component {
                 break;
             case 2:
                 if (s == 3) {  // pass
-                    this.removeDropSpot()
+                    this.removeDropSpot();
+                    this.pass();
                     s = 5;
-                    this.transfer(this.props.data.passCard, this.props.data.currentCard);
-                    this.createEmptyCard();
-
-                    str =  "Pickup the " + this.getCardString(data.passCard) + " or draw a card from the deck" ;
-                    this.setInstructions(str);
-                    this.createDropSpot();
+                    // this.transfer(this.props.data.passCard, this.props.data.currentCard);
+                    // this.createEmptyCard();
+                    //
+                    // str =  "Pickup the " + this.getCardString(data.passCard) + " or draw a card from the deck" ;
+                    // this.setInstructions(str);
+                    // this.createDropSpot();
                 } else if (s == 6) { // pickup
 
                     s = 4;
