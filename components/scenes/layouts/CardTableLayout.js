@@ -119,6 +119,14 @@ class CardTableLayout extends React.Component {
 
     }
 
+    muck(txt){
+        debugger;
+        let data = this.props.data;
+        let cards = data.players[data.playerId].cards;
+        this.props.sendmessage({type:"PAN",name: this.props.name, action: 4,
+            args:{newState:2,hand:this.props.data.hand,cards:cards,txt:txt}});
+
+    }
 
     getBackgroundColor(p) {
 
@@ -213,7 +221,7 @@ class CardTableLayout extends React.Component {
                         }
 
                     }
-                    this.processValidMelds(results);
+                    let txt =this.processValidMelds(results);
                     this.refs.myCards.clear();
                     //this.props.data.currentPlayer = 1;
                     this.refs.hand.getSelectedCards(true);
@@ -224,10 +232,11 @@ class CardTableLayout extends React.Component {
                     }
                     s = 2;
                     str =  "Draw a card from the deck" ;
-                    this.setInstructions(str);
-                    this.createEmptyCard();
-                    this.setState({data: this.props.data, sels: this.state.sels})
+                    // this.setInstructions(str);
+                    // this.createEmptyCard();
 
+                    this.muck(txt);
+                    this.setState({ sels: this.state.sels})
                 }else if (s == 8) {
                     data.players[data.playerId].forfeit = true;
                    // debugger;
@@ -479,12 +488,12 @@ class CardTableLayout extends React.Component {
                 cards[i].str = results[i].str;
                 cards[i].money = results[i].money;
                 money += cards[i].money;
-                txt += "The new meld "+  cards[i].str +" is worth " +  cards[i].money;
+                txt += "the new meld "+  cards[i].str +" is worth " +  cards[i].money;
             }else if ( cards[i].str != results[i].str ){
                 cards[i].str = results[i].str;
                 nwm = true;
                 money += ( results[i].money -cards[i].money);
-                txt += "The changed meld "+  cards[i].str + " worth has changed by " +  ( results[i].money -cards[i].money);
+                txt += "the changed meld "+  cards[i].str + " worth has changed by " +  ( results[i].money -cards[i].money);
                 cards[i].money = results[i].money;
             }
             if(nwm ) {
@@ -493,7 +502,7 @@ class CardTableLayout extends React.Component {
             }
 
         }
-        this.props.data.journal = txt+" everyone should pay " +data.players[data.playerId].name +" "+ money;
+        return txt+" everyone should pay " +data.players[data.playerId].name +" "+ money;
     }
     processMeldErrors(results){
         let errGrps = [];
