@@ -151,7 +151,7 @@ class CardTableLayout extends React.Component {
 
     }
     getInstructionColor() {
-        return "#eba117"
+        return this.state.instructionColor;
     }
     getInstructions() {
         let s = this.props.data.state;
@@ -161,6 +161,8 @@ class CardTableLayout extends React.Component {
             "the selected cards to the meld or\n" +
             "Select one or more cards in a meld and " +
             "then click another meld to move the cards between melds";
+        if (this.state.instructionColor == "yellow")
+            return this.state.instructions;
         switch (s) {
             case 100:
                 return "Hit the Start button, once all the players have entered the game"
@@ -305,14 +307,14 @@ class CardTableLayout extends React.Component {
         this.setState({ data: this.props.data,instructionColor:"#eba117", instructions:msg,border:false});
     }
 
-    reportError(msg, src) {
+    reportWarning(msg, src) {
         this.state.oldInstructions = this.state.instructions;
         this.state.instructionColor = "#eba117";
         this.setState({border: true, borderGroup: src,data:this.props.data,
             instructionColor:"yellow", instructions:msg});
     }
 
-    clearError() {
+    clearWarning() {
         if(this.state.instructionColor == "#eba117") return;
         this.state.instructions = this.state.oldInstructions;
         this.setState({border: false, borderGroup: [],
@@ -320,7 +322,7 @@ class CardTableLayout extends React.Component {
     }
 
     clickMyTableCard(i, g) {
-        this.clearError("");
+        this.clearWarning("");
         let data = this.props.data;
         let cards = data.players[data.playerId].cards;
         if (this.count()) {  // hand cards are selected
@@ -328,7 +330,7 @@ class CardTableLayout extends React.Component {
             let cardsFromHand = this.refs.hand.getSelectedCards(false);
             if( this.state.pickup ){
                 if (g != cards.length -1){
-                    this.reportError(
+                    this.reportWarning(
                         "The card that you just picked up, must be used first to form a meld",
                         [g]);
                     return;
@@ -388,7 +390,7 @@ class CardTableLayout extends React.Component {
 
                 if( this.state.pickup ){
                     if (trg != cards.length -1 && src != cards.length -1){
-                        this.reportError(
+                        this.reportWarning(
                             "The card that you just picked up, must be used first to form a meld",
                             [src]);
                         return;
@@ -405,7 +407,7 @@ class CardTableLayout extends React.Component {
                     }
                 }
                 if (cards[src].cards.length > 1 && (cards[src].cards.length - cnt) < 3) {
-                    this.reportError(
+                    this.reportWarning(
                         "Illegal to move a card from a card group when the number of cards in that group will be less then 3 ",
                         [src]);
                     return;
@@ -561,7 +563,7 @@ class CardTableLayout extends React.Component {
             }
 
         }
-        this.reportError(err, errGrps);
+        this.reportWarning(err, errGrps);
     }
 
     checkForValidity(){
@@ -734,7 +736,7 @@ class CardTableLayout extends React.Component {
     }
 
     notifySelect() {
-        this.clearError("");
+        this.clearWarning("");
         this.refs.myCards.clear();
         this.state.lastGroup = null;
         let cnt = this.count();
