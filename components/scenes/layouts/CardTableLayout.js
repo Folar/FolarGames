@@ -118,6 +118,13 @@ class CardTableLayout extends React.Component {
             args:{newState:5,hand:this.props.data.hand,cards:cards}});
 
     }
+    move(){
+        let data = this.props.data;
+        let cards = data.players[data.playerId].cards;
+        this.props.sendmessage({type:"PAN",name: this.props.name, action: 11,
+            args:{hand:this.props.data.hand,cards:cards}});
+
+    }
 
     muck(txt){
         debugger;
@@ -413,7 +420,8 @@ class CardTableLayout extends React.Component {
             }
         }
 
-        this.setState({data: this.props.data, sels: this.state.sels});
+        this.setState({ sels: this.state.sels});
+        this.move();
     }
 
 
