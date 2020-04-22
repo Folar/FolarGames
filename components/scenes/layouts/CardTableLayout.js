@@ -39,6 +39,7 @@ class CardTableLayout extends React.Component {
             group: cards.length,
             sels: [false, false, false, false, false, false, false, false, false, false],
             money: -1,
+            error:false,
             cards: [
                 {
                     rank: "empty"
@@ -59,6 +60,7 @@ class CardTableLayout extends React.Component {
             group: cards.length,
             sels: [false, false, false, false, false, false, false, false, false, false],
             money: -1,
+            error:false,
             cards: [
                 {
                     rank: "emptyButton"
@@ -126,11 +128,27 @@ class CardTableLayout extends React.Component {
 
     }
 
-    muck(txt){
+    muck(txt,money){
         let data = this.props.data;
         let cards = data.players[data.playerId].cards;
         this.props.sendmessage({type:"PAN",name: this.props.name, action: 4,
-            args:{newState:2,hand:this.props.data.hand,cards:cards,txt:txt}});
+            args:{newState:2,hand:this.props.data.hand,cards:cards,txt:txt,money:money}});
+
+    }
+
+    error(txt){
+        let data = this.props.data;
+        let cards = data.players[data.playerId].cards;
+        this.props.sendmessage({type:"PAN",name: this.props.name, action: 9,
+            args:{hand:this.props.data.hand,cards:cards,txt:txt}});
+
+    }
+
+    forfeit(){
+        let data = this.props.data;
+        let cards = data.players[data.playerId].cards;
+        this.props.sendmessage({type:"PAN",name: this.props.name, action: 8,
+            args:{hand:this.props.data.hand,cards:cards}});
 
     }
 
@@ -140,7 +158,7 @@ class CardTableLayout extends React.Component {
             return "#6b8e23";
         }
         if (p.forfeit) {
-            return "red";
+            return "#8b0000";
         }
         if (this.props.data.currentPlayer == p.playerId && this.props.data.state !=10) {
             debugger;
@@ -181,6 +199,8 @@ class CardTableLayout extends React.Component {
             case 6:
                 return  "Because your the first player this round, you can draw another card or "+
                     "pickup the " + this.getCardString(data.currentCard);
+            case 8:
+                return "Refund all the players your round winnings. Sit out the remaining of the round while your still responsible for paying !!"
         }
         return "tbd "+s
     }
@@ -256,12 +276,16 @@ class CardTableLayout extends React.Component {
                     let results = this.checkForValidity();
                     for (let i=0;i<results.length;i++){
                         if (!results[i].valid || results.meldChangeForLess) {
-                            this.processMeldErrors(results);
+                            let err = this.processMeldErrors(results);
+                            this.error(err);
                             return;
                         }
 
                     }
-                    let txt =this.processValidMelds(results);
+                    let arr =this.processValidMelds(results);
+                    let txt = arr[1];
+                    let money = arr[0];
+
                     this.refs.myCards.clear();
                     //this.props.data.currentPlayer = 1;
                     this.refs.hand.getSelectedCards(true);
@@ -275,17 +299,10 @@ class CardTableLayout extends React.Component {
                     // this.setInstructions(str);
                     // this.createEmptyCard();
 
-                    this.muck(txt);
+                    this.muck(txt,money);
                     this.setState({ sels: this.state.sels})
                 }else if (s == 8) {
-                    data.players[data.playerId].forfeit = true;
-                   // debugger;
-                    this.props.data.journal = this.state.instructions + data.players[data.playerId].name +
-                    "  has to refund each player " +
-                        data.players[data.playerId].current/(data.players.length - 1) ;
-                    str =  "Draw a card from the deck" ;
-                    this.setInstructions(str);
-                    s = 7;
+                   this.forfeit()
                 }
                 break;
         }
@@ -542,28 +559,27 @@ class CardTableLayout extends React.Component {
             }
 
         }
-        return txt+" everyone should pay " +data.players[data.playerId].name +" "+ money;
+        return [money,txt+" everyone should pay " +data.players[data.playerId].name +" "+ money + " chips"];
     }
     processMeldErrors(results){
         let errGrps = [];
         let err= "";
-        this.props.data.state=8;
+        // this.props.data.state= 8;
         for (let i=0;i<results.length;i++){
             if (!results[i].valid || results.meldChangeForLess) {
                 if (!results[i].valid){
-                    err += "The meld " +results[i].str ;
-                    err += " is illegal";
+                    err +=  results[i].str ;
 
                 }else{
-                    err += "The new meld " + results[i].str + " has resulted in less money. The old meld was"+
+                    err += "the new meld " + results[i].str + " has resulted in less money. The old meld was"+
                             results.oldStr ;
                 }
                 errGrps.push(i);
-                err +=". ";
+                err +="; ";
             }
 
         }
-        this.reportWarning(err, errGrps);
+        return err;
     }
 
     checkForValidity(){
@@ -588,7 +604,8 @@ class CardTableLayout extends React.Component {
                     str:this.getCardGroupString(cards[i].cards),
                     meldChangeForLess:cards[i].money <  this.getMoney(result)
                 }
-            }
+            } else
+                cards[i].error = true;
             melds.push(r);
         }
         return melds;

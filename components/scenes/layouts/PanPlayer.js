@@ -328,6 +328,7 @@ class PanPlayer extends React.Component {
         let bm = 0;
         let mr = .02;
         let gw = 0;
+        let color = "yellow";
         if (this.props.player.atTable) {
 
 
@@ -341,14 +342,23 @@ class PanPlayer extends React.Component {
             cardGrps =
                 grps.slice(0, 3).map((item, index) => {
                     if(this.props.border){
+                        color = "yellow";
                         if(this.props.borderGroup.includes(index)){
                             bw = .01;
                         }else{
                             bw = 0;
                         }
+                    } else {
+                        g = this.props.player.cards[index];
+                        if (g.error){
+                            bw = .01;
+                            color = "red";
+                        } else {
+                            bw = 0;
+                        }
                     }
                     return <View key={k[index]} style={{
-                        borderBottomWidth:bw,borderColor:"yellow",marginTop:0,
+                        borderBottomWidth:bw,borderColor:color,marginTop:0,
                         marginRight: .02, flexDirection: 'row', alignItems: 'center',
                         justifyContent: 'center'
                     }}>
