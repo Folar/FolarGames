@@ -150,6 +150,38 @@ class CardTableLayout extends React.Component {
         return "#6b8e23";
 
     }
+    getInstructionColor() {
+        return "#eba117"
+    }
+    getInstructions() {
+        let s = this.props.data.state;
+        let data = this.props.data;
+        let str = "";
+        let state4 = "Select one or more cards in your hand and then click on a meld inorder to transfer " +
+            "the selected cards to the meld or\n" +
+            "Select one or more cards in a meld and " +
+            "then click another meld to move the cards between melds";
+        switch (s) {
+            case 100:
+                return "Hit the Start button, once all the players have entered the game"
+            case 10:
+                return "Wait for all the other players to hit the Start button"
+            case 1:
+                return "Draw the first card";
+            case 2:
+                return "Draw a card";
+            case 3:
+                return "Pickup the " + this.getCardString(data.currentCard)+ " or pass it to the next player";
+            case 4:
+                return state4;
+            case 5:
+                return "Pickup the passed card "+ this.getCardString(data.passCard)+" or draw a new card";
+            case 6:
+                return  "Because your the first player this round, you can draw another card or "+
+                    "pickup the " + this.getCardString(data.currentCard);
+        }
+        return "tbd "+s
+    }
 
     action(a) {
         let s = this.props.data.state;
@@ -175,7 +207,7 @@ class CardTableLayout extends React.Component {
                     this.createDropSpot();
                     this.draw(3);
                     str =  "Pickup the " + this.getCardString(data.currentCard) + " or pass the card to the next player" ;
-                    this.setInstructions(str);
+                   // this.setInstructions(str);
 
                 }  else if (s == 3) { // pickup
                     this.pickup();
@@ -998,8 +1030,8 @@ class CardTableLayout extends React.Component {
                                        sels={this.state.sels}
                                        notifySelect={this.notifySelect.bind(this)}
                                        test={this.test.bind(this)}
-                                       text ={this.state.instructions}
-                                       instructionColor={this.state.instructionColor}
+                                       text ={this.getInstructions()}
+                                       instructionColor={this.getInstructionColor()}
                                        setHand={this.setMyHand.bind(this)} hand={this.props.data.hand}/>
                         </View>
 
