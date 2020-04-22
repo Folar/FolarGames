@@ -127,7 +127,6 @@ class CardTableLayout extends React.Component {
     }
 
     muck(txt){
-        debugger;
         let data = this.props.data;
         let cards = data.players[data.playerId].cards;
         this.props.sendmessage({type:"PAN",name: this.props.name, action: 4,
@@ -278,7 +277,7 @@ class CardTableLayout extends React.Component {
         this.state.oldInstructions = this.state.instructions;
         this.state.instructionColor = "#eba117";
         this.setState({border: true, borderGroup: src,data:this.props.data,
-            instructionColor:"red", instructions:msg});
+            instructionColor:"yellow", instructions:msg});
     }
 
     clearError() {
@@ -292,7 +291,7 @@ class CardTableLayout extends React.Component {
         this.clearError("");
         let data = this.props.data;
         let cards = data.players[data.playerId].cards;
-        if (this.count()) {
+        if (this.count()) {  // hand cards are selected
 
             let cardsFromHand = this.refs.hand.getSelectedCards(false);
             if( this.state.pickup ){
@@ -303,7 +302,7 @@ class CardTableLayout extends React.Component {
                     return;
                 }
                 if(cards[g].cards.length + cardsFromHand.length > 2 ){
-                    this.state.pickup = false;
+                    this.state.pickup = false; // first meld is completed
                 }
 
             }
@@ -338,9 +337,9 @@ class CardTableLayout extends React.Component {
             }
 
 
-        } else {
+        } else { //  no cards are selected in hand
             let cnt = 0;
-            if (this.state.lastGroup == null || this.state.lastGroup == g) {
+            if (this.state.lastGroup == null || this.state.lastGroup == g) { // first group to be selected on table
 
                 cards[g].sels[i] = !cards[g].sels[i];
                 for (let j = 0; j < cards[g].cards.length; j++) {
@@ -351,12 +350,12 @@ class CardTableLayout extends React.Component {
                     this.state.lastGroup = null;
                 else
                     this.state.lastGroup = g;
-            } else {
+            } else {  //  second group to be selected
                 let src = this.state.lastGroup;
                 let trg = g;
 
                 if( this.state.pickup ){
-                    if (src != cards.length -1){
+                    if (trg != cards.length -1 && src != cards.length -1){
                         this.reportError(
                             "The card that you just picked up, must be used first to form a meld",
                             [src]);
@@ -386,7 +385,6 @@ class CardTableLayout extends React.Component {
                     cards[trg].money = 0;
                 }
 
-                //let oldMoney = this.moneyCardGroup(src);
                 for (let j = cards[src].cards.length - 1; j >= 0; j--) {
                     if (cards[src].sels[j]) {
                         cards[src].sels[j] = false;

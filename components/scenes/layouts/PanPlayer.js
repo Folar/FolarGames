@@ -348,7 +348,7 @@ class PanPlayer extends React.Component {
                         }
                     }
                     return <View key={k[index]} style={{
-                        borderBottomWidth:bw,borderColor:"red",marginTop:0,
+                        borderBottomWidth:bw,borderColor:"yellow",marginTop:0,
                         marginRight: .02, flexDirection: 'row', alignItems: 'center',
                         justifyContent: 'center'
                     }}>
