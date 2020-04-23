@@ -28,6 +28,8 @@ class CardTableLayout extends React.Component {
             sels: [false, false, false, false, false, false, false, false, false, false],
 
         };
+        this.journal = "";
+        this.lastEntry = "";
     }
 
     createDropSpot() {
@@ -156,6 +158,9 @@ class CardTableLayout extends React.Component {
 
         if (this.props.data.state == 100 ) {
             return "#6b8e23";
+        }
+        if (p.sitOut) {
+            return "lightgray";
         }
         if (p.forfeit) {
             return "#8b0000";
@@ -559,7 +564,9 @@ class CardTableLayout extends React.Component {
             }
 
         }
-        return [money,txt+" everyone should pay " +data.players[data.playerId].name +" "+ money + " chips"];
+        if (money > 0)
+            txt += " Everyone should pay " +data.players[data.playerId].name +" "+ money + " chip(s)"
+        return [money,txt];
     }
     processMeldErrors(results){
         let errGrps = [];
@@ -775,7 +782,11 @@ class CardTableLayout extends React.Component {
     }
 
     getJournal() {
-        return this.props.data.journal  ;
+        if( this.lastEntry !=  this.props.data.journal) {
+            this.journal = this.props.data.journal + "\n" + this.journal;
+            this.lastEntry =  this.props.data.journal;
+        }
+        return this.journal;  ;
     }
 
     render() {
