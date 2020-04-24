@@ -800,6 +800,9 @@ class CardTableLayout extends React.Component {
         let tw = this.props.w;
         let p = [];
         let pid = this.props.data.playerId;
+        if(pid  == 10) {
+            pid = 0;
+        }
         let nplayers = this.props.data.players.length;
         for (let i = 0; i < nplayers; i++) {
             p.push(this.props.data.players[pid]);
