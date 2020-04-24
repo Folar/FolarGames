@@ -47,6 +47,10 @@ class PanMuck extends React.Component {
         if ( state == 3){
             return "Pickup";
         }
+        if (state == 101 )
+            return "Ante"
+        if (state == 102)
+            return "Play"
         return "";
 
     }
@@ -60,6 +64,8 @@ class PanMuck extends React.Component {
         if ( state == 6 ){
             return "Pickup";
         }
+        if (state == 101 || state == 102)
+            return "Pass"
         return "";
 
     }
@@ -68,7 +74,7 @@ class PanMuck extends React.Component {
         let data = this.props.data;
         let state = data.players[data.currentPlayer].state;
         if ( state == 1 || state == 2 || state == 3
-            || state == 5 || state == 6 || state == 7  ){
+            || state == 5 || state == 6 || state == 7 || state == 101 || state == 102  ){
             return 1;
         }
         return 0;
@@ -79,7 +85,7 @@ class PanMuck extends React.Component {
         let data = this.props.data;
         let state = data.players[data.currentPlayer].state;
         console.log( " show state ="+ state);
-        if ( state == 3 || state == 6 ){
+        if ( state == 3 || state == 6  || state == 101 ||  state == 102 ){
             return 1;
         }
         return 0;
@@ -191,7 +197,9 @@ class PanMuck extends React.Component {
                         <Text
                             style={{
                                 fontSize: .08,
-                                textAlign: 'left',
+                                textAlign: 'center',
+                                width: this.props.w/6,
+                                height: this.props.h/2,
                                 margin: .025,
                                 color:"black",
                                 backgroundColor:"white"

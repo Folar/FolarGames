@@ -112,8 +112,12 @@ class CardTableLayout extends React.Component {
         let cards = data.players[data.playerId].cards;
         this.props.sendmessage({type:"PAN",name: this.props.name, action: 2,
                                 args:{newState:s,hand:this.props.data.hand,cards:cards}});
-
-
+    }
+    ante(play,s) {
+        let data = this.props.data;
+        let cards = data.players[data.playerId].cards;
+        this.props.sendmessage({type:"PAN",name: this.props.name, action: 101,
+            args:{oldState:s,play:play,hand:this.props.data.hand,cards:cards}});
     }
     pass(){
         let data = this.props.data;
@@ -191,6 +195,10 @@ class CardTableLayout extends React.Component {
                 return "Hit the Start button, once all the players have entered the game"
             case 10:
                 return "Wait for all the other players to hit the Start button"
+            case 101:
+                return "Either Ante up 2 chips or Pass for this round"
+            case 102:
+                return "Because you were the dealer you had to ante up 2 chips, but you can still Pass for this round"
             case 1:
                 return "Draw the first card";
             case 2:
@@ -226,57 +234,35 @@ class CardTableLayout extends React.Component {
                 if (s == 1) { // draw
                     this.createDropSpot();
                     this.draw(6);
-                        str = " Because your the first player this round, you can draw another card or "+
-                        " pickup the " + this.getCardString(data.currentCard);
-                    this.setInstructions(str);
 
                 } else if (s == 2 || s == 6  || s == 5) { // draw
                     this.createDropSpot();
                     this.draw(3);
-                    str =  "Pickup the " + this.getCardString(data.currentCard) + " or pass the card to the next player" ;
-                   // this.setInstructions(str);
-
                 }  else if (s == 3) { // pickup
                     this.pickup();
-                    s = 4;
-                    str = instr;
-                    this.setInstructions(str);
-
+                }else if (s == 101 || s == 102) { // ante
+                    this.ante(true,s);
                 }
                 break;
             case 2:
                 if (s == 3) {  // pass
                     this.removeDropSpot();
                     this.pass();
-                    s = 5;
-                    // this.transfer(this.props.data.passCard, this.props.data.currentCard);
-                    // this.createEmptyCard();
-                    //
-                    // str =  "Pickup the " + this.getCardString(data.passCard) + " or draw a card from the deck" ;
-                    // this.setInstructions(str);
-                    // this.createDropSpot();
                 } else if (s == 6) { // pickup
-
-                    s = 4;
-                    str =  instr;
-                    this.setInstructions(str);
+                    str =  instr;;
                     this.pickup();
+                }else if (s == 101 || s == 102) { // ante
+                    this.ante(false,s);
                 }
                 break;
             case 3:
                 if (s == 100){
                     this.props.sendmessage({type:"PAN",name: this.props.name, action: 100,args:{dummy:1}});
                 } else if (s == 5) { // pickup
-                    s = 4;
                     this.transfer(this.props.data.currentCard, this.props.data.passCard);
-                    str =  instr;
-                    this.setInstructions(str);
                     this.pickup();
                 } else if (s == 4) { // muck
                     this.removeDropSpot();
-
-
-
                     let success = true;
                     let results = this.checkForValidity();
                     for (let i=0;i<results.length;i++){
@@ -295,14 +281,11 @@ class CardTableLayout extends React.Component {
                     //this.props.data.currentPlayer = 1;
                     this.refs.hand.getSelectedCards(true);
                     this.refs.myCards.clear();
-                    //this.props.data.currentPlayer = 1;
+
                     if(this.refs.myCards.count()== 11){
                         debbugger;
                     }
-                    s = 2;
-                    str =  "Draw a card from the deck" ;
-                    // this.setInstructions(str);
-                    // this.createEmptyCard();
+
 
                     this.muck(txt,money);
                     this.setState({ sels: this.state.sels})
@@ -311,9 +294,6 @@ class CardTableLayout extends React.Component {
                 }
                 break;
         }
-        //this.props.data.state = s;
-        //console.log("end  state=" + s);
-        //this.setState({data: this.props.data})
 
     }
 
