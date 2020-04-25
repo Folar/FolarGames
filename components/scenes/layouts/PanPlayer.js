@@ -30,6 +30,7 @@ class PanPlayer extends React.Component {
     }
 
     clickAction() {
+        debugger;
         if (this.props.player.playerId == this.props.data.playerId)
             this.props.action(3)
 
@@ -85,6 +86,34 @@ class PanPlayer extends React.Component {
 
     getTab() {
 
+
+        let deal = <View  key={"deal"}
+                         style={{
+                             opacity: 1,
+                             marginLeft: 0,
+                             marginRight: .02,
+                             flexDirection: 'row',
+                             backgroundColor:   this.props.data.currentPlayer == this.props.data.playerId ? "brown" : "gray",
+                             width:  .08,
+                             height: .264 * .25
+                         }}>
+
+
+
+            <VrButton onClick={this.clickAction.bind(this)} key={0}>
+                <Text
+                    style={{
+                        fontSize: .03,
+                        textAlign: 'left',
+                        marginTop: .007,
+                        marginLeft: .015,
+
+                        color: "black"
+                    }}>
+                    {"Deal"}
+                </Text>
+            </VrButton>
+        </View>
 
         let pan = <View  key={"pan"}
             style={{
@@ -286,7 +315,10 @@ class PanPlayer extends React.Component {
 
 
         let data = this.props.data;
-        if(this.props.player.state == 100){
+        if(this.props.player.state == 103){
+            tab = deal;
+
+        } else if(this.props.player.state == 100){
             tab = start;
 
         } else if(this.props.player.state == 8  && data.currentPlayer == data.playerId ){

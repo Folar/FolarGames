@@ -137,8 +137,9 @@ class CardTableLayout extends React.Component {
     muck(txt,money){
         let data = this.props.data;
         let cards = data.players[data.playerId].cards;
+        let pan =  this.refs.myCards.count()== 11;
         this.props.sendmessage({type:"PAN",name: this.props.name, action: 4,
-            args:{newState:2,hand:this.props.data.hand,cards:cards,txt:txt,money:money}});
+            args:{newState:2,hand:this.props.data.hand,cards:cards,txt:txt,money:money,pan:pan}});
 
     }
 
@@ -160,7 +161,10 @@ class CardTableLayout extends React.Component {
 
     getBackgroundColor(p) {
 
-        if (this.props.data.state == 100 ) {
+        if (p.winner) {
+            return "purple";
+        }
+        if (this.props.data.state == 100 || this.props.data.state == 103 ) {
             return "#6b8e23";
         }
         if (p.sitOut) {
@@ -170,7 +174,6 @@ class CardTableLayout extends React.Component {
             return "#8b0000";
         }
         if (this.props.data.currentPlayer == p.playerId && this.props.data.state !=10) {
-            debugger;
             return "blue";
         }
 
@@ -191,6 +194,8 @@ class CardTableLayout extends React.Component {
         if (this.state.instructionColor == "yellow")
             return this.state.instructions;
         switch (s) {
+            case 103:
+                return "You are the next dealer. Hit the Deal button to start the next round."
             case 100:
                 return "Hit the Start button, once all the players have entered the game"
             case 10:
@@ -256,7 +261,10 @@ class CardTableLayout extends React.Component {
                 }
                 break;
             case 3:
-                if (s == 100){
+                if (s == 103) { // deal
+                    debugger;
+                    this.props.sendmessage({type:"PAN",name: this.props.name, action: 103,args:{dummy:1}});
+                } else if (s == 100){
                     this.props.sendmessage({type:"PAN",name: this.props.name, action: 100,args:{dummy:1}});
                 } else if (s == 5) { // pickup
                     this.transfer(this.props.data.currentCard, this.props.data.passCard);
@@ -282,9 +290,7 @@ class CardTableLayout extends React.Component {
                     this.refs.hand.getSelectedCards(true);
                     this.refs.myCards.clear();
 
-                    if(this.refs.myCards.count()== 11){
-                        debbugger;
-                    }
+
 
 
                     this.muck(txt,money);
