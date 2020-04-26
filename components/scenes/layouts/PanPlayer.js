@@ -483,7 +483,7 @@ class PanPlayer extends React.Component {
                                     marginRight: .02
 
                                 }}>
-                                {this.props.player.current}
+                                {this.props.player.round}
                             </Text>
 
                             <Text

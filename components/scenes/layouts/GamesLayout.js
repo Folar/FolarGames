@@ -105,12 +105,12 @@ class GamesLayout extends React.Component {
                 ],
                 players:[
                    {
-                        name:"Elise",
+                        name:"",
                         playerId:0,
                         playing:true,
                         forfeit:false,
                         sitOut:false,
-                        roundTotal:12,
+                        round:12,
                         total:98,
                         current:20,
                         atTable:true,
@@ -119,23 +119,7 @@ class GamesLayout extends React.Component {
 
 
                             ]
-                    },
-                    {
-                        name:"Larry",
-                        playerId:1,
-                        playing:true,
-                        forfeit:false,
-                        atTable:true,
-                        sitOut:false,
-                        roundTotal:2,
-                        total:98,
-                        current:2,
-                        cards:
-                            [
-
-                            ]
                     }
-
 
                 ]
             },
