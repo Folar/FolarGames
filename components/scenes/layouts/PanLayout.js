@@ -17,7 +17,7 @@ class PanLayout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            zoom:3.8
+            zorder: this.props.zorder-.91,
 
         };
 
@@ -56,9 +56,10 @@ debugger;
                     layoutOrigin: [.5, .5],
                     borderRadius: 0.1,
                     backgroundColor:"green",
+
                     transform: [
                         {translateX: 0},
-                        {translateZ: -.91}]
+                        {translateZ: 3+this.state.zorder}]
                 }}>
 
                     <CardTableLayout h={h} w={w} data={this.props.data}

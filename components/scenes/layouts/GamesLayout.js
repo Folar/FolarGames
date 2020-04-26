@@ -248,6 +248,7 @@ class GamesLayout extends React.Component {
 
         _this = takeSixThis = choiceThis = bocaThis = this;
         this.client = null;
+        this.panAdj = 0;
 
     }
 
@@ -348,8 +349,8 @@ class GamesLayout extends React.Component {
     }
 
     zoom(z){
-        this.setState({zoom:-5,
-                        dtX:-2.5,dtY:-.4});
+        this.panAdj = 1.7;
+        this.setState({zoom:-5, dtX:-2.5,dtY:-.4});
         //this.forceUpdate();
     }
 
@@ -536,7 +537,7 @@ class GamesLayout extends React.Component {
                    </View>
                ) :(
                      <View>
-                          <PanLayout zorder={this.state.zoom } data={this.state.panData}
+                          <PanLayout zorder={this.state.zoom + this.panAdj } data={this.state.panData}
                              ref="pan"
                              sendmessage={this.sendBocaMessage.bind(this)}
                              name={this.state.name}
