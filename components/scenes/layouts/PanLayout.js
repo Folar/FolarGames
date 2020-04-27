@@ -17,7 +17,7 @@ class PanLayout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            zorder: this.props.zorder-.91,
+            zorder: this.props.zorder-1,
 
         };
 

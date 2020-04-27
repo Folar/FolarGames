@@ -262,7 +262,6 @@ class CardTableLayout extends React.Component {
                 break;
             case 3:
                 if (s == 103) { // deal
-                    debugger;
                     this.props.sendmessage({type:"PAN",name: this.props.name, action: 103,args:{dummy:1}});
                 } else if (s == 100){
                     this.props.sendmessage({type:"PAN",name: this.props.name, action: 100,args:{dummy:1}});
@@ -274,7 +273,7 @@ class CardTableLayout extends React.Component {
                     let success = true;
                     let results = this.checkForValidity();
                     for (let i=0;i<results.length;i++){
-                        if (!results[i].valid || results.meldChangeForLess) {
+                        if (!results[i].valid || results[i].meldChangeForLess) {
                             let err = this.processMeldErrors(results);
                             this.error(err);
                             return;
@@ -558,13 +557,14 @@ class CardTableLayout extends React.Component {
         let err= "";
         // this.props.data.state= 8;
         for (let i=0;i<results.length;i++){
-            if (!results[i].valid || results.meldChangeForLess) {
+            debugger;
+            if (!results[i].valid || results[i].meldChangeForLess) {
                 if (!results[i].valid){
                     err +=  results[i].str ;
 
                 }else{
-                    err += "the new meld " + results[i].str + " has resulted in less money. The old meld was"+
-                            results.oldStr ;
+                    err += "the new meld " + results[i].str + " has resulted in less money. The old meld was "+
+                            results[i].oldStr ;
                 }
                 errGrps.push(i);
                 err +=";";
@@ -594,12 +594,20 @@ class CardTableLayout extends React.Component {
                     valid:true,
                     money:this.getMoney(result),
                     str:this.getCardGroupString(cards[i].cards),
-                    meldChangeForLess:cards[i].money <  this.getMoney(result)
+                    meldChangeForLess:false,
+                    oldStr: cards[i].str
                 }
-            } else
+
+
+            }
+            if (!result.valid || cards[i].money >  this.getMoney(result) ) {
                 cards[i].error = true;
+                r.meldChangeForLess = true
+
+            }
             melds.push(r);
         }
+        debugger;
         return melds;
     }
 
@@ -775,7 +783,7 @@ class CardTableLayout extends React.Component {
     }
 
     render() {
-        let jw = .63;
+        let jw = .605;
         let jh = 3;
         let h = .22;
         let yh = .265;
@@ -794,7 +802,7 @@ class CardTableLayout extends React.Component {
             pid++;
             if (pid == nplayers) pid = 0;
         }
-        for (let i = nplayers; i < 8; i++) {
+        for (let i = nplayers; i < 7; i++) { // number of players
             p.push({atTable: false});
         }
 
@@ -948,14 +956,24 @@ class CardTableLayout extends React.Component {
 
                             flexDirection: 'column',
                             marginTop: 0,
-                            marginRight: 0,
-                            marginLeft: .045,
-                            width: pw,
-                            height: h
+                            marginRight: 0.02,
+                            marginLeft: .02,
+                            width: jw,
+                            height: jh,
+                            backgroundColor: "green"
                         }}>
-                            <PanPlayer h={h} w={pw} bgColor={this.getBackgroundColor(p[7])}
-                                       color={"black"} key={7}
-                                       data={this.props.data} player={p[7]}/>
+
+                            <Text
+                                style={{
+                                    fontSize: .03,
+                                    textAlign: 'left',
+                                    marginTop: .008,
+                                    marginLeft: .015,
+                                    color: "black"
+                                }}>
+                                {this.getJournal()}
+                            </Text>
+
                         </View>
                         {/*3rd row : exposed hand*/}
                         <View style={{
@@ -1001,35 +1019,13 @@ class CardTableLayout extends React.Component {
                         flexDirection: 'row',
                         marginTop: .01,
                         marginRight: .045,
-                        marginLeft: .045,
-                        width: tw - .1,
+                        marginLeft: .71,
+                        width: tw - .8,
                         height: yh,
                         backgroundColor: "green"
                     }}>
                         {/*4th row : journal*/}
-                        <View style={{
 
-                            flexDirection: 'column',
-                            marginTop: 0,
-                            marginRight: 0.02,
-                            marginLeft: .02,
-                            width: jw,
-                            height: jh,
-                            backgroundColor: "green"
-                        }}>
-
-                            <Text
-                                style={{
-                                    fontSize: .03,
-                                    textAlign: 'left',
-                                    marginTop: .008,
-                                    marginLeft: .015,
-                                    color: "black"
-                                }}>
-                                {this.getJournal()}
-                            </Text>
-
-                        </View>
 
                         {/*4th row : yourhand*/}
                         <View style={{

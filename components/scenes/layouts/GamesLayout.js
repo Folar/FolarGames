@@ -433,7 +433,6 @@ class GamesLayout extends React.Component {
           else if (gt == 7) {
                if (packet.type != "ping"){
                   _this.setState({panData: packet});
-                  debugger;
                  // _this.refs.pan.setData( packet);
               }else {
                    debugger;

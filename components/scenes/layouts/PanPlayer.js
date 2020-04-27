@@ -30,7 +30,6 @@ class PanPlayer extends React.Component {
     }
 
     clickAction() {
-        debugger;
         if (this.props.player.playerId == this.props.data.playerId)
             this.props.action(3)
 
