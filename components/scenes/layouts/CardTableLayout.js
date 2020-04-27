@@ -107,11 +107,11 @@ class CardTableLayout extends React.Component {
         this.props.data.currentCard.ordinal = -1;
     }
 
-    draw(s) {
+    draw(s,firstDraw) {
         let data = this.props.data;
         let cards = data.players[data.playerId].cards;
         this.props.sendmessage({type:"PAN",name: this.props.name, action: 2,
-                                args:{newState:s,hand:this.props.data.hand,cards:cards}});
+                                args:{newState:s,hand:this.props.data.hand,cards:cards,firstDraw:firstDraw}});
     }
     ante(play,s) {
         let data = this.props.data;
@@ -238,11 +238,11 @@ class CardTableLayout extends React.Component {
 
                 if (s == 1) { // draw
                     this.createDropSpot();
-                    this.draw(6);
+                    this.draw(6,true);
 
                 } else if (s == 2 || s == 6  || s == 5) { // draw
                     this.createDropSpot();
-                    this.draw(3);
+                    this.draw(3,false);
                 }  else if (s == 3) { // pickup
                     this.pickup();
                 }else if (s == 101 || s == 102) { // ante
@@ -544,14 +544,13 @@ class CardTableLayout extends React.Component {
                 txt += "the changed meld "+  cards[i].str + " worth has changed by " +  ( results[i].money -cards[i].money);
                 cards[i].money = results[i].money;
             }
-            if(nwm ) {
-                txt += ". ";
-                nwm = false;
-            }
+
+            txt += ";";
+
 
         }
         if (money > 0)
-            txt += " Everyone should pay " +data.players[data.playerId].name +" "+ money + " chip(s)"
+            txt += "Everyone should pay " +data.players[data.playerId].name +" "+ money + " chip(s);"
         return [money,txt];
     }
     processMeldErrors(results){
@@ -568,7 +567,7 @@ class CardTableLayout extends React.Component {
                             results.oldStr ;
                 }
                 errGrps.push(i);
-                err +="; ";
+                err +=";";
             }
 
         }
