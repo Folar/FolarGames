@@ -201,9 +201,9 @@ class CardTableLayout extends React.Component {
             case 10:
                 return "Wait for all the other players to hit the Start button"
             case 101:
-                return "Either Ante up 2 chips or Pass for this round"
+                return "Either Ante up 1 chip or Pass for this round"
             case 102:
-                return "Because you were the dealer you had to ante up 2 chips, but you can still Pass for this round"
+                return "Because you were the dealer you had to ante up 1 chip, but you can still Pass for this round"
             case 1:
                 return "Draw the first card";
             case 2:
