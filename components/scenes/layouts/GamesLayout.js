@@ -387,7 +387,6 @@ class GamesLayout extends React.Component {
 
         client.onmessage = function (x) {
             let packet = JSON.parse(x.data);
-
             if (packet.messageType === "dupUser") {
 
                 let x = _this.state.name;
