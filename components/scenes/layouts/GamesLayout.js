@@ -249,6 +249,7 @@ class GamesLayout extends React.Component {
         _this = takeSixThis = choiceThis = bocaThis = this;
         this.client = null;
         this.panAdj = 0;
+        this.pingTimer = null;
 
     }
 
@@ -316,9 +317,20 @@ class GamesLayout extends React.Component {
 
     }
 
-    sendBocaMessage(d){
-   console.log("in sendboca " + JSON.stringify(d));
+   clearPingTimer(){
+       clearTimeout(pingTimer);
+       pingTimer =null;
+   }
+
+   sendBocaMessage(d){
+        this.clearPingTimer();
+        //console.log("in sendboca " + JSON.stringify(d));
         this.client.send(JSON.stringify(d));
+    }
+
+    pingServer(){
+        _this.client.send(JSON.stringify({name: _this.state.name, type: "PING"}));
+        pingTimer = null;
     }
 
     roll(dice) {
@@ -349,7 +361,7 @@ class GamesLayout extends React.Component {
     }
 
     zoom(z){
-        this.panAdj = 1.7;
+        this.panAdj = 1.8;
         this.setState({zoom:-5, dtX:-2.5,dtY:-.4});
         //this.forceUpdate();
     }
@@ -364,8 +376,8 @@ class GamesLayout extends React.Component {
         if (this.client)
             this.client.close();
 
-       client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-       //client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+      // client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
+       client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -374,7 +386,7 @@ class GamesLayout extends React.Component {
 
 
         client.onmessage = function (x) {
-
+debugger;
             let packet = JSON.parse(x.data);
 
             if (packet.messageType === "dupUser") {
@@ -431,12 +443,13 @@ class GamesLayout extends React.Component {
                }
           }
           else if (gt == 7) {
+
+                debugger;
                if (packet.type != "ping"){
                   _this.setState({panData: packet});
-                 // _this.refs.pan.setData( packet);
-              }else {
-                   debugger;
               }
+              pingTimer = setTimeout(_this.pingServer.bind(this),1000);
+
           }
 
 
