@@ -115,6 +115,7 @@ class CardTableLayout extends React.Component {
     }
     ante(play,s) {
         let data = this.props.data;
+        this.refs.hand.clear();
         let cards = data.players[data.playerId].cards;
         this.props.sendmessage({type:"PAN",name: this.props.name, action: 101,
             args:{oldState:s,play:play,hand:this.props.data.hand,cards:cards}});
@@ -381,7 +382,9 @@ class CardTableLayout extends React.Component {
         } else { //  no cards are selected in hand
             let cnt = 0;
             if (this.state.lastGroup == null || this.state.lastGroup == g) { // first group to be selected on table
-
+                if(cards[g].cards[0].rank == "emptyButton"){
+                    return;
+                }
                 cards[g].sels[i] = !cards[g].sels[i];
                 for (let j = 0; j < cards[g].cards.length; j++) {
                     if (cards[g].sels[j])
@@ -413,7 +416,7 @@ class CardTableLayout extends React.Component {
                         cnt++
                     }
                 }
-                if (cards[src].cards.length > 1 && (cards[src].cards.length - cnt) < 3) {
+                if (cards[src].str.length > 0 && (cards[src].cards.length - cnt) < 3) {
                     this.reportWarning(
                         "Illegal to move a card from a card group when the number of cards in that group will be less then 3 ",
                         [src]);
@@ -535,12 +538,18 @@ class CardTableLayout extends React.Component {
                 cards[i].str = results[i].str;
                 cards[i].money = results[i].money;
                 money += cards[i].money;
-                txt += "the new meld "+  cards[i].str +" is worth " +  cards[i].money;
+                if (cards[i].money > 0)
+                    txt += "the new condition "+  cards[i].str +" is worth " +  cards[i].money;
+                else
+                    txt += "the new meld "+  cards[i].str +" is worth " +  cards[i].money;
             }else if ( cards[i].str != results[i].str ){
                 cards[i].str = results[i].str;
                 nwm = true;
                 money += ( results[i].money -cards[i].money);
-                txt += "the changed meld "+  cards[i].str + " worth has changed by " +  ( results[i].money -cards[i].money);
+                if (results[i].money > 0)
+                    txt += "the changed condition "+  cards[i].str + " worth has changed by " +  ( results[i].money -cards[i].money);
+                else
+                    txt += "the changed meld "+  cards[i].str + " is still worthless";
                 cards[i].money = results[i].money;
             }
 
@@ -563,7 +572,7 @@ class CardTableLayout extends React.Component {
                     err +=  results[i].str ;
 
                 }else{
-                    err += "the new meld " + results[i].str + " has resulted in less money. The old meld was "+
+                    err += "the new condition " + results[i].str + " has resulted in less money. The old meld was "+
                             results[i].oldStr ;
                 }
                 errGrps.push(i);

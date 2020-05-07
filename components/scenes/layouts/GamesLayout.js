@@ -329,6 +329,7 @@ class GamesLayout extends React.Component {
     }
 
     pingServer(){
+        console.log("PINGING in pingServer");
         _this.client.send(JSON.stringify({name: _this.state.name, type: "PING"}));
         pingTimer = null;
     }
@@ -377,7 +378,7 @@ class GamesLayout extends React.Component {
             this.client.close();
 
        client = new W3CWebSocket('wss://damp-shore-50226.herokuapp.com/', 'echo-protocol');
-      // client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
+     //  client = new W3CWebSocket('ws://localhost:9081/', 'echo-protocol');
 
         this.client = client
         client.onerror = function () {
@@ -441,9 +442,7 @@ class GamesLayout extends React.Component {
                }
           }
           else if (gt == 7) {
-
-                debugger;
-               if (packet.type != "ping"){
+              if (packet.type != "ping"){
                   _this.setState({panData: packet});
               }
               pingTimer = setTimeout(_this.pingServer.bind(this),1000);
