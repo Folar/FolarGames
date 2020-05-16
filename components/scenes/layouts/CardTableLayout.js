@@ -715,7 +715,7 @@ class CardTableLayout extends React.Component {
 
             } else {
                 if (r.sameSuit) {
-                    money = r.double + (r.size - 3);
+                    money = r.double + (r.size - 3) * r.double;
                 }
             }
 
